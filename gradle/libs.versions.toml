@@ -1,0 +1,137 @@
+[versions]
+# ======================================= [versions.common] ========================================
+# [versions.common.source]
+version-common-kotlin-language = "2.1.0"
+version-common-kotlin-coroutines = "1.9.0"
+version-common-kotlin-serialization = "1.7.3"
+version-common-kotlin-datetime = "0.6.0"
+version-common-compose = "1.7.3"
+version-common-ktor = "3.0.2"
+version-common-skiko = "0.8.19"
+
+# [versions.common.test]
+version-common-junit = "4.13.2"
+
+# ======================================= [versions.android] =======================================
+# [versions.android.source]
+version-android-agp = "8.5.2"
+version-android-activityCompose = "1.9.3"
+version-android-coreKtx = "1.15.0"
+version-android-espresso = "3.6.1"
+version-android-lifecycle = "2.8.7"
+
+# [versions.android.test]
+version-android-uiTest = "1.7.6"
+
+# ======================================= [versions.jvm] ===========================================
+# [versions.jvm.source]
+# ...
+
+# [versions.jvm.test]
+# ...
+
+# ======================================= [versions.utility] =======================================
+version-utility-detekt = "1.23.7"
+
+[libraries]
+# ======================================= [libraries.common] =======================================
+# [libraries.common.source]
+common-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "version-common-kotlin-coroutines" }
+common-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "version-common-kotlin-serialization" }
+common-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "version-common-kotlin-serialization" }
+common-kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "version-common-kotlin-datetime" }
+common-ktor-client = { group = "io.ktor", name = "ktor-client", version.ref = "version-common-ktor" }
+common-ktor-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "version-common-ktor" }
+common-collections = { module = "androidx.collection:collection", version = "1.4.0" }
+common-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version = "2.8.4" }
+common-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.8.4" }
+
+# [libraries.common.test]
+common-junit = { group = "junit", name = "junit", version.ref = "version-common-junit" }
+common-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "version-common-kotlin-language" }
+common-kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "version-common-kotlin-language" }
+common-kotlin-test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "version-common-kotlin-coroutines" }
+
+# ======================================= [libraries.android] ======================================
+# [libraries.android.source]
+android-kotlin = { group = "androidx.core", name = "core-ktx", version.ref = "version-android-coreKtx" }
+android-kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "version-common-kotlin-coroutines" }
+android-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "version-android-activityCompose" }
+android-splash = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
+android-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "version-android-lifecycle" }
+android-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version = "2.2.0" }
+
+# [libraries.android.test]
+android-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.1" }
+android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "version-android-uiTest" }
+android-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "version-android-espresso" }
+
+# ======================================= [libraries.jvm] ==========================================
+# [libraries.jvm.source]
+jvm-kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "version-common-kotlin-coroutines" }
+
+# [libraries.jvm.test]
+# ...
+
+# ======================================= [libraries.precompiled] ==================================
+gradleplugin-android = { module = "com.android.tools.build:gradle", version.ref = "version-android-agp" }
+gradleplugin-kotlinMultiplatform = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "version-common-kotlin-language" }
+gradleplugin-composeMultiplatform = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "version-common-compose" }
+gradleplugin-composeCompiler = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "version-common-kotlin-language" }
+gradleplugin-kotlinSerialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "version-common-kotlin-language" }
+gradleplugin-kotlinJvm = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "version-common-kotlin-language" }
+gradleplugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "version-utility-detekt" }
+
+[bundles]
+common-source = [
+    "common-kotlin-coroutines",
+    "common-kotlin-serialization",
+    "common-kotlin-serialization-json",
+    "common-kotlin-datetime",
+    "common-ktor-client",
+    "common-ktor-serialization",
+    "common-collections",
+    "common-lifecycle-compose",
+    "common-lifecycle-viewmodel",
+]
+common-test = [
+    "common-junit",
+    "common-kotlin-test",
+    "common-kotlin-test-junit",
+    "common-kotlin-test-coroutines",
+]
+android-source = [
+    "android-kotlin",
+    "android-kotlin-coroutines",
+    "android-activityCompose",
+    "android-splash",
+    "android-lifecycle-runtime",
+    "android-lifecycle-extensions",
+]
+android-test = [
+    "android-junit",
+    "android-testManifest",
+    "android-espresso",
+]
+jvm-source = [
+    "jvm-kotlin-coroutines"
+]
+jvm-test = [
+]
+
+[plugins]
+# [plugins.common]
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "version-common-kotlin-language" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "version-common-compose" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "version-common-kotlin-language" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "version-common-kotlin-language" }
+
+# [plugins.android]
+androidApplication = { id = "com.android.application", version.ref = "version-android-agp" }
+androidLibrary = { id = "com.android.library", version.ref = "version-android-agp" }
+
+# [plugins.jvm]
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "version-common-kotlin-language" }
+
+# [plugins.util]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "version-utility-detekt"}
