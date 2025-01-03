@@ -7,9 +7,6 @@ env:
   JAVA_VERSION: 17
   JAVA_DISTRIBUTION: temurin
 jobs:
-  adam:
-    name: Initial job
-    runs-on: ubuntu-latest
   prebuild:
     name: Prebuild project
     runs-on: ubuntu-latest
