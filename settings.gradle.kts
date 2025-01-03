@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "kmp-template"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -29,10 +28,9 @@ dependencyResolutionManagement {
         }
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
     }
 }
 
 include(":app")
 include(":common")
-//include(":composeApp")
-//include(":shared")

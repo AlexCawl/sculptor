@@ -19,5 +19,5 @@ desktop(
 )
 
 commonMainDependencies {
-    implementation(project(":common"))
+    implementation(projects.common)
 }

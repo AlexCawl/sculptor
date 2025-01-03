@@ -43,7 +43,6 @@ kotlinMultiplatformConfiguration {
         commonMain {
             dependencies {
                 implementation(libs.bundles.common.source)
-                implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)

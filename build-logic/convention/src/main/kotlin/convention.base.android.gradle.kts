@@ -32,16 +32,8 @@ androidBaseConfiguration {
     }
 
     lint {
-        disable += listOf(
-            "NewerVersionAvailable",
-            "GradleDependency",
-            "SelectableText",
-            "Overdraw",
-            "InvalidPackage",
-            "TrustAllX509TrustManager",
-            "ParcelCreator",
-            "UnusedIds"
-        )
+        targetSdk = targetSdkValue
+        lintConfig = rootProject.file("lint.xml")
         checkAllWarnings = true
         warningsAsErrors = true
     }

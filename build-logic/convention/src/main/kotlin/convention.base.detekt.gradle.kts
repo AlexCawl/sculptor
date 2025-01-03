@@ -5,10 +5,6 @@ import org.alexcawl.plugins.detekt.detektConfiguration
 import org.alexcawl.plugins.detektVersionValue
 import org.alexcawl.plugins.javaCompileTargetVersionValue
 
-plugins {
-
-}
-
 detektConfiguration { configuration: DetektConfiguration ->
     with(configuration) {
         // Version of detekt that will be used. When unspecified the latest detekt

@@ -14,10 +14,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import kmp_template.app.generated.resources.Res
-import kmp_template.app.generated.resources.compose_multiplatform
 import org.alexcawl.demo.common.greeting
 import org.jetbrains.compose.resources.painterResource
+import skulptor.app.generated.resources.Res
+import skulptor.app.generated.resources.compose_multiplatform
 
 @Composable
 fun App() {
