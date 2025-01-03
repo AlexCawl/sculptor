@@ -6,62 +6,53 @@ on:
 env:
   JAVA_VERSION: 17
   JAVA_DISTRIBUTION: temurin
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref_name }}-${{ github.event.number || github.sha }}
+  cancel-in-progress: true
 jobs:
   prebuild:
     name: Prebuild project
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-gradle-cache-${{ github.sha }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: false
+          cache-read-only: false
       - name: Run detekt
         run: ./gradlew detekt
   build:
     name: Build project
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     needs:
       - prebuild
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-gradle-cache-${{ github.sha }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: false
+          cache-read-only: true
       - name: Run build with Gradle Wrapper
         run: ./gradlew build
   test:
     name: Test project
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     needs:
       - build
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-      - name: Cache Gradle packages
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-gradle-cache-${{ github.sha }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-disabled: false
+          cache-read-only: true
       - name: Run tests with Gradle Wrapper
         run: ./gradlew test
