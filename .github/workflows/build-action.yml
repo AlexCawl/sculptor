@@ -37,7 +37,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-disabled: false
-          cache-read-only: true
+          cache-read-only: false
       - name: Run build with Gradle Wrapper
         run: ./gradlew build
   test:
@@ -53,6 +53,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           cache-disabled: false
-          cache-read-only: true
+          cache-read-only: false
       - name: Run tests with Gradle Wrapper
         run: ./gradlew test
