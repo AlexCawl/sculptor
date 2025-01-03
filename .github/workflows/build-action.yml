@@ -13,6 +13,14 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
+          restore-keys: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run detekt
@@ -25,6 +33,14 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
+          restore-keys: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run build with Gradle Wrapper
@@ -37,6 +53,14 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
+          restore-keys: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run tests with Gradle Wrapper
