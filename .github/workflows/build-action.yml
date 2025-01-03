@@ -19,8 +19,8 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
-          restore-keys: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
+          key: ${{ runner.os }}-gradle-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-gradle-cache-${{ github.sha }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run detekt
@@ -39,8 +39,8 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
-          restore-keys: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
+          key: ${{ runner.os }}-gradle-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-gradle-cache-${{ github.sha }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run build with Gradle Wrapper
@@ -59,8 +59,8 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
-          restore-keys: ${{ runner.os }}-gradle-cache-${{ secrets.CACHE_VERSION }}-${{ hashFiles(...) }}
+          key: ${{ runner.os }}-gradle-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-gradle-cache-${{ github.sha }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
       - name: Run tests with Gradle Wrapper
