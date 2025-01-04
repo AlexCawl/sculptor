@@ -19,5 +19,8 @@ desktop(
 )
 
 commonMainDependencies {
-//    implementation(projects.common)
+    implementation(projects.core)
+    implementation(projects.builder)
+    implementation(projects.material)
+    implementation(projects.material3)
 }
