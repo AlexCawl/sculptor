@@ -1,11 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
-import java.net.URI
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
+        gradlePluginPortal()
+        mavenCentral()
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")
@@ -13,14 +13,13 @@ pluginManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
-        mavenCentral()
-        gradlePluginPortal()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
 dependencyResolutionManagement {
     repositories {
+        mavenCentral()
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")
@@ -28,12 +27,8 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
-        mavenCentral()
-        maven(url = "https://jitpack.io")
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven {
-            url = URI("https://androidx.dev/storage/compose-compiler/repository/")
-        }
+        maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven(url = "https://androidx.dev/storage/compose-compiler/repository/")
     }
     versionCatalogs {
         create("libs") {
