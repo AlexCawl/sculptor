@@ -27,10 +27,12 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
+        maven(url = "https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
-include(":app")
-include(":common")
+include(":showroom:app")
+include(":core")
+include(":builder")
+include(":material")
+include(":material3")

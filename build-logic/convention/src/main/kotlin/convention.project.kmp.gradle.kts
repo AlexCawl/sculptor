@@ -10,6 +10,7 @@ plugins {
 
     id("convention.base.common")
     id("convention.base.android")
+    id("convention.base.desktop")
     id("convention.base.kmp")
     id("convention.base.detekt")
 }
@@ -36,9 +37,6 @@ private val skikoNativeDistribution: String
     }
 
 kotlinMultiplatformConfiguration {
-    androidTarget()
-    jvm()
-
     sourceSets {
         commonMain {
             dependencies {

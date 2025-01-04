@@ -6,7 +6,6 @@ version-common-kotlin-coroutines = "1.9.0"
 version-common-kotlin-serialization = "1.7.3"
 version-common-kotlin-datetime = "0.6.0"
 version-common-compose = "1.7.3"
-version-common-ktor = "3.0.2"
 version-common-skiko = "0.8.19"
 
 # [versions.common.test]
@@ -40,8 +39,6 @@ common-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-
 common-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "version-common-kotlin-serialization" }
 common-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "version-common-kotlin-serialization" }
 common-kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "version-common-kotlin-datetime" }
-common-ktor-client = { group = "io.ktor", name = "ktor-client-core", version.ref = "version-common-ktor" }
-common-ktor-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "version-common-ktor" }
 common-collections = { module = "androidx.collection:collection", version = "1.4.5" }
 common-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version = "2.8.4" }
 common-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "2.8.4" }
@@ -60,7 +57,6 @@ android-activityCompose = { module = "androidx.activity:activity-compose", versi
 android-splash = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
 android-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "version-android-lifecycle" }
 android-lifecycle-extensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version = "2.2.0" }
-android-ktor-client = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "version-common-ktor" }
 
 # [libraries.android.test]
 android-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.1" }
@@ -70,7 +66,6 @@ android-espresso = { group = "androidx.test.espresso", name = "espresso-core", v
 # ======================================= [libraries.jvm] ==========================================
 # [libraries.jvm.source]
 jvm-kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "version-common-kotlin-coroutines" }
-jvm-ktor-client = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "version-common-ktor" }
 
 # [libraries.jvm.test]
 # ...
@@ -90,8 +85,6 @@ common-source = [
     "common-kotlin-serialization",
     "common-kotlin-serialization-json",
     "common-kotlin-datetime",
-    "common-ktor-client",
-    "common-ktor-serialization",
     "common-collections",
     "common-lifecycle-compose",
     "common-lifecycle-viewmodel",
@@ -105,11 +98,8 @@ common-test = [
 android-source = [
     "android-kotlin",
     "android-kotlin-coroutines",
-    "android-activityCompose",
-    "android-splash",
     "android-lifecycle-runtime",
     "android-lifecycle-extensions",
-    "android-ktor-client"
 ]
 android-test = [
     "android-junit",
@@ -118,7 +108,6 @@ android-test = [
 ]
 jvm-source = [
     "jvm-kotlin-coroutines",
-    "jvm-ktor-client"
 ]
 jvm-test = [
 ]

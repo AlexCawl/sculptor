@@ -14,7 +14,11 @@ inline fun Project.jvmConfiguration(
 
 inline fun Project.desktopConfiguration(
     block: DesktopExtension.() -> Unit
-) = block(desktopExtension)
+) = try {
+    block(desktopExtension)
+} catch (ignored: IllegalStateException) {
+    // no-op
+}
 
 fun Project.desktop(
     applicationClass: String,
