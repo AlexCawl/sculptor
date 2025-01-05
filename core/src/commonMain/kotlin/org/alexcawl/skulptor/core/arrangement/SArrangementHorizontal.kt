@@ -3,7 +3,7 @@ package org.alexcawl.skulptor.core.arrangement
 import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 import org.alexcawl.skulptor.core.alignment.SAlignmentHorizontal
 import org.alexcawl.skulptor.core.dimension.SDimensionDp
 
@@ -11,7 +11,7 @@ import org.alexcawl.skulptor.core.dimension.SDimensionDp
  * Used to specify the horizontal arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Row].
  */
 @Serializable
-sealed interface SArrangementHorizontal : SAttribute<Arrangement.Horizontal> {
+sealed interface SArrangementHorizontal : SkulptorAttribute<Arrangement.Horizontal> {
     /**
      * Place children horizontally such that they are as close as possible to the beginning of the
      * horizontal axis (left if the layout direction is LTR, right otherwise).

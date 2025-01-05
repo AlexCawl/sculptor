@@ -4,7 +4,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 import org.alexcawl.skulptor.core.dimension.SDimensionDp.Hairline
 
 /**
@@ -14,7 +14,7 @@ import org.alexcawl.skulptor.core.dimension.SDimensionDp.Hairline
  * defined using [dp], which can be applied to [Int], [Double], and [Float].
  */
 @Serializable
-sealed interface SDimensionDp : SAttribute<Dp> {
+sealed interface SDimensionDp : SkulptorAttribute<Dp> {
     @Serializable
     sealed interface DpFromNumber : SDimensionDp {
         val value: Number

@@ -6,16 +6,15 @@ import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 import org.alexcawl.skulptor.core.state.SkulptorState
 
 @Serializable
-data class SLayout(
+data class SkulptorLayout(
     @SerialName("id")
     val id: String,
-
-    @SerialName("key")
-    val key: SkulptorKey,
-
+    @SerialName("module")
+    val module: String,
+    @SerialName("type")
+    val type: String,
     @SerialName("modifier")
     val modifier: List<SkulptorModifier>,
-
     @SerialName("state")
     val state: SkulptorState,
 )

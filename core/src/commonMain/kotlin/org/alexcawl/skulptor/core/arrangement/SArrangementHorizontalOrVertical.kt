@@ -3,7 +3,7 @@ package org.alexcawl.skulptor.core.arrangement
 import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 import org.alexcawl.skulptor.core.dimension.SDimensionDp
 
 /**
@@ -12,7 +12,7 @@ import org.alexcawl.skulptor.core.dimension.SDimensionDp
  * [androidx.compose.foundation.layout.Column].
  */
 @Serializable
-sealed interface SArrangementHorizontalOrVertical : SAttribute<Arrangement.HorizontalOrVertical> {
+sealed interface SArrangementHorizontalOrVertical : SkulptorAttribute<Arrangement.HorizontalOrVertical> {
     /**
      * Place children such that they are as close as possible to the middle of the main axis.
      * Visually: ##123## for LTR and ##321## for RTL.

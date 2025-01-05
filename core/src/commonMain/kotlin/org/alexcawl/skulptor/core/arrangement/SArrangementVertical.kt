@@ -3,7 +3,7 @@ package org.alexcawl.skulptor.core.arrangement
 import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 import org.alexcawl.skulptor.core.alignment.SAlignmentVertical
 import org.alexcawl.skulptor.core.dimension.SDimensionDp
 
@@ -11,7 +11,7 @@ import org.alexcawl.skulptor.core.dimension.SDimensionDp
  * Used to specify the vertical arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Column].
  */
 @Serializable
-sealed interface SArrangementVertical : SAttribute<Arrangement.Vertical> {
+sealed interface SArrangementVertical : SkulptorAttribute<Arrangement.Vertical> {
     /**
      * Place children vertically such that they are as close as possible to the top of the main
      * axis.

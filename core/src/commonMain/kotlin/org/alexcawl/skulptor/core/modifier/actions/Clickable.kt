@@ -12,7 +12,7 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 import org.alexcawl.skulptor.core.SkulptorAction
 import org.alexcawl.skulptor.core.modifier.SkulptorModifier
-import org.alexcawl.skulptor.core.SRole
+import org.alexcawl.skulptor.core.role.SRole
 
 internal val clickableSerializersModule = SerializersModule {
     polymorphic(SkulptorModifier::class) {

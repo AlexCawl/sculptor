@@ -1,5 +1,5 @@
 package org.alexcawl.skulptor.core
 
-interface SAttribute<ComposeAttribute> {
+interface SkulptorAttribute<ComposeAttribute> {
     fun asCompose(): ComposeAttribute
 }

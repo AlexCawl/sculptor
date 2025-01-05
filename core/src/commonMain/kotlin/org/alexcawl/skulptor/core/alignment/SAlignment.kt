@@ -3,14 +3,14 @@ package org.alexcawl.skulptor.core.alignment
 import androidx.compose.ui.Alignment
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 
 /**
  * An interface to calculate the position of a sized box inside an available space. [Alignment] is
  * often used to define the alignment of a layout inside a parent layout.
  */
 @Serializable
-sealed interface SAlignment : SAttribute<Alignment> {
+sealed interface SAlignment : SkulptorAttribute<Alignment> {
     @Serializable
     @SerialName("alignment@top_start")
     data object TopStart : SAlignment {

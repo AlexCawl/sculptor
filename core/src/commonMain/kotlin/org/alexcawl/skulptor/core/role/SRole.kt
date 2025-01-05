@@ -1,15 +1,16 @@
-package org.alexcawl.skulptor.core
+package org.alexcawl.skulptor.core.role
 
 import androidx.compose.ui.semantics.Role
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.alexcawl.skulptor.core.SkulptorAttribute
 
 /**
  * The type of user interface element. Accessibility services might use this to describe the
  * element or do customizations.
  */
 @Serializable
-sealed interface SRole : SAttribute<Role> {
+sealed interface SRole : SkulptorAttribute<Role> {
     /**
      * This element is a button control.
      */

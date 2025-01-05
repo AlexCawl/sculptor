@@ -3,7 +3,7 @@ package org.alexcawl.skulptor.core.alignment
 import androidx.compose.ui.Alignment
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 
 /**
  * An interface to calculate the position of a box of a certain height inside an available
@@ -11,7 +11,7 @@ import org.alexcawl.skulptor.core.SAttribute
  * layout inside a parent layout.
  */
 @Serializable
-sealed interface SAlignmentVertical : SAttribute<Alignment.Vertical> {
+sealed interface SAlignmentVertical : SkulptorAttribute<Alignment.Vertical> {
     @Serializable
     @SerialName("alignment@top")
     data object Top : SAlignmentVertical {

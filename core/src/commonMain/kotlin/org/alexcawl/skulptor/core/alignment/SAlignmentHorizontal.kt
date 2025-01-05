@@ -2,7 +2,7 @@ package org.alexcawl.skulptor.core.alignment
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 import androidx.compose.ui.Alignment
 
 /**
@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
  * parent layout.
  */
 @Serializable
-sealed interface SAlignmentHorizontal : SAttribute<Alignment.Horizontal> {
+sealed interface SAlignmentHorizontal : SkulptorAttribute<Alignment.Horizontal> {
     @Serializable
     @SerialName("alignment@start")
     data object Start : SAlignmentHorizontal {

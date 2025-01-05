@@ -2,7 +2,7 @@ package org.alexcawl.skulptor.core
 
 import androidx.compose.runtime.Composable
 
-interface SProperty<ComposeProperty> {
+interface SkulptorProperty<ComposeProperty> {
     @Composable
     fun asCompose(): ComposeProperty
 }

@@ -4,7 +4,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.SkulptorAttribute
 
 /**
  * A two-dimensional Size using [Dp] for units.
@@ -15,7 +15,7 @@ data class SDimensionDpSize(
     val width: SDimensionDp,
     @SerialName("height")
     val height: SDimensionDp,
-) : SAttribute<DpSize> {
+) : SkulptorAttribute<DpSize> {
     override fun asCompose(): DpSize =
         DpSize(
             width = width.asCompose(),
