@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SAttribute
 import org.alexcawl.skulptor.core.alignment.SAlignmentVertical
-import org.alexcawl.skulptor.core.dimension.DimensionDp
+import org.alexcawl.skulptor.core.dimension.SDimensionDp
 
 /**
  * Used to specify the vertical arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Column].
@@ -49,7 +49,7 @@ sealed interface SArrangementVertical : SAttribute<Arrangement.Vertical> {
     @Serializable
     @SerialName("arrangement@spaced_by_alignment_vertical")
     data class SpacedByAlignmentVertical(
-        val space: DimensionDp,
+        val space: SDimensionDp,
         val alignment: SAlignmentVertical
     ) : SArrangementVertical {
         override fun asCompose(): Arrangement.Vertical =

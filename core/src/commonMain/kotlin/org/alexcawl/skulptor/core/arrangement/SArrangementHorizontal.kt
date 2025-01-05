@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SAttribute
 import org.alexcawl.skulptor.core.alignment.SAlignmentHorizontal
-import org.alexcawl.skulptor.core.dimension.DimensionDp
+import org.alexcawl.skulptor.core.dimension.SDimensionDp
 
 /**
  * Used to specify the horizontal arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Row].
@@ -49,7 +49,7 @@ sealed interface SArrangementHorizontal : SAttribute<Arrangement.Horizontal> {
     @Serializable
     @SerialName("arrangement@spaced_by_alignment_horizontal")
     data class SpacedByAlignmentHorizontal(
-        val space: DimensionDp,
+        val space: SDimensionDp,
         val alignment: SAlignmentHorizontal
     ) : SArrangementHorizontal {
         override fun asCompose(): Arrangement.Horizontal =
