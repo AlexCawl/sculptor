@@ -6,7 +6,7 @@ import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 import org.alexcawl.skulptor.core.state.SkulptorState
 
 @Serializable
-data class SkulptorLayout(
+data class SLayout(
     @SerialName("id")
     val id: String,
 

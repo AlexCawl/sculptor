@@ -1,19 +1,23 @@
 package org.alexcawl.skulptor.core
 
+import androidx.compose.ui.semantics.Role
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-private typealias ComposeRole = androidx.compose.ui.semantics.Role
-
+/**
+ * The type of user interface element. Accessibility services might use this to describe the
+ * element or do customizations.
+ */
 @Serializable
-sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
+sealed interface SRole : SAttribute<Role> {
     /**
      * This element is a button control.
      */
     @Serializable
     @SerialName("role@button")
-    data object Button : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.Button
+    data object Button : SRole {
+        override fun asCompose(): Role =
+            Role.Button
     }
 
     /**
@@ -22,8 +26,9 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
      */
     @Serializable
     @SerialName("role@checkbox")
-    data object Checkbox : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.Checkbox
+    data object Checkbox : SRole {
+        override fun asCompose(): Role =
+            Role.Checkbox
     }
 
     /**
@@ -32,8 +37,9 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
      */
     @Serializable
     @SerialName("role@switch")
-    data object Switch : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.Switch
+    data object Switch : SRole {
+        override fun asCompose(): Role =
+            Role.Switch
     }
 
     /**
@@ -42,8 +48,9 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
      */
     @Serializable
     @SerialName("role@radio_button")
-    data object RadioButton : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.RadioButton
+    data object RadioButton : SRole {
+        override fun asCompose(): Role =
+            Role.RadioButton
     }
 
     /**
@@ -52,8 +59,9 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
      */
     @Serializable
     @SerialName("role@tab")
-    data object Tab : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.Tab
+    data object Tab : SRole {
+        override fun asCompose(): Role =
+            Role.Tab
     }
 
     /**
@@ -61,8 +69,9 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
      */
     @Serializable
     @SerialName("role@image")
-    data object Image : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.Image
+    data object Image : SRole {
+        override fun asCompose(): Role =
+            Role.Image
     }
 
     /**
@@ -70,7 +79,8 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
      */
     @Serializable
     @SerialName("role@dropdown_list")
-    data object DropdownList : SkulptorRole {
-        override fun asCompose(): ComposeRole = ComposeRole.DropdownList
+    data object DropdownList : SRole {
+        override fun asCompose(): Role =
+            Role.DropdownList
     }
 }

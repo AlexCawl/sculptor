@@ -5,6 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("dimension@px")
-data class DimensionPx(override val value: Float) : SkulptorDimension<Float> {
+data class DimensionPx(
+    override val value: Float
+) : SDimension<Float> {
     override fun asCompose(): Float = value
 }

@@ -1,14 +1,14 @@
 package org.alexcawl.skulptor.core.dimension
 
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.em
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@SerialName("dimension@sp")
-data class DimensionSp(
+@SerialName("dimension@em")
+data class DimensionEm(
     override val value: Int
 ) : SDimension<TextUnit> {
-    override fun asCompose(): TextUnit = value.sp
+    override fun asCompose(): TextUnit = value.em
 }

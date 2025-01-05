@@ -1,19 +1,17 @@
 package org.alexcawl.skulptor.core.arrangement
 
-import androidx.compose.foundation.layout.Arrangement.HorizontalOrVertical
+import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorProperty
-import org.alexcawl.skulptor.core.alignment.SkulptorAlignmentVertical
+import org.alexcawl.skulptor.core.SAttribute
+import org.alexcawl.skulptor.core.alignment.SAlignmentVertical
 import org.alexcawl.skulptor.core.dimension.DimensionDp
-import androidx.compose.foundation.layout.Arrangement as ComposeArrangement
-import androidx.compose.foundation.layout.Arrangement.Vertical as ComposeVerticalArrangement
 
 /**
  * Used to specify the vertical arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Column].
  */
 @Serializable
-sealed interface SkulptorArrangementVertical : SkulptorProperty<ComposeVerticalArrangement> {
+sealed interface SArrangementVertical : SAttribute<Arrangement.Vertical> {
     /**
      * Place children vertically such that they are as close as possible to the top of the main
      * axis.
@@ -21,9 +19,9 @@ sealed interface SkulptorArrangementVertical : SkulptorProperty<ComposeVerticalA
      */
     @Serializable
     @SerialName("arrangement@top")
-    data object Top : SkulptorArrangementVertical {
-        override fun asCompose(): ComposeVerticalArrangement =
-            ComposeArrangement.Top
+    data object Top : SArrangementVertical {
+        override fun asCompose(): Arrangement.Vertical =
+            Arrangement.Top
     }
 
     /**
@@ -33,9 +31,9 @@ sealed interface SkulptorArrangementVertical : SkulptorProperty<ComposeVerticalA
      */
     @Serializable
     @SerialName("arrangement@bottom")
-    data object Bottom : SkulptorArrangementVertical {
-        override fun asCompose(): ComposeVerticalArrangement =
-            ComposeArrangement.Bottom
+    data object Bottom : SArrangementVertical {
+        override fun asCompose(): Arrangement.Vertical =
+            Arrangement.Bottom
     }
 
     /**
@@ -52,11 +50,29 @@ sealed interface SkulptorArrangementVertical : SkulptorProperty<ComposeVerticalA
     @SerialName("arrangement@spaced_by_alignment_vertical")
     data class SpacedByAlignmentVertical(
         val space: DimensionDp,
-        val alignment: SkulptorAlignmentVertical
-    ) : SkulptorArrangementVertical {
-        override fun asCompose(): ComposeVerticalArrangement =
-            ComposeArrangement.spacedBy(
+        val alignment: SAlignmentVertical
+    ) : SArrangementVertical {
+        override fun asCompose(): Arrangement.Vertical =
+            Arrangement.spacedBy(
                 space = space.asCompose(),
+                alignment = alignment.asCompose()
+            )
+    }
+
+
+    /**
+     * Place children vertically one next to the other and align the obtained group
+     * according to an [alignment].
+     *
+     * @param alignment The alignment of the children inside the parent.
+     */
+    @Serializable
+    @SerialName("arrangement@aligned_vertically")
+    data class AlignedVertically(
+        val alignment: SAlignmentVertical
+    ) : SArrangementVertical {
+        override fun asCompose(): Arrangement.Vertical =
+            Arrangement.aligned(
                 alignment = alignment.asCompose()
             )
     }

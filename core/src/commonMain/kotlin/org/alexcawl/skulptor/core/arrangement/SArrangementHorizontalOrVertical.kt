@@ -1,11 +1,10 @@
 package org.alexcawl.skulptor.core.arrangement
 
+import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorProperty
+import org.alexcawl.skulptor.core.SAttribute
 import org.alexcawl.skulptor.core.dimension.DimensionDp
-import androidx.compose.foundation.layout.Arrangement as ComposeArrangement
-import androidx.compose.foundation.layout.Arrangement.HorizontalOrVertical as ComposeHorizontalOrVerticalArrangement
 
 /**
  * Used to specify the horizontal arrangement of the layout's children in horizontal layouts
@@ -13,16 +12,16 @@ import androidx.compose.foundation.layout.Arrangement.HorizontalOrVertical as Co
  * [androidx.compose.foundation.layout.Column].
  */
 @Serializable
-sealed interface SkulptorHorizontalOrVerticalArrangement : SkulptorProperty<ComposeHorizontalOrVerticalArrangement> {
+sealed interface SArrangementHorizontalOrVertical : SAttribute<Arrangement.HorizontalOrVertical> {
     /**
      * Place children such that they are as close as possible to the middle of the main axis.
      * Visually: ##123## for LTR and ##321## for RTL.
      */
     @Serializable
     @SerialName("arrangement@center")
-    data object Center : SkulptorHorizontalOrVerticalArrangement {
-        override fun asCompose(): ComposeHorizontalOrVerticalArrangement =
-            ComposeArrangement.Center
+    data object Center : SArrangementHorizontalOrVertical {
+        override fun asCompose(): Arrangement.HorizontalOrVertical =
+            Arrangement.Center
     }
 
     /**
@@ -32,9 +31,9 @@ sealed interface SkulptorHorizontalOrVerticalArrangement : SkulptorProperty<Comp
      */
     @Serializable
     @SerialName("arrangement@space_evenly")
-    data object SpaceEvenly : SkulptorHorizontalOrVerticalArrangement {
-        override fun asCompose(): ComposeHorizontalOrVerticalArrangement =
-            ComposeArrangement.SpaceEvenly
+    data object SpaceEvenly : SArrangementHorizontalOrVertical {
+        override fun asCompose(): Arrangement.HorizontalOrVertical =
+            Arrangement.SpaceEvenly
     }
 
     /**
@@ -44,9 +43,9 @@ sealed interface SkulptorHorizontalOrVerticalArrangement : SkulptorProperty<Comp
      */
     @Serializable
     @SerialName("arrangement@space_between")
-    data object SpaceBetween : SkulptorHorizontalOrVerticalArrangement {
-        override fun asCompose(): ComposeHorizontalOrVerticalArrangement =
-            ComposeArrangement.SpaceBetween
+    data object SpaceBetween : SArrangementHorizontalOrVertical {
+        override fun asCompose(): Arrangement.HorizontalOrVertical =
+            Arrangement.SpaceBetween
     }
 
     /**
@@ -57,9 +56,9 @@ sealed interface SkulptorHorizontalOrVerticalArrangement : SkulptorProperty<Comp
      */
     @Serializable
     @SerialName("arrangement@space_around")
-    data object SpaceAround : SkulptorHorizontalOrVerticalArrangement {
-        override fun asCompose(): ComposeHorizontalOrVerticalArrangement =
-            ComposeArrangement.SpaceAround
+    data object SpaceAround : SArrangementHorizontalOrVertical {
+        override fun asCompose(): Arrangement.HorizontalOrVertical =
+            Arrangement.SpaceAround
     }
 
     /**
@@ -76,8 +75,8 @@ sealed interface SkulptorHorizontalOrVerticalArrangement : SkulptorProperty<Comp
     @SerialName("arrangement@spaced_by")
     data class SpacedBy(
         val space: DimensionDp
-    ) : SkulptorHorizontalOrVerticalArrangement {
-        override fun asCompose(): ComposeHorizontalOrVerticalArrangement =
-            ComposeArrangement.spacedBy(space.asCompose())
+    ) : SArrangementHorizontalOrVertical {
+        override fun asCompose(): Arrangement.HorizontalOrVertical =
+            Arrangement.spacedBy(space.asCompose())
     }
 }
