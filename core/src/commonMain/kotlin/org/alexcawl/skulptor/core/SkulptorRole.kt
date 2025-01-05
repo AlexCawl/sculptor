@@ -1,6 +1,5 @@
 package org.alexcawl.skulptor.core
 
-import androidx.compose.runtime.Composable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +13,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@button")
     data object Button : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.Button
     }
 
@@ -25,7 +23,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@checkbox")
     data object Checkbox : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.Checkbox
     }
 
@@ -36,7 +33,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@switch")
     data object Switch : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.Switch
     }
 
@@ -47,7 +43,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@radio_button")
     data object RadioButton : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.RadioButton
     }
 
@@ -58,7 +53,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@tab")
     data object Tab : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.Tab
     }
 
@@ -68,7 +62,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@image")
     data object Image : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.Image
     }
 
@@ -78,7 +71,6 @@ sealed interface SkulptorRole : SkulptorProperty<ComposeRole> {
     @Serializable
     @SerialName("role@dropdown_list")
     data object DropdownList : SkulptorRole {
-        @Composable
         override fun asCompose(): ComposeRole = ComposeRole.DropdownList
     }
 }
