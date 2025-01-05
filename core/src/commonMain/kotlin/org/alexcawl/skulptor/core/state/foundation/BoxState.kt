@@ -11,10 +11,8 @@ import org.alexcawl.skulptor.core.state.SkulptorState
 data class BoxState(
     @SerialName("content_alignment")
     val contentAlignment: SAlignment? = null,
-
     @SerialName("propagate_min_constraints")
     val propagateMinConstraints: Boolean? = null,
-
     @SerialName("content")
     val content: SLayout? = null
 ) : SkulptorState

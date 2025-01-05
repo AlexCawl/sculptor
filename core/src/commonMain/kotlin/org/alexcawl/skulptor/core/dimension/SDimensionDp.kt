@@ -25,6 +25,7 @@ sealed interface SDimensionDp : SAttribute<Dp> {
         @Serializable
         @SerialName("dimension@dp_int")
         data class DpFromInt(
+            @SerialName("value")
             override val value: Int
         ) : DpFromNumber {
             override fun asCompose(): Dp =
@@ -37,6 +38,7 @@ sealed interface SDimensionDp : SAttribute<Dp> {
         @Serializable
         @SerialName("dimension@dp_float")
         data class DpFromFloat(
+            @SerialName("value")
             override val value: Float
         ) : DpFromNumber {
             override fun asCompose(): Dp =
@@ -49,6 +51,7 @@ sealed interface SDimensionDp : SAttribute<Dp> {
         @Serializable
         @SerialName("dimension@dp_double")
         data class DpFromDouble(
+            @SerialName("value")
             override val value: Double
         ) : DpFromNumber {
             override fun asCompose(): Dp =
