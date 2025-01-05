@@ -10,66 +10,66 @@ import org.alexcawl.skulptor.core.SkulptorAttribute
  * often used to define the alignment of a layout inside a parent layout.
  */
 @Serializable
-sealed interface SAlignment : SkulptorAttribute<Alignment> {
+sealed interface SAlignmentHorizontalAndVertical : SkulptorAttribute<Alignment> {
     @Serializable
     @SerialName("alignment@top_start")
-    data object TopStart : SAlignment {
+    data object TopStart : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.TopStart
     }
 
     @Serializable
     @SerialName("alignment@top_center")
-    data object TopCenter : SAlignment {
+    data object TopCenter : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.TopCenter
     }
 
     @Serializable
     @SerialName("alignment@top_end")
-    data object TopEnd : SAlignment {
+    data object TopEnd : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.TopEnd
     }
 
     @Serializable
     @SerialName("alignment@center_start")
-    data object CenterStart : SAlignment {
+    data object CenterStart : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.CenterStart
     }
 
     @Serializable
     @SerialName("alignment@center")
-    data object Center : SAlignment {
+    data object Center : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.Center
     }
 
     @Serializable
     @SerialName("alignment@center_end")
-    data object CenterEnd : SAlignment {
+    data object CenterEnd : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.CenterEnd
     }
 
     @Serializable
     @SerialName("alignment@bottom_start")
-    data object BottomStart : SAlignment {
+    data object BottomStart : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.BottomStart
     }
 
     @Serializable
     @SerialName("alignment@bottom_center")
-    data object BottomCenter : SAlignment {
+    data object BottomCenter : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.BottomCenter
     }
 
     @Serializable
     @SerialName("alignment@bottom_end")
-    data object BottomEnd : SAlignment {
+    data object BottomEnd : SAlignmentHorizontalAndVertical {
         override fun asCompose(): Alignment =
             Alignment.BottomEnd
     }

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.alignment.SAlignment
+import org.alexcawl.skulptor.core.alignment.SAlignmentHorizontalAndVertical
 import org.alexcawl.skulptor.core.dimension.SDimensionDpSize
 import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 
@@ -151,7 +151,7 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@wrap_content_size")
     data class WrapContentSize(
         @SerialName("align")
-        val align: SAlignment,
+        val align: SAlignmentHorizontalAndVertical,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : SizeModifier {
