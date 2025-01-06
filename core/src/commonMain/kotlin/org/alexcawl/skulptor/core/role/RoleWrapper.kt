@@ -10,13 +10,13 @@ import org.alexcawl.skulptor.core.SkulptorAttribute
  * element or do customizations.
  */
 @Serializable
-sealed interface SRole : SkulptorAttribute<Role> {
+sealed interface RoleWrapper : SkulptorAttribute<Role> {
     /**
      * This element is a button control.
      */
     @Serializable
     @SerialName("role@button")
-    data object Button : SRole {
+    data object Button : RoleWrapper {
         override fun asCompose(): Role =
             Role.Button
     }
@@ -27,7 +27,7 @@ sealed interface SRole : SkulptorAttribute<Role> {
      */
     @Serializable
     @SerialName("role@checkbox")
-    data object Checkbox : SRole {
+    data object Checkbox : RoleWrapper {
         override fun asCompose(): Role =
             Role.Checkbox
     }
@@ -38,7 +38,7 @@ sealed interface SRole : SkulptorAttribute<Role> {
      */
     @Serializable
     @SerialName("role@switch")
-    data object Switch : SRole {
+    data object Switch : RoleWrapper {
         override fun asCompose(): Role =
             Role.Switch
     }
@@ -49,7 +49,7 @@ sealed interface SRole : SkulptorAttribute<Role> {
      */
     @Serializable
     @SerialName("role@radio_button")
-    data object RadioButton : SRole {
+    data object RadioButton : RoleWrapper {
         override fun asCompose(): Role =
             Role.RadioButton
     }
@@ -60,7 +60,7 @@ sealed interface SRole : SkulptorAttribute<Role> {
      */
     @Serializable
     @SerialName("role@tab")
-    data object Tab : SRole {
+    data object Tab : RoleWrapper {
         override fun asCompose(): Role =
             Role.Tab
     }
@@ -70,7 +70,7 @@ sealed interface SRole : SkulptorAttribute<Role> {
      */
     @Serializable
     @SerialName("role@image")
-    data object Image : SRole {
+    data object Image : RoleWrapper {
         override fun asCompose(): Role =
             Role.Image
     }
@@ -80,7 +80,7 @@ sealed interface SRole : SkulptorAttribute<Role> {
      */
     @Serializable
     @SerialName("role@dropdown_list")
-    data object DropdownList : SRole {
+    data object DropdownList : RoleWrapper {
         override fun asCompose(): Role =
             Role.DropdownList
     }

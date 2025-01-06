@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.alignment.SAlignmentHorizontal
-import org.alexcawl.skulptor.core.dimension.SDimensionDp
+import org.alexcawl.skulptor.core.alignment.AlignmentWrapper
+import org.alexcawl.skulptor.core.dimension.DpWrapper
 import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 
 @Serializable
@@ -29,7 +29,7 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@width")
     data class Width(
         @SerialName("width")
-        val width: SDimensionDp
+        val width: DpWrapper
     ) : WidthModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -48,9 +48,9 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@width_in")
     data class WidthIn(
         @SerialName("min")
-        val min: SDimensionDp,
+        val min: DpWrapper,
         @SerialName("max")
-        val max: SDimensionDp,
+        val max: DpWrapper,
     ) : WidthModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -76,7 +76,7 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@required_width")
     data class RequiredWidth(
         @SerialName("width")
-        val width: SDimensionDp
+        val width: DpWrapper
     ) : WidthModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -96,9 +96,9 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@required_width_in")
     data class RequiredWidthIn(
         @SerialName("min")
-        val min: SDimensionDp,
+        val min: DpWrapper,
         @SerialName("max")
-        val max: SDimensionDp,
+        val max: DpWrapper,
     ) : WidthModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -142,7 +142,7 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@wrap_content_width")
     data class WrapContentWidth(
         @SerialName("align")
-        val align: SAlignmentHorizontal,
+        val align: AlignmentWrapper.Horizontal,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : WidthModifier {

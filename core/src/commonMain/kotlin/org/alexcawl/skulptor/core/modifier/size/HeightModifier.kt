@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.alignment.SAlignmentVertical
-import org.alexcawl.skulptor.core.dimension.SDimensionDp
+import org.alexcawl.skulptor.core.alignment.AlignmentWrapper
+import org.alexcawl.skulptor.core.dimension.DpWrapper
 import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 
 @Serializable
@@ -29,7 +29,7 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@height")
     data class Height(
         @SerialName("height")
-        val height: SDimensionDp
+        val height: DpWrapper
     ) : HeightModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -48,9 +48,9 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@height_in")
     data class HeightIn(
         @SerialName("min")
-        val min: SDimensionDp,
+        val min: DpWrapper,
         @SerialName("max")
-        val max: SDimensionDp,
+        val max: DpWrapper,
     ) : HeightModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -72,7 +72,7 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@required_height")
     data class RequiredHeight(
         @SerialName("height")
-        val height: SDimensionDp
+        val height: DpWrapper
     ) : HeightModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -92,9 +92,9 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@required_height_in")
     data class RequiredHeightIn(
         @SerialName("min")
-        val min: SDimensionDp,
+        val min: DpWrapper,
         @SerialName("max")
-        val max: SDimensionDp,
+        val max: DpWrapper,
     ) : HeightModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -136,7 +136,7 @@ sealed interface HeightModifier : SkulptorModifier {
     @Serializable
     @SerialName("modifier@wrap_content_height")
     data class WrapContentHeight(
-        val align: SAlignmentVertical,
+        val align: AlignmentWrapper.Vertical,
         val unbounded: Boolean,
     ) : HeightModifier {
         @Composable

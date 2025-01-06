@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.alignment.SAlignmentHorizontalAndVertical
-import org.alexcawl.skulptor.core.dimension.SDimensionDpSize
+import org.alexcawl.skulptor.core.alignment.AlignmentWrapper
+import org.alexcawl.skulptor.core.dimension.DpSizeWrapper
 import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 
 @Serializable
@@ -30,7 +30,7 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@size")
     data class Size(
         @SerialName("size")
-        val size: SDimensionDpSize
+        val size: DpSizeWrapper
     ) : SizeModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -48,9 +48,9 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@size_in")
     data class SizeIn(
         @SerialName("min")
-        val min: SDimensionDpSize,
+        val min: DpSizeWrapper,
         @SerialName("max")
-        val max: SDimensionDpSize,
+        val max: DpSizeWrapper,
     ) : SizeModifier {
         @Composable
         override fun asCompose(): Modifier {
@@ -77,7 +77,7 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@required_size")
     data class RequiredSize(
         @SerialName("size")
-        val size: SDimensionDpSize
+        val size: DpSizeWrapper
     ) : SizeModifier {
         @Composable
         override fun asCompose(): Modifier =
@@ -97,9 +97,9 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@required_size_in")
     data class RequiredSizeIn(
         @SerialName("min")
-        val min: SDimensionDpSize,
+        val min: DpSizeWrapper,
         @SerialName("max")
-        val max: SDimensionDpSize,
+        val max: DpSizeWrapper,
     ) : SizeModifier {
         @Composable
         override fun asCompose(): Modifier {
@@ -151,7 +151,7 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@wrap_content_size")
     data class WrapContentSize(
         @SerialName("align")
-        val align: SAlignmentHorizontalAndVertical,
+        val align: AlignmentWrapper.HorizontalAndVertical,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : SizeModifier {

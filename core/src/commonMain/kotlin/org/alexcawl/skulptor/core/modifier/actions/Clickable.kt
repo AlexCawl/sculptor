@@ -12,7 +12,7 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 import org.alexcawl.skulptor.core.SkulptorAction
 import org.alexcawl.skulptor.core.modifier.SkulptorModifier
-import org.alexcawl.skulptor.core.role.SRole
+import org.alexcawl.skulptor.core.role.RoleWrapper
 
 internal val clickableSerializersModule = SerializersModule {
     polymorphic(SkulptorModifier::class) {
@@ -38,7 +38,7 @@ data class Clickable(
     val enabled: Boolean,
 
     @SerialName("role")
-    val role: SRole,
+    val role: RoleWrapper,
 
     @SerialName("on_click_label")
     val onClickLabel: String? = null,
@@ -77,7 +77,7 @@ data class CombinedClickable(
     val enabled: Boolean,
 
     @SerialName("role")
-    val role: SRole,
+    val role: RoleWrapper,
 
     @SerialName("on_click_label")
     val onClickLabel: String?,

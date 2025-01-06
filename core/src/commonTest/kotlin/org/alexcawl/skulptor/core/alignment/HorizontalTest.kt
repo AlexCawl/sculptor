@@ -3,30 +3,30 @@ package org.alexcawl.skulptor.core.alignment
 import org.alexcawl.skulptor.core.BaseSerializationTest
 import org.junit.Test
 
-class SAlignmentHorizontalTest : BaseSerializationTest() {
+class HorizontalTest : BaseSerializationTest() {
     private inline fun serializationTest(
         identifier: String,
-        factory: () -> SAlignmentHorizontal
+        factory: () -> AlignmentWrapper.Horizontal
     ) = baseSerializationTest(
         string = """{"type":"alignment@${identifier}"}""",
         factory = factory
     )
 
     @Test
-    fun `Test SAlignment_Start`() = serializationTest(
+    fun `Test Alignment_Start`() = serializationTest(
         identifier = "start",
-        factory = { SAlignmentHorizontal.Start }
+        factory = { AlignmentWrapper.Horizontal.Start }
     )
 
     @Test
-    fun `Test SAlignment_CenterHorizontally`() = serializationTest(
+    fun `Test Alignment_CenterHorizontally`() = serializationTest(
         identifier = "center_horizontally",
-        factory = { SAlignmentHorizontal.CenterHorizontally }
+        factory = { AlignmentWrapper.Horizontal.CenterHorizontally }
     )
 
     @Test
-    fun `Test SAlignment_End`() = serializationTest(
+    fun `Test Alignment_End`() = serializationTest(
         identifier = "end",
-        factory = { SAlignmentHorizontal.End }
+        factory = { AlignmentWrapper.Horizontal.End }
     )
 }

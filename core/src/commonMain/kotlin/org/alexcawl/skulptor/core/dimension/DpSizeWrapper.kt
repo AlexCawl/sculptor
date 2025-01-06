@@ -10,11 +10,11 @@ import org.alexcawl.skulptor.core.SkulptorAttribute
  * A two-dimensional Size using [Dp] for units.
  */
 @Serializable
-data class SDimensionDpSize(
+data class DpSizeWrapper(
     @SerialName("width")
-    val width: SDimensionDp,
+    val width: DpWrapper,
     @SerialName("height")
-    val height: SDimensionDp,
+    val height: DpWrapper,
 ) : SkulptorAttribute<DpSize> {
     override fun asCompose(): DpSize =
         DpSize(

@@ -5,7 +5,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SkulptorAttribute
-import org.alexcawl.skulptor.core.dimension.SDimensionDp.Hairline
+import org.alexcawl.skulptor.core.dimension.DpWrapper.Hairline
 
 /**
  * Dimension value representing device-independent pixels (dp). Component APIs specify their
@@ -14,46 +14,46 @@ import org.alexcawl.skulptor.core.dimension.SDimensionDp.Hairline
  * defined using [dp], which can be applied to [Int], [Double], and [Float].
  */
 @Serializable
-sealed interface SDimensionDp : SkulptorAttribute<Dp> {
+sealed interface DpWrapper : SkulptorAttribute<Dp> {
     @Serializable
-    sealed interface DpFromNumber : SDimensionDp {
+    sealed interface FromNumber : DpWrapper {
         val value: Number
 
         /**
-         * Create a [SDimensionDp] using an [Int].
+         * Create a [DpWrapper] using an [Int].
          */
         @Serializable
         @SerialName("dimension@dp_int")
-        data class DpFromInt(
+        data class FromInt(
             @SerialName("value")
             override val value: Int
-        ) : DpFromNumber {
+        ) : FromNumber {
             override fun asCompose(): Dp =
                 value.dp
         }
 
         /**
-         * Create a [SDimensionDp] using an [Float].
+         * Create a [DpWrapper] using an [Float].
          */
         @Serializable
         @SerialName("dimension@dp_float")
-        data class DpFromFloat(
+        data class FromFloat(
             @SerialName("value")
             override val value: Float
-        ) : DpFromNumber {
+        ) : FromNumber {
             override fun asCompose(): Dp =
                 value.dp
         }
 
         /**
-         * Create a [SDimensionDp] using an [Double].
+         * Create a [DpWrapper] using an [Double].
          */
         @Serializable
         @SerialName("dimension@dp_double")
-        data class DpFromDouble(
+        data class FromDouble(
             @SerialName("value")
             override val value: Double
-        ) : DpFromNumber {
+        ) : FromNumber {
             override fun asCompose(): Dp =
                 value.dp
         }
@@ -65,7 +65,7 @@ sealed interface SDimensionDp : SkulptorAttribute<Dp> {
      */
     @Serializable
     @SerialName("dimension@dp_hairline")
-    data object Hairline : SDimensionDp {
+    data object Hairline : DpWrapper {
         override fun asCompose(): Dp =
             Dp.Hairline
     }
@@ -75,7 +75,7 @@ sealed interface SDimensionDp : SkulptorAttribute<Dp> {
      */
     @Serializable
     @SerialName("dimension@dp_infinity")
-    data object Infinity : SDimensionDp {
+    data object Infinity : DpWrapper {
         override fun asCompose(): Dp =
             Dp.Infinity
     }
@@ -85,7 +85,7 @@ sealed interface SDimensionDp : SkulptorAttribute<Dp> {
      */
     @Serializable
     @SerialName("dimension@dp_unspecified")
-    data object Unspecified : SDimensionDp {
+    data object Unspecified : DpWrapper {
         override fun asCompose(): Dp =
             Dp.Unspecified
     }
