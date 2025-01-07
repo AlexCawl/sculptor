@@ -1,7 +1,6 @@
 package org.alexcawl.skulptor.core
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 
 interface SkulptorLayout {
     val id: String
@@ -10,6 +9,5 @@ interface SkulptorLayout {
 
     val state: Any
 
-    @Composable
-    fun Skulptor.build(scope: Any): @Composable () -> Unit
+    fun build(skulptor: Skulptor, scope: Any): @Composable () -> Unit
 }

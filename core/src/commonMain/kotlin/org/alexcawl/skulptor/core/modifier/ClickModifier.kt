@@ -1,15 +1,13 @@
-package org.alexcawl.skulptor.core.modifier.clickable
+package org.alexcawl.skulptor.core.modifier
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorAction
-import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.attribute.RoleWrapper
 
@@ -17,13 +15,6 @@ import org.alexcawl.skulptor.core.attribute.RoleWrapper
 sealed interface ClickModifier : SkulptorModifier {
     /**
      * Configure component to receive clicks via input or accessibility "click" event.
-     *
-     * @param enabled Controls the enabled state. When `false`, [onClick], and this modifier will
-     * appear disabled for accessibility services
-     * @param onClickLabel semantic / accessibility label for the [onClick] action
-     * @param role the type of user interface element. Accessibility services might use this
-     * to describe the element or do customizations
-     * @param onClick will be called when user clicks on the element
      */
     @Serializable
     @SerialName("modifier@clickable")
@@ -37,14 +28,13 @@ sealed interface ClickModifier : SkulptorModifier {
         @SerialName("on_click")
         val onClick: SkulptorAction
     ) : ClickModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.clickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
                 role = role.asCompose(),
                 onClick = {
-                    dispatch(ClickAction.Click(nodeId))
+                    skulptor.dispatch(onClick)
                 }
             )
     }
@@ -52,16 +42,6 @@ sealed interface ClickModifier : SkulptorModifier {
     /**
      * Configure component to receive clicks, double clicks and long clicks via input or accessibility
      * "click" event.
-     *
-     * @param enabled Controls the enabled state. When `false`, [onClick], [onLongClick] or
-     * [onDoubleClick] won't be invoked
-     * @param onClickLabel semantic / accessibility label for the [onClick] action
-     * @param role the type of user interface element. Accessibility services might use this
-     * to describe the element or do customizations
-     * @param onLongClickLabel semantic / accessibility label for the [onLongClick] action
-     * @param onLongClick will be called when user long presses on the element
-     * @param onDoubleClick will be called when user double clicks on the element
-     * @param onClick will be called when user clicks on the element
      */
     @Serializable
     @SerialName("modifier@combined_clickable")
@@ -82,21 +62,24 @@ sealed interface ClickModifier : SkulptorModifier {
         val onDoubleClick: SkulptorAction? = null,
     ) : ClickModifier {
         @OptIn(ExperimentalFoundationApi::class)
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.combinedClickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
                 role = role.asCompose(),
                 onLongClickLabel = onLongClickLabel,
                 onLongClick = {
-                    dispatch(ClickAction.LongClick(nodeId))
+                    if (onLongClick != null) {
+                        skulptor.dispatch(onLongClick)
+                    }
                 },
                 onDoubleClick = {
-                    dispatch(ClickAction.DoubleClick(nodeId))
+                    if (onDoubleClick != null) {
+                        skulptor.dispatch(onDoubleClick)
+                    }
                 },
                 onClick = {
-                    dispatch(ClickAction.Click(nodeId))
+                    skulptor.dispatch(onClick)
                 }
             )
     }

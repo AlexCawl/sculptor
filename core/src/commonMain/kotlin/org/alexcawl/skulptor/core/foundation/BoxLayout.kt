@@ -30,9 +30,8 @@ data class BoxLayout(
         val content: SkulptorLayout? = null,
     )
 
-    @Composable
-    override fun Skulptor.build(scope: Any): @Composable () -> Unit = {
-        val modifier = carve(modifiers)
+    override fun build(skulptor: Skulptor, scope: Any): @Composable () -> Unit = {
+        val modifier = skulptor.carve(modifiers)
         Box(
             modifier = modifier,
             contentAlignment = state.contentAlignment?.asCompose() ?: Alignment.TopStart,
@@ -40,7 +39,7 @@ data class BoxLayout(
             content = {
                 when (val child = state.content) {
                     null -> Unit
-                    else -> place(child, this)
+                    else -> skulptor.place(child, this)
                 }
             }
         )

@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.modifier.size
+package org.alexcawl.skulptor.core.modifier
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.requiredSize
@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.requiredSizeIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
-import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.alexcawl.skulptor.core.attribute.DpSizeWrapper
 import org.alexcawl.skulptor.core.SkulptorModifier
@@ -34,8 +32,7 @@ sealed interface SizeModifier : SkulptorModifier {
         @SerialName("size")
         val size: DpSizeWrapper
     ) : SizeModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.size(
                 size = size.asCompose()
             )
@@ -54,8 +51,7 @@ sealed interface SizeModifier : SkulptorModifier {
         @SerialName("max")
         val max: DpSizeWrapper,
     ) : SizeModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier {
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier {
             val (minWidth, minHeight) = min.asCompose()
             val (maxWidth, maxHeight) = max.asCompose()
             return initial.sizeIn(
@@ -81,8 +77,7 @@ sealed interface SizeModifier : SkulptorModifier {
         @SerialName("size")
         val size: DpSizeWrapper
     ) : SizeModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.requiredSize(
                 size = size.asCompose()
             )
@@ -103,8 +98,7 @@ sealed interface SizeModifier : SkulptorModifier {
         @SerialName("max")
         val max: DpSizeWrapper,
     ) : SizeModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier {
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier {
             val (minWidth, minHeight) = min.asCompose()
             val (maxWidth, maxHeight) = max.asCompose()
             return initial.requiredSizeIn(
@@ -134,8 +128,7 @@ sealed interface SizeModifier : SkulptorModifier {
         @SerialName("fraction")
         val fraction: Float
     ) : SizeModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.fillMaxSize(
                 fraction = fraction
             )
@@ -157,8 +150,7 @@ sealed interface SizeModifier : SkulptorModifier {
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : SizeModifier {
-        @Composable
-        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.wrapContentSize(
                 align = align.asCompose(),
                 unbounded = unbounded

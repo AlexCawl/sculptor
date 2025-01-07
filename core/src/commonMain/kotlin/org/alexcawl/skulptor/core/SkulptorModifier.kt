@@ -1,6 +1,5 @@
 package org.alexcawl.skulptor.core
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 /**
@@ -9,6 +8,5 @@ import androidx.compose.ui.Modifier
  * decorate or add behavior to rows, text or buttons.
  */
 interface SkulptorModifier {
-    @Composable
-    fun Skulptor.build(initial: Modifier, scope: Any): Modifier
+    fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier
 }
