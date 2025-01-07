@@ -27,10 +27,12 @@ private class ColorWrapperSerializer : KSerializer<ColorWrapper> {
     )
 
     override fun deserialize(decoder: Decoder): ColorWrapper {
-        TODO("Not yet implemented")
+        val string = decoder.decodeString()
+        return ColorWrapper(string.toLong(radix = 16))
     }
 
     override fun serialize(encoder: Encoder, value: ColorWrapper) {
-        TODO("Not yet implemented")
+        val string = value.argb.toString(radix = 16)
+        encoder.encodeString(string)
     }
 }

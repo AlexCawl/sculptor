@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorLayout
+import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.attribute.ColorWrapper
 import org.alexcawl.skulptor.core.attribute.ShapeWrapper
@@ -19,8 +19,8 @@ sealed interface BackgroundModifier : SkulptorModifier {
         val shape: ShapeWrapper
     ) : BackgroundModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.background(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.background(
                 color = color.asCompose(),
                 shape = shape.asCompose()
             )

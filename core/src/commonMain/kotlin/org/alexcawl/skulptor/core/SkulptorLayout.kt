@@ -6,14 +6,10 @@ import androidx.compose.ui.Modifier
 interface SkulptorLayout {
     val id: String
 
-    val modifier: List<SkulptorModifier>
+    val modifiers: List<SkulptorModifier>
 
     val state: Any
 
     @Composable
-    fun buildLayout(
-        scope: Any,
-        modifier: Modifier,
-        onChild: (child: SkulptorLayout, parentScope: Any) -> Unit
-    ): @Composable () -> Unit
+    fun Skulptor.build(scope: Any): @Composable () -> Unit
 }

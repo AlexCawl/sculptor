@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorLayout
+import org.alexcawl.skulptor.core.Skulptor
+import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.alexcawl.skulptor.core.attribute.DpWrapper
-import org.alexcawl.skulptor.core.SkulptorModifier
 
 @Serializable
 sealed interface HeightModifier : SkulptorModifier {
@@ -33,8 +33,8 @@ sealed interface HeightModifier : SkulptorModifier {
         val height: DpWrapper
     ) : HeightModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.height(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.height(
                 height = height.asCompose()
             )
     }
@@ -54,8 +54,8 @@ sealed interface HeightModifier : SkulptorModifier {
         val max: DpWrapper,
     ) : HeightModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.heightIn(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.heightIn(
                 min = min.asCompose(),
                 max = max.asCompose()
             )
@@ -76,8 +76,8 @@ sealed interface HeightModifier : SkulptorModifier {
         val height: DpWrapper
     ) : HeightModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.requiredHeight(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.requiredHeight(
                 height = height.asCompose()
             )
     }
@@ -98,8 +98,8 @@ sealed interface HeightModifier : SkulptorModifier {
         val max: DpWrapper,
     ) : HeightModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.requiredHeightIn(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.requiredHeightIn(
                 min = min.asCompose(),
                 max = max.asCompose()
             )
@@ -120,8 +120,8 @@ sealed interface HeightModifier : SkulptorModifier {
         val fraction: Float
     ) : HeightModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.fillMaxHeight(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.fillMaxHeight(
                 fraction = fraction
             )
     }
@@ -143,8 +143,8 @@ sealed interface HeightModifier : SkulptorModifier {
         val unbounded: Boolean,
     ) : HeightModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.wrapContentHeight(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.wrapContentHeight(
                 align = align.asCompose(),
                 unbounded = unbounded
             )

@@ -10,5 +10,5 @@ import androidx.compose.ui.Modifier
  */
 interface SkulptorModifier {
     @Composable
-    fun asCompose(layout: SkulptorLayout): Modifier
+    fun Skulptor.build(initial: Modifier, scope: Any): Modifier
 }

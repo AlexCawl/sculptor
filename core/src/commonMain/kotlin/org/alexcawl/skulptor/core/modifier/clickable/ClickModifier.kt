@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorAction
 import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
@@ -37,14 +38,13 @@ sealed interface ClickModifier : SkulptorModifier {
         val onClick: SkulptorAction
     ) : ClickModifier {
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.clickable(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.clickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
                 role = role.asCompose(),
                 onClick = {
-                    /* TODO */
-                    ClickAction.Click(layout.id)
+                    dispatch(ClickAction.Click(nodeId))
                 }
             )
     }
@@ -83,23 +83,20 @@ sealed interface ClickModifier : SkulptorModifier {
     ) : ClickModifier {
         @OptIn(ExperimentalFoundationApi::class)
         @Composable
-        override fun asCompose(layout: SkulptorLayout): Modifier =
-            Modifier.combinedClickable(
+        override fun Skulptor.build(initial: Modifier, scope: Any): Modifier =
+            initial.combinedClickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
                 role = role.asCompose(),
                 onLongClickLabel = onLongClickLabel,
                 onLongClick = {
-                    /* TODO */
-                    ClickAction.LongClick(layout.id)
+                    dispatch(ClickAction.LongClick(nodeId))
                 },
                 onDoubleClick = {
-                    /* TODO */
-                    ClickAction.DoubleClick(layout.id)
+                    dispatch(ClickAction.DoubleClick(nodeId))
                 },
                 onClick = {
-                    /* TODO */
-                    ClickAction.Click(layout.id)
+                    dispatch(ClickAction.Click(nodeId))
                 }
             )
     }
