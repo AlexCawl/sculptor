@@ -1,10 +1,9 @@
-package org.alexcawl.skulptor.core.alignment
+package org.alexcawl.skulptor.core.attribute
 
 import org.alexcawl.skulptor.core.BaseSerializationTest
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.junit.Test
 
-class HorizontalTest : BaseSerializationTest() {
+class AlignmentHorizontalTest : BaseSerializationTest() {
     private inline fun serializationTest(
         identifier: String,
         factory: () -> AlignmentWrapper.Horizontal
