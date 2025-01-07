@@ -7,13 +7,16 @@ import androidx.compose.ui.platform.testTag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SkulptorLayout
-import org.alexcawl.skulptor.core.modifier.SkulptorModifier
+import org.alexcawl.skulptor.core.SkulptorModifier
 
 @Serializable
 @SerialName("foundation@basic_text")
 data class BasicTextLayout(
+    @SerialName("id")
     override val id: String,
+    @SerialName("modifier")
     override val modifier: List<SkulptorModifier>,
+    @SerialName("state")
     override val state: State
 ) : SkulptorLayout {
     @Serializable

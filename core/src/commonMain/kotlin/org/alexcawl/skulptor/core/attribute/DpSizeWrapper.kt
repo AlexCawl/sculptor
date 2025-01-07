@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.dimension
+package org.alexcawl.skulptor.core.attribute
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize

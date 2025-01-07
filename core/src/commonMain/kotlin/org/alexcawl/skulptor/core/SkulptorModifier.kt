@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.modifier
+package org.alexcawl.skulptor.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,5 +10,5 @@ import androidx.compose.ui.Modifier
  */
 interface SkulptorModifier {
     @Composable
-    fun asCompose(): Modifier
+    fun asCompose(layout: SkulptorLayout): Modifier
 }

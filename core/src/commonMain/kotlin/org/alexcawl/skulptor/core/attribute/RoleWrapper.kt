@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.role
+package org.alexcawl.skulptor.core.attribute
 
 import androidx.compose.ui.semantics.Role
 import kotlinx.serialization.SerialName

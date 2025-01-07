@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.alignment
+package org.alexcawl.skulptor.core.attribute
 
 import androidx.compose.ui.Alignment
 import kotlinx.serialization.SerialName

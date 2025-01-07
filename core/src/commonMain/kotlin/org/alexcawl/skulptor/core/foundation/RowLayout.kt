@@ -1,7 +1,6 @@
 package org.alexcawl.skulptor.core.foundation
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -9,9 +8,9 @@ import androidx.compose.ui.Modifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SkulptorLayout
-import org.alexcawl.skulptor.core.alignment.AlignmentWrapper
-import org.alexcawl.skulptor.core.arrangement.ArrangementWrapper
-import org.alexcawl.skulptor.core.modifier.SkulptorModifier
+import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
+import org.alexcawl.skulptor.core.attribute.ArrangementWrapper
+import org.alexcawl.skulptor.core.SkulptorModifier
 
 @Serializable
 @SerialName("foundation@column")

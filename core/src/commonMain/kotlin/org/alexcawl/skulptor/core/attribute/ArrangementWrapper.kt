@@ -1,11 +1,9 @@
-package org.alexcawl.skulptor.core.arrangement
+package org.alexcawl.skulptor.core.attribute
 
 import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SkulptorAttribute
-import org.alexcawl.skulptor.core.alignment.AlignmentWrapper
-import org.alexcawl.skulptor.core.dimension.DpWrapper
 
 object ArrangementWrapper {
     /**

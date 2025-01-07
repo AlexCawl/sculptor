@@ -2,7 +2,6 @@ package org.alexcawl.skulptor.core
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import org.alexcawl.skulptor.core.modifier.SkulptorModifier
 
 interface SkulptorLayout {
     val id: String

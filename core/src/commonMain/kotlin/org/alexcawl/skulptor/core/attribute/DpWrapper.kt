@@ -1,11 +1,11 @@
-package org.alexcawl.skulptor.core.dimension
+package org.alexcawl.skulptor.core.attribute
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.SkulptorAttribute
-import org.alexcawl.skulptor.core.dimension.DpWrapper.Hairline
+import org.alexcawl.skulptor.core.attribute.DpWrapper.Hairline
 
 /**
  * Dimension value representing device-independent pixels (dp). Component APIs specify their
