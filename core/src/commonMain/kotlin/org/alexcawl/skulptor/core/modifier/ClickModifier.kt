@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorAction
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.RoleWrapper
+import org.alexcawl.skulptor.core.attribute.RoleSerializable
 
 @Serializable
 sealed interface ClickModifier : SkulptorModifier {
@@ -22,7 +22,7 @@ sealed interface ClickModifier : SkulptorModifier {
         @SerialName("enabled")
         val enabled: Boolean,
         @SerialName("role")
-        val role: RoleWrapper,
+        val role: RoleSerializable,
         @SerialName("on_click_label")
         val onClickLabel: String? = null,
         @SerialName("on_click")
@@ -32,7 +32,7 @@ sealed interface ClickModifier : SkulptorModifier {
             initial.clickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
-                role = role.asCompose(),
+                role = role,
                 onClick = {
                     skulptor.dispatch(onClick)
                 }
@@ -49,7 +49,7 @@ sealed interface ClickModifier : SkulptorModifier {
         @SerialName("enabled")
         val enabled: Boolean,
         @SerialName("role")
-        val role: RoleWrapper,
+        val role: RoleSerializable,
         @SerialName("on_click_label")
         val onClickLabel: String?,
         @SerialName("on_click")
@@ -66,7 +66,7 @@ sealed interface ClickModifier : SkulptorModifier {
             initial.combinedClickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
-                role = role.asCompose(),
+                role = role,
                 onLongClickLabel = onLongClickLabel,
                 onLongClick = {
                     if (onLongClick != null) {

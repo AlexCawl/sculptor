@@ -11,9 +11,9 @@ import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
-import org.alexcawl.skulptor.core.attribute.DpWrapper
 import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
+import org.alexcawl.skulptor.core.attribute.DpSerializable
 
 @Serializable
 sealed interface WidthModifier : SkulptorModifier {
@@ -29,11 +29,11 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@width")
     data class Width(
         @SerialName("width")
-        val width: DpWrapper
+        val width: DpSerializable
     ) : WidthModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.width(
-                width = width.asCompose()
+                width = width
             )
     }
 
@@ -47,14 +47,14 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@width_in")
     data class WidthIn(
         @SerialName("min")
-        val min: DpWrapper,
+        val min: DpSerializable,
         @SerialName("max")
-        val max: DpWrapper,
+        val max: DpSerializable,
     ) : WidthModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.widthIn(
-                min = min.asCompose(),
-                max = max.asCompose()
+                min = min,
+                max = max
             )
     }
 
@@ -74,11 +74,11 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@required_width")
     data class RequiredWidth(
         @SerialName("width")
-        val width: DpWrapper
+        val width: DpSerializable
     ) : WidthModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.requiredWidth(
-                width = width.asCompose()
+                width = width
             )
     }
 
@@ -93,14 +93,14 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@required_width_in")
     data class RequiredWidthIn(
         @SerialName("min")
-        val min: DpWrapper,
+        val min: DpSerializable,
         @SerialName("max")
-        val max: DpWrapper,
+        val max: DpSerializable,
     ) : WidthModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.requiredWidthIn(
-                min = min.asCompose(),
-                max = max.asCompose()
+                min = min,
+                max = max
             )
     }
 

@@ -6,21 +6,21 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.ColorWrapper
-import org.alexcawl.skulptor.core.attribute.ShapeWrapper
+import org.alexcawl.skulptor.core.attribute.ColorSerializable
+import org.alexcawl.skulptor.core.attribute.ShapeSerializable
 
 @Serializable
 sealed interface BackgroundModifier : SkulptorModifier {
     data class Background(
         @SerialName("color")
-        val color: ColorWrapper,
+        val color: ColorSerializable,
         @SerialName("shape")
-        val shape: ShapeWrapper
+        val shape: ShapeSerializable
     ) : BackgroundModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.background(
-                color = color.asCompose(),
-                shape = shape.asCompose()
+                color = color,
+                shape = shape
             )
     }
 }

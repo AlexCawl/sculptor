@@ -11,9 +11,9 @@ import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
-import org.alexcawl.skulptor.core.attribute.DpSizeWrapper
 import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
+import org.alexcawl.skulptor.core.attribute.DpSizeSerializable
 
 @Serializable
 sealed interface SizeModifier : SkulptorModifier {
@@ -30,12 +30,10 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@size")
     data class Size(
         @SerialName("size")
-        val size: DpSizeWrapper
+        val size: DpSizeSerializable
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
-            initial.size(
-                size = size.asCompose()
-            )
+            initial.size(size = size)
     }
 
     /**
@@ -47,13 +45,13 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@size_in")
     data class SizeIn(
         @SerialName("min")
-        val min: DpSizeWrapper,
+        val min: DpSizeSerializable,
         @SerialName("max")
-        val max: DpSizeWrapper,
+        val max: DpSizeSerializable,
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier {
-            val (minWidth, minHeight) = min.asCompose()
-            val (maxWidth, maxHeight) = max.asCompose()
+            val (minWidth, minHeight) = min
+            val (maxWidth, maxHeight) = max
             return initial.sizeIn(
                 minWidth = minWidth,
                 minHeight = minHeight,
@@ -75,11 +73,11 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@required_size")
     data class RequiredSize(
         @SerialName("size")
-        val size: DpSizeWrapper
+        val size: DpSizeSerializable
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.requiredSize(
-                size = size.asCompose()
+                size = size
             )
     }
 
@@ -94,13 +92,13 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@required_size_in")
     data class RequiredSizeIn(
         @SerialName("min")
-        val min: DpSizeWrapper,
+        val min: DpSizeSerializable,
         @SerialName("max")
-        val max: DpSizeWrapper,
+        val max: DpSizeSerializable,
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier {
-            val (minWidth, minHeight) = min.asCompose()
-            val (maxWidth, maxHeight) = max.asCompose()
+            val (minWidth, minHeight) = min
+            val (maxWidth, maxHeight) = max
             return initial.requiredSizeIn(
                 minWidth = minWidth,
                 minHeight = minHeight,

@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
-import org.alexcawl.skulptor.core.attribute.DpWrapper
+import org.alexcawl.skulptor.core.attribute.DpSerializable
 
 @Serializable
 sealed interface HeightModifier : SkulptorModifier {
@@ -29,12 +29,10 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@height")
     data class Height(
         @SerialName("height")
-        val height: DpWrapper
+        val height: DpSerializable
     ) : HeightModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
-            initial.height(
-                height = height.asCompose()
-            )
+            initial.height(height = height)
     }
 
     /**
@@ -47,14 +45,14 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@height_in")
     data class HeightIn(
         @SerialName("min")
-        val min: DpWrapper,
+        val min: DpSerializable,
         @SerialName("max")
-        val max: DpWrapper,
+        val max: DpSerializable,
     ) : HeightModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.heightIn(
-                min = min.asCompose(),
-                max = max.asCompose()
+                min = min,
+                max = max
             )
     }
 
@@ -70,11 +68,11 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@required_height")
     data class RequiredHeight(
         @SerialName("height")
-        val height: DpWrapper
+        val height: DpSerializable
     ) : HeightModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.requiredHeight(
-                height = height.asCompose()
+                height = height
             )
     }
 
@@ -89,14 +87,14 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@required_height_in")
     data class RequiredHeightIn(
         @SerialName("min")
-        val min: DpWrapper,
+        val min: DpSerializable,
         @SerialName("max")
-        val max: DpWrapper,
+        val max: DpSerializable,
     ) : HeightModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.requiredHeightIn(
-                min = min.asCompose(),
-                max = max.asCompose()
+                min = min,
+                max = max
             )
     }
 

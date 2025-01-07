@@ -74,10 +74,10 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@spaced_by")
         data class SpacedBy(
-            val space: DpWrapper
+            val space: DpSerializable
         ) : HorizontalOrVertical {
             override fun asCompose(): Arrangement.HorizontalOrVertical =
-                Arrangement.spacedBy(space.asCompose())
+                Arrangement.spacedBy(space)
         }
     }
 
@@ -123,12 +123,12 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@spaced_by_alignment_horizontal")
         data class SpacedByAlignmentHorizontal(
-            val space: DpWrapper,
+            val space: DpSerializable,
             val alignment: AlignmentWrapper.Horizontal
         ) : Horizontal {
             override fun asCompose(): Arrangement.Horizontal =
                 Arrangement.spacedBy(
-                    space = space.asCompose(),
+                    space = space,
                     alignment = alignment.asCompose()
                 )
         }
@@ -193,12 +193,12 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@spaced_by_alignment_vertical")
         data class SpacedByAlignmentVertical(
-            val space: DpWrapper,
+            val space: DpSerializable,
             val alignment: AlignmentWrapper.Vertical
         ) : Vertical {
             override fun asCompose(): Arrangement.Vertical =
                 Arrangement.spacedBy(
-                    space = space.asCompose(),
+                    space = space,
                     alignment = alignment.asCompose()
                 )
         }

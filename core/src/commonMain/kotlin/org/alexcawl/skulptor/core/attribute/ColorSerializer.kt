@@ -11,28 +11,21 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import org.alexcawl.skulptor.core.SkulptorAttribute
 
-@Serializable(with = ColorWrapperSerializer::class)
-data class ColorWrapper(
-    @SerialName("argb")
-    val argb: Long
-) : SkulptorAttribute<Color> {
-    override fun asCompose(): Color =
-        Color(color = argb)
-}
+typealias ColorSerializable = @Serializable(with = ColorSerializer::class) Color
 
-private class ColorWrapperSerializer : KSerializer<ColorWrapper> {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
-        serialName = "org.alexcawl.skulptor.core.attribute.ColorWrapper",
+internal class ColorSerializer : KSerializer<Color> {
+    override val descriptor: SerialDescriptor =  PrimitiveSerialDescriptor(
+        serialName = "androidx.compose.ui.graphics.Color",
         kind = PrimitiveKind.STRING
     )
 
-    override fun deserialize(decoder: Decoder): ColorWrapper {
+    override fun deserialize(decoder: Decoder): Color {
         val string = decoder.decodeString()
-        return ColorWrapper(string.toLong(radix = 16))
+        return Color(value = string.toULong(radix = 16))
     }
 
-    override fun serialize(encoder: Encoder, value: ColorWrapper) {
-        val string = value.argb.toString(radix = 16)
+    override fun serialize(encoder: Encoder, value: Color) {
+        val string = value.value.toString(radix = 16)
         encoder.encodeString(string)
     }
 }
