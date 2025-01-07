@@ -31,14 +31,14 @@ data class RowLayout(
 
     @Composable
     override fun Skulptor.build(scope: Any): @Composable () -> Unit = {
-        val modifier = carve(scope, modifiers)
+        val modifier = carve(modifiers)
         Row(
             modifier = modifier,
             horizontalArrangement = state.horizontalArrangement?.asCompose() ?: Arrangement.Start,
             verticalAlignment = state.verticalAlignment?.asCompose() ?: Alignment.Top,
             content = {
                 state.content?.forEach {
-                    place(this, it)
+                    place(it, this)
                 }
             }
         )

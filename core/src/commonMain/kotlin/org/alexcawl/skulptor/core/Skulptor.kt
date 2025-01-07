@@ -7,7 +7,7 @@ interface Skulptor {
 
     fun dispatch(action: SkulptorAction)
 
-    fun carve(scope: Any, modifiers: List<SkulptorModifier>): Modifier
+    fun carve(modifiers: List<SkulptorModifier>, scope: Any = Any()): Modifier
 
-    fun place(scope: Any, layout: SkulptorLayout)
+    fun place(layout: SkulptorLayout, scope: Any)
 }

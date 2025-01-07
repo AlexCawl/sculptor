@@ -35,7 +35,7 @@ data class BasicTextLayout(
 
     @Composable
     override fun Skulptor.build(scope: Any): @Composable () -> Unit = {
-        val modifier = carve(scope, modifiers)
+        val modifier = carve(modifiers)
         when (state) {
             is State.Base -> {
                 BasicText(
