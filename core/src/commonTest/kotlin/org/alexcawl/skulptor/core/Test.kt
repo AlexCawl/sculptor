@@ -31,8 +31,9 @@ class Test {
                 subclass(BackgroundModifier.Background::class)
                 subclass(WidthModifier.FillMaxWidth::class)
                 subclass(HeightModifier.FillMaxHeight::class)
+                subclass(WidthModifier.Width::class)
+                subclass(HeightModifier.Height::class)
             }
-
         }
     }
 
