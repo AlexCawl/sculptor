@@ -12,8 +12,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.DpSizeSerializable
-import org.alexcawl.skulptor.core.attribute.alignment.AlignmentSerializable
+import org.alexcawl.skulptor.core.provider.DpSizeSerializable
+import org.alexcawl.skulptor.core.provider.alignment.AlignmentSerializable
 
 sealed interface SizeModifier : SkulptorModifier {
     /**

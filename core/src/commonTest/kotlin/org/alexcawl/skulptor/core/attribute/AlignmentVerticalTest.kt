@@ -1,6 +1,7 @@
 package org.alexcawl.skulptor.core.attribute
 
 import org.alexcawl.skulptor.core.BaseSerializationTest
+import org.alexcawl.skulptor.core.provider.AlignmentWrapper
 import org.junit.Test
 
 class AlignmentVerticalTest : BaseSerializationTest() {

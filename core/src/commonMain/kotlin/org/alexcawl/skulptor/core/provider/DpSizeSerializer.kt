@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.attribute
+package org.alexcawl.skulptor.core.provider
 
 import androidx.compose.ui.unit.DpSize
 import kotlinx.serialization.ExperimentalSerializationApi

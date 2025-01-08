@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.attribute.arrangement
+package org.alexcawl.skulptor.core.provider.arrangement
 
 import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import org.alexcawl.skulptor.core.attribute.DpSerializable
+import org.alexcawl.skulptor.core.provider.DpSerializable
 
 class ArrangementHorizontalOrVerticalSerializer : KSerializer<Arrangement.HorizontalOrVertical> {
     @OptIn(ExperimentalSerializationApi::class)

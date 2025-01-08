@@ -1,4 +1,4 @@
-package org.alexcawl.skulptor.core.attribute
+package org.alexcawl.skulptor.core.provider
 
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.ui.unit.dp

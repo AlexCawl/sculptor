@@ -1,9 +1,9 @@
-package org.alexcawl.skulptor.core.attribute
+package org.alexcawl.skulptor.core.provider
 
 import androidx.compose.foundation.layout.Arrangement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorAttribute
+import org.alexcawl.skulptor.core.Provider
 
 object ArrangementWrapper {
     /**
@@ -12,7 +12,7 @@ object ArrangementWrapper {
      * [androidx.compose.foundation.layout.Column].
      */
     @Serializable
-    sealed interface HorizontalOrVertical : SkulptorAttribute<Arrangement.HorizontalOrVertical> {
+    sealed interface HorizontalOrVertical : Provider<Arrangement.HorizontalOrVertical> {
         /**
          * Place children such that they are as close as possible to the middle of the main axis.
          * Visually: ##123## for LTR and ##321## for RTL.
@@ -20,7 +20,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@center")
         data object Center : HorizontalOrVertical {
-            override fun asCompose(): Arrangement.HorizontalOrVertical =
+            override fun invoke(): Arrangement.HorizontalOrVertical =
                 Arrangement.Center
         }
 
@@ -32,7 +32,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@space_evenly")
         data object SpaceEvenly : HorizontalOrVertical {
-            override fun asCompose(): Arrangement.HorizontalOrVertical =
+            override fun invoke(): Arrangement.HorizontalOrVertical =
                 Arrangement.SpaceEvenly
         }
 
@@ -44,7 +44,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@space_between")
         data object SpaceBetween : HorizontalOrVertical {
-            override fun asCompose(): Arrangement.HorizontalOrVertical =
+            override fun invoke(): Arrangement.HorizontalOrVertical =
                 Arrangement.SpaceBetween
         }
 
@@ -57,7 +57,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@space_around")
         data object SpaceAround : HorizontalOrVertical {
-            override fun asCompose(): Arrangement.HorizontalOrVertical =
+            override fun invoke(): Arrangement.HorizontalOrVertical =
                 Arrangement.SpaceAround
         }
 
@@ -76,7 +76,7 @@ object ArrangementWrapper {
         data class SpacedBy(
             val space: DpSerializable
         ) : HorizontalOrVertical {
-            override fun asCompose(): Arrangement.HorizontalOrVertical =
+            override fun invoke(): Arrangement.HorizontalOrVertical =
                 Arrangement.spacedBy(space)
         }
     }
@@ -85,7 +85,7 @@ object ArrangementWrapper {
      * Used to specify the horizontal arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Row].
      */
     @Serializable
-    sealed interface Horizontal : SkulptorAttribute<Arrangement.Horizontal> {
+    sealed interface Horizontal : Provider<Arrangement.Horizontal> {
         /**
          * Place children horizontally such that they are as close as possible to the beginning of the
          * horizontal axis (left if the layout direction is LTR, right otherwise).
@@ -94,7 +94,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@start")
         data object Start : Horizontal {
-            override fun asCompose(): Arrangement.Horizontal =
+            override fun invoke(): Arrangement.Horizontal =
                 Arrangement.Start
         }
 
@@ -106,7 +106,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@end")
         data object End : Horizontal {
-            override fun asCompose(): Arrangement.Horizontal =
+            override fun invoke(): Arrangement.Horizontal =
                 Arrangement.End
         }
 
@@ -126,10 +126,10 @@ object ArrangementWrapper {
             val space: DpSerializable,
             val alignment: AlignmentWrapper.Horizontal
         ) : Horizontal {
-            override fun asCompose(): Arrangement.Horizontal =
+            override fun invoke(): Arrangement.Horizontal =
                 Arrangement.spacedBy(
                     space = space,
-                    alignment = alignment.asCompose()
+                    alignment = alignment.invoke()
                 )
         }
 
@@ -144,9 +144,9 @@ object ArrangementWrapper {
         data class AlignedHorizontally(
             val alignment: AlignmentWrapper.Horizontal
         ) : Horizontal {
-            override fun asCompose(): Arrangement.Horizontal =
+            override fun invoke(): Arrangement.Horizontal =
                 Arrangement.aligned(
-                    alignment = alignment.asCompose()
+                    alignment = alignment.invoke()
                 )
         }
     }
@@ -155,7 +155,7 @@ object ArrangementWrapper {
      * Used to specify the vertical arrangement of the layout's children in layouts like [androidx.compose.foundation.layout.Column].
      */
     @Serializable
-    sealed interface Vertical : SkulptorAttribute<Arrangement.Vertical> {
+    sealed interface Vertical : Provider<Arrangement.Vertical> {
         /**
          * Place children vertically such that they are as close as possible to the top of the main
          * axis.
@@ -164,7 +164,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@top")
         data object Top : Vertical {
-            override fun asCompose(): Arrangement.Vertical =
+            override fun invoke(): Arrangement.Vertical =
                 Arrangement.Top
         }
 
@@ -176,7 +176,7 @@ object ArrangementWrapper {
         @Serializable
         @SerialName("arrangement@bottom")
         data object Bottom : Vertical {
-            override fun asCompose(): Arrangement.Vertical =
+            override fun invoke(): Arrangement.Vertical =
                 Arrangement.Bottom
         }
 
@@ -196,10 +196,10 @@ object ArrangementWrapper {
             val space: DpSerializable,
             val alignment: AlignmentWrapper.Vertical
         ) : Vertical {
-            override fun asCompose(): Arrangement.Vertical =
+            override fun invoke(): Arrangement.Vertical =
                 Arrangement.spacedBy(
                     space = space,
-                    alignment = alignment.asCompose()
+                    alignment = alignment.invoke()
                 )
         }
 
@@ -215,9 +215,9 @@ object ArrangementWrapper {
         data class AlignedVertically(
             val alignment: AlignmentWrapper.Vertical
         ) : Vertical {
-            override fun asCompose(): Arrangement.Vertical =
+            override fun invoke(): Arrangement.Vertical =
                 Arrangement.aligned(
-                    alignment = alignment.asCompose()
+                    alignment = alignment.invoke()
                 )
         }
     }

@@ -12,8 +12,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.DpSerializable
-import org.alexcawl.skulptor.core.attribute.alignment.AlignmentVerticalSerializable
+import org.alexcawl.skulptor.core.provider.DpSerializable
+import org.alexcawl.skulptor.core.provider.alignment.AlignmentVerticalSerializable
 
 sealed interface HeightModifier : SkulptorModifier {
     /**

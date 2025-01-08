@@ -6,8 +6,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.ColorSerializable
-import org.alexcawl.skulptor.core.attribute.ShapeSerializable
+import org.alexcawl.skulptor.core.provider.ColorSerializable
+import org.alexcawl.skulptor.core.provider.ShapeSerializable
 
 sealed interface BackgroundModifier : SkulptorModifier {
     @Serializable

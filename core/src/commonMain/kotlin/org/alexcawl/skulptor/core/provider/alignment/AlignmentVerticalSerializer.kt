@@ -1,6 +1,6 @@
 @file:Suppress("ConstPropertyName")
 
-package org.alexcawl.skulptor.core.attribute.alignment
+package org.alexcawl.skulptor.core.provider.alignment
 
 import androidx.compose.ui.Alignment
 import kotlinx.serialization.KSerializer

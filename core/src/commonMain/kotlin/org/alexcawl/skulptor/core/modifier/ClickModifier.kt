@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorAction
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.RoleSerializable
+import org.alexcawl.skulptor.core.provider.RoleSerializable
 
 @Serializable
 sealed interface ClickModifier : SkulptorModifier {

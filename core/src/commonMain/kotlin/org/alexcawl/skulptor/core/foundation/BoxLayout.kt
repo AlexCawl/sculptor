@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.alignment.AlignmentSerializable
+import org.alexcawl.skulptor.core.provider.alignment.AlignmentSerializable
 
 @Serializable
 @SerialName("foundation@box")

@@ -1,15 +1,13 @@
-package org.alexcawl.skulptor.core.attribute
+package org.alexcawl.skulptor.core.provider
 
 import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import org.alexcawl.skulptor.core.SkulptorAttribute
 
 typealias ColorSerializable = @Serializable(with = ColorSerializer::class) Color
 
