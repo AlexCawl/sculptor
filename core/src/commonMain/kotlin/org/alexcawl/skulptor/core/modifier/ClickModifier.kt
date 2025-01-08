@@ -6,13 +6,12 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.Modifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorAction
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.provider.RoleProvider
 
 @Serializable
-sealed interface ClickModifier : SkulptorModifier {
+sealed class ClickModifier : SkulptorModifier() {
     @Serializable
     @SerialName("modifier@clickable")
     data class Clickable(
@@ -24,14 +23,14 @@ sealed interface ClickModifier : SkulptorModifier {
         val onClickLabel: String? = null,
         @SerialName("on_click")
         val onClick: SkulptorAction
-    ) : ClickModifier {
-        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
+    ) : ClickModifier() {
+        override fun Scope.chain(initial: Modifier): Modifier =
             initial.clickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
                 role = role(),
                 onClick = {
-                    skulptor.dispatch(onClick)
+                    dispatch(onClick)
                 }
             )
     }
@@ -53,9 +52,9 @@ sealed interface ClickModifier : SkulptorModifier {
         val onLongClick: SkulptorAction? = null,
         @SerialName("on_double_click")
         val onDoubleClick: SkulptorAction? = null,
-    ) : ClickModifier {
+    ) : ClickModifier() {
         @OptIn(ExperimentalFoundationApi::class)
-        override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
+        override fun Scope.chain(initial: Modifier): Modifier =
             initial.combinedClickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
@@ -63,16 +62,16 @@ sealed interface ClickModifier : SkulptorModifier {
                 onLongClickLabel = onLongClickLabel,
                 onLongClick = {
                     if (onLongClick != null) {
-                        skulptor.dispatch(onLongClick)
+                        dispatch(onLongClick)
                     }
                 },
                 onDoubleClick = {
                     if (onDoubleClick != null) {
-                        skulptor.dispatch(onDoubleClick)
+                        dispatch(onDoubleClick)
                     }
                 },
                 onClick = {
-                    skulptor.dispatch(onClick)
+                    dispatch(onClick)
                 }
             )
     }

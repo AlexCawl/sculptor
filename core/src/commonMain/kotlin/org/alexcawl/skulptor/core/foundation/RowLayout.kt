@@ -4,21 +4,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.provider.AlignmentProvider
 import org.alexcawl.skulptor.core.provider.ArrangementProvider
 
 @Serializable
-@SerialName("foundation@column")
+@SerialName("foundation@row")
 data class RowLayout(
     override val id: String,
-    override val modifiers: List<SkulptorModifier>,
-    override val state: State
-) : SkulptorLayout {
+    override val modifiers: List<@Contextual SkulptorModifier>,
+    val state: State
+) : SkulptorLayout() {
     @Serializable
     data class State(
         @SerialName("horizontal_arrangement")
@@ -26,18 +26,18 @@ data class RowLayout(
         @SerialName("vertical_alignment")
         val verticalAlignment: AlignmentProvider.Vertical? = null,
         @SerialName("content")
-        val content: List<SkulptorLayout>? = null
+        val content: List<@Contextual SkulptorLayout>? = null
     )
 
-    override fun build(skulptor: Skulptor, scope: Any): @Composable () -> Unit = {
-        val modifier = skulptor.carve(modifiers)
+    override fun Scope.build(): @Composable () -> Unit = {
+        val modifier = carve(modifiers)
         Row(
             modifier = modifier,
             horizontalArrangement = state.horizontalArrangement?.invoke() ?: Arrangement.Start,
             verticalAlignment = state.verticalAlignment?.invoke() ?: Alignment.Top,
             content = {
                 state.content?.forEach {
-                    skulptor.place(it, this)
+                    this.place(it)
                 }
             }
         )

@@ -9,7 +9,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Provider
 
-interface ShapeProvider : Provider<Shape> {
+@Serializable
+sealed interface ShapeProvider : Provider<Shape> {
     @Serializable
     @SerialName("rectangle")
     data object Rectangle : ShapeProvider {

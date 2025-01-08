@@ -2,22 +2,19 @@ package org.alexcawl.skulptor.core.foundation
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
 
 @Serializable
 @SerialName("foundation@basic_text")
 data class BasicTextLayout(
-    @SerialName("id")
     override val id: String,
-    @SerialName("modifier")
-    override val modifiers: List<SkulptorModifier>,
-    @SerialName("state")
-    override val state: State
-) : SkulptorLayout {
+    override val modifiers: List<@Contextual SkulptorModifier>,
+    val state: State
+) : SkulptorLayout() {
     @Serializable
     sealed interface State {
         @Serializable
@@ -34,8 +31,8 @@ data class BasicTextLayout(
         ) : State
     }
 
-    override fun build(skulptor: Skulptor, scope: Any): @Composable () -> Unit = {
-        val modifier = skulptor.carve(modifiers)
+    override fun Scope.build(): @Composable () -> Unit = {
+        val modifier = carve(modifiers)
         when (state) {
             is State.Base -> {
                 BasicText(
