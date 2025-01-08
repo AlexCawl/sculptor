@@ -7,50 +7,35 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Constraints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.provider.DpSizeSerializable
-import org.alexcawl.skulptor.core.provider.alignment.AlignmentSerializable
+import org.alexcawl.skulptor.core.provider.AlignmentProvider
+import org.alexcawl.skulptor.core.provider.DpSizeProvider
 
 sealed interface SizeModifier : SkulptorModifier {
-    /**
-     * Declare the preferred size of the content to be exactly [size]. The incoming
-     * measurement [Constraints] may override this value, forcing the content to be either smaller or
-     * larger.
-     *
-     * For a modifier that sets the size of the content regardless of the incoming constraints, see
-     * [SizeModifier.RequiredSize]. See [WidthModifier] or [HeightModifier] to set width or height alone.
-     * See [WidthModifier.WidthIn], [HeightModifier.HeightIn] or [SizeModifier.SizeIn] to set a preferred size range.
-     */
     @Serializable
     @SerialName("modifier@size")
     data class Size(
         @SerialName("size")
-        val size: DpSizeSerializable
+        val size: DpSizeProvider
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
-            initial.size(size = size)
+            initial.size(size = size())
     }
 
-    /**
-     * Constrain the size of the content to be between [min] size and [max] size as permitted by the incoming
-     * measurement [Constraints]. If the incoming constraints are more restrictive the requested size
-     * will obey the incoming constraints and attempt to be as close as possible to the preferred size.
-     */
     @Serializable
     @SerialName("modifier@size_in")
     data class SizeIn(
         @SerialName("min")
-        val min: DpSizeSerializable,
+        val min: DpSizeProvider,
         @SerialName("max")
-        val max: DpSizeSerializable,
+        val max: DpSizeProvider,
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier {
-            val (minWidth, minHeight) = min
-            val (maxWidth, maxHeight) = max
+            val (minWidth, minHeight) = min()
+            val (maxWidth, maxHeight) = max()
             return initial.sizeIn(
                 minWidth = minWidth,
                 minHeight = minHeight,
@@ -60,44 +45,26 @@ sealed interface SizeModifier : SkulptorModifier {
         }
     }
 
-    /**
-     * Declare the size of the content to be exactly [size]. The incoming measurement
-     * [Constraints] will not override this value. If the content chooses a size that does not
-     * satisfy the incoming [Constraints], the parent layout will be reported a size coerced
-     * in the [Constraints], and the position of the content will be automatically offset to be
-     * centered on the space assigned to the child by the parent layout under the assumption that
-     * [Constraints] were respected.
-     */
-    @Serializable
     @SerialName("modifier@required_size")
     data class RequiredSize(
         @SerialName("size")
-        val size: DpSizeSerializable
+        val size: DpSizeProvider
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
-            initial.requiredSize(
-                size = size
-            )
+            initial.requiredSize(size = size())
     }
 
-    /**
-     * Constrain the size of the content to be between [min] size and [max] size.
-     * If the content chooses a size that does not satisfy the incoming [Constraints], the
-     * parent layout will be reported a size coerced in the [Constraints], and the position
-     * of the content will be automatically offset to be centered on the space assigned to
-     * the child by the parent layout under the assumption that [Constraints] were respected.
-     */
     @Serializable
     @SerialName("modifier@required_size_in")
     data class RequiredSizeIn(
         @SerialName("min")
-        val min: DpSizeSerializable,
+        val min: DpSizeProvider,
         @SerialName("max")
-        val max: DpSizeSerializable,
+        val max: DpSizeProvider,
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier {
-            val (minWidth, minHeight) = min
-            val (maxWidth, maxHeight) = max
+            val (minWidth, minHeight) = min()
+            val (maxWidth, maxHeight) = max()
             return initial.requiredSizeIn(
                 minWidth = minWidth,
                 minHeight = minHeight,
@@ -107,18 +74,6 @@ sealed interface SizeModifier : SkulptorModifier {
         }
     }
 
-    /**
-     * Have the content fill (possibly only partially) the [Constraints.maxWidth] and
-     * [Constraints.maxHeight] of the incoming measurement constraints, by setting the
-     * [minimum width][Constraints.minWidth] and the [maximum width][Constraints.maxWidth] to be
-     * equal to the [maximum width][Constraints.maxWidth] multiplied by [fraction], as well as
-     * the [minimum height][Constraints.minHeight] and the [maximum height][Constraints.minHeight]
-     * to be equal to the [maximum height][Constraints.maxHeight] multiplied by [fraction].
-     * Note that, by default, the [fraction] is 1, so the modifier will make the content fill
-     * the whole available space.
-     * If the incoming maximum width or height is [Constraints.Infinity] this modifier will have no
-     * effect in that dimension.
-     */
     @Serializable
     @SerialName("modifier@fill_max_size")
     data class FillMaxSize(
@@ -126,30 +81,20 @@ sealed interface SizeModifier : SkulptorModifier {
         val fraction: Float
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
-            initial.fillMaxSize(
-                fraction = fraction
-            )
+            initial.fillMaxSize(fraction = fraction)
     }
 
-    /**
-     * Allow the content to measure at its desired size without regard for the incoming measurement
-     * [minimum width][Constraints.minWidth] or [minimum height][Constraints.minHeight] constraints,
-     * and, if [unbounded] is true, also without regard for the incoming maximum constraints.
-     * If the content's measured size is smaller than the minimum size constraint, [align] it
-     * within that minimum sized space. If the content's measured size is larger than the maximum
-     * size constraint (only possible when [unbounded] is true), [align] within the maximum space.
-     */
     @Serializable
     @SerialName("modifier@wrap_content_size")
     data class WrapContentSize(
         @SerialName("align")
-        val align: AlignmentSerializable,
+        val align: AlignmentProvider.HorizontalAndVertical,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.wrapContentSize(
-                align = align,
+                align = align(),
                 unbounded = unbounded
             )
     }

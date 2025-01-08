@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.provider.alignment.AlignmentSerializable
+import org.alexcawl.skulptor.core.provider.AlignmentProvider
 
 @Serializable
 @SerialName("foundation@box")
@@ -23,7 +23,7 @@ data class BoxLayout(
     @Serializable
     data class State(
         @SerialName("content_alignment")
-        val contentAlignment: AlignmentSerializable? = null,
+        val contentAlignment: AlignmentProvider.HorizontalAndVertical? = null,
         @SerialName("propagate_min_constraints")
         val propagateMinConstraints: Boolean? = null,
         @SerialName("content")
@@ -34,7 +34,7 @@ data class BoxLayout(
         val modifier = skulptor.carve(modifiers)
         Box(
             modifier = modifier,
-            contentAlignment = state.contentAlignment ?: Alignment.TopStart,
+            contentAlignment = state.contentAlignment?.invoke() ?: Alignment.TopStart,
             propagateMinConstraints = state.propagateMinConstraints ?: false,
             content = {
                 when (val child = state.content) {
