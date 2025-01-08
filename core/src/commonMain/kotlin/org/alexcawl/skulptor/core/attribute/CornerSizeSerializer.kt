@@ -41,7 +41,7 @@ internal class CornerSizeSerializer : KSerializer<CornerSize> {
             if (percentValue != null) {
                 encoder.encodeSerializableValue(Wrapper.serializer(), percentValue)
             } else {
-                throw SerializationException("Cannot encode CornerSize in pixels: $value")
+                throw SerializationException("This CornerSize type is not supported: $value")
             }
         }
     }
@@ -67,7 +67,7 @@ internal class CornerSizeSerializer : KSerializer<CornerSize> {
     }
 
     private companion object {
-        val dpCornerSizeRegex = "CornerSize\\(size = ([0-9.]+)\\.dp\\)".toRegex()
+        val dpCornerSizeRegex = "CornerSize\\(size = ([0-9.]+|NaN)\\.dp\\)".toRegex()
         val percentCornerSizeRegex = "CornerSize\\(size = ([0-9.]+)%\\)".toRegex()
     }
 }

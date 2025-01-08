@@ -21,12 +21,10 @@ internal class DpSerializer : KSerializer<Dp> {
 
     override fun deserialize(decoder: Decoder): Dp {
         return when (val wrapper: Wrapper = decoder.decodeSerializableValue(Wrapper.serializer())) {
-            is Wrapper.FromNumber.FromDouble -> wrapper.value.dp
-            is Wrapper.FromNumber.FromFloat -> wrapper.value.dp
-            is Wrapper.FromNumber.FromInt -> wrapper.value.dp
-            Wrapper.Hairline -> Dp.Hairline
-            Wrapper.Infinity -> Dp.Infinity
-            Wrapper.Unspecified -> Dp.Unspecified
+            is Wrapper.Number -> wrapper.value.dp
+            is Wrapper.Hairline -> Dp.Hairline
+            is Wrapper.Infinity -> Dp.Infinity
+            is Wrapper.Unspecified -> Dp.Unspecified
         }
     }
 
@@ -35,7 +33,7 @@ internal class DpSerializer : KSerializer<Dp> {
             Dp.Hairline -> Wrapper.Hairline
             Dp.Infinity -> Wrapper.Infinity
             Dp.Unspecified -> Wrapper.Unspecified
-            else -> Wrapper.FromNumber.FromFloat(value.value)
+            else -> Wrapper.Number(value.value)
         }
         encoder.encodeSerializableValue(Wrapper.serializer(), wrapper)
     }
@@ -43,32 +41,19 @@ internal class DpSerializer : KSerializer<Dp> {
     @Serializable
     private sealed interface Wrapper {
         @Serializable
-        sealed interface FromNumber : Wrapper {
-            val value: Number
-
-            @Serializable
-            @SerialName("dimension@dp_int")
-            data class FromInt(override val value: Int) : FromNumber
-
-            @Serializable
-            @SerialName("dimension@dp_float")
-            data class FromFloat(override val value: Float) : FromNumber
-
-            @Serializable
-            @SerialName("dimension@dp_double")
-            data class FromDouble(override val value: Double) : FromNumber
-        }
+        @SerialName("dp@number")
+        data class Number(val value: Float) : Wrapper
 
         @Serializable
-        @SerialName("dimension@dp_hairline")
+        @SerialName("dp@hairline")
         data object Hairline : Wrapper
 
         @Serializable
-        @SerialName("dimension@dp_infinity")
+        @SerialName("dp@infinity")
         data object Infinity : Wrapper
 
         @Serializable
-        @SerialName("dimension@dp_unspecified")
+        @SerialName("dp@unspecified")
         data object Unspecified : Wrapper
     }
 }

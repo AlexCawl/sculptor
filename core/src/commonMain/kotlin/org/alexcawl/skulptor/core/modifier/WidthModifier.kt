@@ -12,10 +12,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.alexcawl.skulptor.core.attribute.DpSerializable
+import org.alexcawl.skulptor.core.attribute.alignment.AlignmentHorizontalSerializable
 
-@Serializable
 sealed interface WidthModifier : SkulptorModifier {
     /**
      * Declare the preferred width of the content to be exactly [width]dp. The incoming measurement
@@ -137,13 +136,13 @@ sealed interface WidthModifier : SkulptorModifier {
     @SerialName("modifier@wrap_content_width")
     data class WrapContentWidth(
         @SerialName("align")
-        val align: AlignmentWrapper.Horizontal,
+        val align: AlignmentHorizontalSerializable,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : WidthModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.wrapContentWidth(
-                align = align.asCompose(),
+                align = align,
                 unbounded = unbounded
             )
     }

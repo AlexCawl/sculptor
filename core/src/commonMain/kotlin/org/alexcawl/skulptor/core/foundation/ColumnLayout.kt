@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.alexcawl.skulptor.core.attribute.ArrangementWrapper
+import org.alexcawl.skulptor.core.attribute.alignment.AlignmentHorizontalSerializable
 
 @Serializable
 @SerialName("foundation@column")
@@ -27,7 +27,7 @@ data class ColumnLayout(
         @SerialName("vertical_arrangement")
         val verticalArrangement: ArrangementWrapper.Vertical? = null,
         @SerialName("horizontal_alignment")
-        val horizontalAlignment: AlignmentWrapper.Horizontal? = null,
+        val horizontalAlignment: AlignmentHorizontalSerializable? = null,
         @SerialName("content")
         val content: List<SkulptorLayout>? = null
     )
@@ -37,7 +37,7 @@ data class ColumnLayout(
         Column(
             modifier = modifier,
             verticalArrangement = state.verticalArrangement?.asCompose() ?: Arrangement.Top,
-            horizontalAlignment = state.horizontalAlignment?.asCompose() ?: Alignment.Start,
+            horizontalAlignment = state.horizontalAlignment ?: Alignment.Start,
             content = {
                 state.content?.forEach {
                     skulptor.place(it, this)

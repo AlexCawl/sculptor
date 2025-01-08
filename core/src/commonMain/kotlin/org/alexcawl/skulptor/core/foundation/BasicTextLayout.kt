@@ -20,6 +20,7 @@ data class BasicTextLayout(
 ) : SkulptorLayout {
     @Serializable
     sealed interface State {
+        @Serializable
         @SerialName("text_state@base")
         data class Base(
             @SerialName("text")

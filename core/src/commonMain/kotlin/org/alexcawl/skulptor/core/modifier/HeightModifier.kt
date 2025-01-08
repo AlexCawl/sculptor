@@ -12,10 +12,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.alexcawl.skulptor.core.attribute.DpSerializable
+import org.alexcawl.skulptor.core.attribute.alignment.AlignmentVerticalSerializable
 
-@Serializable
 sealed interface HeightModifier : SkulptorModifier {
     /**
      * Declare the preferred height of the content to be exactly [height]dp. The incoming measurement
@@ -130,13 +129,13 @@ sealed interface HeightModifier : SkulptorModifier {
     @SerialName("modifier@wrap_content_height")
     data class WrapContentHeight(
         @SerialName("align")
-        val align: AlignmentWrapper.Vertical,
+        val align: AlignmentVerticalSerializable,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : HeightModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.wrapContentHeight(
-                align = align.asCompose(),
+                align = align,
                 unbounded = unbounded
             )
     }

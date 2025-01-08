@@ -12,10 +12,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.attribute.AlignmentWrapper
 import org.alexcawl.skulptor.core.attribute.DpSizeSerializable
+import org.alexcawl.skulptor.core.attribute.alignment.AlignmentSerializable
 
-@Serializable
 sealed interface SizeModifier : SkulptorModifier {
     /**
      * Declare the preferred size of the content to be exactly [size]. The incoming
@@ -144,13 +143,13 @@ sealed interface SizeModifier : SkulptorModifier {
     @SerialName("modifier@wrap_content_size")
     data class WrapContentSize(
         @SerialName("align")
-        val align: AlignmentWrapper.HorizontalAndVertical,
+        val align: AlignmentSerializable,
         @SerialName("unbounded")
         val unbounded: Boolean,
     ) : SizeModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
             initial.wrapContentSize(
-                align = align.asCompose(),
+                align = align,
                 unbounded = unbounded
             )
     }

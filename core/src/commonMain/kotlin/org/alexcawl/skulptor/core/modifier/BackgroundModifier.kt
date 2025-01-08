@@ -9,12 +9,11 @@ import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.attribute.ColorSerializable
 import org.alexcawl.skulptor.core.attribute.ShapeSerializable
 
-@Serializable
 sealed interface BackgroundModifier : SkulptorModifier {
+    @Serializable
+    @SerialName("modifier@background")
     data class Background(
-        @SerialName("color")
         val color: ColorSerializable,
-        @SerialName("shape")
         val shape: ShapeSerializable
     ) : BackgroundModifier {
         override fun chain(initial: Modifier, skulptor: Skulptor, scope: Any): Modifier =
