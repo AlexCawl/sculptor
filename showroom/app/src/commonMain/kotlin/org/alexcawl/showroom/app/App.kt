@@ -1,38 +1,48 @@
 package org.alexcawl.showroom.app
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.painterResource
-import skulptor.showroom.app.generated.resources.Res
-import skulptor.showroom.app.generated.resources.compose_multiplatform
+import androidx.compose.ui.graphics.Color
+import org.alexcawl.skulptor.core.Skulptor
+import org.alexcawl.skulptor.core.SkulptorLayout
+import org.alexcawl.skulptor.core.foundation.BasicTextLayout
+import org.alexcawl.skulptor.core.foundation.BoxLayout
+import org.alexcawl.skulptor.core.modifier.BackgroundModifier
+import org.alexcawl.skulptor.core.modifier.HeightModifier
+import org.alexcawl.skulptor.core.modifier.WidthModifier
+import org.alexcawl.skulptor.core.provider.AlignmentProvider
+import org.alexcawl.skulptor.core.provider.ColorProvider
+import org.alexcawl.skulptor.core.provider.DpProvider
+import org.alexcawl.skulptor.core.provider.ShapeProvider
 
 @Composable
 fun App() {
-    var showContent by remember { mutableStateOf(false) }
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(
-            modifier = Modifier.clickable { showContent = !showContent },
-        ) {
-            BasicText("Click me!")
-        }
-        AnimatedVisibility(showContent) {
-            val greeting = remember { "" }
-            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(painterResource(Res.drawable.compose_multiplatform), null)
-                BasicText("Compose: $greeting")
-            }
-        }
-    }
+    val layout: SkulptorLayout = BoxLayout(
+        id = "box0",
+        modifiers = listOf(
+            BackgroundModifier.Background(
+                color = ColorProvider(Color.Red),
+                shape = ShapeProvider.Circle
+            ),
+            WidthModifier.FillMaxWidth(fraction = 1.0f)
+        ),
+        state = BoxLayout.State(
+            contentAlignment = AlignmentProvider.HorizontalAndVertical(Alignment.Center),
+            content = BasicTextLayout(
+                id = "text0",
+                modifiers = listOf(
+                    BackgroundModifier.Background(
+                        color = ColorProvider(Color.Blue),
+                        shape = ShapeProvider.Rectangle
+                    ),
+                    HeightModifier.Height(DpProvider.Number(96.0f))
+                ),
+                state = BasicTextLayout.State.Base(
+                    text = "some text"
+                )
+            )
+        )
+    )
+    val root = Skulptor.root()
+    root.place(layout)
 }

@@ -7,11 +7,10 @@ import kotlinx.serialization.Serializable
 abstract class SkulptorModifier {
     abstract fun Scope.chain(initial: Modifier): Modifier
 
-    interface Scope {
+    internal fun internalChain(initial: Modifier, scope: Scope): Modifier =
+        with(scope) { chain(initial) }
+
+    interface Scope : SkulptorScope, SkulptorDispatcher {
         val id: String
-
-        val scope: Any
-
-        fun dispatch(action: SkulptorAction)
     }
 }

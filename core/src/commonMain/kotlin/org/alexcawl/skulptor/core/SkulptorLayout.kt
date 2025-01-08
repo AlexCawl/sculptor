@@ -12,11 +12,10 @@ abstract class SkulptorLayout {
 
     abstract fun Scope.build(): @Composable () -> Unit
 
-    interface Scope {
-        val scope: Any
+    internal fun internalBuild(scope: Scope): @Composable () -> Unit =
+        with(scope) { build() }
 
-        fun dispatch(action: SkulptorAction)
-
+    interface Scope : SkulptorScope, SkulptorDispatcher {
         fun carve(modifiers: List<SkulptorModifier>): Modifier
 
         @Composable
