@@ -4,6 +4,7 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
+    id("org.jetbrains.kotlin.plugin.serialization")
     id("org.jetbrains.compose")
     id("org.jetbrains.kotlin.plugin.compose")
     id("io.gitlab.arturbosch.detekt")
