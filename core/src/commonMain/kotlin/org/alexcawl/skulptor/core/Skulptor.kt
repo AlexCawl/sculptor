@@ -52,7 +52,7 @@ private class SkulptorImpl(
 
     @Composable
     override fun invoke() = with(scope) {
-        val layout = getLayoutOrNull<BaseLayout>(id) ?: error("Dude no...")
+        val layout = getLayout<BaseLayout>(id)
         place(layout)
     }
 

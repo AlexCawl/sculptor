@@ -35,6 +35,9 @@ dependencyResolutionManagement {
 
 include(":showroom:app")
 include(":core")
+include(":provider")
+include(":foundation")
+include(":modifier")
 include(":builder")
 include(":material")
 include(":material3")
