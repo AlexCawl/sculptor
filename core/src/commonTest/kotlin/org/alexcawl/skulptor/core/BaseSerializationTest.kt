@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 abstract class BaseSerializationTest {
     protected val format: StringFormat = Json
 
-    protected inline fun <reified T> baseSerializationTest(
+    protected inline fun <reified T> baseTest(
         string: String,
         factory: () -> T,
     ) {

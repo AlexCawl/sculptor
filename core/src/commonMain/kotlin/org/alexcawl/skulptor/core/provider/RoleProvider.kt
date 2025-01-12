@@ -1,4 +1,4 @@
-@file:Suppress("ConstPropertyName")
+@file:Suppress("ConstPropertyName", "ObjectPropertyNaming")
 
 package org.alexcawl.skulptor.core.provider
 
@@ -11,7 +11,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import org.alexcawl.skulptor.core.Provider
+import org.alexcawl.skulptor.core.common.Provider
 
 @Serializable(with = RoleSerializer::class)
 data class RoleProvider(private val role: Role) : Provider<Role> {

@@ -7,8 +7,9 @@ import androidx.compose.ui.Alignment
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorLayout
+import org.alexcawl.skulptor.core.ComponentLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.ContainerLayout
 import org.alexcawl.skulptor.core.provider.AlignmentProvider
 import org.alexcawl.skulptor.core.provider.ArrangementProvider
 
@@ -18,15 +19,12 @@ data class ColumnLayout(
     override val id: String,
     override val modifiers: List<@Contextual SkulptorModifier>,
     val state: State
-) : SkulptorLayout() {
+) : ContainerLayout() {
     @Serializable
     data class State(
-        @SerialName("vertical_arrangement")
         val verticalArrangement: ArrangementProvider.Vertical? = null,
-        @SerialName("horizontal_alignment")
         val horizontalAlignment: AlignmentProvider.Horizontal? = null,
-        @SerialName("content")
-        val content: List<@Contextual SkulptorLayout>? = null
+        val content: List<@Contextual ComponentLayout>? = null
     )
 
     override fun Scope.build(): @Composable () -> Unit = {
