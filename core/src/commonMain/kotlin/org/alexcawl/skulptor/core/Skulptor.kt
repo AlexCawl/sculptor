@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastFold
-import kotlin.reflect.KClass
 
 interface Skulptor : SkulptorModifier.Scope, ComponentLayout.Scope, ContainerLayout.Scope {
     @Composable
@@ -29,14 +28,12 @@ private class SkulptorImpl(
     }
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : BaseState> getState(id: String): T? {
-        return schema.states.fastFilter { it.id == id }.firstOrNull() as? T
-    }
+    override fun <T : BaseState> getState(id: String): T? =
+        schema.states.fastFilter { it.id == id }.firstOrNull() as? T
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : BaseLayout> getLayout(id: String): T? {
-        return schema.layouts.fastFilter { it.id == id }.firstOrNull() as? T
-    }
+    override fun <T : BaseLayout> getLayout(id: String): T? =
+        schema.layouts.fastFilter { it.id == id }.firstOrNull() as? T
 
 
     @Composable

@@ -1,4 +1,4 @@
-@file:Suppress("ConstPropertyName")
+@file:Suppress("ConstPropertyName", "ObjectPropertyNaming")
 
 package org.alexcawl.skulptor.core.provider
 

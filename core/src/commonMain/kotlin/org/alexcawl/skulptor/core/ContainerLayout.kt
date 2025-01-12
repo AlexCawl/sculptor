@@ -2,7 +2,6 @@ package org.alexcawl.skulptor.core
 
 import androidx.compose.runtime.Composable
 import kotlinx.serialization.Serializable
-import kotlin.reflect.KClass
 
 @Serializable
 abstract class ContainerLayout : BaseLayout {
