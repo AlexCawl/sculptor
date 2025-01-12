@@ -3,7 +3,7 @@ package org.alexcawl.skulptor.core.provider
 import androidx.compose.ui.unit.Dp
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.Provider
+import org.alexcawl.skulptor.core.common.Provider
 
 @Serializable
 sealed interface DpProvider : Provider<Dp> {

@@ -1,7 +1,6 @@
 package org.alexcawl.skulptor.core
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -21,7 +20,7 @@ import org.junit.Test
 class Test {
     private val format = Json {
         serializersModule = SerializersModule {
-            polymorphic(SkulptorLayout::class) {
+            polymorphic(ComponentLayout::class) {
                 subclass(BasicTextLayout::class)
                 subclass(BoxLayout::class)
                 subclass(ColumnLayout::class)
@@ -39,7 +38,7 @@ class Test {
 
     @Test
     fun test() {
-        val layout: SkulptorLayout = BoxLayout(
+        val layout: ComponentLayout = BoxLayout(
             id = "box0",
             modifiers = listOf(
                 BackgroundModifier.Background(

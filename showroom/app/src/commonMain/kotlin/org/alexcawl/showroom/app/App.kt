@@ -8,9 +8,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import org.alexcawl.skulptor.core.BaseLayout
+import org.alexcawl.skulptor.core.BaseState
 import org.alexcawl.skulptor.core.Skulptor
-import org.alexcawl.skulptor.core.SkulptorLayout
 import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.SkulptorSchema
 import org.alexcawl.skulptor.core.foundation.BasicTextLayout
 import org.alexcawl.skulptor.core.foundation.BoxLayout
 import org.alexcawl.skulptor.core.foundation.ColumnLayout
@@ -25,7 +27,7 @@ import org.alexcawl.skulptor.core.provider.ShapeProvider
 
 val format = Json {
     serializersModule = SerializersModule {
-        polymorphic(SkulptorLayout::class) {
+        polymorphic(BaseLayout::class) {
             subclass(BasicTextLayout::class)
             subclass(BoxLayout::class)
             subclass(ColumnLayout::class)
@@ -38,23 +40,28 @@ val format = Json {
             subclass(WidthModifier.Width::class)
             subclass(HeightModifier.Height::class)
         }
+        polymorphic(BaseState::class) {
+            subclass(BasicTextLayout.State::class)
+            subclass(BoxLayout.State::class)
+        }
     }
 }
 
 @Composable
 fun App() {
-    val layout: SkulptorLayout = BoxLayout(
-        id = "box0",
-        modifiers = listOf(
-            BackgroundModifier.Background(
-                color = ColorProvider(Color.Red),
-                shape = ShapeProvider.Circle
+    val schema = SkulptorSchema(
+        layouts = listOf(
+            BoxLayout(
+                id = "box0",
+                modifiers = listOf(
+                    BackgroundModifier.Background(
+                        color = ColorProvider(Color.Red),
+                        shape = ShapeProvider.Circle
+                    ),
+                    WidthModifier.FillMaxWidth(fraction = 1.0f)
+                ),
             ),
-            WidthModifier.FillMaxWidth(fraction = 1.0f)
-        ),
-        state = BoxLayout.State(
-            contentAlignment = AlignmentProvider.HorizontalAndVertical(Alignment.Center),
-            content = BasicTextLayout(
+            BasicTextLayout(
                 id = "text0",
                 modifiers = listOf(
                     BackgroundModifier.Background(
@@ -63,13 +70,22 @@ fun App() {
                     ),
                     HeightModifier.Height(DpProvider.Number(96.0f))
                 ),
-                state = BasicTextLayout.State.Base(
-                    text = "some text"
-                )
             )
+        ),
+        states = listOf(
+            BoxLayout.State(
+                id = "box0",
+                contentAlignment = AlignmentProvider.HorizontalAndVertical(Alignment.Center),
+                content = "text0"
+            ),
+            BasicTextLayout.State(
+                id = "text0",
+                text = "some text"
+            ),
         )
     )
-    println(format.encodeToString(layout))
-    val root = Skulptor.root()
-    root.place(layout)
+
+    println(format.encodeToString(schema))
+    val root = Skulptor.root(schema = schema, rootId = "box0")
+    root()
 }

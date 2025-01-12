@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.Provider
+import org.alexcawl.skulptor.core.common.Provider
 
 @Serializable
 sealed interface ShapeProvider : Provider<Shape> {

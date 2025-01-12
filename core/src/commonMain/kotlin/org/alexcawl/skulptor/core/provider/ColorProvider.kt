@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import org.alexcawl.skulptor.core.Provider
+import org.alexcawl.skulptor.core.common.Provider
 
 @Serializable(with = ColorSerializer::class)
 data class ColorProvider(private val color: Color) : Provider<Color> {
