@@ -5,13 +5,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 abstract class ContainerLayout : BaseLayout {
-    abstract fun Scope.build(): @Composable () -> Unit
+    abstract fun ContainerLayoutScope.build(): @Composable () -> Unit
 
-    internal fun internalBuild(scope: Scope): @Composable () -> Unit =
+    internal fun internalBuild(scope: ContainerLayoutScope): @Composable () -> Unit =
         with(scope) { build() }
 
-    interface Scope : BaseLayout.BaseLayoutScope {
-        fun <T : BaseLayout> getLayout(id: String): T?
+    interface ContainerLayoutScope : BaseLayout.BaseLayoutScope {
+        fun <T : BaseLayout> getLayout(id: String): T
+
+        fun <T : BaseLayout> getLayoutOrNull(id: String): T?
 
         @Composable
         fun Any.place(layout: BaseLayout)

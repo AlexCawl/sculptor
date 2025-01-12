@@ -24,7 +24,7 @@ sealed class ClickModifier : SkulptorModifier() {
         @SerialName("on_click")
         val onClick: SkulptorAction
     ) : ClickModifier() {
-        override fun Scope.chain(initial: Modifier): Modifier =
+        override fun ModifierScope.chain(initial: Modifier): Modifier =
             initial.clickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
@@ -54,7 +54,7 @@ sealed class ClickModifier : SkulptorModifier() {
         val onDoubleClick: SkulptorAction? = null,
     ) : ClickModifier() {
         @OptIn(ExperimentalFoundationApi::class)
-        override fun Scope.chain(initial: Modifier): Modifier =
+        override fun ModifierScope.chain(initial: Modifier): Modifier =
             initial.combinedClickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,

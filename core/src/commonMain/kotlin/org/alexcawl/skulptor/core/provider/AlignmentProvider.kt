@@ -30,8 +30,7 @@ object AlignmentProvider {
     }
 }
 
-private class HorizontalAndVerticalSerializer :
-    KSerializer<AlignmentProvider.HorizontalAndVertical> {
+private class HorizontalAndVerticalSerializer : KSerializer<AlignmentProvider.HorizontalAndVertical> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
         serialName = "androidx.compose.ui.Alignment",
         kind = PrimitiveKind.STRING

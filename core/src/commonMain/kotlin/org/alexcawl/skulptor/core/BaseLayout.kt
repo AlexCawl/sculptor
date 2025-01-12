@@ -11,6 +11,8 @@ sealed interface BaseLayout {
     interface BaseLayoutScope : Scoped, Dispatcher {
         fun carve(modifiers: List<SkulptorModifier>): Modifier
 
-        fun <T : BaseState> getState(id: String): T?
+        fun <T : BaseState> getState(id: String): T
+
+        fun <T : BaseState> getStateOrNull(id: String): T?
     }
 }

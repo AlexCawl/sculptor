@@ -7,12 +7,12 @@ import org.alexcawl.skulptor.core.common.Dispatcher
 
 @Serializable
 abstract class SkulptorModifier {
-    abstract fun Scope.chain(initial: Modifier): Modifier
+    abstract fun ModifierScope.chain(initial: Modifier): Modifier
 
-    internal fun internalChain(initial: Modifier, scope: Scope): Modifier =
+    internal fun internalChain(initial: Modifier, scope: ModifierScope): Modifier =
         with(scope) { chain(initial) }
 
-    interface Scope : Scoped, Dispatcher {
+    interface ModifierScope : Scoped, Dispatcher {
         val id: String
     }
 }

@@ -15,7 +15,7 @@ sealed class BackgroundModifier : SkulptorModifier() {
         val color: ColorProvider,
         val shape: ShapeProvider
     ) : BackgroundModifier() {
-        override fun Scope.chain(initial: Modifier): Modifier =
+        override fun ModifierScope.chain(initial: Modifier): Modifier =
             initial.background(color = color(), shape = shape())
     }
 }

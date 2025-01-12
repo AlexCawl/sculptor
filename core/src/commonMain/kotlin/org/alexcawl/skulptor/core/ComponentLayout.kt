@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 abstract class ComponentLayout : BaseLayout {
-    abstract fun Scope.build(): @Composable () -> Unit
+    abstract fun ComponentLayoutScope.build(): @Composable () -> Unit
 
-    internal fun internalBuild(scope: Scope): @Composable () -> Unit =
+    internal fun internalBuild(scope: ComponentLayoutScope): @Composable () -> Unit =
         with(scope) { build() }
 
-    interface Scope : BaseLayout.BaseLayoutScope
+    interface ComponentLayoutScope : BaseLayout.BaseLayoutScope
 }

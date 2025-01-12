@@ -12,27 +12,33 @@ import org.alexcawl.skulptor.core.BaseState
 @Serializable
 @SerialName("foundation@basic_text")
 data class BasicTextLayout(
+    @SerialName("id")
     override val id: String,
+    @SerialName("modifiers")
     override val modifiers: List<@Contextual SkulptorModifier>,
 ) : ComponentLayout() {
-    @Serializable
-    data class State(
-        override val id: String,
-        val text: String? = null,
-        val softWrap: Boolean? = null,
-        val maxLines: Int? = null,
-        val minLines: Int? = null,
-    ) : BaseState
-
-    override fun Scope.build(): @Composable () -> Unit = {
-        val modifier = carve(modifiers)
-        val state = getState<State>(id) ?: error("Dudes no state")
+    override fun ComponentLayoutScope.build(): @Composable () -> Unit = {
+        val state = getState<State>(id)
         BasicText(
-            text = state.text ?: "",
-            modifier = modifier,
-            softWrap = state.softWrap ?: true,
-            maxLines = state.maxLines ?: Int.MAX_VALUE,
-            minLines = state.minLines ?: 1
+            text = state.text,
+            modifier = carve(modifiers),
+            softWrap = state.softWrap,
+            maxLines = state.maxLines,
+            minLines = state.minLines
         )
     }
+
+    @Serializable
+    data class State(
+        @SerialName("id")
+        override val id: String,
+        @SerialName("text")
+        val text: String,
+        @SerialName("soft_wrap")
+        val softWrap: Boolean = true,
+        @SerialName("max_lines")
+        val maxLines: Int = Int.MAX_VALUE,
+        @SerialName("min_lines")
+        val minLines: Int = 1,
+    ) : BaseState
 }

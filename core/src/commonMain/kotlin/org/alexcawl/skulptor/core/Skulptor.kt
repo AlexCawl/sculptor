@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastFold
 
-interface Skulptor : SkulptorModifier.Scope, ComponentLayout.Scope, ContainerLayout.Scope {
+interface Skulptor : SkulptorModifier.ModifierScope, ComponentLayout.ComponentLayoutScope, ContainerLayout.ContainerLayoutScope {
     @Composable
     operator fun invoke()
 
@@ -15,6 +15,7 @@ interface Skulptor : SkulptorModifier.Scope, ComponentLayout.Scope, ContainerLay
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 private class SkulptorImpl(
     private val schema: SkulptorSchema,
     override val id: String,
@@ -27,12 +28,16 @@ private class SkulptorImpl(
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : BaseState> getState(id: String): T? =
+    override fun <T : BaseState> getState(id: String): T =
+        schema.states.fastFilter { it.id == id }.first() as T
+
+    override fun <T : BaseState> getStateOrNull(id: String): T? =
         schema.states.fastFilter { it.id == id }.firstOrNull() as? T
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : BaseLayout> getLayout(id: String): T? =
+    override fun <T : BaseLayout> getLayout(id: String): T =
+        schema.layouts.fastFilter { it.id == id }.first() as T
+
+    override fun <T : BaseLayout> getLayoutOrNull(id: String): T? =
         schema.layouts.fastFilter { it.id == id }.firstOrNull() as? T
 
 
@@ -47,7 +52,7 @@ private class SkulptorImpl(
 
     @Composable
     override fun invoke() = with(scope) {
-        val layout = getLayout<BaseLayout>(id) ?: error("Dude no...")
+        val layout = getLayoutOrNull<BaseLayout>(id) ?: error("Dude no...")
         place(layout)
     }
 
