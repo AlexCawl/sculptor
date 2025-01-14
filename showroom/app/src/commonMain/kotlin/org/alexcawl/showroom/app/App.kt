@@ -13,17 +13,17 @@ import org.alexcawl.skulptor.core.BaseState
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.SkulptorSchema
-import org.alexcawl.skulptor.core.foundation.BasicTextLayout
-import org.alexcawl.skulptor.core.foundation.BoxLayout
-import org.alexcawl.skulptor.core.foundation.ColumnLayout
-import org.alexcawl.skulptor.core.foundation.RowLayout
-import org.alexcawl.skulptor.core.modifier.BackgroundModifier
-import org.alexcawl.skulptor.core.modifier.HeightModifier
-import org.alexcawl.skulptor.core.modifier.WidthModifier
-import org.alexcawl.skulptor.core.provider.AlignmentProvider
-import org.alexcawl.skulptor.core.provider.ColorProvider
-import org.alexcawl.skulptor.core.provider.DpProvider
-import org.alexcawl.skulptor.core.provider.ShapeProvider
+import org.alexcawl.skulptor.foundation.BasicTextLayout
+import org.alexcawl.skulptor.foundation.BoxLayout
+import org.alexcawl.skulptor.foundation.ColumnLayout
+import org.alexcawl.skulptor.foundation.RowLayout
+import org.alexcawl.skulptor.modifier.BackgroundModifier
+import org.alexcawl.skulptor.modifier.HeightModifier
+import org.alexcawl.skulptor.modifier.WidthModifier
+import org.alexcawl.skulptor.provider.AlignmentProvider
+import org.alexcawl.skulptor.provider.ColorProvider
+import org.alexcawl.skulptor.provider.DpProvider
+import org.alexcawl.skulptor.provider.ShapeProvider
 
 val format = Json {
     serializersModule = SerializersModule {
@@ -76,7 +76,7 @@ fun App() {
             BoxLayout.State(
                 id = "box0",
                 contentAlignment = AlignmentProvider.HorizontalAndVertical(Alignment.Center),
-                content = "text0"
+                content = listOf("text0")
             ),
             BasicTextLayout.State(
                 id = "text0",

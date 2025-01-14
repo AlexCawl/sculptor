@@ -22,6 +22,7 @@ commonMainDependencies {
     implementation(projects.core)
     implementation(projects.provider)
     implementation(projects.foundation)
+    implementation(projects.modifier)
     implementation(projects.builder)
     implementation(projects.material)
     implementation(projects.material3)
