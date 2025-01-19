@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SkulptorSchema(
     @SerialName("layouts")
-    val layouts: List<BaseLayout>,
+    val layouts: List<BaseLayout<*>>,
     @SerialName("states")
     val states: List<BaseState>,
 )

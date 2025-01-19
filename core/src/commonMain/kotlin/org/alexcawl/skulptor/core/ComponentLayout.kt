@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import kotlinx.serialization.Serializable
 
 @Serializable
-abstract class ComponentLayout : BaseLayout {
+abstract class ComponentLayout<S : BaseState> : BaseLayout<S> {
     abstract fun ComponentLayoutScope.build(): @Composable () -> Unit
 
     internal fun internalBuild(scope: ComponentLayoutScope): @Composable () -> Unit =

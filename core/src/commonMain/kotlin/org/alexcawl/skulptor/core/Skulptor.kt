@@ -34,15 +34,15 @@ private class SkulptorImpl(
     override fun <T : BaseState> getStateOrNull(id: String): T? =
         schema.states.fastFilter { it.id == id }.firstOrNull() as? T
 
-    override fun <T : BaseLayout> getLayout(id: String): T =
+    override fun <T : BaseLayout<*>> getLayout(id: String): T =
         schema.layouts.fastFilter { it.id == id }.first() as T
 
-    override fun <T : BaseLayout> getLayoutOrNull(id: String): T? =
+    override fun <T : BaseLayout<*>> getLayoutOrNull(id: String): T? =
         schema.layouts.fastFilter { it.id == id }.firstOrNull() as? T
 
 
     @Composable
-    override fun Any.place(layout: BaseLayout) {
+    override fun Any.place(layout: BaseLayout<*>) {
         val skulptor = SkulptorImpl(schema = schema, id = layout.id, scope = this)
         return when (layout) {
             is ComponentLayout -> layout.internalBuild(skulptor).invoke()
@@ -52,7 +52,7 @@ private class SkulptorImpl(
 
     @Composable
     override fun invoke() = with(scope) {
-        val layout = getLayout<BaseLayout>(id)
+        val layout = getLayout<BaseLayout<*>>(id)
         place(layout)
     }
 

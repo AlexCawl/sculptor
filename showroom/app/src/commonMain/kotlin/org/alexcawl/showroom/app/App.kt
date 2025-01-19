@@ -13,10 +13,12 @@ import org.alexcawl.skulptor.core.BaseState
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
 import org.alexcawl.skulptor.core.SkulptorSchema
-import org.alexcawl.skulptor.foundation.BasicTextLayout
-import org.alexcawl.skulptor.foundation.BoxLayout
-import org.alexcawl.skulptor.foundation.ColumnLayout
-import org.alexcawl.skulptor.foundation.RowLayout
+import org.alexcawl.skulptor.foundation.layout.basictext.BasicTextLayout
+import org.alexcawl.skulptor.foundation.layout.basictext.BasicTextState
+import org.alexcawl.skulptor.foundation.layout.box.BoxLayout
+import org.alexcawl.skulptor.foundation.layout.box.BoxState
+import org.alexcawl.skulptor.foundation.layout.column.ColumnLayout
+import org.alexcawl.skulptor.foundation.layout.row.RowLayout
 import org.alexcawl.skulptor.modifier.BackgroundModifier
 import org.alexcawl.skulptor.modifier.HeightModifier
 import org.alexcawl.skulptor.modifier.WidthModifier
@@ -41,8 +43,8 @@ val format = Json {
             subclass(HeightModifier.Height::class)
         }
         polymorphic(BaseState::class) {
-            subclass(BasicTextLayout.State::class)
-            subclass(BoxLayout.State::class)
+            subclass(BasicTextState::class)
+            subclass(BoxState::class)
         }
     }
 }
@@ -73,19 +75,18 @@ fun App() {
             )
         ),
         states = listOf(
-            BoxLayout.State(
+            BoxState(
                 id = "box0",
                 contentAlignment = AlignmentProvider.HorizontalAndVertical(Alignment.Center),
                 content = listOf("text0")
             ),
-            BasicTextLayout.State(
+            BasicTextState(
                 id = "text0",
                 text = "some text"
             ),
         )
     )
-
-    println(format.encodeToString(schema))
-    val root = Skulptor.root(schema = schema, rootId = "box0")
+    val string = format.encodeToString(schema)
+    val root = Skulptor.root(schema = format.decodeFromString(string), rootId = "box0")
     root()
 }

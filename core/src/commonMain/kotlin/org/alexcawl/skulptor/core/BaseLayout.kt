@@ -2,7 +2,7 @@ package org.alexcawl.skulptor.core
 
 import androidx.compose.ui.Modifier
 
-sealed interface BaseLayout {
+sealed interface BaseLayout<S : BaseState> {
     val id: String
     val modifiers: List<SkulptorModifier>
 
