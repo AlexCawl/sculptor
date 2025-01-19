@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
-import org.alexcawl.skulptor.core.layout.ContainerLayoutFactory
+import org.alexcawl.skulptor.core.layout.CompositeLayoutFactory
 
-object BoxFactory : ContainerLayoutFactory<BoxState>() {
+object BoxFactory : CompositeLayoutFactory<BoxState>() {
     @Composable
     override fun build(state: BoxState, modifier: Modifier) {
         Box(

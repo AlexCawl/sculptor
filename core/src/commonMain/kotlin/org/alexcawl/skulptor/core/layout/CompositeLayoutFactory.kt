@@ -6,7 +6,7 @@ import org.alexcawl.skulptor.core.Skulptor.getLayout
 import org.alexcawl.skulptor.core.Skulptor.getState
 import org.alexcawl.skulptor.core.Skulptor.withScope
 
-abstract class ContainerLayoutFactory<S : BaseState> : BaseLayoutFactory<S>() {
+abstract class CompositeLayoutFactory<S : BaseState> : BaseLayoutFactory<S>() {
     @Composable
     protected fun place(layoutId: String, scope: Any = Any()) {
         withScope(scope) {

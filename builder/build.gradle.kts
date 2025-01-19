@@ -10,4 +10,5 @@ android {
 
 commonMainDependencies {
     implementation(projects.core)
+    implementation(projects.foundation)
 }

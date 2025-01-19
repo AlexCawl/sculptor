@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
-import org.alexcawl.skulptor.core.layout.ContainerLayoutFactory
+import org.alexcawl.skulptor.core.layout.CompositeLayoutFactory
 
-object ColumnFactory : ContainerLayoutFactory<ColumnState>() {
+object ColumnFactory : CompositeLayoutFactory<ColumnState>() {
     @Composable
     override fun build(state: ColumnState, modifier: Modifier) {
         Column(
