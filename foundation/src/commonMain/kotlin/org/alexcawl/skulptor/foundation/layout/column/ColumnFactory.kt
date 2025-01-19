@@ -7,7 +7,8 @@ import androidx.compose.ui.util.fastForEach
 import org.alexcawl.skulptor.core.layout.ContainerLayoutFactory
 
 object ColumnFactory : ContainerLayoutFactory<ColumnState>() {
-    override fun build(state: ColumnState, modifier: Modifier): @Composable () -> Unit = {
+    @Composable
+    override fun build(state: ColumnState, modifier: Modifier) {
         Column(
             modifier = modifier,
             verticalArrangement = state.verticalArrangement.invoke(),

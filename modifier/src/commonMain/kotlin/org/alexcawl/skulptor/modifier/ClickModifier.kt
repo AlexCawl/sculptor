@@ -6,12 +6,12 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.Modifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.SkulptorAction
-import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.BaseAction
+import org.alexcawl.skulptor.core.BaseModifier
 import org.alexcawl.skulptor.provider.RoleProvider
 
 @Serializable
-sealed class ClickModifier : SkulptorModifier() {
+sealed class ClickModifier : BaseModifier() {
     @Serializable
     @SerialName("modifier@clickable")
     data class Clickable(
@@ -22,9 +22,9 @@ sealed class ClickModifier : SkulptorModifier() {
         @SerialName("on_click_label")
         val onClickLabel: String? = null,
         @SerialName("on_click")
-        val onClick: SkulptorAction
+        val onClick: BaseAction
     ) : ClickModifier() {
-        override fun ModifierScope.chain(initial: Modifier): Modifier =
+        override fun Scope.chain(initial: Modifier): Modifier =
             initial.clickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,
@@ -45,16 +45,16 @@ sealed class ClickModifier : SkulptorModifier() {
         @SerialName("on_click_label")
         val onClickLabel: String?,
         @SerialName("on_click")
-        val onClick: SkulptorAction,
+        val onClick: BaseAction,
         @SerialName("on_long_click_label")
         val onLongClickLabel: String? = null,
         @SerialName("on_long_click")
-        val onLongClick: SkulptorAction? = null,
+        val onLongClick: BaseAction? = null,
         @SerialName("on_double_click")
-        val onDoubleClick: SkulptorAction? = null,
+        val onDoubleClick: BaseAction? = null,
     ) : ClickModifier() {
         @OptIn(ExperimentalFoundationApi::class)
-        override fun ModifierScope.chain(initial: Modifier): Modifier =
+        override fun Scope.chain(initial: Modifier): Modifier =
             initial.combinedClickable(
                 enabled = enabled,
                 onClickLabel = onClickLabel,

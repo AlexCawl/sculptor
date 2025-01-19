@@ -1,11 +1,10 @@
 package org.alexcawl.showroom.app
 
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -13,7 +12,7 @@ import kotlinx.serialization.modules.subclass
 import org.alexcawl.skulptor.core.factory.BaseLayout
 import org.alexcawl.skulptor.core.BaseState
 import org.alexcawl.skulptor.core.Skulptor
-import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.BaseModifier
 import org.alexcawl.skulptor.core.SkulptorSchema
 import org.alexcawl.skulptor.foundation.layout.basictext.BasicTextLayout
 import org.alexcawl.skulptor.foundation.layout.basictext.BasicTextState
@@ -37,7 +36,7 @@ val format = Json {
             subclass(ColumnLayout::class)
             subclass(RowLayout::class)
         }
-        polymorphic(SkulptorModifier::class) {
+        polymorphic(BaseModifier::class) {
             subclass(BackgroundModifier.Background::class)
             subclass(WidthModifier.FillMaxWidth::class)
             subclass(HeightModifier.FillMaxHeight::class)
@@ -53,7 +52,7 @@ val format = Json {
 
 @Composable
 fun App() {
-    var schema = SkulptorSchema(
+    val schema = SkulptorSchema(
         layouts = listOf(
             BoxLayout(
                 id = "box0",
@@ -88,12 +87,13 @@ fun App() {
             ),
         )
     )
-    val string = format.encodeToString(schema)
-    schema = format.decodeFromString(string)
-    val rootId = "box0"
+
     Skulptor(
-        rootId = rootId,
-        schema = schema,
-        modifier = Modifier.fillMaxWidth()
+        rootLayoutId = "box0",
+        state = Skulptor.State(
+            schema = schema,
+            dispatch = ::println
+        ),
+        modifier = Modifier.fillMaxSize()
     )
 }

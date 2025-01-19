@@ -7,7 +7,8 @@ import androidx.compose.ui.util.fastForEach
 import org.alexcawl.skulptor.core.layout.ContainerLayoutFactory
 
 object BoxFactory : ContainerLayoutFactory<BoxState>() {
-    override fun build(state: BoxState, modifier: Modifier): @Composable () -> Unit = {
+    @Composable
+    override fun build(state: BoxState, modifier: Modifier) {
         Box(
             modifier = modifier,
             contentAlignment = state.contentAlignment.invoke(),

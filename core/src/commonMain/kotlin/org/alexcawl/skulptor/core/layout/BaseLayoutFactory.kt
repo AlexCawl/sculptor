@@ -6,48 +6,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastFold
 import org.alexcawl.skulptor.core.BaseState
-import org.alexcawl.skulptor.core.SkulptorAction
-import org.alexcawl.skulptor.core.SkulptorModifier
-import org.alexcawl.skulptor.core.dispatchProvider
-import org.alexcawl.skulptor.core.scopeProvider
+import org.alexcawl.skulptor.core.Skulptor
+import org.alexcawl.skulptor.core.BaseModifier
 
 sealed class BaseLayoutFactory<S : BaseState> {
     @Composable
-    internal operator fun invoke(
+    internal inline fun build(
         layoutId: String,
         stateProvider: () -> BaseState,
-        modifiers: List<SkulptorModifier>,
+        modifiers: List<BaseModifier>,
         initial: Modifier = Modifier,
-    ): @Composable () -> Unit {
-        val scope = scope
-        val dispatch = dispatcher
-        return build(
-            state = stateProvider() as S,
-            modifier = carve(
-                modifiers = modifiers,
-                scope = object : SkulptorModifier.ModifierScope {
-                    override val id: String = layoutId
-                    override val scope: Any = scope
-                    override fun dispatch(action: SkulptorAction) = dispatch(action)
-                },
-                initial = initial
-            )
+    ) = build(
+        state = stateProvider() as S,
+        modifier = initial.chain(
+            modifiers = modifiers,
+            scope = BaseModifier.Scope(
+                id = layoutId,
+                scope = Skulptor.scope,
+                dispatch = Skulptor.dispatch
+            ),
         )
-    }
+    )
 
-    abstract fun build(state: S, modifier: Modifier): @Composable () -> Unit
+    @Composable
+    abstract fun build(state: S, modifier: Modifier)
 
-    protected val scope: Any
-        @Composable get() = scopeProvider.current
-
-    protected val dispatcher: (SkulptorAction) -> Unit
-        @Composable get() = dispatchProvider.current
-
-    private fun carve(
-        modifiers: List<SkulptorModifier>,
-        scope: SkulptorModifier.ModifierScope,
-        initial: Modifier = Modifier
-    ): Modifier = modifiers.fastFold(initial) { modifier, skulptorModifier ->
+    private fun Modifier.chain(
+        modifiers: List<BaseModifier>,
+        scope: BaseModifier.Scope,
+    ): Modifier = modifiers.fastFold(initial = this) { modifier, skulptorModifier ->
         skulptorModifier.internalChain(initial = modifier, scope = scope)
     }
 }

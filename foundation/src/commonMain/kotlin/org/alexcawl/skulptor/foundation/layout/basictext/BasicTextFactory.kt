@@ -6,7 +6,8 @@ import androidx.compose.ui.Modifier
 import org.alexcawl.skulptor.core.layout.ComponentLayoutFactory
 
 object BasicTextFactory : ComponentLayoutFactory<BasicTextState>() {
-    override fun build(state: BasicTextState, modifier: Modifier): @Composable () -> Unit = {
+    @Composable
+    override fun build(state: BasicTextState, modifier: Modifier) {
         BasicText(
             text = state.text,
             modifier = modifier,
