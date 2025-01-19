@@ -11,15 +11,23 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.skulptor.core.BaseModifier
 import org.alexcawl.skulptor.provider.AlignmentProvider
+import org.alexcawl.skulptor.provider.DpProvider
 import org.alexcawl.skulptor.provider.DpSizeProvider
 
 @Serializable
 sealed class SizeModifier : BaseModifier() {
     @Serializable
     @SerialName("size@size")
-    data class Size(val size: DpSizeProvider) : SizeModifier() {
+    data class Size(val width: DpProvider, val height: DpProvider) : SizeModifier() {
+        constructor(all: DpProvider) : this(width = all, height = all)
+
+        constructor(size: DpSizeProvider) : this(
+            width = DpProvider.Number(size().width.value),
+            height = DpProvider.Number(size().height.value)
+        )
+
         override fun Scope.chain(initial: Modifier): Modifier =
-            initial.size(size = size())
+            initial.size(width = width(), height = height())
     }
 
     @Serializable

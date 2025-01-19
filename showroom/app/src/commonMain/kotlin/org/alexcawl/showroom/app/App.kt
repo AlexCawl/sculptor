@@ -52,6 +52,13 @@ val format = Json {
 
 @Composable
 fun App() {
+    // column(state=..., modifiers=...) {
+    //     text(state=...)
+    //     row(state=...) {
+    //         text(state=...)
+    //         text(state=...)
+    //     }
+    // }
     val schema = SkulptorSchema(
         layouts = listOf(
             BoxLayout(
