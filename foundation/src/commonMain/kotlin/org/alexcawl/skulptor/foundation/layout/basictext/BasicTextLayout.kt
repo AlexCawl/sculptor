@@ -1,12 +1,12 @@
 package org.alexcawl.skulptor.foundation.layout.basictext
 
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.runtime.Composable
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.ComponentLayout
+import kotlinx.serialization.Transient
 import org.alexcawl.skulptor.core.SkulptorModifier
+import org.alexcawl.skulptor.core.factory.ComponentLayout
+import org.alexcawl.skulptor.core.layout.ComponentLayoutFactory
 
 @Serializable
 @SerialName("layout@basic_text")
@@ -15,15 +15,6 @@ data class BasicTextLayout(
     override val id: String,
     @SerialName("modifiers")
     override val modifiers: List<@Contextual SkulptorModifier>,
-) : ComponentLayout<BasicTextState>() {
-    override fun ComponentLayoutScope.build(): @Composable () -> Unit = {
-        val state = getState<BasicTextState>(id)
-        BasicText(
-            text = state.text,
-            modifier = carve(modifiers),
-            softWrap = state.softWrap,
-            maxLines = state.maxLines,
-            minLines = state.minLines
-        )
-    }
-}
+    @Transient
+    override val factory: ComponentLayoutFactory<BasicTextState> = BasicTextFactory,
+) : ComponentLayout<BasicTextState>()

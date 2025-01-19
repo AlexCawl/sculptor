@@ -1,14 +1,16 @@
 package org.alexcawl.showroom.app
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
-import org.alexcawl.skulptor.core.BaseLayout
+import org.alexcawl.skulptor.core.factory.BaseLayout
 import org.alexcawl.skulptor.core.BaseState
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.SkulptorModifier
@@ -51,7 +53,7 @@ val format = Json {
 
 @Composable
 fun App() {
-    val schema = SkulptorSchema(
+    var schema = SkulptorSchema(
         layouts = listOf(
             BoxLayout(
                 id = "box0",
@@ -87,6 +89,11 @@ fun App() {
         )
     )
     val string = format.encodeToString(schema)
-    val root = Skulptor.root(schema = format.decodeFromString(string), rootId = "box0")
-    root()
+    schema = format.decodeFromString(string)
+    val rootId = "box0"
+    Skulptor(
+        rootId = rootId,
+        schema = schema,
+        modifier = Modifier.fillMaxWidth()
+    )
 }

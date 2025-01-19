@@ -1,0 +1,18 @@
+package org.alexcawl.skulptor.foundation.layout.basictext
+
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import org.alexcawl.skulptor.core.layout.ComponentLayoutFactory
+
+object BasicTextFactory : ComponentLayoutFactory<BasicTextState>() {
+    override fun build(state: BasicTextState, modifier: Modifier): @Composable () -> Unit = {
+        BasicText(
+            text = state.text,
+            modifier = modifier,
+            softWrap = state.softWrap,
+            maxLines = state.maxLines,
+            minLines = state.minLines
+        )
+    }
+}
