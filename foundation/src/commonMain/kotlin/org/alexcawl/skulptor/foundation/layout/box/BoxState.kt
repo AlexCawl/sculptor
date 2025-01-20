@@ -3,7 +3,8 @@ package org.alexcawl.skulptor.foundation.layout.box
 import androidx.compose.ui.Alignment
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.BaseState
+import org.alexcawl.skulptor.core.state.BaseState
+import org.alexcawl.skulptor.core.state.CompositeState
 import org.alexcawl.skulptor.provider.AlignmentProvider
 
 @Serializable
@@ -18,5 +19,5 @@ data class BoxState(
     @SerialName("propagate_min_constraints")
     val propagateMinConstraints: Boolean = false,
     @SerialName("content")
-    val content: List<String> = listOf(),
-) : BaseState
+    override val content: List<String> = listOf(),
+) : CompositeState()

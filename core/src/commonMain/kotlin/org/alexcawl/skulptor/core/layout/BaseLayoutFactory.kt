@@ -5,7 +5,7 @@ package org.alexcawl.skulptor.core.layout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastFold
-import org.alexcawl.skulptor.core.BaseState
+import org.alexcawl.skulptor.core.state.BaseState
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.BaseModifier
 

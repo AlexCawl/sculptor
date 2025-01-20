@@ -2,31 +2,30 @@ package org.alexcawl.showroom.app
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import org.alexcawl.skulptor.builder.basicText
+import org.alexcawl.skulptor.builder.column
+import org.alexcawl.skulptor.builder.layout
+import org.alexcawl.skulptor.builder.row
 import org.alexcawl.skulptor.core.factory.BaseLayout
-import org.alexcawl.skulptor.core.BaseState
+import org.alexcawl.skulptor.core.state.BaseState
 import org.alexcawl.skulptor.core.Skulptor
 import org.alexcawl.skulptor.core.BaseModifier
-import org.alexcawl.skulptor.core.SkulptorSchema
 import org.alexcawl.skulptor.foundation.layout.basictext.BasicTextLayout
 import org.alexcawl.skulptor.foundation.layout.basictext.BasicTextState
 import org.alexcawl.skulptor.foundation.layout.box.BoxLayout
 import org.alexcawl.skulptor.foundation.layout.box.BoxState
 import org.alexcawl.skulptor.foundation.layout.column.ColumnLayout
+import org.alexcawl.skulptor.foundation.layout.column.ColumnState
 import org.alexcawl.skulptor.foundation.layout.row.RowLayout
+import org.alexcawl.skulptor.foundation.layout.row.RowState
 import org.alexcawl.skulptor.modifier.BackgroundModifier
 import org.alexcawl.skulptor.modifier.HeightModifier
 import org.alexcawl.skulptor.modifier.WidthModifier
-import org.alexcawl.skulptor.provider.AlignmentProvider
-import org.alexcawl.skulptor.provider.ColorProvider
-import org.alexcawl.skulptor.provider.DpProvider
-import org.alexcawl.skulptor.provider.ShapeProvider
 
 val format = Json {
     serializersModule = SerializersModule {
@@ -52,51 +51,40 @@ val format = Json {
 
 @Composable
 fun App() {
-    // column(state=..., modifiers=...) {
-    //     text(state=...)
-    //     row(state=...) {
-    //         text(state=...)
-    //         text(state=...)
-    //     }
-    // }
-    val schema = SkulptorSchema(
-        layouts = listOf(
-            BoxLayout(
-                id = "box0",
-                modifiers = listOf(
-                    BackgroundModifier.Background(
-                        color = ColorProvider(Color.Red),
-                        shape = ShapeProvider.Circle
-                    ),
-                    WidthModifier.FillMaxWidth(fraction = 1.0f)
-                ),
-            ),
-            BasicTextLayout(
-                id = "text0",
-                modifiers = listOf(
-                    BackgroundModifier.Background(
-                        color = ColorProvider(Color.Blue),
-                        shape = ShapeProvider.Rectangle
-                    ),
-                    HeightModifier.Height(DpProvider.Number(96.0f))
-                ),
+    val schema = layout {
+        column(
+            state = ColumnState("column0"),
+        ) {
+            basicText(
+                state = BasicTextState("text0", "some text"),
             )
-        ),
-        states = listOf(
-            BoxState(
-                id = "box0",
-                contentAlignment = AlignmentProvider.HorizontalAndVertical(Alignment.Center),
-                content = listOf("text0")
-            ),
-            BasicTextState(
-                id = "text0",
-                text = "some text"
-            ),
-        )
-    )
+            basicText(
+                state = BasicTextState("text1", "some text"),
+            )
+            row(
+                state = RowState("row0"),
+            ) {
+                basicText(
+                    state = BasicTextState("text5", "some text"),
+                )
+                basicText(
+                    state = BasicTextState("text6", "some text"),
+                )
+            }
+            basicText(
+                state = BasicTextState("text2", "some text"),
+            )
+            basicText(
+                state = BasicTextState("text3", "some text"),
+            )
+            basicText(
+                state = BasicTextState("text4", "some text"),
+            )
+        }
+    }
 
     Skulptor(
-        rootLayoutId = "box0",
+        rootLayoutId = "column0",
         state = Skulptor.State(
             schema = schema,
             dispatch = ::println

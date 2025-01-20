@@ -7,6 +7,7 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastFilter
 import org.alexcawl.skulptor.core.factory.BaseLayout
+import org.alexcawl.skulptor.core.state.BaseState
 import kotlin.properties.Delegates
 
 private val defaultScope: Skulptor.State by Delegates.notNull()

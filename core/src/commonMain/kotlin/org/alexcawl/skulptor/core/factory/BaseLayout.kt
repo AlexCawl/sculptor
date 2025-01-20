@@ -1,6 +1,6 @@
 package org.alexcawl.skulptor.core.factory
 
-import org.alexcawl.skulptor.core.BaseState
+import org.alexcawl.skulptor.core.state.BaseState
 import org.alexcawl.skulptor.core.BaseModifier
 import org.alexcawl.skulptor.core.layout.BaseLayoutFactory
 

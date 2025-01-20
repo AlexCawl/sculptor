@@ -2,7 +2,8 @@ package org.alexcawl.skulptor.foundation.layout.basictext
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.skulptor.core.BaseState
+import org.alexcawl.skulptor.core.state.BaseState
+import org.alexcawl.skulptor.core.state.SolidState
 
 @Serializable
 @SerialName("state@basic_text")
@@ -17,4 +18,4 @@ data class BasicTextState(
     val maxLines: Int = Int.MAX_VALUE,
     @SerialName("min_lines")
     val minLines: Int = 1,
-) : BaseState
+) : SolidState()

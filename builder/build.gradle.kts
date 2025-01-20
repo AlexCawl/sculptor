@@ -11,4 +11,5 @@ android {
 commonMainDependencies {
     implementation(projects.core)
     implementation(projects.foundation)
+    implementation(projects.provider)
 }
