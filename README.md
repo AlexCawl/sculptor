@@ -1,22 +1,97 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop.
+# Foundation
 
-# Source
+## Components
 
-* `/app` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-    - `commonMain` is for code that’s common for all targets.
-    - Other folders are for Kotlin code that will be compiled for only the platform indicated in the
-      folder name.
+### Common
 
-* `/common` is for the code that will be shared between all targets in the project.
-  The most important subfolder is `commonMain`. If preferred, you can add code to the
-  platform-specific folders here too.
+- BasicTooltipBox
+- Image
 
-# Build
+### Text
 
-* `/build-logic` is for the Gradle plugins and project setup.
-    - `base` is for the common configurations and extensions.
-    - `convention` is for the convention plugins.
+- BasicText
+- BasicTextField
+- BasicSecureTextField
 
-Learn more
-about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### Layout
+
+- Box
+- BoxWithConstraints
+- Column
+- FlowColumn
+- ContextualFlowColumn
+- Row
+- FlowRow
+- ContextualFlowRow
+
+### Animation
+
+- AnimatedVisibility
+- AnimatedContent
+- Crossfade
+- ColumnScope.AnimatedVisibility
+- RowScope.AnimatedVisibility
+
+## Modifiers
+
+### Common
+
+- background
+- basicMarquee
+- border
+- clickable
+- clipScrollableContainer
+- combinedClickable
+- horizontalScroll
+- verticalScroll
+
+### Layout
+
+- absoluteOffset
+- absolutePadding
+- aspectRatio
+- captionBarPadding
+- defaultMinSize
+- displayCutoutPadding
+- fillMaxHeight
+- fillMaxSize
+- fillMaxWidth
+- height
+- heightIn
+- imePadding
+- mandatorySystemGesturesPadding
+- navigationBarsPadding
+- offset
+- padding
+- paddingFrom
+- paddingFromBaseline
+- requiredHeight
+- requiredHeightIn
+- requiredSize
+- requiredSizeIn
+- requiredWidth
+- requiredWidthIn
+- safeContentPadding
+- safeDrawingPadding
+- safeGesturesPadding
+- size
+- sizeIn
+- statusBarsPadding
+- systemBarsPadding
+- systemGesturesPadding
+- waterfallPadding
+- width
+- widthIn
+- wrapContentHeight
+- wrapContentSize
+- wrapContentWidth
+- BoxScope.align
+- BoxScope.matchParentSize
+- ColumnScope.align
+- ColumnScope.alignBy
+- ColumnScope.weight
+- RowScope.align
+- RowScope.alignBy
+- RowScope.weight
+- FlowColumnScope.fillMaxColumnWidth
+- FlowRowScope.fillMaxRowHeight
