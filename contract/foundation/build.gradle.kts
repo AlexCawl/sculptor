@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "org.alexcawl.skulptor.material"
+    namespace = "org.alexcawl.skulptor.contract.foundation"
 }
 
 commonMainDependencies {
     implementation(projects.core)
-    implementation(compose.dependencies.material)
+    implementation(projects.provider)
 }
