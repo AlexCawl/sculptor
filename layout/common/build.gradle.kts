@@ -9,6 +9,6 @@ android {
 }
 
 commonMainDependencies {
-    implementation(projects.core)
-    implementation(projects.provider)
+    implementation(projects.common)
+    implementation(projects.contract.common)
 }

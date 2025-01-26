@@ -86,8 +86,6 @@ common-source = [
     "common-kotlin-serialization-json",
     "common-kotlin-datetime",
     "common-collections",
-    "common-lifecycle-compose",
-    "common-lifecycle-viewmodel",
 ]
 common-test = [
     "common-junit",

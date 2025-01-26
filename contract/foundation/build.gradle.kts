@@ -1,14 +1,14 @@
 import org.alexcawl.plugins.commonMainDependencies
 
 plugins {
-    id("convention.project.kmp.library")
+    id("convention.project.kmp.core")
 }
 
 android {
-    namespace = "org.alexcawl.skulptor.contract.foundation"
+    namespace = "org.alexcawl.sculptor.contract.foundation"
 }
 
 commonMainDependencies {
-    implementation(projects.core)
-    implementation(projects.provider)
+    implementation(projects.common)
+    implementation(projects.contract.common)
 }

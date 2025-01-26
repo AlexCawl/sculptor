@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "org.alexcawl.sculptor.contract.common"
+    namespace = "org.alexcawl.sculptor.common"
 }
