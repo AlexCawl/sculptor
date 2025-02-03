@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "org.alexcawl.skulptor.common.presenter"
+    namespace = "org.alexcawl.sculptor.common.presenter"
 }
 
 commonMainDependencies {
