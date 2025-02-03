@@ -1,5 +1,6 @@
 package org.alexcawl.sculptor.common.presenter
 
+import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 
 internal typealias DelegateTransform = (
@@ -8,7 +9,8 @@ internal typealias DelegateTransform = (
     value: Any
 ) -> Any
 
-abstract class PresenterScope(
+
+class PresenterScope @InternalSculptorApi constructor(
     @PublishedApi
     internal val delegateTransform: DelegateTransform
 ) {

@@ -9,7 +9,7 @@ class PresenterTest {
     @Test
     fun `Check if presenter can be matched with input and output markers`() {
         val presenter: Presenter<Int, String> = PresenterMock()
-        val presenterScope: PresenterScope = PresenterScopeMock()
+        val presenterScope = PresenterScope(delegateTransform = { _, _, _ -> Any() })
         val input = 5
         val output = "5"
 
@@ -34,10 +34,6 @@ class PresenterTest {
         )
     }
 }
-
-private class PresenterScopeMock : PresenterScope(
-    delegateTransform = { _, _, _ -> Any() }
-)
 
 private class PresenterMock : Presenter<Int, String>() {
     override val input = Int::class

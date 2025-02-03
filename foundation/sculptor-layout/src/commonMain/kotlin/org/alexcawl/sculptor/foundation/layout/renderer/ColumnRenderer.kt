@@ -6,8 +6,11 @@ import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.layout.Renderer
 import org.alexcawl.sculptor.common.layout.RendererScope
 import org.alexcawl.sculptor.foundation.layout.ColumnLayout
+import kotlin.reflect.KClass
 
 class ColumnRenderer : Renderer<ColumnLayout>() {
+    override val layout: KClass<ColumnLayout> = ColumnLayout::class
+
     @Composable
     override fun RendererScope.Render(layout: ColumnLayout) {
         Column(

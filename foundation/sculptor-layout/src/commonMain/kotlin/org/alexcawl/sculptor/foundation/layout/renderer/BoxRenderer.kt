@@ -6,8 +6,11 @@ import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.layout.Renderer
 import org.alexcawl.sculptor.common.layout.RendererScope
 import org.alexcawl.sculptor.foundation.layout.BoxLayout
+import kotlin.reflect.KClass
 
 class BoxRenderer : Renderer<BoxLayout>() {
+    override val layout: KClass<BoxLayout> = BoxLayout::class
+
     @Composable
     override fun RendererScope.Render(layout: BoxLayout) {
         Box(

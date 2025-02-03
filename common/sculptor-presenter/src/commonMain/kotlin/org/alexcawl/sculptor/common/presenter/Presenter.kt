@@ -9,7 +9,8 @@ abstract class Presenter<Input : Any, Output : Any> {
 
     @InternalSculptorApi
     @JvmName("internalTransform")
-    fun transform(scope: PresenterScope, input: Input): Output = scope.transform(input)
+    @Suppress("UNCHECKED_CAST")
+    fun transform(scope: PresenterScope, input: Any): Output = scope.transform(input as Input)
 
     abstract fun PresenterScope.transform(input: Input): Output
 }

@@ -6,8 +6,11 @@ import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.layout.Renderer
 import org.alexcawl.sculptor.common.layout.RendererScope
 import org.alexcawl.sculptor.foundation.layout.RowLayout
+import kotlin.reflect.KClass
 
 class RowRenderer : Renderer<RowLayout>() {
+    override val layout: KClass<RowLayout> = RowLayout::class
+
     @Composable
     override fun RendererScope.Render(layout: RowLayout) {
         Row(
