@@ -43,7 +43,6 @@ kotlinMultiplatformConfiguration {
             dependencies {
                 implementation(libs.bundles.common.source)
                 implementation(compose.foundation)
-                implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
                 implementation(libs.common.lifecycle.compose)
                 implementation(libs.common.lifecycle.viewmodel)

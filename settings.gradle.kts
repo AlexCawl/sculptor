@@ -34,13 +34,17 @@ dependencyResolutionManagement {
 }
 
 include(":showroom:app")
-include(":common")
-include(":core")
-include(":provider")
-include(":foundation")
-include(":modifier")
-include(":builder")
-include(":layout:common")
-include(":layout:foundation")
-include("contract:common")
-include("contract:foundation")
+
+include(
+    ":common:sculptor-core",
+    ":common:sculptor-contract",
+    ":common:sculptor-layout",
+    ":common:sculptor-presenter",
+    ":common:sculptor-engine",
+)
+
+include(
+    ":foundation:sculptor-contract",
+    ":foundation:sculptor-layout",
+    ":foundation:sculptor-presenter"
+)
