@@ -15,8 +15,8 @@ class DpSizePresenter : Presenter<SculptorDpSize, ComposeDpSize>() {
             SculptorDpSize.Zero -> ComposeDpSize.Zero
             SculptorDpSize.Unspecified -> ComposeDpSize.Unspecified
             is SculptorDpSize.Content -> ComposeDpSize(
-                width = transform(input.width),
-                height = transform(input.height)
+                width = map(input.width),
+                height = map(input.height)
             )
         }
     }

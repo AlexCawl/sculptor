@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.common.contract
 
-interface Contract {
-    val id: String
-    val modifier: List<ContractModifier>
-}
+/**
+ * The base marker that all contracts are inherited from.
+ */
+interface Contract

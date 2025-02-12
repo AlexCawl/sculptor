@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.foundation.contract.modifier.click
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.sculptor.common.contract.ContractModifier
+import org.alexcawl.sculptor.common.contract.layout.ModifierContract
 import org.alexcawl.sculptor.foundation.contract.property.Role
 
 @Serializable
@@ -22,4 +22,4 @@ data class CombinedClickable(
     val onLongClick: String?,
     @SerialName("on_double_click")
     val onDoubleClick: String?,
-) : ContractModifier
+) : ModifierContract

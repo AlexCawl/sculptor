@@ -19,7 +19,7 @@ class ArrangementPresenter : Presenter<SculptorArrangement, ComposeArrangement.H
             SculptorArrangement.SpaceEvenly -> ComposeArrangement.SpaceEvenly
 
             is SculptorArrangement.SpacedBy -> ComposeArrangement.spacedBy(
-                space = transform(input.space)
+                space = map(input.space)
             )
         }
     }

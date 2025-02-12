@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.foundation.contract.modifier.height
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.sculptor.common.contract.ContractModifier
+import org.alexcawl.sculptor.common.contract.layout.ModifierContract
 import org.alexcawl.sculptor.foundation.contract.property.Alignment
 
 @Serializable
@@ -12,4 +12,4 @@ data class WrapContentHeight(
     val align: Alignment.Vertical,
     @SerialName("unbounded")
     val unbounded: Boolean,
-) : ContractModifier
+) : ModifierContract

@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.foundation.contract.modifier.padding
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.alexcawl.sculptor.common.contract.ContractModifier
+import org.alexcawl.sculptor.common.contract.layout.ModifierContract
 import org.alexcawl.sculptor.foundation.contract.property.Dp
 
 @Serializable
@@ -16,7 +16,7 @@ data class Padding(
     val end: Dp,
     @SerialName("bottom")
     val bottom: Dp,
-) : ContractModifier {
+) : ModifierContract {
     constructor(all: Dp) : this(all, all, all, all)
 
     constructor(horizontal: Dp, vertical: Dp) : this(horizontal, vertical, horizontal, vertical)

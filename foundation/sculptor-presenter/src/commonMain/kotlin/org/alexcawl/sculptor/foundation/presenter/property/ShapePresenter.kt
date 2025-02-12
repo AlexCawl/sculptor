@@ -27,10 +27,10 @@ class ShapePresenter : Presenter<SculptorShape, ComposeShape>() {
     private fun PresenterScope.transformCut(input: SculptorShape.CutCorner): ComposeShape {
         return when (input) {
             is SculptorShape.CutCorner.DPixel -> CutCornerShape(
-                topStart = transform<SculptorDp, ComposeDp>(input.topStart),
-                topEnd = transform<SculptorDp, ComposeDp>(input.topEnd),
-                bottomEnd = transform<SculptorDp, ComposeDp>(input.bottomEnd),
-                bottomStart = transform<SculptorDp, ComposeDp>(input.bottomStart),
+                topStart = map<SculptorDp, ComposeDp>(input.topStart),
+                topEnd = map<SculptorDp, ComposeDp>(input.topEnd),
+                bottomEnd = map<SculptorDp, ComposeDp>(input.bottomEnd),
+                bottomStart = map<SculptorDp, ComposeDp>(input.bottomStart),
             )
 
             is SculptorShape.CutCorner.Percent -> CutCornerShape(
@@ -45,10 +45,10 @@ class ShapePresenter : Presenter<SculptorShape, ComposeShape>() {
     private fun PresenterScope.transformRounded(input: SculptorShape.RoundedCorner): ComposeShape {
         return when (input) {
             is SculptorShape.RoundedCorner.DPixel -> CutCornerShape(
-                topStart = transform<SculptorDp, ComposeDp>(input.topStart),
-                topEnd = transform<SculptorDp, ComposeDp>(input.topEnd),
-                bottomEnd = transform<SculptorDp, ComposeDp>(input.bottomEnd),
-                bottomStart = transform<SculptorDp, ComposeDp>(input.bottomStart),
+                topStart = map<SculptorDp, ComposeDp>(input.topStart),
+                topEnd = map<SculptorDp, ComposeDp>(input.topEnd),
+                bottomEnd = map<SculptorDp, ComposeDp>(input.bottomEnd),
+                bottomStart = map<SculptorDp, ComposeDp>(input.bottomStart),
             )
 
             is SculptorShape.RoundedCorner.Percent -> CutCornerShape(

@@ -19,13 +19,13 @@ class ArrangementVerticalPresenter : Presenter<SculptorArrangement.Vertical, Com
             SculptorArrangement.Vertical.Bottom -> ComposeArrangement.Bottom
 
             is SculptorArrangement.Vertical.Aligned -> ComposeArrangement.aligned(
-                alignment = transform<SculptorAlignment.Vertical, ComposeAlignment.Vertical>(
+                alignment = map<SculptorAlignment.Vertical, ComposeAlignment.Vertical>(
                     input = input.alignment
                 )
             )
 
             is SculptorArrangement.Vertical.SpacedBy -> ComposeArrangement.spacedBy(
-                space = transform(input.space)
+                space = map(input.space)
             )
         }
     }

@@ -13,10 +13,10 @@ class RowPresenter : Presenter<RowContract, RowLayout>() {
     override fun PresenterScope.transform(input: RowContract): RowLayout {
         return RowLayout(
             id = input.id,
-            modifier = transform(input.modifier),
-            horizontalArrangement = transform(input.horizontalArrangement),
-            verticalAlignment = transform(input.verticalAlignment),
-            content = transform(input.content),
+            modifier = map(input.modifiers),
+            horizontalArrangement = map(input.horizontalArrangement),
+            verticalAlignment = map(input.verticalAlignment),
+            content = map(input.content),
         )
     }
 }

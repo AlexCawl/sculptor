@@ -13,8 +13,8 @@ class BasicTextPresenter : Presenter<BasicTextContract, BasicTextLayout>() {
     override fun PresenterScope.transform(input: BasicTextContract): BasicTextLayout {
         return BasicTextLayout(
             id = input.id,
-            modifier = transform(input.modifier),
-            text = input.text,
+            modifier = map(input.modifiers),
+            text = input.text.value,
             softWrap = input.softWrap,
             maxLines = input.maxLines,
             minLines = input.minLines,

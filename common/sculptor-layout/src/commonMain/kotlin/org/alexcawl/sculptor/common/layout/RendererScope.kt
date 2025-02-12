@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 
-internal typealias DelegateRender = @Composable (layout: Layout) -> Unit
+typealias DelegateRender = @Composable (layout: Layout) -> Unit
 
 @Stable
 class RendererScope @InternalSculptorApi constructor(

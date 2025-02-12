@@ -13,10 +13,10 @@ class ColumnPresenter : Presenter<ColumnContract, ColumnLayout>() {
     override fun PresenterScope.transform(input: ColumnContract): ColumnLayout {
         return ColumnLayout(
             id = input.id,
-            modifier = transform(input.modifier),
-            verticalArrangement = transform(input.verticalArrangement),
-            horizontalAlignment = transform(input.horizontalAlignment),
-            content = transform(input.content),
+            modifier = map(input.modifiers),
+            verticalArrangement = map(input.verticalArrangement),
+            horizontalAlignment = map(input.horizontalAlignment),
+            content = map(input.content),
         )
     }
 }

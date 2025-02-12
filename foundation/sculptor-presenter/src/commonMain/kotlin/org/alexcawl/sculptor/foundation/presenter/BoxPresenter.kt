@@ -13,10 +13,10 @@ class BoxPresenter : Presenter<BoxContract, BoxLayout>() {
     override fun PresenterScope.transform(input: BoxContract): BoxLayout {
         return BoxLayout(
             id = input.id,
-            modifier = transform(input.modifier),
-            contentAlignment = transform(input.contentAlignment),
+            modifier = map(input.modifiers),
+            contentAlignment = map(input.contentAlignment),
             propagateMinConstraints = input.propagateMinConstraints,
-            content = transform(input.content)
+            content = map(input.content)
         )
     }
 }
