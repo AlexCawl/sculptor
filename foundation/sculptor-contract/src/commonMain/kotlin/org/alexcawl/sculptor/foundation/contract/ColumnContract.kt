@@ -10,17 +10,18 @@ import org.alexcawl.sculptor.foundation.contract.property.Alignment
 import org.alexcawl.sculptor.foundation.contract.property.Arrangement
 
 @Serializable
-@SerialName("column@contract")
-data class ColumnContract : LayoutContract<ColumnState>() {
-
-}
+@SerialName("column@layout")
+data class ColumnLayoutContract(
+    override val id: Identifier,
+    override val state: Identifier,
+    override val modifiers: List<ModifierContract>,
+    override val states: List<ColumnStateContract>
+) : LayoutContract
 
 @Serializable
 @SerialName("column@state")
-data class ColumnState(
-    @SerialName("id")
+data class ColumnStateContract(
     override val id: Identifier,
-    @SerialName("modifiers")
     override val modifiers: List<ModifierContract>,
     @SerialName("vertical_arrangement")
     val verticalArrangement: Arrangement.Vertical,

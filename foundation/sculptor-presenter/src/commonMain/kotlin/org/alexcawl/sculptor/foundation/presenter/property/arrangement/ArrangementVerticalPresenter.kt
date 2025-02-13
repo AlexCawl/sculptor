@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.foundation.presenter.property.arrangement
 
-import org.alexcawl.sculptor.common.presenter.Presenter
+import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import kotlin.reflect.KClass
 import androidx.compose.foundation.layout.Arrangement as ComposeArrangement
@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment as ComposeAlignment
 import org.alexcawl.sculptor.foundation.contract.property.Alignment as SculptorAlignment
 import org.alexcawl.sculptor.foundation.contract.property.Arrangement as SculptorArrangement
 
-class ArrangementVerticalPresenter : Presenter<SculptorArrangement.Vertical, ComposeArrangement.Vertical>() {
+class ArrangementVerticalPresenter : CommonPresenter<SculptorArrangement.Vertical, ComposeArrangement.Vertical>() {
     override val input: KClass<SculptorArrangement.Vertical> = SculptorArrangement.Vertical::class
     override val output: KClass<ComposeArrangement.Vertical> = ComposeArrangement.Vertical::class
 

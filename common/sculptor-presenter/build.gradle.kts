@@ -10,4 +10,6 @@ android {
 
 commonMainDependencies {
     api(projects.common.sculptorCore)
+    implementation(projects.common.sculptorContract)
+    implementation(projects.common.sculptorLayout)
 }

@@ -9,28 +9,23 @@ import org.alexcawl.sculptor.common.contract.layout.StateContract
 import org.alexcawl.sculptor.foundation.contract.property.Alignment
 
 @Serializable
-@SerialName("box@contract")
-data class BoxContract(
-    @SerialName("id")
+@SerialName("box@layout")
+data class BoxLayoutContract(
     override val id: Identifier,
-    @SerialName("state")
-    override val state: Int?,
-    @SerialName("modifiers")
+    override val state: Identifier,
     override val modifiers: List<ModifierContract>,
-    @SerialName("states")
-    override val states: List<BoxStateContract>,
+    override val states: List<BoxStateContract>
 ) : LayoutContract
 
 @Serializable
 @SerialName("box@state")
 data class BoxStateContract(
     override val id: Identifier,
-    @SerialName("modifiers")
     override val modifiers: List<ModifierContract>,
     @SerialName("content_alignment")
     val contentAlignment: Alignment,
     @SerialName("propagate_min_constraints")
     val propagateMinConstraints: Boolean,
     @SerialName("content")
-    val content: List<String>,
+    val content: List<Identifier>,
 ) : StateContract

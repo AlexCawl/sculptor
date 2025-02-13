@@ -1,5 +1,6 @@
 package org.alexcawl.sculptor.common.contract
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.layout.LayoutContract
 import org.alexcawl.sculptor.common.contract.value.ValueContract
@@ -17,10 +18,12 @@ data class SculptorScreen(
     /**
      * The list of values.
      */
+    @Contextual
     val values: List<ValueContract>,
 
     /**
      * The list of layouts.
      */
-    val layout: List<LayoutContract<*>>,
+    @Contextual
+    val layout: List<LayoutContract>,
 )

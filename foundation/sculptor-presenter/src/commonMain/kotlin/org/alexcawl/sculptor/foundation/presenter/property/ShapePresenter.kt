@@ -3,7 +3,7 @@ package org.alexcawl.sculptor.foundation.presenter.property
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.ui.graphics.RectangleShape
-import org.alexcawl.sculptor.common.presenter.Presenter
+import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import kotlin.reflect.KClass
 import androidx.compose.ui.graphics.Shape as ComposeShape
@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.Dp as ComposeDp
 import org.alexcawl.sculptor.foundation.contract.property.Dp as SculptorDp
 import org.alexcawl.sculptor.foundation.contract.property.Shape as SculptorShape
 
-class ShapePresenter : Presenter<SculptorShape, ComposeShape>() {
+class ShapePresenter : CommonPresenter<SculptorShape, ComposeShape>() {
     override val input: KClass<SculptorShape> = SculptorShape::class
     override val output: KClass<ComposeShape> = ComposeShape::class
 

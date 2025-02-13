@@ -4,11 +4,11 @@ import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class PresenterTest {
+class CommonPresenterTest {
     @OptIn(InternalSculptorApi::class)
     @Test
     fun `Check if presenter can be matched with input and output markers`() {
-        val presenter: Presenter<Int, String> = PresenterMock()
+        val presenter: CommonPresenter<Int, String> = CommonPresenterMock()
         val presenterScope = PresenterScope(delegateTransform = { _, _, _ -> Any() })
         val input = 5
         val output = "5"
@@ -25,7 +25,7 @@ class PresenterTest {
             message = "Presenter output type is not String"
         )
 
-        val transformed = presenter.transform(presenterScope, input)
+        val transformed = presenter.internalTransform(presenterScope, input)
 
         assertEquals(
             expected = output,
@@ -35,7 +35,7 @@ class PresenterTest {
     }
 }
 
-private class PresenterMock : Presenter<Int, String>() {
+private class CommonPresenterMock : CommonPresenter<Int, String>() {
     override val input = Int::class
     override val output = String::class
 

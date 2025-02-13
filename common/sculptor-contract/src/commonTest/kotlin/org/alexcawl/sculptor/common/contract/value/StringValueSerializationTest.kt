@@ -14,7 +14,7 @@ class StringValueSerializationTest : ValueSerializationTest<StringValueContract>
         get() = """
             {
                 "id": "id",
-                "value": true
+                "value": "value"
             }
         """.trimIndent()
 

@@ -1,12 +1,12 @@
 package org.alexcawl.sculptor.foundation.presenter.property.alignment
 
-import org.alexcawl.sculptor.common.presenter.Presenter
+import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import kotlin.reflect.KClass
 import androidx.compose.ui.Alignment as ComposeAlignment
 import org.alexcawl.sculptor.foundation.contract.property.Alignment as SculptorAlignment
 
-class AlignmentPresenter : Presenter<SculptorAlignment, ComposeAlignment>() {
+class AlignmentPresenter : CommonPresenter<SculptorAlignment, ComposeAlignment>() {
     override val input: KClass<SculptorAlignment> = SculptorAlignment::class
     override val output: KClass<ComposeAlignment> = ComposeAlignment::class
 

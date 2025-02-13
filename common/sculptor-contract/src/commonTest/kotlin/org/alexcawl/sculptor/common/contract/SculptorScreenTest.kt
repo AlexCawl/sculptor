@@ -2,8 +2,6 @@ package org.alexcawl.sculptor.common.contract
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.StringFormat
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
@@ -19,6 +17,9 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
     override val format: Json = Json {
         prettyPrint = true
         serializersModule = SerializersModule {
+            polymorphic(LayoutContract::class) {
+                subclass(TestLayout::class)
+            }
             polymorphic(StateContract::class) {
                 subclass(TestState::class)
             }
@@ -30,7 +31,7 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
             rootLayoutId = "root".id,
             values = emptyList(),
             layout = listOf(
-                LayoutContract(
+                TestLayout(
                     id = "root".id,
                     state = "state1".id,
                     modifiers = emptyList(),
@@ -52,12 +53,12 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
                 "values": [],
                 "layout": [
                     {
+                        "type": "contract@test",
                         "id": "root",
                         "state": "state1",
                         "modifiers": [],
                         "states": [
                             {
-                                "type": "state@test",
                                 "id": "state1",
                                 "modifiers": [],
                                 "testValue": "testValue"
@@ -72,6 +73,7 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
     override fun serializationTest() {
         val actual = format.encodeToString(value)
         val expected = string
+        println(actual)
         assertEquals(
             expected = expected,
             actual = actual,
@@ -90,6 +92,15 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
         )
     }
 }
+
+@Serializable
+@SerialName("contract@test")
+private data class TestLayout(
+    override val id: Identifier,
+    override val state: Identifier,
+    override val modifiers: List<ModifierContract>,
+    override val states: List<TestState>
+) : LayoutContract
 
 @Serializable
 @SerialName("state@test")

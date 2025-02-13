@@ -27,4 +27,7 @@ data class PresenterScope @InternalSculptorApi constructor(
             input
         ) as Out
     }
+
+    inline fun <reified In : Any, reified Out : Any> listMap(input: List<In>): List<Out> =
+        input.map(::map)
 }

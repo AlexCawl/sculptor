@@ -1,12 +1,12 @@
 package org.alexcawl.sculptor.foundation.presenter.property
 
-import org.alexcawl.sculptor.common.presenter.Presenter
+import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import kotlin.reflect.KClass
 import androidx.compose.ui.unit.Dp as ComposeDp
 import org.alexcawl.sculptor.foundation.contract.property.Dp as SculptorDp
 
-class DpPresenter : Presenter<SculptorDp, ComposeDp>() {
+class DpPresenter : CommonPresenter<SculptorDp, ComposeDp>() {
     override val input: KClass<SculptorDp> = SculptorDp::class
     override val output: KClass<ComposeDp> = ComposeDp::class
 
