@@ -32,10 +32,6 @@ data class Sculptor private constructor(private val context: SculptorContext) {
     @OptIn(InternalSculptorApi::class)
     private val rendererScope = RendererScope(delegateRender = delegateRender)
 
-    fun transform(input: SculptorScreen): Layout {
-        val rootLayoutContract: LayoutContract<*>? = input.layout.find { it.id == input.rootLayoutId }
-    }
-
     companion object Factory {
         fun create(
             presenters: List<CommonPresenter<*, *>>,

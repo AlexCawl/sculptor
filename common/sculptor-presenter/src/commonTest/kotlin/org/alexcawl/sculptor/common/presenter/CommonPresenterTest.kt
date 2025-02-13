@@ -1,15 +1,23 @@
 package org.alexcawl.sculptor.common.presenter
 
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class CommonPresenterTest {
+class CommonPresenterTest : BasePresenterTest<Int, String>() {
     @OptIn(InternalSculptorApi::class)
-    @Test
-    fun `Check if presenter can be matched with input and output markers`() {
-        val presenter: CommonPresenter<Int, String> = CommonPresenterMock()
-        val presenterScope = PresenterScope(delegateTransform = { _, _, _ -> Any() })
+    override val presenterScope: PresenterScope = PresenterScope(
+        delegateTransform = { _, _, _ -> Any() }
+    )
+
+    override val presenter = commonPresenter(
+        input = Int::class,
+        output = String::class
+    ) { input: Int ->
+        input.toString()
+    }
+
+    @OptIn(InternalSculptorApi::class)
+    override fun transformationTest() {
         val input = 5
         val output = "5"
 
@@ -33,11 +41,4 @@ class CommonPresenterTest {
             message = "Presenter output is not correct"
         )
     }
-}
-
-private class CommonPresenterMock : CommonPresenter<Int, String>() {
-    override val input = Int::class
-    override val output = String::class
-
-    override fun PresenterScope.transform(input: Int): String = input.toString()
 }
