@@ -13,7 +13,7 @@ import org.alexcawl.sculptor.common.contract.layout.StateContract
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
+class ScaffoldTest : BaseSerializationTest<Scaffold>() {
     override val format: Json = Json {
         prettyPrint = true
         serializersModule = SerializersModule {
@@ -26,11 +26,11 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
         }
     }
 
-    override val value: SculptorScreen
-        get() = SculptorScreen(
+    override val value: Scaffold
+        get() = Scaffold(
             rootLayoutId = "root".id,
             values = emptyList(),
-            layout = listOf(
+            layouts = listOf(
                 TestLayout(
                     id = "root".id,
                     state = "state1".id,
@@ -83,7 +83,7 @@ class SculptorScreenTest : BaseSerializationTest<SculptorScreen>() {
 
     @Test
     override fun deserializationTest() {
-        val actual = format.decodeFromString<SculptorScreen>(string)
+        val actual = format.decodeFromString<Scaffold>(string)
         val expected = value
         assertEquals(
             expected = expected,

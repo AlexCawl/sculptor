@@ -2,7 +2,6 @@ package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.contract.id
-import org.alexcawl.sculptor.common.contract.layout.ModifierContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.presenter.utils.TestLayout
 import org.alexcawl.sculptor.common.presenter.utils.TestLayoutContract
@@ -12,17 +11,13 @@ import kotlin.test.assertEquals
 class LayoutPresenterTest : BasePresenterTest<TestLayoutContract, TestLayout>() {
     @OptIn(InternalSculptorApi::class)
     override val presenterScope: PresenterScope = PresenterScope(
-        delegateTransform = { input, output, _ ->
-            when {
-                input is ModifierContract && output is Modifier -> Modifier
-                else -> error("Unknown input and output types")
-            }
-        }
+        presenterProvider = { _, _ -> error("Mock") },
+        layoutProvider = { _ -> error("Mock") },
+        valueProvider = { _ -> error("Mock") },
     )
 
     override val presenter = layoutPresenter(
-        contract = TestLayoutContract::class,
-        layout = TestLayout::class
+        contract = TestLayoutContract::class
     ) { id, modifier, state: TestStateContract ->
         with(state) {
             TestLayout(
@@ -33,7 +28,6 @@ class LayoutPresenterTest : BasePresenterTest<TestLayoutContract, TestLayout>() 
         }
     }
 
-    @OptIn(InternalSculptorApi::class)
     override fun transformationTest() {
         val input = TestLayoutContract(
             id = "root".id,

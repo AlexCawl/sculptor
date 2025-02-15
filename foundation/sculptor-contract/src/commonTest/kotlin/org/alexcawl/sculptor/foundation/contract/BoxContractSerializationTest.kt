@@ -2,6 +2,8 @@ package org.alexcawl.sculptor.foundation.contract
 
 import kotlinx.serialization.encodeToString
 import org.alexcawl.sculptor.common.contract.id
+import org.alexcawl.sculptor.foundation.contract.layout.BoxLayoutContract
+import org.alexcawl.sculptor.foundation.contract.layout.BoxStateContract
 import org.alexcawl.sculptor.foundation.contract.property.Alignment
 import kotlin.test.assertEquals
 

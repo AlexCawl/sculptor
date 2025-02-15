@@ -20,28 +20,24 @@ inline fun <reified I : Any, reified O : Any> commonPresenter(
     }
 }
 
-inline fun <reified C : LayoutContract, reified S : StateContract, reified L : Layout> layoutPresenter(
-    contract: KClass<C>,
-    layout: KClass<L>,
-    crossinline transformer: PresenterScope.(id: String, modifier: Modifier, state: S) -> L,
-) : LayoutPresenter<C, S, L> {
-    return object : LayoutPresenter<C, S, L>() {
-        override val input: KClass<C> = contract
-        override val output: KClass<L> = layout
+inline fun <reified LC : LayoutContract, reified SC : StateContract, reified L : Layout> layoutPresenter(
+    contract: KClass<LC>,
+    crossinline transformer: PresenterScope.(id: String, modifier: Modifier, state: SC) -> L,
+) : LayoutPresenter<LC, SC> {
+    return object : LayoutPresenter<LC, SC>() {
+        override val input: KClass<LC> = contract
 
-        override fun PresenterScope.transform(id: String, modifier: Modifier, state: S): L = transformer(id, modifier, state)
+        override fun PresenterScope.transform(id: String, modifier: Modifier, state: SC): L = transformer(id, modifier, state)
     }
 }
 
-inline fun <reified C : ModifierContract, reified M : Modifier> modifierPresenter(
-    input: KClass<C>,
-    output: KClass<M>,
-    crossinline transformer: PresenterScope.(input: C) -> M,
-) : ModifierPresenter<C, M> {
-    return object : ModifierPresenter<C, M>() {
-        override val input: KClass<C> = input
-        override val output: KClass<M> = output
+inline fun <reified MC : ModifierContract> modifierPresenter(
+    input: KClass<MC>,
+    crossinline transformer: PresenterScope.(input: MC) -> Modifier,
+) : ModifierPresenter<MC> {
+    return object : ModifierPresenter<MC>() {
+        override val input: KClass<MC> = input
 
-        override fun PresenterScope.transform(input: C): M = transformer(input)
+        override fun PresenterScope.transform(input: MC): Modifier = transformer(input)
     }
 }

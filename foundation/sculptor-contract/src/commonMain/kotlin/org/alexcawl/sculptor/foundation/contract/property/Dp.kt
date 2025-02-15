@@ -19,7 +19,7 @@ sealed interface Dp {
     data object Unspecified : Dp
 }
 
-private class DpSerializer : KSerializer<Dp> {
+internal class DpSerializer : KSerializer<Dp> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
         serialName = "Dp",
         kind = PrimitiveKind.STRING

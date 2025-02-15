@@ -9,7 +9,7 @@ import org.alexcawl.sculptor.common.contract.value.ValueContract
  * A `@Serializable` description for a single screen.
  */
 @Serializable
-data class SculptorScreen(
+data class Scaffold(
     /**
      * The identifier of the root layout.
      */
@@ -25,5 +25,5 @@ data class SculptorScreen(
      * The list of layouts.
      */
     @Contextual
-    val layout: List<LayoutContract>,
+    val layouts: List<LayoutContract>,
 )

@@ -1,17 +1,17 @@
 package org.alexcawl.sculptor.common.layout
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.Immutable
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
+import kotlin.reflect.KClass
 
-typealias DelegateRender = @Composable (layout: Layout) -> Unit
+typealias ResolveRenderer = (layoutClass: KClass<out Layout>) -> Renderer<Layout>
 
-@Stable
-class RendererScope @InternalSculptorApi constructor(
+@Immutable
+data class RendererScope @InternalSculptorApi constructor(
     @PublishedApi
-    internal val delegateRender: DelegateRender
+    internal val resolveRenderer: ResolveRenderer,
 ) {
     @Composable
-    @Suppress("NOTHING_TO_INLINE")
-    inline fun render(layout: Layout) = delegateRender(layout)
+    fun render(layout: Layout) = resolveRenderer(layout::class).internalRender(scope = this, layout = layout)
 }

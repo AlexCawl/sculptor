@@ -1,48 +1,48 @@
 package org.alexcawl.sculptor.engine
 
 import androidx.compose.runtime.Immutable
-import org.alexcawl.sculptor.common.contract.SculptorScreen
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import org.alexcawl.sculptor.common.layout.DelegateRender
-import org.alexcawl.sculptor.common.layout.Layout
-import org.alexcawl.sculptor.common.layout.Renderer
-import org.alexcawl.sculptor.common.layout.RendererScope
-import org.alexcawl.sculptor.common.presenter.DelegateTransform
-import org.alexcawl.sculptor.common.presenter.CommonPresenter
-import org.alexcawl.sculptor.common.presenter.PresenterScope
+import org.alexcawl.sculptor.common.contract.ContractorState
+import org.alexcawl.sculptor.common.layout.RendererState
+import org.alexcawl.sculptor.common.presenter.PresenterState
 
 @Immutable
-data class Sculptor private constructor(private val context: SculptorContext) {
-    @OptIn(InternalSculptorApi::class)
-    private val delegateTransform: DelegateTransform
-        get() = { inputClass, outputClass, value ->
-            context.findPresenter(inputClass, outputClass).internalTransform(presenterScope, value)
-        }
-
-    @OptIn(InternalSculptorApi::class)
-    private val presenterScope = PresenterScope(delegateTransform = delegateTransform)
-
-    @OptIn(InternalSculptorApi::class)
-    private val delegateRender: DelegateRender
-        get() = { layout ->
-            context.findRenderer(layout::class).render(rendererScope, layout)
-        }
-
-    @OptIn(InternalSculptorApi::class)
-    private val rendererScope = RendererScope(delegateRender = delegateRender)
+interface Sculptor : ContractorEngine, PresenterEngine, RendererEngine {
+    fun launch(mode: LaunchMode): SculptorScreen
 
     companion object Factory {
         fun create(
-            presenters: List<CommonPresenter<*, *>>,
-            renderers: List<Renderer<Layout>>,
-        ): Sculptor {
-            val context = SculptorContext(
-                presenters = presenters,
-                renderers = renderers,
-            )
-            return Sculptor(context = context)
-        }
+            contractorState: ContractorState,
+            presenterState: PresenterState,
+            rendererState: RendererState,
+        ): Sculptor = SculptorImpl(
+            contractorEngine = ContractorEngine.create(contractorState),
+            presenterEngine = PresenterEngine.create(presenterState),
+            rendererEngine = RendererEngine.create(rendererState)
+        )
     }
 }
 
+@Immutable
+private data class SculptorImpl(
+    private val contractorEngine: ContractorEngine,
+    private val presenterEngine: PresenterEngine,
+    private val rendererEngine: RendererEngine,
+) : Sculptor,
+    ContractorEngine by contractorEngine,
+    PresenterEngine by presenterEngine,
+    RendererEngine by rendererEngine {
+
+    override fun launch(mode: LaunchMode): SculptorScreen = when (mode) {
+        is LaunchMode.FromRaw -> mode.string
+            .let(::contract)
+            .let(::transform)
+            .let(::render)
+
+        is LaunchMode.FromScaffold -> mode.scaffold
+            .let(::transform)
+            .let(::render)
+
+        is LaunchMode.FromLayout -> mode.layout
+            .let(::render)
+    }
+}

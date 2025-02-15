@@ -6,7 +6,9 @@ import kotlin.test.assertEquals
 class CommonPresenterTest : BasePresenterTest<Int, String>() {
     @OptIn(InternalSculptorApi::class)
     override val presenterScope: PresenterScope = PresenterScope(
-        delegateTransform = { _, _, _ -> Any() }
+        presenterProvider = { _, _ -> error("Mock") },
+        layoutProvider = { _ -> error("Mock") },
+        valueProvider = { _ -> error("Mock") },
     )
 
     override val presenter = commonPresenter(

@@ -2,6 +2,8 @@ package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.contract.layout.ModifierContract
+import kotlin.reflect.KClass
 
-@Suppress(names = ["UNCHECKED_CAST", "EXTENSION_SHADOWED_BY_MEMBER"])
-abstract class ModifierPresenter<Input : ModifierContract, Output : Modifier> : CommonPresenter<Input, Output>()
+abstract class ModifierPresenter<Input : ModifierContract> : CommonPresenter<Input, Modifier>() {
+    final override val output: KClass<Modifier> = Modifier::class
+}

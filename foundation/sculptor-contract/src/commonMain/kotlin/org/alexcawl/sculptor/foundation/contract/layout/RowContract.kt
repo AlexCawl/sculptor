@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.foundation.contract
+package org.alexcawl.sculptor.foundation.contract.layout
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,25 +7,26 @@ import org.alexcawl.sculptor.common.contract.layout.LayoutContract
 import org.alexcawl.sculptor.common.contract.layout.ModifierContract
 import org.alexcawl.sculptor.common.contract.layout.StateContract
 import org.alexcawl.sculptor.foundation.contract.property.Alignment
+import org.alexcawl.sculptor.foundation.contract.property.Arrangement
 
 @Serializable
-@SerialName("box@layout")
-data class BoxLayoutContract(
+@SerialName("row@layout")
+data class RowLayoutContract(
     override val id: Identifier,
     override val state: Identifier,
     override val modifiers: List<ModifierContract>,
-    override val states: List<BoxStateContract>
+    override val states: List<RowStateContract>
 ) : LayoutContract
 
 @Serializable
-@SerialName("box@state")
-data class BoxStateContract(
+@SerialName("row@state")
+data class RowStateContract(
     override val id: Identifier,
     override val modifiers: List<ModifierContract>,
-    @SerialName("content_alignment")
-    val contentAlignment: Alignment,
-    @SerialName("propagate_min_constraints")
-    val propagateMinConstraints: Boolean,
+    @SerialName("horizontal_arrangement")
+    val horizontalArrangement: Arrangement.Horizontal,
+    @SerialName("vertical_alignment")
+    val verticalAlignment: Alignment.Vertical,
     @SerialName("content")
     val content: List<Identifier>,
 ) : StateContract

@@ -46,5 +46,6 @@ include(
 include(
     ":foundation:sculptor-contract",
     ":foundation:sculptor-layout",
-    ":foundation:sculptor-presenter"
+    ":foundation:sculptor-presenter",
+    ":foundation:showroom"
 )

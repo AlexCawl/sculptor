@@ -13,7 +13,7 @@ data class Color(val value: ULong) {
     constructor(argb: String) : this(argb.toULong(radix = 16))
 }
 
-private class ColorSerializer : KSerializer<Color> {
+internal class ColorSerializer : KSerializer<Color> {
     override val descriptor: SerialDescriptor =  PrimitiveSerialDescriptor(
         serialName = "androidx.compose.ui.graphics.Color",
         kind = PrimitiveKind.STRING
