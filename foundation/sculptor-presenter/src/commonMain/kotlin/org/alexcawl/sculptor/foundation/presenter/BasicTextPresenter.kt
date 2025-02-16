@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.foundation.presenter
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.value.StringValueContract
+import org.alexcawl.sculptor.common.contract.StringValueContract
 import org.alexcawl.sculptor.common.presenter.LayoutPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextLayoutContract

@@ -1,48 +1,67 @@
 package org.alexcawl.sculptor.engine
 
 import androidx.compose.runtime.Immutable
-import org.alexcawl.sculptor.common.contract.ContractorState
-import org.alexcawl.sculptor.common.layout.RendererState
-import org.alexcawl.sculptor.common.presenter.PresenterState
+import org.alexcawl.sculptor.common.contract.SculptorContractor
+import org.alexcawl.sculptor.common.core.ExperimentalSculptorApi
+import org.alexcawl.sculptor.common.layout.SculptorRenderer
+import org.alexcawl.sculptor.common.layout.SculptorScreen
+import org.alexcawl.sculptor.common.presenter.SculptorPresenter
 
 @Immutable
-interface Sculptor : ContractorEngine, PresenterEngine, RendererEngine {
+sealed interface Sculptor {
     fun launch(mode: LaunchMode): SculptorScreen
+
+    operator fun plus(other: Sculptor): Sculptor
 
     companion object Factory {
         fun create(
-            contractorState: ContractorState,
-            presenterState: PresenterState,
-            rendererState: RendererState,
-        ): Sculptor = SculptorImpl(
-            contractorEngine = ContractorEngine.create(contractorState),
-            presenterEngine = PresenterEngine.create(presenterState),
-            rendererEngine = RendererEngine.create(rendererState)
+            contractorState: SculptorContractor.State,
+            presenterState: SculptorPresenter.State,
+            rendererState: SculptorRenderer.State,
+        ): Sculptor = Impl(
+            sculptorContractor = SculptorContractor.create(contractorState),
+            sculptorPresenter = SculptorPresenter.create(presenterState),
+            rendererEngine = SculptorRenderer.create(rendererState)
+        )
+
+        @ExperimentalSculptorApi
+        fun create(
+            contractor: SculptorContractor,
+            presenter: SculptorPresenter,
+            renderer: SculptorRenderer,
+        ): Sculptor = Impl(
+            sculptorContractor = contractor,
+            sculptorPresenter = presenter,
+            rendererEngine = renderer,
         )
     }
 }
 
 @Immutable
-private data class SculptorImpl(
-    private val contractorEngine: ContractorEngine,
-    private val presenterEngine: PresenterEngine,
-    private val rendererEngine: RendererEngine,
-) : Sculptor,
-    ContractorEngine by contractorEngine,
-    PresenterEngine by presenterEngine,
-    RendererEngine by rendererEngine {
-
+private data class Impl(
+    private val sculptorContractor: SculptorContractor,
+    private val sculptorPresenter: SculptorPresenter,
+    private val rendererEngine: SculptorRenderer,
+) : Sculptor {
     override fun launch(mode: LaunchMode): SculptorScreen = when (mode) {
         is LaunchMode.FromRaw -> mode.string
-            .let(::contract)
-            .let(::transform)
-            .let(::render)
+            .let(sculptorContractor::contract)
+            .let(sculptorPresenter::transform)
+            .let(rendererEngine::render)
 
         is LaunchMode.FromScaffold -> mode.scaffold
-            .let(::transform)
-            .let(::render)
+            .let(sculptorPresenter::transform)
+            .let(rendererEngine::render)
 
         is LaunchMode.FromLayout -> mode.layout
-            .let(::render)
+            .let(rendererEngine::render)
+    }
+
+    override fun plus(other: Sculptor): Sculptor = when (other) {
+        is Impl -> Impl(
+            sculptorContractor = sculptorContractor + other.sculptorContractor,
+            sculptorPresenter = sculptorPresenter + other.sculptorPresenter,
+            rendererEngine = rendererEngine + other.rendererEngine,
+        )
     }
 }

@@ -3,7 +3,7 @@ package org.alexcawl.sculptor.foundation.presenter
 import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.LayoutPresenter
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
-import org.alexcawl.sculptor.common.presenter.PresenterState
+import org.alexcawl.sculptor.common.presenter.SculptorPresenter
 import org.alexcawl.sculptor.foundation.presenter.modifier.BackgroundModifierPresenter
 import org.alexcawl.sculptor.foundation.presenter.property.ColorPresenter
 import org.alexcawl.sculptor.foundation.presenter.property.DpPresenter
@@ -17,7 +17,7 @@ import org.alexcawl.sculptor.foundation.presenter.property.arrangement.Arrangeme
 import org.alexcawl.sculptor.foundation.presenter.property.arrangement.ArrangementPresenter
 import org.alexcawl.sculptor.foundation.presenter.property.arrangement.ArrangementVerticalPresenter
 
-object FoundationPresenterState : PresenterState {
+object FoundationPresenterState : SculptorPresenter.State {
     override val layoutPresenters: List<LayoutPresenter<*, *>> = buildList {
         add(BasicTextPresenter())
         add(BoxPresenter())

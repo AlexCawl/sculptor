@@ -3,10 +3,10 @@ package org.alexcawl.sculptor.foundation.contract
 import kotlinx.serialization.modules.PolymorphicModuleBuilder
 import kotlinx.serialization.modules.SerializersModuleBuilder
 import kotlinx.serialization.modules.subclass
-import org.alexcawl.sculptor.common.contract.ContractorState
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.contract.layout.ModifierContract
-import org.alexcawl.sculptor.common.contract.layout.StateContract
+import org.alexcawl.sculptor.common.contract.LayoutContract
+import org.alexcawl.sculptor.common.contract.ModifierContract
+import org.alexcawl.sculptor.common.contract.SculptorContractor
+import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextLayoutContract
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextStateContract
 import org.alexcawl.sculptor.foundation.contract.layout.BoxLayoutContract
@@ -38,7 +38,7 @@ import org.alexcawl.sculptor.foundation.contract.modifier.width.Width
 import org.alexcawl.sculptor.foundation.contract.modifier.width.WidthIn
 import org.alexcawl.sculptor.foundation.contract.modifier.width.WrapContentWidth
 
-object FoundationContractorState : ContractorState {
+object FoundationContractorState : SculptorContractor.State.Json {
     override val modifiers: PolymorphicModuleBuilder<ModifierContract>.() -> Unit = {
         subclass(Background::class)
 

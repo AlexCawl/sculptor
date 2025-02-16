@@ -7,9 +7,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.contract.layout.ModifierContract
-import org.alexcawl.sculptor.common.contract.layout.StateContract
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -2,8 +2,6 @@ package org.alexcawl.sculptor.common.contract
 
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.contract.value.ValueContract
 
 /**
  * A `@Serializable` description for a single screen.

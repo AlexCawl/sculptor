@@ -3,9 +3,9 @@ package org.alexcawl.sculptor.foundation.contract.layout
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.contract.layout.ModifierContract
-import org.alexcawl.sculptor.common.contract.layout.StateContract
+import org.alexcawl.sculptor.common.contract.LayoutContract
+import org.alexcawl.sculptor.common.contract.ModifierContract
+import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.foundation.contract.property.Alignment
 
 @Serializable

@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.foundation.presenter
 
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
+import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.LayoutPresenter

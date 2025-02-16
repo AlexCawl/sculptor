@@ -1,6 +1,7 @@
 package org.alexcawl.sculptor.common.contract.value
 
 import kotlinx.serialization.encodeToString
+import org.alexcawl.sculptor.common.contract.StringValueContract
 import org.alexcawl.sculptor.common.contract.id
 import kotlin.test.assertEquals
 

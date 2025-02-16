@@ -2,9 +2,9 @@ package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.contract.layout.ModifierContract
-import org.alexcawl.sculptor.common.contract.value.ValueContract
+import org.alexcawl.sculptor.common.contract.LayoutContract
+import org.alexcawl.sculptor.common.contract.ModifierContract
+import org.alexcawl.sculptor.common.contract.ValueContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 

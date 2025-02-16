@@ -1,8 +1,7 @@
-package org.alexcawl.sculptor.common.contract.layout
+package org.alexcawl.sculptor.common.contract
 
 import androidx.annotation.Size
 import kotlinx.serialization.SerialName
-import org.alexcawl.sculptor.common.contract.Identifier
 
 /**
  * A contract for a layout block. Represents a single `@Composable` function in most cases.

@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
  */
 @JvmInline
 @Serializable
-value class Identifier(val identifier: String)
+value class Identifier(val id: String)
 
 val String.id: Identifier
-    get() = Identifier(identifier = this)
+    get() = Identifier(id = this)
 
-fun combineIds(id1: Identifier, id2: Identifier): String = "${id1.identifier}@${id2.identifier}"
+fun combineIds(id1: Identifier, id2: Identifier): String = "${id1.id}@${id2.id}"

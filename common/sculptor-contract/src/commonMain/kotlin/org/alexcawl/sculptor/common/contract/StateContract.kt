@@ -1,7 +1,6 @@
-package org.alexcawl.sculptor.common.contract.layout
+package org.alexcawl.sculptor.common.contract
 
 import kotlinx.serialization.SerialName
-import org.alexcawl.sculptor.common.contract.Identifier
 
 /**
  * A contract for a state of layout.

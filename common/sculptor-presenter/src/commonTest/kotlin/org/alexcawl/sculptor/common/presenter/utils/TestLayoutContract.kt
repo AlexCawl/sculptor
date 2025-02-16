@@ -3,8 +3,8 @@ package org.alexcawl.sculptor.common.presenter.utils
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.layout.LayoutContract
-import org.alexcawl.sculptor.common.contract.layout.ModifierContract
+import org.alexcawl.sculptor.common.contract.LayoutContract
+import org.alexcawl.sculptor.common.contract.ModifierContract
 
 @Serializable
 @SerialName("test@contract")

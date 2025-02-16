@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.common.contract.layout
+package org.alexcawl.sculptor.common.contract
 
 /**
  * A contract for a modifier.
