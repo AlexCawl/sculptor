@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.common.presenter
+package org.alexcawl.sculptor.engine
 
 import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.Scaffold
@@ -6,32 +6,77 @@ import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ValueContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
+import org.alexcawl.sculptor.common.presenter.CommonPresenter
+import org.alexcawl.sculptor.common.presenter.LayoutPresenter
+import org.alexcawl.sculptor.common.presenter.LayoutProvider
+import org.alexcawl.sculptor.common.presenter.ModifierPresenter
+import org.alexcawl.sculptor.common.presenter.Presenter
+import org.alexcawl.sculptor.common.presenter.PresenterProvider
+import org.alexcawl.sculptor.common.presenter.PresenterScope
+import org.alexcawl.sculptor.common.presenter.ValueProvider
 import kotlin.reflect.KClass
 
-sealed interface SculptorPresenter {
-    fun transform(scaffold: Scaffold): Layout
+/**
+ * TODO: docs
+ */
+public sealed interface SculptorPresenter {
+    /**
+     * TODO: docs
+     */
+    public fun transform(scaffold: Scaffold): Layout
 
-    fun findPresenter(inputClass: KClass<out Any>, outputClass: KClass<out Any>): Presenter<*, *>
+    /**
+     * TODO: docs
+     */
+    public fun findPresenter(inputClass: KClass<out Any>, outputClass: KClass<out Any>): Presenter<*, *>
 
-    operator fun plus(other: SculptorPresenter): SculptorPresenter
+    /**
+     * TODO: docs
+     */
+    public operator fun plus(other: SculptorPresenter): SculptorPresenter
 
-    interface State {
-        val layoutPresenters: List<LayoutPresenter<*, *>>
-        val modifierPresenters: List<ModifierPresenter<*>>
-        val commonPresenters: List<CommonPresenter<*, *>>
+    /**
+     * TODO: docs
+     */
+    public interface State {
+        /**
+         * TODO: docs
+         */
+        public val layoutPresenters: List<LayoutPresenter<*, *>>
 
-        val presenters: List<Presenter<*, *>>
+        /**
+         * TODO: docs
+         */
+        public val modifierPresenters: List<ModifierPresenter<*>>
+
+        /**
+         * TODO: docs
+         */
+        public val commonPresenters: List<CommonPresenter<*, *>>
+
+        /**
+         * TODO: docs
+         */
+        public val presenters: List<Presenter<*, *>>
             get() = layoutPresenters + modifierPresenters + commonPresenters
     }
 
-    companion object Factory {
-        fun create(state: State): SculptorPresenter =
-            Impl(presenters = state.presenters)
+    /**
+     * TODO: docs
+     */
+    public companion object Factory {
+        /**
+         * TODO: docs
+         */
+        public fun create(state: State): SculptorPresenter =
+            SculptorPresenterImpl(presenters = state.presenters)
     }
 }
 
 @OptIn(InternalSculptorApi::class)
-private class Impl(private val presenters: List<Presenter<*, *>>) : SculptorPresenter {
+private class SculptorPresenterImpl(
+    private val presenters: List<Presenter<*, *>>,
+) : SculptorPresenter {
     override fun transform(scaffold: Scaffold): Layout {
         val presenterProvider: PresenterProvider = this::findPresenter
         val layoutProvider: LayoutProvider = { id: Identifier -> findLayout(scaffold, id) }
@@ -54,7 +99,7 @@ private class Impl(private val presenters: List<Presenter<*, *>>) : SculptorPres
         ?: error("No presenter found for $inputClass -> $outputClass")
 
     override fun plus(other: SculptorPresenter): SculptorPresenter = when (other) {
-        is Impl -> Impl(presenters = presenters + other.presenters)
+        is SculptorPresenterImpl -> SculptorPresenterImpl(presenters = presenters + other.presenters)
     }
 
     private fun findLayout(scaffold: Scaffold, identifier: Identifier): LayoutContract =

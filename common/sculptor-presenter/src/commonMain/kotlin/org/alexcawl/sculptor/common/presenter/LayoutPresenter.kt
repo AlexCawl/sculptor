@@ -10,8 +10,14 @@ import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
 import kotlin.reflect.KClass
 
-abstract class LayoutPresenter<Input : LayoutContract, State : StateContract> : Presenter<Input, Layout> {
-    final override val output: KClass<Layout> = Layout::class
+/**
+ * TODO: docs
+ */
+public abstract class LayoutPresenter<Input : LayoutContract, State : StateContract> : Presenter<Input, Layout> {
+    /**
+     * TODO: docs
+     */
+    public final override val output: KClass<Layout> = Layout::class
 
     @InternalSculptorApi
     final override fun internalTransform(scope: PresenterScope, input: Any): Layout {
@@ -29,7 +35,10 @@ abstract class LayoutPresenter<Input : LayoutContract, State : StateContract> : 
         )
     }
 
-    abstract fun PresenterScope.transform(
+    /**
+     * TODO: docs
+     */
+    public abstract fun PresenterScope.transform(
         id: String,
         modifier: Modifier,
         state: State,

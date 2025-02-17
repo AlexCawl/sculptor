@@ -5,13 +5,24 @@ import androidx.compose.runtime.Immutable
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 
-typealias ResolveRenderer = (layoutClass: KClass<out Layout>) -> Renderer<Layout>
+/**
+ * TODO: docs
+ */
+public typealias ResolveRenderer = (layoutClass: KClass<out Layout>) -> Renderer<Layout>
 
+/**
+ * TODO: docs
+ */
 @Immutable
-data class RendererScope @InternalSculptorApi constructor(
+public data class RendererScope @InternalSculptorApi constructor(
     @PublishedApi
     internal val resolveRenderer: ResolveRenderer,
 ) {
+    /**
+     * TODO: docs
+     */
+    @OptIn(InternalSculptorApi::class)
     @Composable
-    fun render(layout: Layout) = resolveRenderer(layout::class).internalRender(scope = this, layout = layout)
+    public fun render(layout: Layout): Unit = resolveRenderer(layout::class)
+        .internalRender(scope = this, layout = layout)
 }

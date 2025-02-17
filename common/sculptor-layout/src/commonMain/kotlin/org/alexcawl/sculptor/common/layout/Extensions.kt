@@ -3,7 +3,10 @@ package org.alexcawl.sculptor.common.layout
 import androidx.compose.runtime.Composable
 import kotlin.reflect.KClass
 
-inline fun <reified L : Layout> renderer(
+/**
+ * TODO: docs
+ */
+public inline fun <reified L : Layout> renderer(
     layoutType: KClass<L>,
     crossinline renderer: @Composable RendererScope.(layout: L) -> Unit
 ): Renderer<L> = object : Renderer<L>() {

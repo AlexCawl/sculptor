@@ -4,9 +4,15 @@ package org.alexcawl.sculptor.common.presenter
 
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 
-abstract class CommonPresenter<Input : Any, Output : Any> : Presenter<Input, Output> {
+/**
+ * TODO: docs
+ */
+public abstract class CommonPresenter<Input : Any, Output : Any> : Presenter<Input, Output> {
     @InternalSculptorApi
-    final override fun internalTransform(scope: PresenterScope, input: Any): Output = scope.transform(input as Input)
+    public final override fun internalTransform(scope: PresenterScope, input: Any): Output = scope.transform(input as Input)
 
+    /**
+     * TODO: docs
+     */
     protected abstract fun PresenterScope.transform(input: Input): Output
 }

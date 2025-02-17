@@ -3,6 +3,8 @@ import org.alexcawl.plugins.kotlinJvmToolchainVersionValue
 import org.alexcawl.plugins.toJavaLanguageVersion
 
 kotlinMultiplatformConfiguration {
+    explicitApi()
+
     jvm()
     androidTarget()
 

@@ -3,14 +3,22 @@
 package org.alexcawl.sculptor.common.layout
 
 import androidx.compose.runtime.Composable
+import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 
-abstract class Renderer<L : Layout> {
-    abstract val layout: KClass<L>
+/**
+ * TODO: docs
+ */
+public abstract class Renderer<L : Layout> {
+    public abstract val layout: KClass<L>
 
+    @InternalSculptorApi
     @Composable
-    fun internalRender(scope: RendererScope, layout: Layout) = scope.Render(layout as L)
+    public fun internalRender(scope: RendererScope, layout: Layout): Unit = scope.Render(layout as L)
 
+    /**
+     * TODO: docs
+     */
     @Composable
-    abstract fun RendererScope.Render(layout: L)
+    public abstract fun RendererScope.Render(layout: L)
 }

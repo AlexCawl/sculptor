@@ -7,7 +7,10 @@ import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.layout.Layout
 import kotlin.reflect.KClass
 
-inline fun <reified I : Any, reified O : Any> commonPresenter(
+/**
+ * TODO: docs
+ */
+public inline fun <reified I : Any, reified O : Any> commonPresenter(
     input: KClass<I>,
     output: KClass<O>,
     crossinline transformer: PresenterScope.(input: I) -> O,
@@ -20,7 +23,10 @@ inline fun <reified I : Any, reified O : Any> commonPresenter(
     }
 }
 
-inline fun <reified LC : LayoutContract, reified SC : StateContract, reified L : Layout> layoutPresenter(
+/**
+ * TODO: docs
+ */
+public inline fun <reified LC : LayoutContract, reified SC : StateContract, reified L : Layout> layoutPresenter(
     contract: KClass<LC>,
     crossinline transformer: PresenterScope.(id: String, modifier: Modifier, state: SC) -> L,
 ) : LayoutPresenter<LC, SC> {
@@ -31,7 +37,10 @@ inline fun <reified LC : LayoutContract, reified SC : StateContract, reified L :
     }
 }
 
-inline fun <reified MC : ModifierContract> modifierPresenter(
+/**
+ * TODO: docs
+ */
+public inline fun <reified MC : ModifierContract> modifierPresenter(
     input: KClass<MC>,
     crossinline transformer: PresenterScope.(input: MC) -> Modifier,
 ) : ModifierPresenter<MC> {

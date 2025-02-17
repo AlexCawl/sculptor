@@ -8,24 +8,34 @@ import org.alexcawl.sculptor.common.contract.ValueContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 
-typealias PresenterProvider = (inputClass: KClass<out Any>, outputClass: KClass<out Any>) -> Presenter<*, *>
+/**
+ * TODO: docs
+ */
+public typealias PresenterProvider = (inputClass: KClass<out Any>, outputClass: KClass<out Any>) -> Presenter<*, *>
 
-typealias LayoutProvider = (id: Identifier) -> LayoutContract
+/**
+ * TODO: docs
+ */
+public typealias LayoutProvider = (id: Identifier) -> LayoutContract
 
-typealias ValueProvider = (id: Identifier) -> ValueContract
+/**
+ * TODO: docs
+ */
+public typealias ValueProvider = (id: Identifier) -> ValueContract
 
-data class PresenterScope @InternalSculptorApi constructor(
+/**
+ * TODO: docs
+ */
+public data class PresenterScope @InternalSculptorApi constructor(
     private val presenterProvider: PresenterProvider,
     private val layoutProvider: LayoutProvider,
     private val valueProvider: ValueProvider,
 ) {
     /**
-     * Maps a value to an another value.
-     * @param input The input value contract.
-     * @return The mapped value.
+     * TODO: docs
      */
     @OptIn(InternalSculptorApi::class)
-    inline fun <reified In : Any, reified Out : Any> map(input: In): Out {
+    public inline fun <reified In : Any, reified Out : Any> map(input: In): Out {
         return this.internalMap(
             inputClass = In::class,
             outputClass = Out::class,
@@ -34,23 +44,39 @@ data class PresenterScope @InternalSculptorApi constructor(
     }
 
     /**
-     * Maps a list of values to an another values list.
-     * @param input The input value contract of a list.
-     * @return The mapped values list.
+     * TODO: docs
      */
-    inline fun <reified In : Any, reified Out : Any> listMap(input: List<In>): List<Out> =
+    public inline fun <reified In : Any, reified Out : Any> listMap(input: List<In>): List<Out> =
         input.map(::map)
 
     /**
-     * Maps a list of modifiers to single [Modifier].
-     * @param input The input list of modifiers.
-     * @return The mapped [Modifier].
+     * TODO: docs
      */
-    fun modifierMap(input: List<ModifierContract>): Modifier =
+    public fun modifierMap(input: List<ModifierContract>): Modifier =
         listMap<ModifierContract, Modifier>(input).fold(Modifier, Modifier::then)
 
+    /**
+     * TODO: docs
+     */
+    @OptIn(InternalSculptorApi::class)
+    public inline fun <reified Out : LayoutContract> getLayout(identifier: Identifier): Out {
+        val layout = internalGetLayout(identifier)
+        return layout as? Out
+            ?: error("Layout with identifier $identifier is not of type ${Out::class.simpleName}")
+    }
+
+    /**
+     * TODO: docs
+     */
+    @OptIn(InternalSculptorApi::class)
+    public inline fun <reified Out : ValueContract> getValue(identifier: Identifier): Out {
+        val value = internalGetValue(identifier)
+        return value as? Out
+            ?: error("Value with identifier $identifier is not of type ${Out::class.simpleName}")
+    }
+
     @InternalSculptorApi
-    fun internalMap(
+    public fun internalMap(
         inputClass: KClass<out Any>,
         outputClass: KClass<out Any>,
         value: Any
@@ -59,33 +85,9 @@ data class PresenterScope @InternalSculptorApi constructor(
         input = value
     )
 
-    /**
-     * Retrieves a [LayoutContract] from the given identifier
-     * @param identifier The identifier of the [LayoutContract] to retrieve.
-     * @return The [LayoutContract] with the given identifier.
-     */
-    @OptIn(InternalSculptorApi::class)
-    inline fun <reified Out : LayoutContract> getLayout(identifier: Identifier): Out {
-        val layout = internalGetLayout(identifier)
-        return layout as? Out
-            ?: error("Layout with identifier $identifier is not of type ${Out::class.simpleName}")
-    }
+    @InternalSculptorApi
+    public fun internalGetLayout(identifier: Identifier): Any = layoutProvider(identifier)
 
     @InternalSculptorApi
-    fun internalGetLayout(identifier: Identifier): Any = layoutProvider(identifier)
-
-    /**
-     * Retrieves a [ValueContract] from the given identifier
-     * @param identifier The identifier of the [ValueContract] to get.
-     * @return The [ValueContract]
-     */
-    @OptIn(InternalSculptorApi::class)
-    inline fun <reified Out : ValueContract> getValue(identifier: Identifier): Out {
-        val value = internalGetValue(identifier)
-        return value as? Out
-            ?: error("Value with identifier $identifier is not of type ${Out::class.simpleName}")
-    }
-
-    @InternalSculptorApi
-    fun internalGetValue(identifier: Identifier): Any = valueProvider(identifier)
+    public fun internalGetValue(identifier: Identifier): Any = valueProvider(identifier)
 }

@@ -3,10 +3,20 @@ package org.alexcawl.sculptor.common.presenter
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 
-interface Presenter<Input : Any, Output : Any> {
-    val input: KClass<Input>
-    val output: KClass<Output>
+/**
+ * TODO: docs
+ */
+public interface Presenter<Input : Any, Output : Any> {
+    /**
+     * TODO: docs
+     */
+    public val input: KClass<Input>
+
+    /**
+     * TODO: docs
+     */
+    public val output: KClass<Output>
 
     @InternalSculptorApi
-    fun internalTransform(scope: PresenterScope, input: Any): Output
+    public fun internalTransform(scope: PresenterScope, input: Any): Output
 }

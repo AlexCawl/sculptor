@@ -1,35 +1,49 @@
 package org.alexcawl.sculptor.engine
 
 import androidx.compose.runtime.Immutable
-import org.alexcawl.sculptor.common.contract.SculptorContractor
 import org.alexcawl.sculptor.common.core.ExperimentalSculptorApi
-import org.alexcawl.sculptor.common.layout.SculptorRenderer
-import org.alexcawl.sculptor.common.layout.SculptorScreen
-import org.alexcawl.sculptor.common.presenter.SculptorPresenter
 
+/**
+ * TODO: docs
+ */
 @Immutable
-sealed interface Sculptor {
-    fun launch(mode: LaunchMode): SculptorScreen
+public sealed interface Sculptor {
+    /**
+     * TODO: docs
+     */
+    public fun launch(mode: LaunchMode): SculptorScreen
 
-    operator fun plus(other: Sculptor): Sculptor
+    /**
+     * TODO: docs
+     */
+    public operator fun plus(other: Sculptor): Sculptor
 
-    companion object Factory {
-        fun create(
+    /**
+     * TODO: docs
+     */
+    public companion object Factory {
+        /**
+         * TODO: docs
+         */
+        public fun create(
             contractorState: SculptorContractor.State,
             presenterState: SculptorPresenter.State,
             rendererState: SculptorRenderer.State,
-        ): Sculptor = Impl(
+        ): Sculptor = SculptorImpl(
             sculptorContractor = SculptorContractor.create(contractorState),
             sculptorPresenter = SculptorPresenter.create(presenterState),
             rendererEngine = SculptorRenderer.create(rendererState)
         )
 
+        /**
+         * TODO: docs
+         */
         @ExperimentalSculptorApi
-        fun create(
+        public fun create(
             contractor: SculptorContractor,
             presenter: SculptorPresenter,
             renderer: SculptorRenderer,
-        ): Sculptor = Impl(
+        ): Sculptor = SculptorImpl(
             sculptorContractor = contractor,
             sculptorPresenter = presenter,
             rendererEngine = renderer,
@@ -38,7 +52,7 @@ sealed interface Sculptor {
 }
 
 @Immutable
-private data class Impl(
+private data class SculptorImpl(
     private val sculptorContractor: SculptorContractor,
     private val sculptorPresenter: SculptorPresenter,
     private val rendererEngine: SculptorRenderer,
@@ -58,7 +72,7 @@ private data class Impl(
     }
 
     override fun plus(other: Sculptor): Sculptor = when (other) {
-        is Impl -> Impl(
+        is SculptorImpl -> SculptorImpl(
             sculptorContractor = sculptorContractor + other.sculptorContractor,
             sculptorPresenter = sculptorPresenter + other.sculptorPresenter,
             rendererEngine = rendererEngine + other.rendererEngine,

@@ -1,34 +1,88 @@
 package org.alexcawl.sculptor.common.contract
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * A contract for a value. Value is a token that makes sense to business logic of the screen.
+ * TODO: docs
  */
 @Serializable
-sealed interface ValueContract {
-    val id: Identifier
+public sealed interface ValueContract {
+    @SerialName("id")
+    public val id: Identifier
 }
 
+/**
+ * TODO: docs
+ */
 @Serializable
-data class StringValueContract(override val id: Identifier, val value: String) : ValueContract
+public data class StringValueContract(
+    @SerialName("id")
+    public override val id: Identifier,
+    @SerialName("value")
+    public val value: String,
+) : ValueContract
 
+/**
+ * TODO: docs
+ */
 @Serializable
-data class BooleanValueContract(override val id: Identifier, val value: Boolean) : ValueContract
+public data class BooleanValueContract(
+    @SerialName("id")
+    public override val id: Identifier,
+    @SerialName("value")
+    public val value: Boolean,
+) : ValueContract
 
+/**
+ * TODO: docs
+ */
 @Serializable
-abstract class NumberValueContract : ValueContract {
-    abstract val value: Number
+public abstract class NumberValueContract : ValueContract {
+    @SerialName("value")
+    public abstract val value: Number
 }
 
+/**
+ * TODO: docs
+ */
 @Serializable
-data class FloatValueContract(override val id: Identifier, override val value: Float) : NumberValueContract()
+public data class FloatValueContract(
+    @SerialName("id")
+    override val id: Identifier,
+    @SerialName("value")
+    override val value: Float
+) : NumberValueContract()
 
+/**
+ * TODO: docs
+ */
 @Serializable
-data class DoubleValueContract(override val id: Identifier, override val value: Double) : NumberValueContract()
+public data class DoubleValueContract(
+    @SerialName("id")
+    override val id: Identifier,
+    @SerialName("value")
+    override val value: Double
+) : NumberValueContract()
 
+/**
+ * TODO: docs
+ */
 @Serializable
-class IntValueContract(override val id: Identifier, override val value: Int) : NumberValueContract()
+public class IntValueContract(
+    @SerialName("id")
+    override val id: Identifier,
+    @SerialName("value")
+    override val value: Int
+) : NumberValueContract()
 
+/**
+ * TODO: docs
+ */
 @Serializable
-data class LongValueContract(override val id: Identifier, override val value: Long) : NumberValueContract()
+public data class LongValueContract(
+    @SerialName("id")
+    override val id: Identifier,
+    @SerialName("value")
+    override val value: Long
+) : NumberValueContract()
