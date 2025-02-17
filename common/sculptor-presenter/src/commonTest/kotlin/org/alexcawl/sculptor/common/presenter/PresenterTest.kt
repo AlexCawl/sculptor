@@ -1,7 +1,6 @@
 package org.alexcawl.sculptor.common.presenter
 
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import org.junit.Test
 
 interface PresenterTest<I : Any, O : Any> {
     @OptIn(InternalSculptorApi::class)
@@ -14,6 +13,5 @@ interface PresenterTest<I : Any, O : Any> {
 
     val presenter: Presenter<I, O>
 
-    @Test
     fun transformationTest()
 }

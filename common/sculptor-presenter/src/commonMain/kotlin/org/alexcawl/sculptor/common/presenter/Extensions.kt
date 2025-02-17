@@ -27,11 +27,11 @@ public inline fun <reified I : Any, reified O : Any> commonPresenter(
  * TODO: docs
  */
 public inline fun <reified LC : LayoutContract, reified SC : StateContract, reified L : Layout> layoutPresenter(
-    contract: KClass<LC>,
+    layoutContract: KClass<LC>,
     crossinline transformer: PresenterScope.(id: String, modifier: Modifier, state: SC) -> L,
 ) : LayoutPresenter<LC, SC> {
     return object : LayoutPresenter<LC, SC>() {
-        override val input: KClass<LC> = contract
+        override val input: KClass<LC> = layoutContract
 
         override fun PresenterScope.transform(id: String, modifier: Modifier, state: SC): L = transformer(id, modifier, state)
     }
@@ -41,11 +41,11 @@ public inline fun <reified LC : LayoutContract, reified SC : StateContract, reif
  * TODO: docs
  */
 public inline fun <reified MC : ModifierContract> modifierPresenter(
-    input: KClass<MC>,
-    crossinline transformer: PresenterScope.(input: MC) -> Modifier,
+    modifierContract: KClass<MC>,
+    crossinline transformer: PresenterScope.(contract: MC) -> Modifier,
 ) : ModifierPresenter<MC> {
     return object : ModifierPresenter<MC>() {
-        override val input: KClass<MC> = input
+        override val input: KClass<MC> = modifierContract
 
         override fun PresenterScope.transform(input: MC): Modifier = transformer(input)
     }

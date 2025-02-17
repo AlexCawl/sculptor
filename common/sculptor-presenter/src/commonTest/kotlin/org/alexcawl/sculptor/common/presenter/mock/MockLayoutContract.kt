@@ -7,7 +7,7 @@ import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 
 @Serializable
-@SerialName("test@contract")
+@SerialName("test@layout")
 data class MockLayoutContract(
     override val id: Identifier,
     override val state: Identifier,

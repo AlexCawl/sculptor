@@ -1,14 +1,16 @@
 package org.alexcawl.sculptor.common.presenter
 
+import androidx.compose.ui.Modifier
+import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-abstract class CommonPresenterTest<I : Any, O : Any> : PresenterTest<I, O> {
-    abstract override val presenter: CommonPresenter<I, O>
+abstract class ModifierPresenterTest<MC : ModifierContract> : PresenterTest<MC, Modifier> {
+    abstract override val presenter: ModifierPresenter<MC>
 
-    abstract val input: I
-    abstract val expected: O
+    abstract val input: MC
+    abstract val expected: Modifier
 
     @OptIn(InternalSculptorApi::class)
     @Test
