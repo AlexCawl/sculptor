@@ -36,26 +36,36 @@ public data class FillMaxSize(
 @Serializable
 @SerialName("size@required_size")
 public data class RequiredSize(
-    @SerialName("size")
-    val size: Dp,
+    @SerialName("width")
+    val width: Dp,
+    @SerialName("height")
+    val height: Dp,
 ) : ModifierContract
 
 @Serializable
 @SerialName("size@required_size_in")
 public data class RequiredSizeIn(
-    @SerialName("min")
-    val min: Dp,
-    @SerialName("max")
-    val max: Dp,
+    @SerialName("min_width")
+    val minWidth: Dp,
+    @SerialName("min_height")
+    val minHeight: Dp,
+    @SerialName("max_width")
+    val maxWidth: Dp,
+    @SerialName("max_height")
+    val maxHeight: Dp,
 ) : ModifierContract
 
 @Serializable
 @SerialName("size@size_in")
 public data class SizeIn(
-    @SerialName("min")
-    val min: Dp,
-    @SerialName("max")
-    val max: Dp,
+    @SerialName("min_width")
+    val minWidth: Dp,
+    @SerialName("min_height")
+    val minHeight: Dp,
+    @SerialName("max_width")
+    val maxWidth: Dp,
+    @SerialName("max_height")
+    val maxHeight: Dp,
 ) : ModifierContract
 
 @Serializable

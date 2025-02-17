@@ -7,7 +7,7 @@ import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.foundation.contract.modifier.Background
 import kotlin.reflect.KClass
 
-public class BackgroundModifierPresenter : ModifierPresenter<Background>() {
+public class BackgroundPresenter : ModifierPresenter<Background>() {
     override val input: KClass<Background> = Background::class
 
     override fun PresenterScope.transform(input: Background): Modifier {

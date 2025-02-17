@@ -21,7 +21,7 @@ import org.alexcawl.sculptor.foundation.presenter.layout.BasicTextPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BoxPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.ColumnPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.RowPresenter
-import org.alexcawl.sculptor.foundation.presenter.modifier.BackgroundModifierPresenter
+import org.alexcawl.sculptor.foundation.presenter.modifier.BackgroundPresenter
 import org.junit.Test
 import kotlin.reflect.KClass
 
@@ -32,7 +32,7 @@ abstract class PresenterTest<I : Any, O : Any> {
         add(ColumnPresenter())
         add(RowPresenter())
 
-        add(BackgroundModifierPresenter())
+        add(BackgroundPresenter())
 
         add(AlignmentHorizontalPresenter())
         add(AlignmentPresenter())
