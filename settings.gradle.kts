@@ -47,5 +47,7 @@ include(
     ":foundation:sculptor-contract",
     ":foundation:sculptor-layout",
     ":foundation:sculptor-presenter",
-    ":foundation:showroom"
+    ":foundation:sculptor-client",
+    ":foundation:sculptor-server",
+    ":foundation:showroom",
 )

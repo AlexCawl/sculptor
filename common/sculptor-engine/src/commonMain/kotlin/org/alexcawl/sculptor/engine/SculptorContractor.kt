@@ -2,6 +2,7 @@ package org.alexcawl.sculptor.engine
 
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.PolymorphicModuleBuilder
 import kotlinx.serialization.modules.SerializersModule
@@ -20,7 +21,12 @@ public sealed interface SculptorContractor {
     /**
      * TODO: docs
      */
-    public fun contract(string: String) : Scaffold
+    public fun decode(string: String) : Scaffold
+
+    /**
+     * TODO: docs
+     */
+    public fun encode(scaffold: Scaffold): String
 
     /**
      * TODO: docs
@@ -30,7 +36,7 @@ public sealed interface SculptorContractor {
     /**
      * TODO: docs
      */
-    public sealed interface State {
+    public interface State {
         /**
          * TODO: docs
          */
@@ -83,7 +89,9 @@ private class SculptorContractorImpl(
         }
     }
 
-    override fun contract(string: String): Scaffold = format.decodeFromString(string)
+    override fun decode(string: String): Scaffold = format.decodeFromString(string)
+
+    override fun encode(scaffold: Scaffold): String = format.encodeToString(scaffold)
 
     override fun plus(other: SculptorContractor): SculptorContractor = when (other) {
         is SculptorContractorImpl -> SculptorContractorImpl(

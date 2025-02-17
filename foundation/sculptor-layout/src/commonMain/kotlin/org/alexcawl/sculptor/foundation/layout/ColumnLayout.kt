@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.layout.Layout
 
 @Immutable
-data class ColumnLayout(
+public data class ColumnLayout(
     override val id: String,
     override val modifier: Modifier,
     val verticalArrangement: Arrangement.Vertical,

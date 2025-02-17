@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.layout.Layout
 
 @Immutable
-data class BasicTextLayout(
+public data class BasicTextLayout(
     override val id: String,
     override val modifier: Modifier,
     val text: String,

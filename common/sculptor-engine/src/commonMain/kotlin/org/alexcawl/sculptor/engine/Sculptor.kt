@@ -59,7 +59,7 @@ private data class SculptorImpl(
 ) : Sculptor {
     override fun launch(mode: LaunchMode): SculptorScreen = when (mode) {
         is LaunchMode.FromRaw -> mode.string
-            .let(sculptorContractor::contract)
+            .let(sculptorContractor::decode)
             .let(sculptorPresenter::transform)
             .let(rendererEngine::render)
 

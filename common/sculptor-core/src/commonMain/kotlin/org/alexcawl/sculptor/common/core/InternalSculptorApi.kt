@@ -13,4 +13,4 @@ import kotlin.annotation.AnnotationRetention.BINARY
     level = RequiresOptIn.Level.ERROR,
     message = "This is internal API for SDUI, you should not rely on it."
 )
-annotation class InternalSculptorApi
+public annotation class InternalSculptorApi

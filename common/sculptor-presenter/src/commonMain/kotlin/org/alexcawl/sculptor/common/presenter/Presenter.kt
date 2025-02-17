@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 /**
  * TODO: docs
  */
-public interface Presenter<Input : Any, Output : Any> {
+public sealed interface Presenter<Input : Any, Output : Any> {
     /**
      * TODO: docs
      */

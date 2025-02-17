@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.foundation.showroom
 
 import androidx.compose.ui.window.application
 
-fun main() {
+public fun main() {
     application {
         Application()
     }

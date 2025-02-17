@@ -6,11 +6,11 @@ import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.foundation.contract.property.Alignment
+import org.alexcawl.sculptor.foundation.contract.common.Alignment
 
 @Serializable
 @SerialName("box@layout")
-data class BoxLayoutContract(
+public data class BoxLayoutContract(
     override val id: Identifier,
     override val state: Identifier,
     override val modifiers: List<ModifierContract>,
@@ -19,7 +19,7 @@ data class BoxLayoutContract(
 
 @Serializable
 @SerialName("box@state")
-data class BoxStateContract(
+public data class BoxStateContract(
     override val id: Identifier,
     override val modifiers: List<ModifierContract>,
     @SerialName("content_alignment")

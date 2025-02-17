@@ -6,12 +6,12 @@ import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.foundation.contract.property.Alignment
-import org.alexcawl.sculptor.foundation.contract.property.Arrangement
+import org.alexcawl.sculptor.foundation.contract.common.Alignment
+import org.alexcawl.sculptor.foundation.contract.common.Arrangement
 
 @Serializable
 @SerialName("row@layout")
-data class RowLayoutContract(
+public data class RowLayoutContract(
     override val id: Identifier,
     override val state: Identifier,
     override val modifiers: List<ModifierContract>,
@@ -20,7 +20,7 @@ data class RowLayoutContract(
 
 @Serializable
 @SerialName("row@state")
-data class RowStateContract(
+public data class RowStateContract(
     override val id: Identifier,
     override val modifiers: List<ModifierContract>,
     @SerialName("horizontal_arrangement")

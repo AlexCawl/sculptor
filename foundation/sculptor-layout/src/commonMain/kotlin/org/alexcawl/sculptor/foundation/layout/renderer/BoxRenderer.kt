@@ -2,13 +2,15 @@ package org.alexcawl.sculptor.foundation.layout.renderer
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.layout.Renderer
 import org.alexcawl.sculptor.common.layout.RendererScope
 import org.alexcawl.sculptor.foundation.layout.BoxLayout
 import kotlin.reflect.KClass
 
-class BoxRenderer : Renderer<BoxLayout>() {
+@Stable
+public class BoxRenderer : Renderer<BoxLayout>() {
     override val layout: KClass<BoxLayout> = BoxLayout::class
 
     @Composable

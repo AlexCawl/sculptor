@@ -1,14 +1,29 @@
 package org.alexcawl.sculptor.common.presenter
 
-import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.id
+import org.alexcawl.sculptor.common.contract.LayoutContract
+import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import org.alexcawl.sculptor.common.presenter.utils.TestLayout
-import org.alexcawl.sculptor.common.presenter.utils.TestLayoutContract
-import org.alexcawl.sculptor.common.presenter.utils.TestStateContract
+import org.alexcawl.sculptor.common.layout.Layout
 import kotlin.test.assertEquals
 
-class LayoutPresenterTest : BasePresenterTest<TestLayoutContract, TestLayout>() {
+abstract class LayoutPresenterTest<LC : LayoutContract, SC : StateContract> : PresenterTest<LC, Layout> {
+    abstract override val presenter: LayoutPresenter<LC, SC>
+
+    abstract val input: LC
+    abstract val expected: Layout
+
+    @OptIn(InternalSculptorApi::class)
+    final override fun transformationTest() {
+        val actual = presenter.internalTransform(presenterScope, input)
+        assertEquals(
+            expected = expected,
+            actual = actual,
+            message = "Transformation failed for $input"
+        )
+    }
+}
+
+/*
     @OptIn(InternalSculptorApi::class)
     override val presenterScope: PresenterScope = PresenterScope(
         presenterProvider = { _, _ -> error("Mock") },
@@ -67,4 +82,4 @@ class LayoutPresenterTest : BasePresenterTest<TestLayoutContract, TestLayout>() 
             message = "Presenter output is not correct"
         )
     }
-}
+ */

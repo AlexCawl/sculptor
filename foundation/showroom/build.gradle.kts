@@ -21,8 +21,5 @@ desktop(
 )
 
 commonMainDependencies {
-    implementation(projects.common.sculptorEngine)
-    implementation(projects.foundation.sculptorContract)
-    implementation(projects.foundation.sculptorLayout)
-    implementation(projects.foundation.sculptorPresenter)
+    implementation(projects.foundation.sculptorClient)
 }

@@ -2,12 +2,14 @@ package org.alexcawl.sculptor.foundation.layout.renderer
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import org.alexcawl.sculptor.common.layout.Renderer
 import org.alexcawl.sculptor.common.layout.RendererScope
 import org.alexcawl.sculptor.foundation.layout.BasicTextLayout
 import kotlin.reflect.KClass
 
-class BasicTextRenderer : Renderer<BasicTextLayout>() {
+@Stable
+public class BasicTextRenderer : Renderer<BasicTextLayout>() {
     override val layout: KClass<BasicTextLayout> = BasicTextLayout::class
 
     @Composable

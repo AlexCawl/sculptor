@@ -11,4 +11,4 @@ import kotlin.annotation.AnnotationRetention.BINARY
     level = RequiresOptIn.Level.ERROR,
     message = "This is an experimental API for SDUI and is likely to change"
 )
-annotation class ExperimentalSculptorApi
+public annotation class ExperimentalSculptorApi

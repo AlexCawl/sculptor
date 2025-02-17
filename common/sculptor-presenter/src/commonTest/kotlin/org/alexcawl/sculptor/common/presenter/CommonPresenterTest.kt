@@ -3,7 +3,24 @@ package org.alexcawl.sculptor.common.presenter
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.test.assertEquals
 
-class CommonPresenterTest : BasePresenterTest<Int, String>() {
+abstract class CommonPresenterTest<I : Any, O : Any> : PresenterTest<I, O> {
+    abstract override val presenter: CommonPresenter<I, O>
+
+    abstract val input: I
+    abstract val expected: O
+
+    @OptIn(InternalSculptorApi::class)
+    final override fun transformationTest() {
+        val actual = presenter.internalTransform(presenterScope, input)
+        assertEquals(
+            expected = expected,
+            actual = actual,
+            message = "Transformation failed for $input",
+        )
+    }
+}
+
+/*
     @OptIn(InternalSculptorApi::class)
     override val presenterScope: PresenterScope = PresenterScope(
         presenterProvider = { _, _ -> error("Mock") },
@@ -43,4 +60,4 @@ class CommonPresenterTest : BasePresenterTest<Int, String>() {
             message = "Presenter output is not correct"
         )
     }
-}
+ */

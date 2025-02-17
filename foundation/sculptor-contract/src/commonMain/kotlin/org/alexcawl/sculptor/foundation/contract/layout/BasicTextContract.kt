@@ -9,7 +9,7 @@ import org.alexcawl.sculptor.common.contract.StateContract
 
 @Serializable
 @SerialName("basic_text@layout")
-data class BasicTextLayoutContract(
+public data class BasicTextLayoutContract(
     override val id: Identifier,
     override val state: Identifier,
     override val modifiers: List<ModifierContract>,
@@ -17,37 +17,32 @@ data class BasicTextLayoutContract(
 ) : LayoutContract
 
 @Serializable
-sealed interface BasicTextStateContract : StateContract {
+public data class BasicTextStateContract(
+    override val id: Identifier,
+    override val modifiers: List<ModifierContract>,
     @SerialName("soft_wrap")
-    val softWrap: Boolean
-
+    public val softWrap: Boolean,
     @SerialName("max_lines")
-    val maxLines: Int
-
+    public val maxLines: Int,
     @SerialName("min_lines")
-    val minLines: Int
-
+    public val minLines: Int,
+    @SerialName("text")
+    public val textType: TextType,
+) : StateContract {
     @Serializable
-    @SerialName("basic_text@state@dynamic")
-    data class Dynamic(
-        override val id: Identifier,
-        override val modifiers: List<ModifierContract>,
-        override val softWrap: Boolean,
-        override val maxLines: Int,
-        override val minLines: Int,
-        @SerialName("text")
-        val textIdentifier: Identifier,
-    ) : BasicTextStateContract
+    public sealed interface TextType {
+        @Serializable
+        @SerialName("static")
+        public data class Static(
+            @SerialName("text")
+            val text: String,
+        ) : TextType
 
-    @Serializable
-    @SerialName("basic_text@state@static")
-    data class Static(
-        override val id: Identifier,
-        override val modifiers: List<ModifierContract>,
-        override val softWrap: Boolean,
-        override val maxLines: Int,
-        override val minLines: Int,
-        @SerialName("text")
-        val text: String,
-    ) : BasicTextStateContract
+        @Serializable
+        @SerialName("dynamic")
+        public data class Dynamic(
+            @SerialName("text_identifier")
+            val textIdentifier: Identifier,
+        ) : TextType
+    }
 }
