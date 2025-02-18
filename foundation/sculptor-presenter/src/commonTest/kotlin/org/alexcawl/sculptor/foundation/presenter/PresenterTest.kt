@@ -10,7 +10,6 @@ import org.alexcawl.sculptor.foundation.presenter.common.ColorPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpSizePresenter
 import org.alexcawl.sculptor.foundation.presenter.common.RolePresenter
-import org.alexcawl.sculptor.foundation.presenter.common.RolePresenterTest
 import org.alexcawl.sculptor.foundation.presenter.common.ShapePresenter
 import org.alexcawl.sculptor.foundation.presenter.common.alignment.AlignmentHorizontalPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.alignment.AlignmentPresenter

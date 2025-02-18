@@ -69,7 +69,7 @@ complexity:
     ignoreNestingFunctions: false
     nestingFunctions: [ 'run', 'let', 'apply', 'with', 'also', 'use', 'forEach', 'isNotNull', 'ifNull' ]
   LabeledExpression:
-    active: true
+    active: false
     ignoredLabels: [ ]
   LargeClass:
     active: false
@@ -257,7 +257,7 @@ naming:
     excludes: [ '**/*.kts' ]
     rootPackage: ''
   MemberNameEqualsClassName:
-    active: true
+    active: false
     ignoreOverridden: true
   NoNameShadowing:
     active: true
@@ -391,7 +391,7 @@ style:
   ExplicitItLambdaParameter:
     active: true
   ExpressionBodySyntax:
-    active: true
+    active: false
     includeLineWrapping: true
   ForbiddenComment:
     active: true
@@ -449,7 +449,7 @@ style:
   OptionalAbstractKeyword:
     active: true
   OptionalUnit:
-    active: true
+    active: false
   PreferToOverPairSyntax:
     active: true
   ProtectedMemberInFinalClass:
@@ -480,8 +480,8 @@ style:
   TrailingWhitespace:
     active: true
   UnderscoresInNumericLiterals:
-    active: true
-    acceptableLength: 4
+    active: false
+    acceptableLength: 5
   UnnecessaryAbstractClass:
     active: false
     ignoreAnnotated: [ 'dagger.Module' ]
