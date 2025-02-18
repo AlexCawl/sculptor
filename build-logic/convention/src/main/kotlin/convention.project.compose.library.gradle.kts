@@ -1,8 +1,9 @@
-import org.alexcawl.plugins.kotlin.kotlinMultiplatformConfiguration
 import org.alexcawl.plugins.libs
 import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
+    id("com.android.library")
+
     id("org.jetbrains.kotlin.multiplatform")
     id("org.jetbrains.kotlin.plugin.serialization")
     id("org.jetbrains.compose")
@@ -37,15 +38,13 @@ private val skikoNativeDistribution: String
         return "org.jetbrains.skiko:skiko-awt-runtime-$target:$version"
     }
 
-kotlinMultiplatformConfiguration {
+kotlin {
     sourceSets {
         commonMain {
             dependencies {
                 implementation(libs.bundles.common.source)
                 implementation(compose.foundation)
                 implementation(compose.components.uiToolingPreview)
-                implementation(libs.common.lifecycle.compose)
-                implementation(libs.common.lifecycle.viewmodel)
             }
         }
 
@@ -73,6 +72,7 @@ kotlinMultiplatformConfiguration {
         jvmMain {
             dependencies {
                 implementation(libs.bundles.jvm.source)
+                implementation(compose.desktop.common)
                 implementation(skikoNativeDistribution)
             }
         }

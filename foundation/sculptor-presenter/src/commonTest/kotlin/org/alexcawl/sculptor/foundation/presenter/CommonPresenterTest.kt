@@ -1,18 +1,15 @@
 package org.alexcawl.sculptor.foundation.presenter
 
-import org.alexcawl.sculptor.common.contract.LayoutContract
-import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import org.alexcawl.sculptor.common.layout.Layout
-import org.alexcawl.sculptor.common.presenter.LayoutPresenter
+import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-abstract class LayoutPresenterTest<LC : LayoutContract, SC : StateContract> : PresenterTest<LC, Layout> {
-    abstract override val presenter: LayoutPresenter<LC, SC>
+abstract class CommonPresenterTest<I : Any, O : Any> : PresenterTest<I, O> {
+    abstract override val presenter: CommonPresenter<I, O>
 
-    abstract val input: LC
-    abstract val expected: Layout
+    abstract val input: I
+    abstract val expected: O
 
     @OptIn(InternalSculptorApi::class)
     @Test

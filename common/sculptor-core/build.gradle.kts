@@ -1,5 +1,5 @@
 plugins {
-    id("convention.project.kmp.core")
+    id("convention.project.kotlin.library")
 }
 
 android {

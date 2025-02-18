@@ -1,4 +1,3 @@
-import org.alexcawl.plugins.kotlin.kotlinMultiplatformConfiguration
 import org.alexcawl.plugins.libs
 
 plugins {
@@ -20,7 +19,7 @@ android {
     }
 }
 
-kotlinMultiplatformConfiguration {
+kotlin {
     sourceSets {
         commonMain {
             dependencies {

@@ -1,11 +1,11 @@
-package org.alexcawl.sculptor.foundation.layout.renderer
+package org.alexcawl.sculptor.foundation.renderer
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import org.alexcawl.sculptor.common.layout.Layout
-import org.alexcawl.sculptor.common.layout.Renderer
-import org.alexcawl.sculptor.common.layout.RendererScope
+import org.alexcawl.sculptor.common.renderer.Renderer
+import org.alexcawl.sculptor.common.renderer.RendererScope
 import org.alexcawl.sculptor.foundation.layout.ColumnLayout
 import kotlin.reflect.KClass
 

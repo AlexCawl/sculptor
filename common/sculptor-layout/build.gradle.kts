@@ -1,7 +1,7 @@
 import org.alexcawl.plugins.commonMainDependencies
 
 plugins {
-    id("convention.project.kmp.library")
+    id("convention.project.compose.library")
 }
 
 android {
@@ -9,5 +9,6 @@ android {
 }
 
 commonMainDependencies {
-    api(projects.common.sculptorCore)
+    // Private dependencies
+    implementation(projects.common.sculptorCore)
 }

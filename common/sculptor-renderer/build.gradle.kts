@@ -5,10 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "org.alexcawl.sculptor.foundation.layout"
+    namespace = "org.alexcawl.sculptor.common.renderer"
 }
 
 commonMainDependencies {
     // Private dependencies
-    implementation(projects.common.sculptorLayout)
+    implementation(projects.common.sculptorCore)
+
+    // Public dependencies
+    api(projects.common.sculptorLayout)
 }

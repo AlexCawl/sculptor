@@ -10,7 +10,7 @@ import kotlinx.serialization.modules.subclass
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class ScaffoldTest : BaseSerializationTest<Scaffold>() {
+class ScaffoldTest : ContractTest<Scaffold>() {
     override val format: Json = Json {
         prettyPrint = true
         serializersModule = SerializersModule {

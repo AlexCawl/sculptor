@@ -2,7 +2,7 @@ import org.alexcawl.plugins.commonMainDependencies
 import org.alexcawl.plugins.jvm.desktop
 
 plugins {
-    id("convention.project.kmp.application")
+    id("convention.project.showroom.application")
 }
 
 val packageNamespace = "org.alexcawl.sculptor.foundation.showroom"

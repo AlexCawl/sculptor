@@ -3,8 +3,8 @@ package org.alexcawl.sculptor.engine
 import androidx.compose.runtime.Composable
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
-import org.alexcawl.sculptor.common.layout.Renderer
-import org.alexcawl.sculptor.common.layout.RendererScope
+import org.alexcawl.sculptor.common.renderer.Renderer
+import org.alexcawl.sculptor.common.renderer.RendererScope
 import kotlin.reflect.KClass
 
 /**

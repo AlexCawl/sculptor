@@ -1,6 +1,7 @@
-package org.alexcawl.sculptor.common.layout
+package org.alexcawl.sculptor.common.renderer
 
 import androidx.compose.runtime.Composable
+import org.alexcawl.sculptor.common.layout.Layout
 import kotlin.reflect.KClass
 
 /**

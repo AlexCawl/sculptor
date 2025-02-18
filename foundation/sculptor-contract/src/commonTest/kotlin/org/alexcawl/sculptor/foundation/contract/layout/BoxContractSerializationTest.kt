@@ -1,13 +1,11 @@
-package org.alexcawl.sculptor.foundation.contract
+package org.alexcawl.sculptor.foundation.contract.layout
 
-import kotlinx.serialization.encodeToString
+import kotlinx.serialization.KSerializer
 import org.alexcawl.sculptor.common.contract.id
-import org.alexcawl.sculptor.foundation.contract.layout.BoxLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.BoxStateContract
+import org.alexcawl.sculptor.foundation.contract.SerializationTest
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
-import kotlin.test.assertEquals
 
-class BoxContractSerializationTest : BaseSerializationTest<BoxLayoutContract>(){
+class BoxContractSerializationTest : SerializationTest<BoxLayoutContract>(){
     override val value: BoxLayoutContract
         get() = BoxLayoutContract(
             id = "id".id,
@@ -47,23 +45,5 @@ class BoxContractSerializationTest : BaseSerializationTest<BoxLayoutContract>(){
             }
         """.trimIndent()
 
-    override fun serializationTest() {
-        val actual = format.encodeToString(value)
-        val expected = string
-        assertEquals(
-            expected = expected,
-            actual = actual,
-            message = "Serialization failed"
-        )
-    }
-
-    override fun deserializationTest() {
-        val actual = format.decodeFromString<BoxLayoutContract>(string)
-        val expected = value
-        assertEquals(
-            expected = expected,
-            actual = actual,
-            message = "Deserialization failed"
-        )
-    }
+    override val serializer: KSerializer<BoxLayoutContract> = BoxLayoutContract.serializer()
 }

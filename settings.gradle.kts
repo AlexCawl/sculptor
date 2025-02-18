@@ -40,6 +40,7 @@ include(
     ":common:sculptor-contract",
     ":common:sculptor-layout",
     ":common:sculptor-presenter",
+    ":common:sculptor-renderer",
     ":common:sculptor-engine",
 )
 
@@ -47,7 +48,7 @@ include(
     ":foundation:sculptor-contract",
     ":foundation:sculptor-layout",
     ":foundation:sculptor-presenter",
+    ":foundation:sculptor-renderer",
     ":foundation:sculptor-client",
-    ":foundation:sculptor-server",
     ":foundation:showroom",
 )

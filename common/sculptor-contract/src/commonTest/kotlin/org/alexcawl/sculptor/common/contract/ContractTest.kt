@@ -1,13 +1,10 @@
-package org.alexcawl.sculptor.foundation.contract
+package org.alexcawl.sculptor.common.contract
 
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
 
-abstract class BaseSerializationTest<V> {
-    protected open val format: Json = Json {
-        prettyPrint = true
-    }
-
+abstract class ContractTest<V> {
+    abstract val format: Json
     abstract val value: V
     abstract val string: String
 
