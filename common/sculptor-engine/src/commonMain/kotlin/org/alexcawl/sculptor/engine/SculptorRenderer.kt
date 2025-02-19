@@ -19,7 +19,17 @@ public sealed interface SculptorRenderer {
     /**
      * TODO: docs
      */
-    public fun render(layout: Layout): SculptorScreen
+    public val renderers: List<Renderer<Layout>>
+
+    /**
+     * TODO: docs
+     */
+    public fun measure(layout: Layout): Result<Boolean>
+
+    /**
+     * TODO: docs
+     */
+    public fun draw(layout: Layout): SculptorScreen
 
     /**
      * TODO: docs
@@ -55,18 +65,24 @@ public sealed interface SculptorRenderer {
 
 @OptIn(InternalSculptorApi::class)
 private class SculptorRendererImpl(
-    private val renderers: List<Renderer<Layout>>,
+    override val renderers: List<Renderer<Layout>>,
 ) : SculptorRenderer {
-    override fun render(layout: Layout): SculptorScreen = {
+    override fun measure(layout: Layout): Result<Boolean> = runCatching {
         val rendererScope = RendererScope(resolveRenderer = this::findRenderer)
         val renderer: Renderer<Layout> = findRenderer(layout::class)
-        renderer.internalRender(scope = rendererScope, layout = layout)
+        renderer.internalMeasure(rendererScope, layout)
+    }
+
+    override fun draw(layout: Layout): SculptorScreen = {
+        val rendererScope = RendererScope(resolveRenderer = this::findRenderer)
+        val renderer: Renderer<Layout> = findRenderer(layout::class)
+        renderer.internalDraw(scope = rendererScope, layout = layout)
     }
 
     override fun findRenderer(layoutClass: KClass<out Layout>): Renderer<Layout> =
         renderers.find { it.layout == layoutClass } ?: error("No renderer found for $layoutClass")
 
-    override fun plus(other: SculptorRenderer): SculptorRenderer = when (other) {
-        is SculptorRendererImpl -> SculptorRendererImpl(renderers = renderers + other.renderers)
-    }
+    override fun plus(other: SculptorRenderer): SculptorRenderer = SculptorRendererImpl(
+        renderers = renderers + other.renderers
+    )
 }

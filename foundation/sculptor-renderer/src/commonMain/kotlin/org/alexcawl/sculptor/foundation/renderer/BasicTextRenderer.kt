@@ -13,7 +13,7 @@ public class BasicTextRenderer : Renderer<BasicTextLayout>() {
     override val layout: KClass<BasicTextLayout> = BasicTextLayout::class
 
     @Composable
-    override fun RendererScope.Render(layout: BasicTextLayout) {
+    override fun RendererScope.Draw(layout: BasicTextLayout) {
         BasicText(
             modifier = layout.modifier,
             text = layout.text,
@@ -22,4 +22,6 @@ public class BasicTextRenderer : Renderer<BasicTextLayout>() {
             minLines = layout.minLines,
         )
     }
+
+    override fun RendererScope.Measure(layout: BasicTextLayout): Boolean = true
 }

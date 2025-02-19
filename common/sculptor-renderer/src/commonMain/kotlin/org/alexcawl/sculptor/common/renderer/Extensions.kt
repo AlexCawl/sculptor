@@ -9,10 +9,13 @@ import kotlin.reflect.KClass
  */
 public inline fun <reified L : Layout> renderer(
     layoutType: KClass<L>,
-    crossinline renderer: @Composable RendererScope.(layout: L) -> Unit
+    crossinline drawer: @Composable RendererScope.(layout: L) -> Unit,
+    crossinline measurer: RendererScope.(layout: L) -> Boolean,
 ): Renderer<L> = object : Renderer<L>() {
     override val layout: KClass<L> = layoutType
 
     @Composable
-    override fun RendererScope.Render(layout: L) = renderer(layout)
+    override fun RendererScope.Draw(layout: L) = drawer(layout)
+
+    override fun RendererScope.Measure(layout: L): Boolean = measurer(layout)
 }

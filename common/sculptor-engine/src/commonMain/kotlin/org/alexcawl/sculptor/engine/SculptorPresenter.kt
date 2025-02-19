@@ -23,7 +23,12 @@ public sealed interface SculptorPresenter {
     /**
      * TODO: docs
      */
-    public fun transform(scaffold: Scaffold): Layout
+    public val presenters: List<Presenter<*, *>>
+
+    /**
+     * TODO: docs
+     */
+    public fun transform(scaffold: Scaffold): Result<Layout>
 
     /**
      * TODO: docs
@@ -75,9 +80,9 @@ public sealed interface SculptorPresenter {
 
 @OptIn(InternalSculptorApi::class)
 private class SculptorPresenterImpl(
-    private val presenters: List<Presenter<*, *>>,
+    override val presenters: List<Presenter<*, *>>,
 ) : SculptorPresenter {
-    override fun transform(scaffold: Scaffold): Layout {
+    override fun transform(scaffold: Scaffold): Result<Layout> = runCatching {
         val presenterProvider: PresenterProvider = this::findPresenter
         val layoutProvider: LayoutProvider = { id: Identifier -> findLayout(scaffold, id) }
         val valueProvider: ValueProvider = { id: Identifier -> findValue(scaffold, id) }
@@ -88,7 +93,7 @@ private class SculptorPresenterImpl(
         )
         val rootLayout: LayoutContract = findLayout(scaffold, scaffold.rootLayoutId)
         val rootLayoutPresenter: Presenter<*, *> = findPresenter(rootLayout::class, Layout::class)
-        return rootLayoutPresenter.internalTransform(presenterScope, rootLayout) as Layout
+        rootLayoutPresenter.internalTransform(presenterScope, rootLayout) as Layout
     }
 
     override fun findPresenter(
@@ -98,9 +103,9 @@ private class SculptorPresenterImpl(
         .firstOrNull { it.input == inputClass && it.output == outputClass }
         ?: error("No presenter found for $inputClass -> $outputClass")
 
-    override fun plus(other: SculptorPresenter): SculptorPresenter = when (other) {
-        is SculptorPresenterImpl -> SculptorPresenterImpl(presenters = presenters + other.presenters)
-    }
+    override fun plus(other: SculptorPresenter): SculptorPresenter = SculptorPresenterImpl(
+        presenters = presenters + other.presenters
+    )
 
     private fun findLayout(scaffold: Scaffold, identifier: Identifier): LayoutContract =
         scaffold.layouts.find { it.id == identifier } ?: error("No layout found for $identifier")

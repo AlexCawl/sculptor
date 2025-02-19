@@ -21,12 +21,17 @@ public sealed interface SculptorContractor {
     /**
      * TODO: docs
      */
-    public fun decode(string: String) : Scaffold
+    public val serializers: SerializersModule
 
     /**
      * TODO: docs
      */
-    public fun encode(scaffold: Scaffold): String
+    public fun decode(string: String) : Result<Scaffold>
+
+    /**
+     * TODO: docs
+     */
+    public fun encode(scaffold: Scaffold): Result<String>
 
     /**
      * TODO: docs
@@ -79,7 +84,7 @@ public sealed interface SculptorContractor {
 }
 
 private class SculptorContractorImpl(
-    private val serializers: SerializersModule,
+    override val serializers: SerializersModule,
 ) : SculptorContractor {
     private val format: StringFormat by lazy {
         Json {
@@ -89,13 +94,15 @@ private class SculptorContractorImpl(
         }
     }
 
-    override fun decode(string: String): Scaffold = format.decodeFromString(string)
-
-    override fun encode(scaffold: Scaffold): String = format.encodeToString(scaffold)
-
-    override fun plus(other: SculptorContractor): SculptorContractor = when (other) {
-        is SculptorContractorImpl -> SculptorContractorImpl(
-            serializers = serializers + other.serializers
-        )
+    override fun decode(string: String): Result<Scaffold> = runCatching {
+        format.decodeFromString<Scaffold>(string)
     }
+
+    override fun encode(scaffold: Scaffold): Result<String> = runCatching {
+        format.encodeToString<Scaffold>(scaffold)
+    }
+
+    override fun plus(other: SculptorContractor): SculptorContractor = SculptorContractorImpl(
+        serializers = serializers + other.serializers
+    )
 }

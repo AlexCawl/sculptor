@@ -14,16 +14,18 @@ public class ColumnRenderer : Renderer<ColumnLayout>() {
     override val layout: KClass<ColumnLayout> = ColumnLayout::class
 
     @Composable
-    override fun RendererScope.Render(layout: ColumnLayout) {
+    override fun RendererScope.Draw(layout: ColumnLayout) {
         Column(
             modifier = layout.modifier,
             verticalArrangement = layout.verticalArrangement,
             horizontalAlignment = layout.horizontalAlignment,
             content = {
                 layout.content.forEach { layout: Layout ->
-                    render(layout)
+                    draw(layout)
                 }
             }
         )
     }
+
+    override fun RendererScope.Measure(layout: ColumnLayout): Boolean = layout.content.all(::measure)
 }

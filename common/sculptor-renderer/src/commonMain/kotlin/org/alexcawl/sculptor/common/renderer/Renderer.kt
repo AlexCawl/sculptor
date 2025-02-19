@@ -1,4 +1,4 @@
-@file:Suppress("UNCHECKED_CAST")
+@file:Suppress("UNCHECKED_CAST", "FunctionName")
 
 package org.alexcawl.sculptor.common.renderer
 
@@ -15,11 +15,19 @@ public abstract class Renderer<L : Layout> {
 
     @InternalSculptorApi
     @Composable
-    public fun internalRender(scope: RendererScope, layout: Layout): Unit = scope.Render(layout as L)
+    public fun internalDraw(scope: RendererScope, layout: Layout): Unit = scope.Draw(layout as L)
+
+    @InternalSculptorApi
+    public fun internalMeasure(scope: RendererScope, layout: Layout): Boolean = scope.Measure(layout as L)
 
     /**
      * TODO: docs
      */
     @Composable
-    public abstract fun RendererScope.Render(layout: L)
+    public abstract fun RendererScope.Draw(layout: L)
+
+    /**
+     * TODO: docs
+     */
+    public abstract fun RendererScope.Measure(layout: L): Boolean
 }

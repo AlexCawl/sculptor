@@ -1,81 +1,56 @@
 package org.alexcawl.sculptor.engine
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import org.alexcawl.sculptor.common.core.ExperimentalSculptorApi
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-/**
- * TODO: docs
- */
-@Immutable
-public sealed interface Sculptor {
-    /**
-     * TODO: docs
-     */
-    public fun launch(mode: LaunchMode): SculptorScreen
+@Composable
+public fun Sculptor(
+    sculptorState: SculptorState,
+    launchMode: LaunchMode,
+    loading: @Composable () -> Unit,
+    error: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    var uiState: SculptorUiState by remember(key1 = launchMode, key2 = sculptorState) {
+        mutableStateOf(value = SculptorUiState.Loading)
+    }
 
-    /**
-     * TODO: docs
-     */
-    public operator fun plus(other: Sculptor): Sculptor
+    LaunchedEffect(key1 = launchMode, key2 = sculptorState) {
+        val sculptorScreen: Result<SculptorScreen> = withContext(Dispatchers.Default) {
+            sculptorState.launch(mode = launchMode)
+        }
+        uiState = when (val value = sculptorScreen.getOrNull()) {
+            null -> SculptorUiState.Error
+            else -> SculptorUiState.Content(value)
+        }
+    }
 
-    /**
-     * TODO: docs
-     */
-    public companion object Factory {
-        /**
-         * TODO: docs
-         */
-        public fun create(
-            contractorState: SculptorContractor.State,
-            presenterState: SculptorPresenter.State,
-            rendererState: SculptorRenderer.State,
-        ): Sculptor = SculptorImpl(
-            sculptorContractor = SculptorContractor.create(contractorState),
-            sculptorPresenter = SculptorPresenter.create(presenterState),
-            rendererEngine = SculptorRenderer.create(rendererState)
-        )
-
-        /**
-         * TODO: docs
-         */
-        @ExperimentalSculptorApi
-        public fun create(
-            contractor: SculptorContractor,
-            presenter: SculptorPresenter,
-            renderer: SculptorRenderer,
-        ): Sculptor = SculptorImpl(
-            sculptorContractor = contractor,
-            sculptorPresenter = presenter,
-            rendererEngine = renderer,
-        )
+    AnimatedContent(
+        targetState = uiState,
+        modifier = modifier
+    ) { state ->
+        when (state) {
+            SculptorUiState.Loading -> loading()
+            SculptorUiState.Error -> error()
+            is SculptorUiState.Content -> state.screen()
+        }
     }
 }
 
 @Immutable
-private data class SculptorImpl(
-    private val sculptorContractor: SculptorContractor,
-    private val sculptorPresenter: SculptorPresenter,
-    private val rendererEngine: SculptorRenderer,
-) : Sculptor {
-    override fun launch(mode: LaunchMode): SculptorScreen = when (mode) {
-        is LaunchMode.FromRaw -> mode.string
-            .let(sculptorContractor::decode)
-            .let(sculptorPresenter::transform)
-            .let(rendererEngine::render)
+private sealed interface SculptorUiState {
+    data object Loading : SculptorUiState
 
-        is LaunchMode.FromScaffold -> mode.scaffold
-            .let(sculptorPresenter::transform)
-            .let(rendererEngine::render)
+    data object Error : SculptorUiState
 
-        is LaunchMode.FromLayout -> mode.layout
-            .let(rendererEngine::render)
-    }
-
-    override fun plus(other: Sculptor): Sculptor = when (other) {
-        is SculptorImpl -> SculptorImpl(
-            sculptorContractor = sculptorContractor + other.sculptorContractor,
-            sculptorPresenter = sculptorPresenter + other.sculptorPresenter,
-            rendererEngine = rendererEngine + other.rendererEngine,
-        )
-    }
+    data class Content(val screen: SculptorScreen) : SculptorUiState
 }

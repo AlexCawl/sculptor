@@ -24,6 +24,13 @@ public data class RendererScope @InternalSculptorApi constructor(
      */
     @OptIn(InternalSculptorApi::class)
     @Composable
-    public fun render(layout: Layout): Unit = resolveRenderer(layout::class)
-        .internalRender(scope = this, layout = layout)
+    public fun draw(layout: Layout): Unit = resolveRenderer(layout::class)
+        .internalDraw(scope = this, layout = layout)
+
+    /**
+     * TODO: docs
+     */
+    @OptIn(InternalSculptorApi::class)
+    public fun measure(layout: Layout): Boolean = resolveRenderer(layout::class)
+        .internalMeasure(scope = this, layout = layout)
 }

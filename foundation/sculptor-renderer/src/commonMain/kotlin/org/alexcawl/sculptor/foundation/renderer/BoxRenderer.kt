@@ -14,16 +14,18 @@ public class BoxRenderer : Renderer<BoxLayout>() {
     override val layout: KClass<BoxLayout> = BoxLayout::class
 
     @Composable
-    override fun RendererScope.Render(layout: BoxLayout) {
+    override fun RendererScope.Draw(layout: BoxLayout) {
         Box(
             modifier = layout.modifier,
             contentAlignment = layout.contentAlignment,
             propagateMinConstraints = layout.propagateMinConstraints,
             content = {
                 layout.content.forEach { layout: Layout ->
-                    render(layout)
+                    draw(layout)
                 }
             }
         )
     }
+
+    override fun RendererScope.Measure(layout: BoxLayout): Boolean = layout.content.all(::measure)
 }

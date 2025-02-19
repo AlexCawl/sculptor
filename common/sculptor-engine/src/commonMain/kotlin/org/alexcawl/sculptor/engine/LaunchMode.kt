@@ -12,32 +12,32 @@ public sealed interface LaunchMode {
      * TODO: docs
      */
     @Immutable
-    public data class FromRaw(val string: String) : LaunchMode
+    public data class Data(val string: String) : LaunchMode
 
     /**
      * TODO: docs
      */
     @Immutable
-    public data class FromScaffold(val scaffold: Scaffold) : LaunchMode
+    public data class Domain(val scaffold: Scaffold) : LaunchMode
 
     /**
      * TODO: docs
      */
     @Immutable
-    public data class FromLayout(val layout: Layout) : LaunchMode
+    public data class Ui(val layout: Layout) : LaunchMode
 }
 
 /**
  * TODO: docs
  */
-public fun String.asLaunchMode(): LaunchMode = LaunchMode.FromRaw(string = this)
+public fun String.asLaunchMode(): LaunchMode = LaunchMode.Data(string = this)
 
 /**
  * TODO: docs
  */
-public fun Scaffold.asLaunchMode(): LaunchMode = LaunchMode.FromScaffold(scaffold = this)
+public fun Scaffold.asLaunchMode(): LaunchMode = LaunchMode.Domain(scaffold = this)
 
 /**
  * TODO: docs
  */
-public fun Layout.asLaunchMode(): LaunchMode = LaunchMode.FromLayout(layout = this)
+public fun Layout.asLaunchMode(): LaunchMode = LaunchMode.Ui(layout = this)
