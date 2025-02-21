@@ -10,14 +10,12 @@ import org.alexcawl.sculptor.common.contract.NumberValueContract
 import org.alexcawl.sculptor.common.contract.StringValueContract
 import org.alexcawl.sculptor.common.contract.ValueContract
 
-@SculptorBuilder
 public abstract class ValueBuilder<VC : ValueContract>(
     protected val identifier: Identifier,
 ) : Builder<VC> {
     abstract override fun build(): VC
 }
 
-@SculptorBuilder
 public class StringValueBuilder(
     identifier: Identifier,
     private val value: String,
@@ -25,7 +23,6 @@ public class StringValueBuilder(
     override fun build(): ValueContract = StringValueContract(identifier, value)
 }
 
-@SculptorBuilder
 public class BooleanValueBuilder(
     identifier: Identifier,
     private val value: Boolean,
@@ -33,7 +30,6 @@ public class BooleanValueBuilder(
     override fun build(): ValueContract = BooleanValueContract(identifier, value)
 }
 
-@SculptorBuilder
 public abstract class NumberValueBuilder<N : Number, NVC : NumberValueContract>(
     identifier: Identifier,
     protected val value: N,
@@ -41,7 +37,6 @@ public abstract class NumberValueBuilder<N : Number, NVC : NumberValueContract>(
     abstract override fun build(): NVC
 }
 
-@SculptorBuilder
 public class FloatValueBuilder(
     identifier: Identifier,
     value: Float,
@@ -49,7 +44,6 @@ public class FloatValueBuilder(
     override fun build(): FloatValueContract = FloatValueContract(identifier, value)
 }
 
-@SculptorBuilder
 public class DoubleValueBuilder(
     identifier: Identifier,
     value: Double,
@@ -57,7 +51,6 @@ public class DoubleValueBuilder(
     override fun build(): DoubleValueContract = DoubleValueContract(identifier, value)
 }
 
-@SculptorBuilder
 public class IntValueBuilder(
     identifier: Identifier,
     value: Int,
@@ -65,7 +58,6 @@ public class IntValueBuilder(
     override fun build(): IntValueContract = IntValueContract(identifier, value)
 }
 
-@SculptorBuilder
 public class LongValueBuilder(
     identifier: Identifier,
     value: Long,

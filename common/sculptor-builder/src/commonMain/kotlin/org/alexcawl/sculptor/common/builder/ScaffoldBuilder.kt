@@ -5,9 +5,8 @@ import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.ValueContract
 
-@SculptorBuilder
 public class ScaffoldBuilder(
-    public val rootLayoutId: Identifier? = null,
+    private val rootLayoutId: Identifier? = null,
 ) : Builder<Scaffold> {
     private val values: MutableList<ValueContract> = mutableListOf()
     private val layouts: MutableList<LayoutContract> = mutableListOf()

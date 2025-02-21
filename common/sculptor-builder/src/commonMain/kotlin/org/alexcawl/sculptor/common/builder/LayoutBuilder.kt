@@ -5,7 +5,6 @@ import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
 
-@SculptorBuilder
 public abstract class LayoutBuilder<LC : LayoutContract, SC : StateContract>(
     protected val identifier: Identifier,
     defaultModifiers: List<ModifierContract>,

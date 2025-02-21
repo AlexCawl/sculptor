@@ -7,7 +7,7 @@ import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.contract.ValueContract
 
-public inline fun <reified LC : LayoutContract, SC : StateContract> ScaffoldBuilder.addLayout(
+public inline fun <reified LC : LayoutContract, SC : StateContract> ScaffoldBuilder.layout(
     identifier: Identifier,
     modifier: List<ModifierContract>,
     crossinline builder: LayoutBuilder<LC, SC>.() -> LC,
@@ -37,7 +37,7 @@ public inline fun <reified LC : LayoutContract, SC : StateContract> LayoutBuilde
     this.addState(state)
 }
 
-public inline fun <reified VC : ValueContract> ScaffoldBuilder.addValue(
+public inline fun <reified VC : ValueContract> ScaffoldBuilder.value(
     identifier: Identifier,
     crossinline builder: ValueBuilder<VC>.() -> VC,
 ) {
