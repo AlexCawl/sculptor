@@ -70,7 +70,6 @@ class ScaffoldTest : ContractTest<Scaffold>() {
     override fun serializationTest() {
         val actual = format.encodeToString(value)
         val expected = string
-        println(actual)
         assertEquals(
             expected = expected,
             actual = actual,

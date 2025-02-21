@@ -6,8 +6,7 @@ import kotlinx.serialization.Serializable
 /**
  * TODO: docs
  */
-@Serializable
-public sealed interface ValueContract {
+public interface ValueContract {
     @SerialName("id")
     public val id: Identifier
 }
