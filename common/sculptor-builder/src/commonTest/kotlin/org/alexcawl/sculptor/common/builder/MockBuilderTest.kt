@@ -5,8 +5,8 @@ import org.alexcawl.sculptor.common.builder.mock.MockProperty
 import org.alexcawl.sculptor.common.builder.mock.builder.mockLayout
 import org.alexcawl.sculptor.common.builder.mock.builder.mockState
 import org.alexcawl.sculptor.common.builder.mock.builder.mockValue
-import org.alexcawl.sculptor.common.contract.ModifierList
 import org.alexcawl.sculptor.common.contract.Scaffold
+import org.alexcawl.sculptor.common.contract.Style
 
 class MockBuilderTest : BuilderTest() {
     override val value: Scaffold
@@ -26,8 +26,8 @@ class MockBuilderTest : BuilderTest() {
                     testValue = "test value 2"
                 }
                 mockState(
-                    id ="state3",
-                    modifier = ModifierList
+                    id = "state3",
+                    modifier = Style
                             plus MockModifierContract(testValue = "other modifier here")
                             plus MockModifierContract(testValue = "and other modifier here")
                             plus MockModifierContract(testValue = "idk lol")

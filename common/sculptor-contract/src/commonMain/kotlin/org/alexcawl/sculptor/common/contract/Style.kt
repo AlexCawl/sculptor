@@ -11,31 +11,31 @@ import kotlinx.serialization.serializer
  * TODO: docs
  */
 @Serializable(with = ModifierListSerializer::class)
-public sealed class ModifierList(
+public sealed class Style(
     public val modifiers: List<ModifierContract>
 ) : List<ModifierContract> by modifiers {
     /**
      * TODO: docs
      */
-    public infix operator fun plus(modifier: ModifierContract): ModifierList = Impl(modifiers = modifiers + modifier)
+    public infix operator fun plus(modifier: ModifierContract): Style = Impl(modifiers = modifiers + modifier)
 
     /**
      * TODO: docs
      */
-    public companion object : ModifierList(emptyList())
+    public companion object : Style(emptyList())
 
-    internal class Impl(modifiers: List<ModifierContract>) : ModifierList(modifiers = modifiers)
+    internal class Impl(modifiers: List<ModifierContract>) : Style(modifiers = modifiers)
 }
 
-internal class ModifierListSerializer : KSerializer<ModifierList> {
+internal class ModifierListSerializer : KSerializer<Style> {
     private val serializer: KSerializer<List<ModifierContract>> = serializer()
     override val descriptor: SerialDescriptor = serializer.descriptor
 
-    override fun deserialize(decoder: Decoder): ModifierList {
-        return ModifierList.Impl(serializer.deserialize(decoder))
+    override fun deserialize(decoder: Decoder): Style {
+        return Style.Impl(serializer.deserialize(decoder))
     }
 
-    override fun serialize(encoder: Encoder, value: ModifierList) {
+    override fun serialize(encoder: Encoder, value: Style) {
        serializer.serialize(encoder, value.modifiers)
     }
 }
