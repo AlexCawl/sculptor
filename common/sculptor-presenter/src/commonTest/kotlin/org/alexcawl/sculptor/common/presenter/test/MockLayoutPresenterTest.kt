@@ -6,6 +6,7 @@ import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.LayoutPresenter
 import org.alexcawl.sculptor.common.presenter.LayoutPresenterTest
 import org.alexcawl.sculptor.common.presenter.layoutPresenter
+import org.alexcawl.sculptor.common.presenter.mock.Mock
 import org.alexcawl.sculptor.common.presenter.mock.MockLayout
 import org.alexcawl.sculptor.common.presenter.mock.MockLayoutContract
 import org.alexcawl.sculptor.common.presenter.mock.MockStateContract
@@ -18,7 +19,7 @@ class MockLayoutPresenterTest : LayoutPresenterTest<MockLayoutContract, MockStat
                 MockLayout(
                     id = id,
                     modifier = modifier,
-                    testValue = state.testValue,
+                    value = state.value.data,
                 )
             }
         )
@@ -31,14 +32,16 @@ class MockLayoutPresenterTest : LayoutPresenterTest<MockLayoutContract, MockStat
             MockStateContract(
                 id = "state1".id,
                 modifiers = listOf(),
-                testValue = "Hello World!",
-            )
-        )
+                value = Mock(
+                    data = "Hello World!",
+                ),
+            ),
+        ),
     )
 
     override val expected: Layout = MockLayout(
         id = "test@state1",
         modifier = Modifier,
-        testValue = "Hello World!",
+        value = "Hello World!",
     )
 }

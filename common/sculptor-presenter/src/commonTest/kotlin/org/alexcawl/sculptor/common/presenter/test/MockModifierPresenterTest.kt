@@ -3,6 +3,7 @@ package org.alexcawl.sculptor.common.presenter.test
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
 import org.alexcawl.sculptor.common.presenter.ModifierPresenterTest
+import org.alexcawl.sculptor.common.presenter.mock.Mock
 import org.alexcawl.sculptor.common.presenter.mock.MockModifierContract
 import org.alexcawl.sculptor.common.presenter.modifierPresenter
 import org.junit.runner.RunWith
@@ -16,7 +17,9 @@ class MockModifierPresenterTest : ModifierPresenterTest<MockModifierContract>() 
     )
 
     override val input: MockModifierContract = MockModifierContract(
-        testValue = "Hello World!",
+        value = Mock(
+            data = "Hello World!",
+        ),
     )
 
     override val expected: Modifier = Modifier

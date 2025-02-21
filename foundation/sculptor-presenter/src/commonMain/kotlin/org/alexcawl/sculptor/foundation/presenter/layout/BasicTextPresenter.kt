@@ -1,11 +1,11 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.StringValueContract
 import org.alexcawl.sculptor.common.presenter.LayoutPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextLayoutContract
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextStateContract
+import org.alexcawl.sculptor.foundation.contract.value.StringValueContract
 import org.alexcawl.sculptor.foundation.layout.BasicTextLayout
 import kotlin.reflect.KClass
 

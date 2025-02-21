@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.common.presenter.mock
+package org.alexcawl.sculptor.common.renderer.mock
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier

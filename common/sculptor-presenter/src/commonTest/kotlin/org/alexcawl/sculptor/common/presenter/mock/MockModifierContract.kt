@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.ModifierContract
 
 @Serializable
-@SerialName("test@modifier")
+@SerialName("mock@modifier")
 data class MockModifierContract(
-    val testValue: String,
+    @SerialName("value")
+    val value: Mock,
 ) : ModifierContract
