@@ -1,6 +1,7 @@
 package org.alexcawl.sculptor.common.builder.mock.builder
 
 import org.alexcawl.sculptor.common.builder.StateBuilder
+import org.alexcawl.sculptor.common.builder.mock.Mock
 import org.alexcawl.sculptor.common.builder.mock.MockStateContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.id
@@ -12,12 +13,12 @@ class MockStateBuilder(
     identifier = identifier.id,
     defaultModifiers = defaultModifiers,
 ){
-    var testValue: String? = null
+    var testValue: Mock? = null
 
     override fun build(): MockStateContract = MockStateContract(
         id = identifier,
         modifiers = modifiers,
-        testValue = testValue ?: error("testValue is not specified"),
+        value = testValue ?: error("testValue is not specified"),
     )
 }
 

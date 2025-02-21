@@ -9,7 +9,10 @@ import org.alexcawl.sculptor.common.contract.StateContract
 @Serializable
 @SerialName("mock@state")
 data class MockStateContract(
+    @SerialName("id")
     override val id: Identifier,
+    @SerialName("modifiers")
     override val modifiers: List<ModifierContract>,
-    val testValue: String,
+    @SerialName("value")
+    val value: Mock,
 ) : StateContract

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MockProperty(
-    @SerialName("test_value")
-    val testValue: String,
+data class Mock(
+    @SerialName("data")
+    val data: String,
 )
