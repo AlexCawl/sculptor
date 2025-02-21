@@ -1,9 +1,13 @@
 package org.alexcawl.sculptor.common.renderer
 
+import androidx.compose.ui.test.ComposeUiTest
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.runComposeUiTest
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
 import org.junit.Test
-import org.junit.rules.TestRule
 
 abstract class RendererTest<L : Layout> {
     @OptIn(InternalSculptorApi::class)
@@ -12,11 +16,20 @@ abstract class RendererTest<L : Layout> {
             resolveRenderer = { _ -> error("Mock") },
         )
 
+    private val rule: ComposeContentTestRule = createComposeRule()
+
     abstract val renderer: Renderer<L>
     abstract val input: L
 
-    @Test
-    fun rendererTest() {
+    @OptIn(ExperimentalTestApi::class)
+    abstract fun ComposeUiTest.assert()
 
+    @OptIn(InternalSculptorApi::class, ExperimentalTestApi::class)
+    @Test
+    fun rendererTest() = runComposeUiTest {
+        setContent {
+            renderer.internalDraw(scope = rendererScope, layout = input)
+        }
+        assert()
     }
 }

@@ -2,9 +2,9 @@
 # ======================================= [versions.common] ========================================
 # [versions.common.source]
 version-common-kotlin-language = "2.1.0"
-version-common-kotlin-coroutines = "1.9.0"
-version-common-kotlin-serialization = "1.7.3"
-version-common-kotlin-datetime = "0.6.0"
+version-common-kotlin-coroutines = "1.10.1"
+version-common-kotlin-serialization = "1.8.0"
+version-common-kotlin-datetime = "0.6.1"
 version-common-compose = "1.7.3"
 version-common-skiko = "0.8.19"
 
@@ -14,13 +14,11 @@ version-common-junit = "4.13.2"
 # ======================================= [versions.android] =======================================
 # [versions.android.source]
 version-android-agp = "8.5.2"
-version-android-activityCompose = "1.9.3"
+version-android-activityCompose = "1.10.0"
 version-android-coreKtx = "1.15.0"
-version-android-espresso = "3.6.1"
-version-android-lifecycle = "2.8.7"
 
 # [versions.android.test]
-version-android-uiTest = "1.7.6"
+version-android-espresso = "3.6.1"
 
 # ======================================= [versions.jvm] ===========================================
 # [versions.jvm.source]
@@ -55,8 +53,8 @@ android-activityCompose = { module = "androidx.activity:activity-compose", versi
 android-splash = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
 
 # [libraries.android.test]
-android-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.1" }
-android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "version-android-uiTest" }
+android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "version-common-compose"}
+android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "version-common-compose" }
 android-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "version-android-espresso" }
 
 # ======================================= [libraries.jvm] ==========================================
