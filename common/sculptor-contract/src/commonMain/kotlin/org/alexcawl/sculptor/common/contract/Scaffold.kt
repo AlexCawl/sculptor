@@ -27,5 +27,5 @@ public data class Scaffold(
      */
     @SerialName("layouts")
     @Contextual
-    public val layouts: List<LayoutContract>,
+    public val layouts: List<Block<StateContract>>,
 )

@@ -1,11 +1,13 @@
 package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
+import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.contract.ValueContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
+import org.alexcawl.sculptor.common.layout.Layout
 import kotlin.reflect.KClass
 
 /**
@@ -16,7 +18,7 @@ public typealias PresenterProvider = (inputClass: KClass<out Any>, outputClass: 
 /**
  * TODO: docs
  */
-public typealias LayoutProvider = (id: Identifier) -> LayoutContract
+public typealias BlockProvider = (id: Identifier) -> Block<*>
 
 /**
  * TODO: docs
@@ -26,15 +28,15 @@ public typealias ValueProvider = (id: Identifier) -> ValueContract
 /**
  * TODO: docs
  */
+@OptIn(InternalSculptorApi::class)
 public data class PresenterScope @InternalSculptorApi constructor(
     private val presenterProvider: PresenterProvider,
-    private val layoutProvider: LayoutProvider,
+    private val blockProvider: BlockProvider,
     private val valueProvider: ValueProvider,
 ) {
     /**
      * TODO: docs
      */
-    @OptIn(InternalSculptorApi::class)
     public inline fun <reified In : Any, reified Out : Any> map(input: In): Out {
         return this.internalMap(
             inputClass = In::class,
@@ -58,21 +60,29 @@ public data class PresenterScope @InternalSculptorApi constructor(
     /**
      * TODO: docs
      */
-    @OptIn(InternalSculptorApi::class)
-    public inline fun <reified Out : LayoutContract> getLayout(identifier: Identifier): Out {
-        val layout = internalGetLayout(identifier)
-        return layout as? Out
-            ?: error("Layout with identifier $identifier is not of type ${Out::class.simpleName}")
+    public inline fun <reified Out : ValueContract> getValue(identifier: Identifier): Out {
+        val value = internalGetValue(identifier)
+        return value as? Out
+            ?: error("Value with identifier $identifier is not of type ${Out::class.simpleName}")
     }
 
     /**
      * TODO: docs
      */
-    @OptIn(InternalSculptorApi::class)
-    public inline fun <reified Out : ValueContract> getValue(identifier: Identifier): Out {
-        val value = internalGetValue(identifier)
-        return value as? Out
-            ?: error("Value with identifier $identifier is not of type ${Out::class.simpleName}")
+    public fun getLayout(identifier: Identifier): Layout {
+        val block: Block<*> = blockProvider(identifier)
+        val modifiers: List<ModifierContract> = block.modifiers
+        val state: StateContract = block.states.find { it.id == block.state }
+            ?: error("No state found for ${block.state}")
+        val statePresenter: Presenter<*, *> = presenterProvider(state::class, Layout::class)
+        return statePresenter.internalTransform(
+            scope = this,
+            input = StatePresenter.Bundle(
+                id = identifier,
+                modifiers = modifiers,
+                state = state,
+            ),
+        ) as Layout
     }
 
     @InternalSculptorApi
@@ -80,14 +90,16 @@ public data class PresenterScope @InternalSculptorApi constructor(
         inputClass: KClass<out Any>,
         outputClass: KClass<out Any>,
         value: Any
-    ): Any = presenterProvider(inputClass, outputClass).internalTransform(
-        scope = this,
-        input = value
-    )
+    ): Any {
+        println("$inputClass -> $outputClass")
+        return presenterProvider(inputClass, outputClass).also {
+            println("$it for $value")
+        }.internalTransform(
+            scope = this,
+            input = value
+        )
+    }
 
     @InternalSculptorApi
-    public fun internalGetLayout(identifier: Identifier): Any = layoutProvider(identifier)
-
-    @InternalSculptorApi
-    public fun internalGetValue(identifier: Identifier): Any = valueProvider(identifier)
+    public fun internalGetValue(identifier: Identifier): ValueContract = valueProvider(identifier)
 }

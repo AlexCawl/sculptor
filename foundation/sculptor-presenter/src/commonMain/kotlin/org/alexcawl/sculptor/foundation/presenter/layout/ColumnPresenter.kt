@@ -1,25 +1,27 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.presenter.LayoutPresenter
+import org.alexcawl.sculptor.common.contract.Identifier
+import org.alexcawl.sculptor.common.contract.ModifierContract
+import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.PresenterScope
-import org.alexcawl.sculptor.foundation.contract.layout.ColumnLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.ColumnStateContract
+import org.alexcawl.sculptor.common.presenter.StatePresenter
+import org.alexcawl.sculptor.foundation.contract.layout.ColumnState
 import org.alexcawl.sculptor.foundation.layout.ColumnLayout
 import kotlin.reflect.KClass
 
-public class ColumnPresenter : LayoutPresenter<ColumnLayoutContract, ColumnStateContract>() {
-    override val input: KClass<ColumnLayoutContract> = ColumnLayoutContract::class
+public class ColumnPresenter : StatePresenter<ColumnState>() {
+    override val input: KClass<ColumnState> = ColumnState::class
 
     override fun PresenterScope.transform(
-        id: String,
-        modifier: Modifier,
-        state: ColumnStateContract
-    ): ColumnLayout {
+        blockId: Identifier,
+        blockModifiers: List<ModifierContract>,
+        state: ColumnState
+    ): Layout {
         return with(state) {
             ColumnLayout(
-                id = id,
-                modifier = modifier,
+                id = blockId + id,
+                modifier = modifierMap(input = blockModifiers + modifiers),
                 verticalArrangement = map(verticalArrangement),
                 horizontalAlignment = map(horizontalAlignment),
                 content = content.map(::getLayout),

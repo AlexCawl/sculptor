@@ -8,35 +8,47 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
+private const val RGB_REGEX = "^[0-9a-fA-F]{6}$"
+private const val RGBA_REGEX = "^[0-9a-fA-F]{8}$"
+
 @Serializable(with = ColorSerializer::class)
-@JvmInline
-public value class Color(public val value: ULong) {
-    public constructor(value: String) : this(
-        value = factories.find { it.match(value) }
-            ?.create(value)
-            ?: error("Invalid color: $value")
-    )
+public sealed interface Color {
+    public val content: String
+
+    @Serializable
+    public data class RGB(override val content: String) : Color {
+        init {
+            assert(content.matches(Regex(pattern = RGB_REGEX)))
+        }
+    }
+
+    @Serializable
+    public data class RGBA(override val content: String) : Color {
+        init {
+            assert(content.matches(Regex(pattern = RGBA_REGEX)))
+        }
+    }
+
+    public val r: Int
+        get() = content.substring(0, 2).toInt(radix = 16)
+    public val g: Int
+        get() = content.substring(2, 4).toInt(radix = 16)
+    public val b: Int
+        get() = content.substring(4, 6).toInt(radix = 16)
+    public val a: Int
+        get() = when (this) {
+            is RGB -> 0xFF
+            is RGBA -> content.substring(6, 8).toInt(radix = 16)
+        }
+
+    public companion object {
+        public operator fun invoke(content: String): Color = when {
+            content.matches(Regex(pattern = RGB_REGEX)) -> RGB(content)
+            content.matches(Regex(pattern = RGBA_REGEX)) -> RGBA(content)
+            else -> throw IllegalArgumentException("Invalid color: $content")
+        }
+    }
 }
-
-private interface ColorFactory {
-    fun match(value: String): Boolean
-    fun create(value: String): ULong
-}
-
-private val factories: List<ColorFactory> = listOf(
-    object : ColorFactory {
-        override fun match(value: String): Boolean =
-            value.matches(Regex(pattern = "^[0-9a-fA-F]{6}$"))
-
-        override fun create(value: String): ULong = value.toULong(radix = 16) xor 0xFF000000UL
-    },
-    object : ColorFactory {
-        override fun match(value: String): Boolean =
-            value.matches(Regex(pattern = "^[0-9a-fA-F]{8}$"))
-
-        override fun create(value: String): ULong = value.toULong(radix = 16)
-    },
-)
 
 internal class ColorSerializer : KSerializer<Color> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
@@ -46,11 +58,15 @@ internal class ColorSerializer : KSerializer<Color> {
 
     override fun deserialize(decoder: Decoder): Color {
         val string = decoder.decodeString()
-        return Color(value = string.toULong(radix = 16))
+        return when {
+            string.matches(Regex(pattern = RGB_REGEX)) -> Color.RGB(content = string)
+            string.matches(Regex(pattern = RGBA_REGEX)) -> Color.RGBA(content = string)
+            else -> error("Invalid color: $string")
+        }
     }
 
     override fun serialize(encoder: Encoder, value: Color) {
-        val string = value.value.toString(radix = 16)
+        val string = value.content
         encoder.encodeString(string)
     }
 }

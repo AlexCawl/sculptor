@@ -3,22 +3,15 @@ package org.alexcawl.sculptor.foundation.contract.layout
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
 
 @Serializable
-@SerialName("basic_text@layout")
-public data class BasicTextLayoutContract(
+@SerialName("basic_text@state")
+public data class BasicTextState(
+    @SerialName("id")
     override val id: Identifier,
-    override val state: Identifier,
-    override val modifiers: List<ModifierContract>,
-    override val states: List<BasicTextStateContract>
-) : LayoutContract
-
-@Serializable
-public data class BasicTextStateContract(
-    override val id: Identifier,
+    @SerialName("modifiers")
     override val modifiers: List<ModifierContract>,
     @SerialName("soft_wrap")
     public val softWrap: Boolean,

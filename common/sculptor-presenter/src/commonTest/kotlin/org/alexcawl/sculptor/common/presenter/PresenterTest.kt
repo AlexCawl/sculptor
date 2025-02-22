@@ -9,7 +9,7 @@ abstract class PresenterTest<I : Any, O : Any> {
     protected open val presenterScope: PresenterScope
         get() = PresenterScope(
             presenterProvider = { _, _ -> error("Mock") },
-            layoutProvider = { _ -> error("Mock") },
+            blockProvider = { _ -> error("Mock") },
             valueProvider = { _ -> error("Mock") },
         )
 
@@ -19,7 +19,7 @@ abstract class PresenterTest<I : Any, O : Any> {
 
     @OptIn(InternalSculptorApi::class)
     @Test
-    fun transformationTest() {
+    open fun transformationTest() {
         val actual = presenter.internalTransform(scope = presenterScope, input = input)
         assertEquals(
             expected = expected,

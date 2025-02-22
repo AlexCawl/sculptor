@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.foundation.client
 
 import org.alexcawl.sculptor.common.presenter.CommonPresenter
-import org.alexcawl.sculptor.common.presenter.LayoutPresenter
+import org.alexcawl.sculptor.common.presenter.StatePresenter
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
 import org.alexcawl.sculptor.engine.SculptorPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BasicTextPresenter
@@ -43,7 +43,7 @@ import org.alexcawl.sculptor.foundation.presenter.modifier.WrapContentWidthPrese
  * TODO: docs
  */
 public object FoundationPresenterState : SculptorPresenter.State {
-    override val layoutPresenters: List<LayoutPresenter<*, *>> = buildList {
+    override val statePresenters: List<StatePresenter<*>> = buildList {
         add(BasicTextPresenter())
         add(BoxPresenter())
         add(ColumnPresenter())

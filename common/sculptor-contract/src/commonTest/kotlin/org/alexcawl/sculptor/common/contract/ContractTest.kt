@@ -6,7 +6,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
-import org.alexcawl.sculptor.common.contract.mock.MockLayoutContract
 import org.alexcawl.sculptor.common.contract.mock.MockModifierContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
 import org.alexcawl.sculptor.common.contract.mock.MockValueContract
@@ -17,9 +16,6 @@ abstract class ContractTest<C> {
     protected open val format: StringFormat = Json {
         prettyPrint = true
         serializersModule = SerializersModule {
-            polymorphic(LayoutContract::class) {
-                subclass(MockLayoutContract::class)
-            }
             polymorphic(StateContract::class) {
                 subclass(MockStateContract::class)
             }

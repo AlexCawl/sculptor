@@ -1,11 +1,11 @@
 package org.alexcawl.sculptor.common.contract.test
 
 import kotlinx.serialization.KSerializer
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.ContractTest
 import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.contract.mock.Mock
-import org.alexcawl.sculptor.common.contract.mock.MockLayoutContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
 import org.alexcawl.sculptor.common.contract.mock.MockValueContract
 
@@ -23,7 +23,7 @@ class ScaffoldTest : ContractTest<Scaffold>() {
             ),
         ),
         layouts = listOf(
-            MockLayoutContract(
+            Block(
                 id = "root".id,
                 state = "state1".id,
                 modifiers = emptyList(),
@@ -43,7 +43,7 @@ class ScaffoldTest : ContractTest<Scaffold>() {
     override val string: String
         get() = """
             {
-                "rootLayoutId": "root",
+                "root_layout_id": "root",
                 "values": [
                     {
                         "type": "mock@value",
@@ -55,12 +55,12 @@ class ScaffoldTest : ContractTest<Scaffold>() {
                 ],
                 "layouts": [
                     {
-                        "type": "mock@layout",
                         "id": "root",
                         "state": "state1",
                         "modifiers": [],
                         "states": [
                             {
+                                "type": "mock@state",
                                 "id": "state1",
                                 "modifiers": [],
                                 "value": {

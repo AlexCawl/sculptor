@@ -1,23 +1,24 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.layout.Layout
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextStateContract
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextStateContract.TextType
+import org.alexcawl.sculptor.common.presenter.StatePresenter
+import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
+import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState.TextType
 import org.alexcawl.sculptor.foundation.layout.BasicTextLayout
-import org.alexcawl.sculptor.foundation.presenter.LayoutPresenterTest
+import org.alexcawl.sculptor.foundation.presenter.StatePresenterTest
 
-class BasicTextPresenterTest : LayoutPresenterTest<BasicTextLayoutContract, BasicTextStateContract>() {
-    override val presenter: BasicTextPresenter = BasicTextPresenter()
+class BasicTextPresenterTest : StatePresenterTest<BasicTextState>() {
+    override val statePresenter: StatePresenter<BasicTextState> = BasicTextPresenter()
 
-    override val input: BasicTextLayoutContract = BasicTextLayoutContract(
+    override val input: Block<BasicTextState> = Block(
         id = "basic_text".id,
         state = "state1".id,
         modifiers = emptyList(),
         states = listOf(
-            BasicTextStateContract(
+            BasicTextState(
                 id = "state1".id,
                 modifiers = emptyList(),
                 softWrap = true,

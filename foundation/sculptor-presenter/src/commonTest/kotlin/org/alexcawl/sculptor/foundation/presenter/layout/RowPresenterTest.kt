@@ -1,24 +1,25 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.layout.Layout
+import org.alexcawl.sculptor.common.presenter.StatePresenter
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 import org.alexcawl.sculptor.foundation.contract.common.Arrangement
-import org.alexcawl.sculptor.foundation.contract.layout.RowLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.RowStateContract
+import org.alexcawl.sculptor.foundation.contract.layout.RowState
 import org.alexcawl.sculptor.foundation.layout.RowLayout
-import org.alexcawl.sculptor.foundation.presenter.LayoutPresenterTest
+import org.alexcawl.sculptor.foundation.presenter.StatePresenterTest
 
-class RowPresenterTest : LayoutPresenterTest<RowLayoutContract, RowStateContract>() {
-    override val presenter: RowPresenter = RowPresenter()
+class RowPresenterTest : StatePresenterTest<RowState>() {
+    override val statePresenter: StatePresenter<RowState> = RowPresenter()
 
-    override val input: RowLayoutContract = RowLayoutContract(
+    override val input: Block<RowState> = Block(
         id = "row".id,
         state = "state1".id,
         modifiers = emptyList(),
         states = listOf(
-            RowStateContract(
+            RowState(
                 id = "state1".id,
                 modifiers = emptyList(),
                 horizontalArrangement = Arrangement.Horizontal.Start,

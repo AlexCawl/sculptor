@@ -3,24 +3,17 @@ package org.alexcawl.sculptor.foundation.contract.layout
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.LayoutContract
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 
 @Serializable
-@SerialName("box@layout")
-public data class BoxLayoutContract(
-    override val id: Identifier,
-    override val state: Identifier,
-    override val modifiers: List<ModifierContract>,
-    override val states: List<BoxStateContract>
-) : LayoutContract
-
-@Serializable
 @SerialName("box@state")
-public data class BoxStateContract(
+public data class BoxState(
+    @SerialName("id")
     override val id: Identifier,
+    @SerialName("modifiers")
     override val modifiers: List<ModifierContract>,
     @SerialName("content_alignment")
     val contentAlignment: Alignment,

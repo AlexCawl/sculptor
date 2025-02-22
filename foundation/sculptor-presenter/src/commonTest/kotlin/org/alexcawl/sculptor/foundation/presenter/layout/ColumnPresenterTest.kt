@@ -1,24 +1,25 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.layout.Layout
+import org.alexcawl.sculptor.common.presenter.StatePresenter
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 import org.alexcawl.sculptor.foundation.contract.common.Arrangement
-import org.alexcawl.sculptor.foundation.contract.layout.ColumnLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.ColumnStateContract
+import org.alexcawl.sculptor.foundation.contract.layout.ColumnState
 import org.alexcawl.sculptor.foundation.layout.ColumnLayout
-import org.alexcawl.sculptor.foundation.presenter.LayoutPresenterTest
+import org.alexcawl.sculptor.foundation.presenter.StatePresenterTest
 
-class ColumnPresenterTest : LayoutPresenterTest<ColumnLayoutContract, ColumnStateContract>() {
-    override val presenter: ColumnPresenter = ColumnPresenter()
+class ColumnPresenterTest : StatePresenterTest<ColumnState>() {
+    override val statePresenter: StatePresenter<ColumnState> = ColumnPresenter()
 
-    override val input: ColumnLayoutContract = ColumnLayoutContract(
+    override val input: Block<ColumnState> = Block(
         id = "row".id,
         state = "state1".id,
         modifiers = emptyList(),
         states = listOf(
-            ColumnStateContract(
+            ColumnState(
                 id = "state1".id,
                 modifiers = emptyList(),
                 verticalArrangement = Arrangement.Vertical.Top,

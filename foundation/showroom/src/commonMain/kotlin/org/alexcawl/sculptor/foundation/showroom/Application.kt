@@ -1,6 +1,8 @@
 package org.alexcawl.sculptor.foundation.showroom
 
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.engine.Sculptor
@@ -8,11 +10,9 @@ import org.alexcawl.sculptor.engine.asLaunchMode
 import org.alexcawl.sculptor.foundation.client.FoundationSculptor
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 import org.alexcawl.sculptor.foundation.contract.common.Arrangement
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextStateContract
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextStateContract.TextType
-import org.alexcawl.sculptor.foundation.contract.layout.RowLayoutContract
-import org.alexcawl.sculptor.foundation.contract.layout.RowStateContract
+import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
+import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState.TextType
+import org.alexcawl.sculptor.foundation.contract.layout.RowState
 
 public val response: String = """
     {
@@ -87,12 +87,12 @@ public val scaffold: Scaffold = Scaffold(
     rootLayoutId = "root".id,
     values = listOf(),
     layouts = listOf(
-        RowLayoutContract(
+        Block(
             id = "root".id,
             modifiers = listOf(),
             state = "1".id,
             states = listOf(
-                RowStateContract(
+                RowState(
                     id = "1".id,
                     modifiers = listOf(),
                     horizontalArrangement = Arrangement.Horizontal.Start,
@@ -101,12 +101,12 @@ public val scaffold: Scaffold = Scaffold(
                 )
             ),
         ),
-        BasicTextLayoutContract(
+        Block(
             id = "text1".id,
             modifiers = listOf(),
             state = "1".id,
             states = listOf(
-                BasicTextStateContract(
+                BasicTextState(
                     id = "1".id,
                     modifiers = listOf(),
                     softWrap = false,
@@ -118,12 +118,12 @@ public val scaffold: Scaffold = Scaffold(
                 )
             ),
         ),
-        BasicTextLayoutContract(
+        Block(
             id = "text2".id,
             modifiers = listOf(),
             state = "1".id,
             states = listOf(
-                BasicTextStateContract(
+                BasicTextState(
                     id = "1".id,
                     modifiers = listOf(),
                     softWrap = false,
@@ -144,7 +144,11 @@ public fun Application() {
     Sculptor(
         sculptorState = FoundationSculptor(),
         launchMode = launchMode,
-        loading = {},
-        error = {},
+        loading = {
+            BasicText(text = "Loading...")
+        },
+        error = {
+            BasicText(text = "Error")
+        },
     )
 }
