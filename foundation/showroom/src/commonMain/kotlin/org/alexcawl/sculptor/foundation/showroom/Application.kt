@@ -140,7 +140,7 @@ public val scaffold: Scaffold = Scaffold(
 
 @Composable
 public fun Application() {
-    val launchMode = response.asLaunchMode()
+    val launchMode = scaffold.asLaunchMode()
     Sculptor(
         sculptorState = FoundationSculptor(),
         launchMode = launchMode,
