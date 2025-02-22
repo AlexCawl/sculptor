@@ -4,7 +4,6 @@
 version-common-kotlin-language = "2.1.0"
 version-common-kotlin-coroutines = "1.10.1"
 version-common-kotlin-serialization = "1.8.0"
-version-common-kotlin-datetime = "0.6.1"
 version-common-compose = "1.7.3"
 version-common-skiko = "0.8.19"
 
@@ -36,7 +35,6 @@ version-utility-detekt = "1.23.7"
 common-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "version-common-kotlin-coroutines" }
 common-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "version-common-kotlin-serialization" }
 common-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "version-common-kotlin-serialization" }
-common-kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "version-common-kotlin-datetime" }
 common-collections = { module = "androidx.collection:collection", version = "1.4.5" }
 
 # [libraries.common.test]
@@ -55,7 +53,6 @@ android-splash = { group = "androidx.core", name = "core-splashscreen", version 
 # [libraries.android.test]
 android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "version-common-compose"}
 android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "version-common-compose" }
-android-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "version-android-espresso" }
 
 # ======================================= [libraries.jvm] ==========================================
 # [libraries.jvm.source]
@@ -78,7 +75,6 @@ common-source = [
     "common-kotlin-coroutines",
     "common-kotlin-serialization",
     "common-kotlin-serialization-json",
-    "common-kotlin-datetime",
     "common-collections",
 ]
 common-test = [
@@ -94,7 +90,6 @@ android-source = [
 android-test = [
     "android-junit",
     "android-testManifest",
-    "android-espresso",
 ]
 jvm-source = [
     "jvm-kotlin-coroutines",
