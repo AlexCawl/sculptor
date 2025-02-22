@@ -41,7 +41,7 @@ include(
     ":common:sculptor-layout",
     ":common:sculptor-presenter",
     ":common:sculptor-renderer",
-//    ":common:sculptor-builder",
+    ":common:sculptor-builder",
     ":common:sculptor-engine",
 )
 
