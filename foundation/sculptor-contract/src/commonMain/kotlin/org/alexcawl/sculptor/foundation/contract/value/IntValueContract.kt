@@ -3,6 +3,7 @@ package org.alexcawl.sculptor.foundation.contract.value
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
+import org.alexcawl.sculptor.common.contract.ValueContract
 
 /**
  * TODO: docs
@@ -13,4 +14,4 @@ public class IntValueContract(
     override val id: Identifier,
     @SerialName("value")
     override val value: Int
-) : NumberValueContract()
+) : ValueContract

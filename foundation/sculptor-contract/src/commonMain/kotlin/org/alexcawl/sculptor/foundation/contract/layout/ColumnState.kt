@@ -3,7 +3,6 @@ package org.alexcawl.sculptor.foundation.contract.layout
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 import org.alexcawl.sculptor.foundation.contract.common.Arrangement
@@ -13,8 +12,6 @@ import org.alexcawl.sculptor.foundation.contract.common.Arrangement
 public data class ColumnState(
     @SerialName("id")
     override val id: Identifier,
-    @SerialName("modifiers")
-    override val modifiers: List<ModifierContract>,
     @SerialName("vertical_arrangement")
     val verticalArrangement: Arrangement.Vertical,
     @SerialName("horizontal_alignment")

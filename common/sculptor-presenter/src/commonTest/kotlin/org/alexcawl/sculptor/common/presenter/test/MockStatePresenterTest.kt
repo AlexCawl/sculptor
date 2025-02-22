@@ -16,8 +16,8 @@ class MockStatePresenterTest : StatePresenterTest<MockStateContract>() {
             stateContract = MockStateContract::class,
             transformer = { id, modifier, state ->
                 MockLayout(
-                    id = id + state.id,
-                    modifier = modifierMap(input = modifier + state.modifiers),
+                    id = id,
+                    modifier = modifier,
                     value = state.value.data,
                 )
             }
@@ -26,7 +26,6 @@ class MockStatePresenterTest : StatePresenterTest<MockStateContract>() {
     override val input: MockStateContract
         get() = MockStateContract(
             id = "state1".id,
-            modifiers = listOf(),
             value = Mock(
                 data = "Hello World!",
             ),

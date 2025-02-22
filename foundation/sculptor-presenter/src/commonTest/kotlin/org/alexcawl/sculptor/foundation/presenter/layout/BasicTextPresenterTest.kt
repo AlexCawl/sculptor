@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.Block
+import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.StatePresenter
@@ -13,14 +13,13 @@ import org.alexcawl.sculptor.foundation.presenter.StatePresenterTest
 class BasicTextPresenterTest : StatePresenterTest<BasicTextState>() {
     override val statePresenter: StatePresenter<BasicTextState> = BasicTextPresenter()
 
-    override val input: Block<BasicTextState> = Block(
+    override val input: Section = Section(
         id = "basic_text".id,
-        state = "state1".id,
+        forcedState = "state1".id,
         modifiers = emptyList(),
         states = listOf(
             BasicTextState(
                 id = "state1".id,
-                modifiers = emptyList(),
                 softWrap = true,
                 maxLines = 3,
                 minLines = 1,

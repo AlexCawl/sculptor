@@ -36,6 +36,7 @@ abstract class ContractTest<C> {
     fun serializationTest() {
         val actual: String = format.encodeToString(serializer, value)
         val expected: String = string
+        println("actual:\n$actual")
         assertEquals(
             expected = expected,
             actual = actual,

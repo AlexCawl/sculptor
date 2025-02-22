@@ -13,5 +13,5 @@ public data class BooleanValueContract(
     @SerialName("id")
     public override val id: Identifier,
     @SerialName("value")
-    public val value: Boolean,
+    public override val value: Boolean,
 ) : ValueContract

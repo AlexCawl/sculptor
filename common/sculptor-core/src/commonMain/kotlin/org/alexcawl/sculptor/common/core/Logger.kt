@@ -1,5 +1,7 @@
 package org.alexcawl.sculptor.common.core
 
+import kotlin.jvm.Throws
+
 public interface Logger {
     public fun w(tag: Tag = Tag.UNKNOWN, message: String)
 
@@ -10,6 +12,7 @@ public interface Logger {
             println("${tag.name}: $message")
         }
 
+        @Throws(IllegalStateException::class)
         override fun e(tag: Tag, message: String): Nothing {
             error("${tag.name}: $message")
         }

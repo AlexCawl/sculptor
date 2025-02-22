@@ -1,21 +1,21 @@
 package org.alexcawl.sculptor.common.contract.test
 
 import kotlinx.serialization.KSerializer
-import org.alexcawl.sculptor.common.contract.Block
+import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.ContractTest
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.contract.mock.Mock
 import org.alexcawl.sculptor.common.contract.mock.MockModifierContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
 
-class BlockTest : ContractTest<Block<MockStateContract>>() {
-    override val serializer: KSerializer<Block<MockStateContract>>
-        get() = Block.serializer(MockStateContract.serializer())
+class BlockTest : ContractTest<Section>() {
+    override val serializer: KSerializer<Section>
+        get() = Section.serializer()
 
-    override val value: Block<MockStateContract>
-        get() = Block(
+    override val value: Section
+        get() = Section(
             id = "testId".id,
-            state = "testState".id,
+            forcedState = "testState".id,
             modifiers = listOf(
                 MockModifierContract(
                     value = Mock(
@@ -26,13 +26,6 @@ class BlockTest : ContractTest<Block<MockStateContract>>() {
             states = listOf(
                 MockStateContract(
                     id = "testState".id,
-                    modifiers = listOf(
-                        MockModifierContract(
-                            value = Mock(
-                                data = "testValue"
-                            ),
-                        ),
-                    ),
                     value = Mock(
                         data = "testValue",
                     ),
@@ -44,7 +37,6 @@ class BlockTest : ContractTest<Block<MockStateContract>>() {
         get() = """
             {
                 "id": "testId",
-                "state": "testState",
                 "modifiers": [
                     {
                         "type": "mock@modifier",
@@ -55,20 +47,14 @@ class BlockTest : ContractTest<Block<MockStateContract>>() {
                 ],
                 "states": [
                     {
+                        "type": "mock@state",
                         "id": "testState",
-                        "modifiers": [
-                            {
-                                "type": "mock@modifier",
-                                "value": {
-                                    "data": "testValue"
-                                }
-                            }
-                        ],
                         "value": {
                             "data": "testValue"
                         }
                     }
-                ]
+                ],
+                "forced": "testState"
             }
         """.trimIndent()
 }

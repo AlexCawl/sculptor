@@ -3,7 +3,6 @@ package org.alexcawl.sculptor.foundation.contract.layout
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
 
 @Serializable
@@ -11,8 +10,6 @@ import org.alexcawl.sculptor.common.contract.StateContract
 public data class BasicTextState(
     @SerialName("id")
     override val id: Identifier,
-    @SerialName("modifiers")
-    override val modifiers: List<ModifierContract>,
     @SerialName("soft_wrap")
     public val softWrap: Boolean,
     @SerialName("max_lines")

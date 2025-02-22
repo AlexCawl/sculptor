@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.foundation.showroom
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import org.alexcawl.sculptor.common.contract.Block
+import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.engine.Sculptor
@@ -84,31 +84,28 @@ public val response: String = """
 """.trimIndent()
 
 public val scaffold: Scaffold = Scaffold(
-    rootLayoutId = "root".id,
     values = listOf(),
-    layouts = listOf(
-        Block(
+    sections = listOf(
+        Section(
             id = "root".id,
             modifiers = listOf(),
-            state = "1".id,
+            forcedState = "1".id,
             states = listOf(
                 RowState(
                     id = "1".id,
-                    modifiers = listOf(),
                     horizontalArrangement = Arrangement.Horizontal.Start,
                     verticalAlignment = Alignment.Vertical.Top,
                     content = listOf("text1".id, "text2".id)
                 )
             ),
         ),
-        Block(
+        Section(
             id = "text1".id,
             modifiers = listOf(),
-            state = "1".id,
+            forcedState = "1".id,
             states = listOf(
                 BasicTextState(
                     id = "1".id,
-                    modifiers = listOf(),
                     softWrap = false,
                     maxLines = 1,
                     minLines = 1,
@@ -118,14 +115,13 @@ public val scaffold: Scaffold = Scaffold(
                 )
             ),
         ),
-        Block(
+        Section(
             id = "text2".id,
             modifiers = listOf(),
-            state = "1".id,
+            forcedState = "1".id,
             states = listOf(
                 BasicTextState(
                     id = "1".id,
-                    modifiers = listOf(),
                     softWrap = false,
                     maxLines = 1,
                     minLines = 1,

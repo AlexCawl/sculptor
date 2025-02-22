@@ -38,7 +38,6 @@ import org.alexcawl.sculptor.foundation.contract.value.DoubleValueContract
 import org.alexcawl.sculptor.foundation.contract.value.FloatValueContract
 import org.alexcawl.sculptor.foundation.contract.value.IntValueContract
 import org.alexcawl.sculptor.foundation.contract.value.LongValueContract
-import org.alexcawl.sculptor.foundation.contract.value.NumberValueContract
 import org.alexcawl.sculptor.foundation.contract.value.StringValueContract
 
 /**
@@ -81,7 +80,6 @@ public object FoundationContractorState : SculptorContractor.State {
         subclass(FloatValueContract::class)
         subclass(IntValueContract::class)
         subclass(LongValueContract::class)
-        subclass(NumberValueContract::class)
         subclass(StringValueContract::class)
     }
 

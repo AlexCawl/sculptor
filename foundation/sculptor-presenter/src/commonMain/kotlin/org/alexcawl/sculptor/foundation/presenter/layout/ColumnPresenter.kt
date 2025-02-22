@@ -1,8 +1,6 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.common.presenter.StatePresenter
@@ -14,14 +12,14 @@ public class ColumnPresenter : StatePresenter<ColumnState>() {
     override val input: KClass<ColumnState> = ColumnState::class
 
     override fun PresenterScope.transform(
-        blockId: Identifier,
-        blockModifiers: List<ModifierContract>,
+        id: String,
+        modifier: Modifier,
         state: ColumnState
     ): Layout {
         return with(state) {
             ColumnLayout(
-                id = blockId + id,
-                modifier = modifierMap(input = blockModifiers + modifiers),
+                id = id,
+                modifier = modifier,
                 verticalArrangement = map(verticalArrangement),
                 horizontalAlignment = map(horizontalAlignment),
                 content = content.map(::getLayout),

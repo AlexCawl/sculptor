@@ -13,5 +13,5 @@ public data class StringValueContract(
     @SerialName("id")
     public override val id: Identifier,
     @SerialName("value")
-    public val value: String,
+    public override val value: String,
 ) : ValueContract

@@ -1,23 +1,22 @@
 package org.alexcawl.sculptor.foundation.contract.layout
 
 import kotlinx.serialization.KSerializer
-import org.alexcawl.sculptor.common.contract.Block
+import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.foundation.contract.SerializationTest
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 
-class BoxStateSerializationTest : SerializationTest<Block<BoxState>>(){
-    override val serializer: KSerializer<Block<BoxState>> = Block.serializer(BoxState.serializer())
+class BoxStateSerializationTest : SerializationTest<Section>(){
+    override val serializer: KSerializer<Section> = Section.serializer()
 
-    override val value: Block<BoxState>
-        get() = Block(
+    override val value: Section
+        get() = Section(
             id = "id".id,
             modifiers = listOf(),
-            state = "state1".id,
+            forcedState = "state1".id,
             states = listOf(
                 BoxState(
                     id = "state1".id,
-                    modifiers = listOf(),
                     contentAlignment = Alignment.Center,
                     propagateMinConstraints = true,
                     content = listOf("content1".id, "content2".id),
@@ -29,12 +28,11 @@ class BoxStateSerializationTest : SerializationTest<Block<BoxState>>(){
         get() = """
             {
                 "id": "id",
-                "state": "state1",
                 "modifiers": [],
                 "states": [
                     {
+                        "type": "box@state",
                         "id": "state1",
-                        "modifiers": [],
                         "content_alignment": {
                             "type": "center"
                         },
@@ -44,7 +42,8 @@ class BoxStateSerializationTest : SerializationTest<Block<BoxState>>(){
                             "content2"
                         ]
                     }
-                ]
+                ],
+                "forced": "state1"
             }
         """.trimIndent()
 }

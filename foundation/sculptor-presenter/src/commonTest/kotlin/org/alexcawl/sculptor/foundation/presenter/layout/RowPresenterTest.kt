@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.Block
+import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.StatePresenter
@@ -14,14 +14,13 @@ import org.alexcawl.sculptor.foundation.presenter.StatePresenterTest
 class RowPresenterTest : StatePresenterTest<RowState>() {
     override val statePresenter: StatePresenter<RowState> = RowPresenter()
 
-    override val input: Block<RowState> = Block(
+    override val input: Section = Section(
         id = "row".id,
-        state = "state1".id,
+        forcedState = "state1".id,
         modifiers = emptyList(),
         states = listOf(
             RowState(
                 id = "state1".id,
-                modifiers = emptyList(),
                 horizontalArrangement = Arrangement.Horizontal.Start,
                 verticalAlignment = Alignment.Vertical.Top,
                 content = emptyList(),

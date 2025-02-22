@@ -5,4 +5,6 @@
     <issue id="ConvertToWebp" severity="ignore" />
 
     <issue id="MonochromeLauncherIcon" severity="ignore" />
+
+    <issue id="SyntheticAccessor" severity="ignore" />
 </lint>

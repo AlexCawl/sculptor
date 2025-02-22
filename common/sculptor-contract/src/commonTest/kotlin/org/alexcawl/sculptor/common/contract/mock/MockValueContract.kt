@@ -11,5 +11,5 @@ data class MockValueContract(
     @SerialName("id")
     override val id: Identifier,
     @SerialName("value")
-    val value: Mock,
+    override val value: Mock,
 ) : ValueContract

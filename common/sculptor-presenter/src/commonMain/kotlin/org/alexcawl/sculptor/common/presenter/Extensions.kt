@@ -1,7 +1,6 @@
 package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.layout.Layout
@@ -28,16 +27,16 @@ public inline fun <reified I : Any, reified O : Any> commonPresenter(
  */
 public inline fun <reified SC : StateContract, reified L : Layout> statePresenter(
     stateContract: KClass<SC>,
-    crossinline transformer: PresenterScope.(blockId: Identifier, blockModifiers: List<ModifierContract>, state: SC) -> L,
+    crossinline transformer: PresenterScope.(id: String, modifier: Modifier, state: SC) -> L,
 ) : StatePresenter<SC> {
     return object : StatePresenter<SC>() {
         override val input: KClass<SC> = stateContract
 
         override fun PresenterScope.transform(
-            blockId: Identifier,
-            blockModifiers: List<ModifierContract>,
+            id: String,
+            modifier: Modifier,
             state: SC
-        ): Layout = transformer(blockId, blockModifiers, state)
+        ): Layout = transformer(id, modifier, state)
     }
 }
 

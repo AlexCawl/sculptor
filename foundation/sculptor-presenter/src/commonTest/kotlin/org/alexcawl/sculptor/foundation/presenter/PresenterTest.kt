@@ -1,12 +1,9 @@
 package org.alexcawl.sculptor.foundation.presenter
 
-import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.Scaffold
-import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import org.alexcawl.sculptor.common.presenter.BlockPresenter
 import org.alexcawl.sculptor.common.presenter.Presenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
+import org.alexcawl.sculptor.common.presenter.SectionPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.ColorPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpSizePresenter
@@ -23,14 +20,13 @@ import org.alexcawl.sculptor.foundation.presenter.layout.BoxPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.ColumnPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.RowPresenter
 import org.alexcawl.sculptor.foundation.presenter.modifier.BackgroundPresenter
-import kotlin.reflect.KClass
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 abstract class PresenterTest<I : Any, O : Any> {
     protected open val presenters: List<Presenter<*, *>>
         get() = buildList {
-            add(BlockPresenter)
+            add(SectionPresenter)
 
             add(BasicTextPresenter())
             add(BoxPresenter())
@@ -54,17 +50,9 @@ abstract class PresenterTest<I : Any, O : Any> {
     @OptIn(InternalSculptorApi::class)
     protected open val presenterScope: PresenterScope
         get() = PresenterScope(
-            presenterProvider = { inputClass: KClass<out Any>, outputClass: KClass<out Any> ->
-                presenters
-                    .firstOrNull { it.input == inputClass && it.output == outputClass }
-                    ?: error("No presenter found for $inputClass -> $outputClass")
-            },
-            blockProvider = { _: Identifier ->
-                error("Mock")
-            },
-            valueProvider = { _: Identifier ->
-                error("Mock")
-            },
+            presenters = presenters,
+            sections = emptyList(),
+            values = emptyList(),
         )
 
     abstract val presenter: Presenter<I, O>

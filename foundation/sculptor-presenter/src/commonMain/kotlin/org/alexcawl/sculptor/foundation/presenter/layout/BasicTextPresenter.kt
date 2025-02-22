@@ -1,7 +1,6 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
-import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.ModifierContract
+import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.common.presenter.StatePresenter
@@ -16,14 +15,14 @@ public class BasicTextPresenter : StatePresenter<BasicTextState>() {
     override val input: KClass<BasicTextState> = BasicTextState::class
 
     override fun PresenterScope.transform(
-        blockId: Identifier,
-        blockModifiers: List<ModifierContract>,
+        id: String,
+        modifier: Modifier,
         state: BasicTextState
     ): Layout {
         return with(state) {
             BasicTextLayout(
-                id = blockId + id,
-                modifier = modifierMap(input = blockModifiers + modifiers),
+                id = id,
+                modifier = modifier,
                 text = when (val textType = textType) {
                     is Dynamic -> getValue<StringValueContract>(textType.textIdentifier).value
                     is Static -> textType.text
