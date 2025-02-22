@@ -22,4 +22,5 @@ desktop(
 
 commonMainDependencies {
     implementation(projects.foundation.sculptorClient)
+    implementation(projects.foundation.sculptorServer)
 }
