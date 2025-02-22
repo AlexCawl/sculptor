@@ -3,7 +3,10 @@ package org.alexcawl.sculptor.common.builder.test
 import kotlinx.serialization.KSerializer
 import org.alexcawl.sculptor.common.builder.BuilderTest
 import org.alexcawl.sculptor.common.builder.mock.Mock
+import org.alexcawl.sculptor.common.builder.mock.MockLayoutContract
 import org.alexcawl.sculptor.common.builder.mock.MockModifierContract
+import org.alexcawl.sculptor.common.builder.mock.MockStateContract
+import org.alexcawl.sculptor.common.builder.mock.MockValueContract
 import org.alexcawl.sculptor.common.builder.mock.builder.mockLayout
 import org.alexcawl.sculptor.common.builder.mock.builder.mockState
 import org.alexcawl.sculptor.common.builder.mock.builder.mockValue
@@ -15,22 +18,22 @@ class ScaffoldTest : BuilderTest<Scaffold>() {
     override val serializer: KSerializer<Scaffold> = Scaffold.serializer()
 
     override val value: Scaffold = scaffold {
-        mockValue(
-            id = "testValue",
-            value = Mock(
-                data = "testValue"
-            ),
-        )
-        mockLayout(
-            id = "root",
-            modifier = Style plus MockModifierContract(value = Mock(data = "testValue"))
-        ) {
-            mockState(
-                id = "testState",
-                modifier = Style plus MockModifierContract(value = Mock(data = "testValue"))
-            ) {
-                testValue = Mock(data = "testValue")
+        value(identifier = "value") { identifier ->
+            MockValueContract(
+                id = identifier,
+                value = Mock("value")
+            )
+        }
+
+        layout<MockLayoutContract, MockStateContract>(identifier = "layout") { identifier, modifiers ->
+            state("state1") { identifier, modifiers ->
+                MockStateContract(
+                    id = identifier,
+                    modifiers = modifiers,
+                    value = Mock("value"),
+                )
             }
+            TODO()
         }
     }
 
