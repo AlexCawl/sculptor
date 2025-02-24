@@ -25,6 +25,8 @@ public sealed class Style(
     public companion object : Style(emptyList())
 
     internal class Impl(modifiers: List<ModifierContract>) : Style(modifiers = modifiers)
+
+    override fun toString(): String = modifiers.toString()
 }
 
 internal class ModifierListSerializer : KSerializer<Style> {

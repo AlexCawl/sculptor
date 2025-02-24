@@ -4,7 +4,6 @@ import kotlinx.serialization.KSerializer
 import org.alexcawl.sculptor.common.contract.StateContractTest
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.contract.mock.Mock
-import org.alexcawl.sculptor.common.contract.mock.MockModifierContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
 
 class StateTest : StateContractTest<MockStateContract>() {
@@ -12,13 +11,6 @@ class StateTest : StateContractTest<MockStateContract>() {
 
     override val value: MockStateContract = MockStateContract(
         id = "testState".id,
-        modifiers = listOf(
-            MockModifierContract(
-                value = Mock(
-                    data = "testValue"
-                ),
-            ),
-        ),
         value = Mock(
             data = "testValue",
         ),
@@ -28,14 +20,6 @@ class StateTest : StateContractTest<MockStateContract>() {
         get() = """
             {
                 "id": "testState",
-                "modifiers": [
-                    {
-                        "type": "mock@modifier",
-                        "value": {
-                            "data": "testValue"
-                        }
-                    }
-                ],
                 "value": {
                     "data": "testValue"
                 }

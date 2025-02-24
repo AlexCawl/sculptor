@@ -6,10 +6,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
-import org.alexcawl.sculptor.common.contract.mock.MockLayoutContract
 import org.alexcawl.sculptor.common.contract.mock.MockModifierContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
-import org.alexcawl.sculptor.common.contract.mock.MockValueContract
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -17,17 +15,11 @@ abstract class ContractTest<C> {
     protected open val format: StringFormat = Json {
         prettyPrint = true
         serializersModule = SerializersModule {
-            polymorphic(LayoutContract::class) {
-                subclass(MockLayoutContract::class)
-            }
             polymorphic(StateContract::class) {
                 subclass(MockStateContract::class)
             }
             polymorphic(ModifierContract::class) {
                 subclass(MockModifierContract::class)
-            }
-            polymorphic(ValueContract::class) {
-                subclass(MockValueContract::class)
             }
         }
     }
@@ -40,6 +32,7 @@ abstract class ContractTest<C> {
     fun serializationTest() {
         val actual: String = format.encodeToString(serializer, value)
         val expected: String = string
+        println("actual:\n$actual")
         assertEquals(
             expected = expected,
             actual = actual,

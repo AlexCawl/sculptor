@@ -1,20 +1,16 @@
 package org.alexcawl.sculptor.engine
 
-import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.Scaffold
-import org.alexcawl.sculptor.common.contract.LayoutContract
-import org.alexcawl.sculptor.common.contract.ValueContract
+import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.CommonPresenter
-import org.alexcawl.sculptor.common.presenter.LayoutPresenter
-import org.alexcawl.sculptor.common.presenter.LayoutProvider
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
 import org.alexcawl.sculptor.common.presenter.Presenter
-import org.alexcawl.sculptor.common.presenter.PresenterProvider
 import org.alexcawl.sculptor.common.presenter.PresenterScope
-import org.alexcawl.sculptor.common.presenter.ValueProvider
-import kotlin.reflect.KClass
+import org.alexcawl.sculptor.common.presenter.SectionCompositePresenter
+import org.alexcawl.sculptor.common.presenter.SectionSinglePresenter
+import org.alexcawl.sculptor.common.presenter.StatePresenter
 
 /**
  * TODO: docs
@@ -33,11 +29,6 @@ public sealed interface SculptorPresenter {
     /**
      * TODO: docs
      */
-    public fun findPresenter(inputClass: KClass<out Any>, outputClass: KClass<out Any>): Presenter<*, *>
-
-    /**
-     * TODO: docs
-     */
     public operator fun plus(other: SculptorPresenter): SculptorPresenter
 
     /**
@@ -47,7 +38,7 @@ public sealed interface SculptorPresenter {
         /**
          * TODO: docs
          */
-        public val layoutPresenters: List<LayoutPresenter<*, *>>
+        public val statePresenters: List<StatePresenter<*>>
 
         /**
          * TODO: docs
@@ -63,7 +54,13 @@ public sealed interface SculptorPresenter {
          * TODO: docs
          */
         public val presenters: List<Presenter<*, *>>
-            get() = layoutPresenters + modifierPresenters + commonPresenters
+            get() = buildList {
+                add(SectionSinglePresenter)
+                add(SectionCompositePresenter)
+                addAll(statePresenters)
+                addAll(modifierPresenters)
+                addAll(commonPresenters)
+            }
     }
 
     /**
@@ -83,33 +80,15 @@ private class SculptorPresenterImpl(
     override val presenters: List<Presenter<*, *>>,
 ) : SculptorPresenter {
     override fun transform(scaffold: Scaffold): Result<Layout> = runCatching {
-        val presenterProvider: PresenterProvider = this::findPresenter
-        val layoutProvider: LayoutProvider = { id: Identifier -> findLayout(scaffold, id) }
-        val valueProvider: ValueProvider = { id: Identifier -> findValue(scaffold, id) }
         val presenterScope = PresenterScope(
-            presenterProvider = presenterProvider,
-            layoutProvider = layoutProvider,
-            valueProvider = valueProvider,
+            presenters = presenters,
+            sections = scaffold.sections,
         )
-        val rootLayout: LayoutContract = findLayout(scaffold, scaffold.rootLayoutId)
-        val rootLayoutPresenter: Presenter<*, *> = findPresenter(rootLayout::class, Layout::class)
-        rootLayoutPresenter.internalTransform(presenterScope, rootLayout) as Layout
+        val section: Section = scaffold.section
+        presenterScope.internalMap(section::class, Layout::class, section) as Layout
     }
-
-    override fun findPresenter(
-        inputClass: KClass<out Any>,
-        outputClass: KClass<out Any>
-    ): Presenter<*, *> = presenters
-        .firstOrNull { it.input == inputClass && it.output == outputClass }
-        ?: error("No presenter found for $inputClass -> $outputClass")
 
     override fun plus(other: SculptorPresenter): SculptorPresenter = SculptorPresenterImpl(
         presenters = presenters + other.presenters
     )
-
-    private fun findLayout(scaffold: Scaffold, identifier: Identifier): LayoutContract =
-        scaffold.layouts.find { it.id == identifier } ?: error("No layout found for $identifier")
-
-    private fun findValue(scaffold: Scaffold, identifier: Identifier): ValueContract =
-        scaffold.values.find { it.id == identifier }?: error("No value found for $identifier")
 }

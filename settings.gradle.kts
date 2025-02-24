@@ -41,7 +41,7 @@ include(
     ":common:sculptor-layout",
     ":common:sculptor-presenter",
     ":common:sculptor-renderer",
-//    ":common:sculptor-builder",
+    ":common:sculptor-builder",
     ":common:sculptor-engine",
 )
 
@@ -51,5 +51,6 @@ include(
     ":foundation:sculptor-presenter",
     ":foundation:sculptor-renderer",
     ":foundation:sculptor-client",
+    ":foundation:sculptor-server",
     ":foundation:showroom",
 )

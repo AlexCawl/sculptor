@@ -9,7 +9,6 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.SerializersModuleBuilder
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
-import org.alexcawl.sculptor.common.contract.LayoutContract
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.StateContract
@@ -50,11 +49,6 @@ public sealed interface SculptorContractor {
         /**
          * TODO: docs
          */
-        public val layouts: PolymorphicModuleBuilder<LayoutContract>.() -> Unit
-
-        /**
-         * TODO: docs
-         */
         public val states: PolymorphicModuleBuilder<StateContract>.() -> Unit
 
         /**
@@ -73,7 +67,6 @@ public sealed interface SculptorContractor {
         public fun create(state: State): SculptorContractor = SculptorContractorImpl(
             serializers = SerializersModule {
                 polymorphic(ModifierContract::class, builderAction = state.modifiers)
-                polymorphic(LayoutContract::class, builderAction = state.layouts)
                 polymorphic(StateContract::class, builderAction = state.states)
                 with(state) {
                     this@SerializersModule.contractBuilder()

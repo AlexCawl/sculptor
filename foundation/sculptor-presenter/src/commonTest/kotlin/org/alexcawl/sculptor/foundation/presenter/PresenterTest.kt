@@ -1,11 +1,9 @@
 package org.alexcawl.sculptor.foundation.presenter
 
-import org.alexcawl.sculptor.common.contract.Identifier
-import org.alexcawl.sculptor.common.contract.Scaffold
-import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.presenter.Presenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
+import org.alexcawl.sculptor.common.presenter.SectionSinglePresenter
 import org.alexcawl.sculptor.foundation.presenter.common.ColorPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpSizePresenter
@@ -22,11 +20,14 @@ import org.alexcawl.sculptor.foundation.presenter.layout.BoxPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.ColumnPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.RowPresenter
 import org.alexcawl.sculptor.foundation.presenter.modifier.BackgroundPresenter
-import kotlin.reflect.KClass
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-interface PresenterTest<I : Any, O : Any> {
-    val presenters: List<Presenter<*, *>>
+abstract class PresenterTest<I : Any, O : Any> {
+    protected open val presenters: List<Presenter<*, *>>
         get() = buildList {
+            add(SectionSinglePresenter)
+
             add(BasicTextPresenter())
             add(BoxPresenter())
             add(ColumnPresenter())
@@ -47,33 +48,24 @@ interface PresenterTest<I : Any, O : Any> {
         }
 
     @OptIn(InternalSculptorApi::class)
-    val presenterScope: PresenterScope
+    protected open val presenterScope: PresenterScope
         get() = PresenterScope(
-            presenterProvider = { inputClass: KClass<out Any>, outputClass: KClass<out Any> ->
-                presenters
-                    .firstOrNull { it.input == inputClass && it.output == outputClass }
-                    ?: error("No presenter found for $inputClass -> $outputClass")
-            },
-            layoutProvider = { identifier: Identifier ->
-                scaffold.layouts
-                    .find { it.id == identifier }
-                    ?: error("No layout found for $identifier")
-            },
-            valueProvider = { identifier: Identifier ->
-                scaffold.values
-                    .find { it.id == identifier }
-                    ?: error("No value found for $identifier")
-            },
+            presenters = presenters,
+            sections = emptyList(),
         )
 
-    val scaffold: Scaffold
-        get() = Scaffold(
-            rootLayoutId = "root".id,
-            values = listOf(),
-            layouts = listOf()
+    abstract val presenter: Presenter<I, O>
+    abstract val input: I
+    abstract val expected: O
+
+    @OptIn(InternalSculptorApi::class)
+    @Test
+    fun transformationTest() {
+        val actual = presenter.internalTransform(presenterScope, input)
+        assertEquals(
+            expected = expected,
+            actual = actual,
+            message = "Transformation failed for $input",
         )
-
-    val presenter: Presenter<I, O>
-
-    fun transformationTest()
+    }
 }

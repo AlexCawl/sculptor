@@ -9,9 +9,7 @@ android {
 }
 
 commonMainDependencies {
-    // Private dependencies
-    implementation(projects.common.sculptorCore)
-
     // Public dependencies
+    api(projects.common.sculptorCore)
     api(projects.common.sculptorContract)
 }

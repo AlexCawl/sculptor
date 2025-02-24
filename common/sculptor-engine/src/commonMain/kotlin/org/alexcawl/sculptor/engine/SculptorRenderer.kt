@@ -34,11 +34,6 @@ public sealed interface SculptorRenderer {
     /**
      * TODO: docs
      */
-    public fun findRenderer(layoutClass: KClass<out Layout>): Renderer<Layout>
-
-    /**
-     * TODO: docs
-     */
     public operator fun plus(other: SculptorRenderer): SculptorRenderer
 
     /**
@@ -79,7 +74,7 @@ private class SculptorRendererImpl(
         renderer.internalDraw(scope = rendererScope, layout = layout)
     }
 
-    override fun findRenderer(layoutClass: KClass<out Layout>): Renderer<Layout> =
+    private fun findRenderer(layoutClass: KClass<out Layout>): Renderer<Layout> =
         renderers.find { it.layout == layoutClass } ?: error("No renderer found for $layoutClass")
 
     override fun plus(other: SculptorRenderer): SculptorRenderer = SculptorRendererImpl(

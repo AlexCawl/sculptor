@@ -21,31 +21,31 @@ class ColorSerializationTest(state: State) : SerializationTest<Color>() {
         @Parameterized.Parameters(name = "{0}")
         fun run(): List<State> = listOf(
             State(
-                color = Color("ff000000"),
+                color = Color(content = "ff000000"),
                 colorString = "\"ff000000\"",
             ),
             State(
-                color = Color("ffffff"),
-                colorString = "\"ffffffff\"",
+                color = Color(content = "ffffff"),
+                colorString = "\"ffffff\"",
             ),
             State(
-                color = Color("ff0000"),
-                colorString = "\"ffff0000\"",
+                color = Color(content = "ff0000"),
+                colorString = "\"ff0000\"",
             ),
             State(
-                color = Color("00ff00"),
-                colorString = "\"ff00ff00\"",
+                color = Color(content = "00ff00"),
+                colorString = "\"00ff00\"",
             ),
             State(
-                color = Color("0000ff"),
-                colorString = "\"ff0000ff\"",
+                color = Color(content = "0000ff"),
+                colorString = "\"0000ff\"",
             ),
             State(
-                color = Color("ffff00"),
-                colorString = "\"ffffff00\"",
+                color = Color(content = "ffff00"),
+                colorString = "\"ffff00\"",
             ),
             State(
-                color = Color("00ffff"),
+                color = Color(content = "ff00ffff"),
                 colorString = "\"ff00ffff\"",
             ),
         )

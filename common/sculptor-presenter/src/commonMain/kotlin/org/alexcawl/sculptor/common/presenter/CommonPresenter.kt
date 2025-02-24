@@ -7,7 +7,7 @@ import org.alexcawl.sculptor.common.core.InternalSculptorApi
 /**
  * TODO: docs
  */
-public abstract class CommonPresenter<Input : Any, Output : Any> : Presenter<Input, Output> {
+public abstract class CommonPresenter<Input : Any, Output : Any> : Presenter<Input, Output>() {
     @InternalSculptorApi
     public final override fun internalTransform(scope: PresenterScope, input: Any): Output = scope.transform(input as Input)
 

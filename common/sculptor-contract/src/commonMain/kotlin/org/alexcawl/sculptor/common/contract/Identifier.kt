@@ -8,16 +8,16 @@ import kotlinx.serialization.Serializable
 @JvmInline
 @Serializable
 public value class Identifier(
-    public val id: String,
-)
+    public val value: String,
+) {
+    /**
+     * TODO: docs
+     */
+    public operator fun plus(other: Identifier): String = "${value}@${other.value}"
+}
 
 /**
  * TODO: docs
  */
 public val String.id: Identifier
-    get() = Identifier(id = this)
-
-/**
- * TODO: docs
- */
-public fun combineIds(id1: Identifier, id2: Identifier): String = "${id1.id}@${id2.id}"
+    get() = Identifier(value = this)
