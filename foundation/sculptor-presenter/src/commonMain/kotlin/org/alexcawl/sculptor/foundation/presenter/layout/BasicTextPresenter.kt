@@ -5,9 +5,6 @@ import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.common.presenter.StatePresenter
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState.TextType.Dynamic
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState.TextType.Static
-import org.alexcawl.sculptor.foundation.contract.value.StringValueContract
 import org.alexcawl.sculptor.foundation.layout.BasicTextLayout
 import kotlin.reflect.KClass
 
@@ -23,10 +20,7 @@ public class BasicTextPresenter : StatePresenter<BasicTextState>() {
             BasicTextLayout(
                 id = id,
                 modifier = modifier,
-                text = when (val textType = textType) {
-                    is Dynamic -> getValue<StringValueContract>(textType.textIdentifier).value
-                    is Static -> textType.text
-                },
+                text = text,
                 softWrap = softWrap,
                 maxLines = maxLines,
                 minLines = minLines,

@@ -10,29 +10,12 @@ import org.alexcawl.sculptor.common.contract.StateContract
 public data class BasicTextState(
     @SerialName("id")
     override val id: Identifier,
+    @SerialName("text")
+    val text: String,
     @SerialName("soft_wrap")
     public val softWrap: Boolean,
     @SerialName("max_lines")
     public val maxLines: Int,
     @SerialName("min_lines")
     public val minLines: Int,
-    @SerialName("text")
-    public val textType: TextType,
-) : StateContract {
-    @Serializable
-    public sealed interface TextType {
-        @Serializable
-        @SerialName("static")
-        public data class Static(
-            @SerialName("text")
-            val text: String,
-        ) : TextType
-
-        @Serializable
-        @SerialName("dynamic")
-        public data class Dynamic(
-            @SerialName("text_identifier")
-            val textIdentifier: Identifier,
-        ) : TextType
-    }
-}
+) : StateContract

@@ -28,6 +28,7 @@ public fun Sculptor(
         val sculptorScreen: Result<SculptorScreen> = withContext(Dispatchers.Default) {
             sculptorState.launch(mode = launchMode)
         }
+        println(sculptorScreen)
         uiState = when (val value = sculptorScreen.getOrNull()) {
             null -> SculptorUiState.Error
             else -> SculptorUiState.Content(value)

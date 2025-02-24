@@ -7,7 +7,6 @@ import org.alexcawl.sculptor.common.builder.mock.MockModifierContract
 import org.alexcawl.sculptor.common.builder.mock.MockStateContract
 import org.alexcawl.sculptor.common.builder.scaffold
 import org.alexcawl.sculptor.common.contract.Scaffold
-import org.alexcawl.sculptor.common.contract.Style
 import org.alexcawl.sculptor.common.contract.id
 
 class ScaffoldTest : BuilderTest<Scaffold>() {
@@ -60,9 +59,9 @@ class ScaffoldTest : BuilderTest<Scaffold>() {
     override val string: String
         get() = """
             {
-                "values": [],
                 "sections": [
                     {
+                        "type": "composite",
                         "id": "root",
                         "modifiers": [],
                         "states": [
@@ -84,6 +83,7 @@ class ScaffoldTest : BuilderTest<Scaffold>() {
                         "forced": "state2"
                     },
                     {
+                        "type": "single",
                         "id": "not-root",
                         "modifiers": [
                             {
@@ -93,28 +93,25 @@ class ScaffoldTest : BuilderTest<Scaffold>() {
                                 }
                             }
                         ],
-                        "states": [
-                            {
-                                "type": "mock@state",
-                                "id": "state3",
-                                "value": {
-                                    "data": "state3"
-                                }
+                        "state": {
+                            "type": "mock@state",
+                            "id": "state3",
+                            "value": {
+                                "data": "state3"
                             }
-                        ]
+                        }
                     },
                     {
+                        "type": "single",
                         "id": "lol-section",
                         "modifiers": [],
-                        "states": [
-                            {
-                                "type": "mock@state",
-                                "id": "state4",
-                                "value": {
-                                    "data": "state4"
-                                }
+                        "state": {
+                            "type": "mock@state",
+                            "id": "state4",
+                            "value": {
+                                "data": "state4"
                             }
-                        ]
+                        }
                     }
                 ]
             }

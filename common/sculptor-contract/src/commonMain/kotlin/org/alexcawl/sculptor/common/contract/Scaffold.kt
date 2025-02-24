@@ -7,9 +7,6 @@ import org.alexcawl.sculptor.common.core.Tag
 
 @Serializable
 public data class Scaffold(
-    @SerialName("values")
-    public val values: List<ValueContract>,
-
     @SerialName("sections")
     public val sections: List<Section>,
 

@@ -8,12 +8,12 @@ import org.alexcawl.sculptor.common.contract.mock.Mock
 import org.alexcawl.sculptor.common.contract.mock.MockModifierContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
 
-class BlockTest : ContractTest<Section>() {
-    override val serializer: KSerializer<Section>
-        get() = Section.serializer()
+class SectionTest : ContractTest<Section.Composite>() {
+    override val serializer: KSerializer<Section.Composite>
+        get() = Section.Composite.serializer()
 
-    override val value: Section
-        get() = Section(
+    override val value: Section.Composite
+        get() = Section.Composite(
             id = "testId".id,
             forcedState = "testState".id,
             modifiers = listOf(

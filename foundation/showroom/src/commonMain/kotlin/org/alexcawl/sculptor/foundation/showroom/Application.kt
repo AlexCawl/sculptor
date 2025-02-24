@@ -3,7 +3,6 @@ package org.alexcawl.sculptor.foundation.showroom
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import org.alexcawl.sculptor.common.builder.scaffold
-import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.Scaffold
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.engine.Sculptor
@@ -14,7 +13,6 @@ import org.alexcawl.sculptor.foundation.client.FoundationSculptor
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 import org.alexcawl.sculptor.foundation.contract.common.Arrangement
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
-import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState.TextType
 import org.alexcawl.sculptor.foundation.contract.layout.RowState
 
 public val response: String = """
@@ -94,9 +92,7 @@ public val scaffold: Scaffold = scaffold {
             softWrap = false,
             maxLines = 1,
             minLines = 1,
-            textType = TextType.Static(
-                text = "Hello World 1"
-            ),
+            text = "Hello World 1",
         )
     }
     singleSection("text2") {
@@ -105,9 +101,7 @@ public val scaffold: Scaffold = scaffold {
             softWrap = false,
             maxLines = 1,
             minLines = 1,
-            textType = TextType.Static(
-                text = "Hello World 2"
-            )
+            text = "Hello World 2",
         )
     }
 }

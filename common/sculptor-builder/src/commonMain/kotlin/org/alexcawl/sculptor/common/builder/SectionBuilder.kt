@@ -35,10 +35,17 @@ private class SectionBuilderImpl(
 
     override fun <SC : StateContract> state(builder: () -> SC) = state(builder())
 
-    override fun build(): Section = Section(
-        id = identifier,
-        modifiers = modifiers,
-        forcedState = forcedState,
-        states = _states,
-    )
+    override fun build(): Section = when (_states.size == 1) {
+        true -> Section.Single(
+            id = identifier,
+            modifiers = modifiers,
+            state = _states.first(),
+        )
+        false -> Section.Composite(
+            id = identifier,
+            modifiers = modifiers,
+            states = _states,
+            forcedState = forcedState,
+        )
+    }
 }

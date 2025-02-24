@@ -3,7 +3,7 @@ package org.alexcawl.sculptor.foundation.presenter
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.presenter.Presenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
-import org.alexcawl.sculptor.common.presenter.SectionPresenter
+import org.alexcawl.sculptor.common.presenter.SectionSinglePresenter
 import org.alexcawl.sculptor.foundation.presenter.common.ColorPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpSizePresenter
@@ -26,7 +26,7 @@ import kotlin.test.assertEquals
 abstract class PresenterTest<I : Any, O : Any> {
     protected open val presenters: List<Presenter<*, *>>
         get() = buildList {
-            add(SectionPresenter)
+            add(SectionSinglePresenter)
 
             add(BasicTextPresenter())
             add(BoxPresenter())
@@ -52,7 +52,6 @@ abstract class PresenterTest<I : Any, O : Any> {
         get() = PresenterScope(
             presenters = presenters,
             sections = emptyList(),
-            values = emptyList(),
         )
 
     abstract val presenter: Presenter<I, O>

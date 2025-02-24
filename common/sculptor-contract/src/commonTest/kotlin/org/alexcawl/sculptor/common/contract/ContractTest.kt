@@ -8,7 +8,6 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 import org.alexcawl.sculptor.common.contract.mock.MockModifierContract
 import org.alexcawl.sculptor.common.contract.mock.MockStateContract
-import org.alexcawl.sculptor.common.contract.mock.MockValueContract
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -21,9 +20,6 @@ abstract class ContractTest<C> {
             }
             polymorphic(ModifierContract::class) {
                 subclass(MockModifierContract::class)
-            }
-            polymorphic(ValueContract::class) {
-                subclass(MockValueContract::class)
             }
         }
     }

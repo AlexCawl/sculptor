@@ -8,14 +8,14 @@ import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.presenter.Presenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.common.presenter.PresenterTest
-import org.alexcawl.sculptor.common.presenter.SectionPresenter
+import org.alexcawl.sculptor.common.presenter.SectionCompositePresenter
 import org.alexcawl.sculptor.common.presenter.StatePresenter
 import org.alexcawl.sculptor.common.presenter.mock.Mock
 import org.alexcawl.sculptor.common.presenter.mock.MockLayout
 import org.alexcawl.sculptor.common.presenter.mock.MockStateContract
 import org.alexcawl.sculptor.common.presenter.statePresenter
 
-class SectionPresenterTest : PresenterTest<Section, Layout>() {
+class SectionPresenterTest : PresenterTest<Section.Composite, Layout>() {
     private val mockPresenter: StatePresenter<MockStateContract>
         get() = statePresenter(
             stateContract = MockStateContract::class,
@@ -33,13 +33,12 @@ class SectionPresenterTest : PresenterTest<Section, Layout>() {
         get() = PresenterScope(
             presenters = listOf(mockPresenter),
             sections = listOf(input),
-            values = emptyList(),
         )
 
-    override val presenter: Presenter<Section, Layout> = SectionPresenter
+    override val presenter: Presenter<Section.Composite, Layout> = SectionCompositePresenter
 
-    override val input: Section
-        get() = Section(
+    override val input: Section.Composite
+        get() = Section.Composite(
             id = "test".id,
             forcedState = "state1".id,
             modifiers = listOf(),

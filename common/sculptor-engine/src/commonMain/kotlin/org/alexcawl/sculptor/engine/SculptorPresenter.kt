@@ -8,7 +8,8 @@ import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
 import org.alexcawl.sculptor.common.presenter.Presenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
-import org.alexcawl.sculptor.common.presenter.SectionPresenter
+import org.alexcawl.sculptor.common.presenter.SectionCompositePresenter
+import org.alexcawl.sculptor.common.presenter.SectionSinglePresenter
 import org.alexcawl.sculptor.common.presenter.StatePresenter
 
 /**
@@ -53,7 +54,13 @@ public sealed interface SculptorPresenter {
          * TODO: docs
          */
         public val presenters: List<Presenter<*, *>>
-            get() = statePresenters + modifierPresenters + commonPresenters + SectionPresenter
+            get() = buildList {
+                add(SectionSinglePresenter)
+                add(SectionCompositePresenter)
+                addAll(statePresenters)
+                addAll(modifierPresenters)
+                addAll(commonPresenters)
+            }
     }
 
     /**
@@ -76,7 +83,6 @@ private class SculptorPresenterImpl(
         val presenterScope = PresenterScope(
             presenters = presenters,
             sections = scaffold.sections,
-            values = scaffold.values,
         )
         val section: Section = scaffold.section
         presenterScope.internalMap(section::class, Layout::class, section) as Layout

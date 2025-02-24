@@ -10,7 +10,6 @@ abstract class PresenterTest<I : Any, O : Any> {
         get() = PresenterScope(
             presenters = emptyList(),
             sections = emptyList(),
-            values = emptyList(),
         )
 
     abstract val presenter: Presenter<I, O>

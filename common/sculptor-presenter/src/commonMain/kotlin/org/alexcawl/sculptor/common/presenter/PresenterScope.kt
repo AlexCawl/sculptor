@@ -1,5 +1,3 @@
-@file:Suppress("NAME_SHADOWING")
-
 package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
@@ -7,7 +5,6 @@ import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.common.contract.ValueContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.core.Logger
 import org.alexcawl.sculptor.common.core.Tag
@@ -27,22 +24,15 @@ public typealias SectionProvider = (id: Identifier) -> Section
 /**
  * TODO: docs
  */
-public typealias ValueProvider = (id: Identifier) -> ValueContract
-
-/**
- * TODO: docs
- */
 @OptIn(InternalSculptorApi::class)
 public class PresenterScope private constructor(
     private val presenterProvider: PresenterProvider,
     private val sectionProvider: SectionProvider,
-    private val valueProvider: ValueProvider,
 ) {
     @InternalSculptorApi
     public constructor(
         presenters: List<Presenter<*, *>>,
         sections: List<Section>,
-        values: List<ValueContract>,
     ) : this(
         presenterProvider = { inputClass: KClass<out Any>, outputClass: KClass<out Any> ->
             presenters
@@ -60,14 +50,6 @@ public class PresenterScope private constructor(
                     message = "Cannot resolve section for id $identifier",
                 )
         },
-        valueProvider = { identifier ->
-            values
-                .find { it.id == identifier }
-                ?: Logger.e(
-                    tag = Tag.PRESENTER_SCOPE,
-                    message = "Cannot resolve value for id $identifier",
-                )
-        }
     )
 
     /**
@@ -97,27 +79,6 @@ public class PresenterScope private constructor(
         initial = Modifier,
         operation = Modifier::then,
     )
-
-    /**
-     * TODO: docs
-     */
-    public inline fun <reified Out : Any> getValue(
-        id: Identifier,
-    ): Out {
-        val valueContract: ValueContract = internalGetValue(id)
-        return valueContract.value as? Out
-            ?: Logger.e(
-                tag = Tag.PRESENTER_SCOPE,
-                message = "Cannot resolve value with id $id. Expected ${Out::class} but it was ${valueContract::class} instead"
-            )
-    }
-
-    /**
-     * TODO: docs
-     */
-    public inline fun <reified Out : Any> safeGetValue(
-        id: Identifier,
-    ): Result<Out> = runCatching { getValue<Out>(id = id) }
 
     /**
      * TODO: docs
@@ -163,9 +124,4 @@ public class PresenterScope private constructor(
         scope = this,
         input = value,
     )
-
-    @InternalSculptorApi
-    public fun internalGetValue(
-        identifier: Identifier
-    ): ValueContract = valueProvider(identifier)
 }

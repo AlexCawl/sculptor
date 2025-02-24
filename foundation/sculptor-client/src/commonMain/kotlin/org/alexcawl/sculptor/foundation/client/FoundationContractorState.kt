@@ -5,7 +5,6 @@ import kotlinx.serialization.modules.SerializersModuleBuilder
 import kotlinx.serialization.modules.subclass
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.common.contract.ValueContract
 import org.alexcawl.sculptor.engine.SculptorContractor
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
 import org.alexcawl.sculptor.foundation.contract.layout.BoxState
@@ -33,12 +32,6 @@ import org.alexcawl.sculptor.foundation.contract.modifier.WidthIn
 import org.alexcawl.sculptor.foundation.contract.modifier.WrapContentHeight
 import org.alexcawl.sculptor.foundation.contract.modifier.WrapContentSize
 import org.alexcawl.sculptor.foundation.contract.modifier.WrapContentWidth
-import org.alexcawl.sculptor.foundation.contract.value.BooleanValueContract
-import org.alexcawl.sculptor.foundation.contract.value.DoubleValueContract
-import org.alexcawl.sculptor.foundation.contract.value.FloatValueContract
-import org.alexcawl.sculptor.foundation.contract.value.IntValueContract
-import org.alexcawl.sculptor.foundation.contract.value.LongValueContract
-import org.alexcawl.sculptor.foundation.contract.value.StringValueContract
 
 /**
  * TODO: docs
@@ -72,15 +65,6 @@ public object FoundationContractorState : SculptorContractor.State {
         subclass(Width::class)
         subclass(WidthIn::class)
         subclass(WrapContentWidth::class)
-    }
-
-    override val values: PolymorphicModuleBuilder<ValueContract>.() -> Unit = {
-        subclass(BooleanValueContract::class)
-        subclass(DoubleValueContract::class)
-        subclass(FloatValueContract::class)
-        subclass(IntValueContract::class)
-        subclass(LongValueContract::class)
-        subclass(StringValueContract::class)
     }
 
     override val states: PolymorphicModuleBuilder<StateContract>.() -> Unit = {
