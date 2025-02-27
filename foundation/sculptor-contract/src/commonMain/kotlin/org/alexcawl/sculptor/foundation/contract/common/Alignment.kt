@@ -7,12 +7,15 @@ import kotlinx.serialization.Serializable
 public sealed interface Alignment {
     @Serializable
     public sealed interface Horizontal {
+        @Serializable
         @SerialName("horizontal@start")
         public data object Start : Horizontal
 
+        @Serializable
         @SerialName("horizontal@center")
         public data object Center : Horizontal
 
+        @Serializable
         @SerialName("horizontal@end")
         public data object End : Horizontal
     }
