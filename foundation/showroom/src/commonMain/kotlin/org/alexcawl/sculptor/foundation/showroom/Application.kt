@@ -4,6 +4,7 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import org.alexcawl.sculptor.common.builder.scaffold
 import org.alexcawl.sculptor.common.contract.Scaffold
+import org.alexcawl.sculptor.common.contract.Style
 import org.alexcawl.sculptor.common.contract.id
 import org.alexcawl.sculptor.engine.Sculptor
 import org.alexcawl.sculptor.engine.SculptorContractor
@@ -12,8 +13,14 @@ import org.alexcawl.sculptor.foundation.client.FoundationContractorState
 import org.alexcawl.sculptor.foundation.client.FoundationSculptor
 import org.alexcawl.sculptor.foundation.contract.common.Alignment
 import org.alexcawl.sculptor.foundation.contract.common.Arrangement
+import org.alexcawl.sculptor.foundation.contract.common.Color
+import org.alexcawl.sculptor.foundation.contract.common.Shape
+import org.alexcawl.sculptor.foundation.contract.common.dp
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
-import org.alexcawl.sculptor.foundation.contract.layout.RowState
+import org.alexcawl.sculptor.foundation.contract.layout.ColumnState
+import org.alexcawl.sculptor.foundation.contract.modifier.Background
+import org.alexcawl.sculptor.foundation.contract.modifier.Padding
+import org.alexcawl.sculptor.foundation.contract.modifier.Size
 
 public val response: String = """
     {
@@ -79,37 +86,49 @@ public val response: String = """
 
 public val scaffold: Scaffold = scaffold {
     singleSection("root") {
-        RowState(
+        ColumnState(
             id = "1".id,
-            horizontalArrangement = Arrangement.Horizontal.Start,
-            verticalAlignment = Alignment.Vertical.Top,
-            content = listOf("text1".id, "text2".id)
+            verticalArrangement = Arrangement.Vertical.SpacedBy(
+                space = 16.dp,
+                alignment = Alignment.Vertical.Top,
+            ),
+            horizontalAlignment = Alignment.Horizontal.Center,
+            content = (0 .. 9).map { "text$it".id }
         )
     }
-    singleSection("text1") {
-        BasicTextState(
-            id = "1".id,
-            softWrap = false,
-            maxLines = 1,
-            minLines = 1,
-            text = "Hello World 1",
-        )
-    }
-    singleSection("text2") {
-        BasicTextState(
-            id = "1".id,
-            softWrap = false,
-            maxLines = 1,
-            minLines = 1,
-            text = "Hello World 2",
-        )
+    (0 .. 9).forEach {
+        singleSection(
+            id = "text$it",
+            modifiers = Style plus Size(
+                width = 200.dp,
+                height = 72.dp,
+            ) plus Background(
+                shape = Shape.RoundedCorner.DPixel(
+                    topStart = 16.dp,
+                    topEnd = 16.dp,
+                    bottomStart = 16.dp,
+                    bottomEnd = 16.dp,
+                ),
+                color = Color.RGB("00FFFF")
+            ) plus Padding(
+                all = 16.dp
+            )
+        ) {
+            BasicTextState(
+                id = "1".id,
+                softWrap = false,
+                maxLines = 1,
+                minLines = 1,
+                text = "Hello World $it",
+            )
+        }
     }
 }
 
 @Composable
 public fun Application() {
-    val launchMode = scaffold.asLaunchMode()
-    println(SculptorContractor.create(FoundationContractorState).encode(scaffold).getOrNull())
+    val string = SculptorContractor.create(FoundationContractorState).encode(scaffold).getOrThrow()
+    val launchMode = string.asLaunchMode()
     Sculptor(
         sculptorState = FoundationSculptor(),
         launchMode = launchMode,

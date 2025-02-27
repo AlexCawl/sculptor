@@ -2,6 +2,7 @@ package org.alexcawl.sculptor.foundation.presenter.common
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.RectangleShape
 import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
@@ -44,14 +45,14 @@ public class ShapePresenter : CommonPresenter<SculptorShape, ComposeShape>() {
 
     private fun PresenterScope.transformRounded(input: SculptorShape.RoundedCorner): ComposeShape {
         return when (input) {
-            is SculptorShape.RoundedCorner.DPixel -> CutCornerShape(
+            is SculptorShape.RoundedCorner.DPixel -> RoundedCornerShape(
                 topStart = map<SculptorDp, ComposeDp>(input.topStart),
                 topEnd = map<SculptorDp, ComposeDp>(input.topEnd),
                 bottomEnd = map<SculptorDp, ComposeDp>(input.bottomEnd),
                 bottomStart = map<SculptorDp, ComposeDp>(input.bottomStart),
             )
 
-            is SculptorShape.RoundedCorner.Percent -> CutCornerShape(
+            is SculptorShape.RoundedCorner.Percent -> RoundedCornerShape(
                 topStartPercent = input.topStart,
                 topEndPercent = input.topEnd,
                 bottomEndPercent = input.bottomEnd,

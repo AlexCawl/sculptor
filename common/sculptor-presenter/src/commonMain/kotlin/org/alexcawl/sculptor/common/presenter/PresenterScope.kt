@@ -75,7 +75,9 @@ public class PresenterScope private constructor(
      */
     public fun buildModifier(
         modifiers: List<ModifierContract>
-    ): Modifier = mapEach<ModifierContract, Modifier>(input = modifiers).fold(
+    ): Modifier = modifiers.map {
+        internalMap(it::class, Modifier::class, it) as Modifier
+    }.fold(
         initial = Modifier,
         operation = Modifier::then,
     )
