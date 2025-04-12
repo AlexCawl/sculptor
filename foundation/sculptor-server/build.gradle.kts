@@ -11,7 +11,7 @@ android {
 commonMainDependencies {
     // Public dependencies [common]
     api(projects.common.sculptorContract)
-    api(projects.common.sculptorBuilder)
+//    api(projects.common.sculptorBuilder)
 
     // Public dependencies [foundation]
     api(projects.foundation.sculptorContract)
