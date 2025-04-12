@@ -4,7 +4,6 @@ package org.alexcawl.sculptor.foundation.client
 
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.renderer.Renderer
-import org.alexcawl.sculptor.engine.SculptorRenderer
 import org.alexcawl.sculptor.foundation.renderer.BasicTextRenderer
 import org.alexcawl.sculptor.foundation.renderer.BoxRenderer
 import org.alexcawl.sculptor.foundation.renderer.ColumnRenderer

@@ -3,25 +3,30 @@ package org.alexcawl.sculptor.foundation.renderer
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import org.alexcawl.sculptor.common.renderer.Renderer
 import org.alexcawl.sculptor.common.renderer.RendererScope
-import org.alexcawl.sculptor.foundation.layout.BasicTextLayout
+import org.alexcawl.sculptor.foundation.layout.BasicTextUiState
 import kotlin.reflect.KClass
 
 @Stable
-public class BasicTextRenderer : Renderer<BasicTextLayout>() {
-    override val layout: KClass<BasicTextLayout> = BasicTextLayout::class
+public class BasicTextRenderer : Renderer<BasicTextUiState>() {
+    override val state: KClass<BasicTextUiState> = BasicTextUiState::class
 
     @Composable
-    override fun RendererScope.Draw(layout: BasicTextLayout) {
+    override fun Draw(
+        scope: RendererScope,
+        id: String,
+        modifier: Modifier,
+        state: BasicTextUiState
+    ) {
         BasicText(
-            modifier = layout.modifier,
-            text = layout.text,
-            softWrap = layout.softWrap,
-            maxLines = layout.maxLines,
-            minLines = layout.minLines,
+            modifier = modifier.testTag(tag = id),
+            text = state.text,
+            softWrap = state.softWrap,
+            maxLines = state.maxLines,
+            minLines = state.minLines,
         )
     }
-
-    override fun RendererScope.Measure(layout: BasicTextLayout): Boolean = true
 }

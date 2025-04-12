@@ -3,7 +3,6 @@ package org.alexcawl.sculptor.foundation.showroom
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import org.alexcawl.sculptor.engine.Sculptor
-import org.alexcawl.sculptor.engine.SculptorContractor
 import org.alexcawl.sculptor.engine.asLaunchMode
 import org.alexcawl.sculptor.foundation.client.FoundationContractorState
 import org.alexcawl.sculptor.foundation.client.FoundationSculptor

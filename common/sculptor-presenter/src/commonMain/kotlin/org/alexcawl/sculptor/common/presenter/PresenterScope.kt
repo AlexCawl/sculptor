@@ -1,129 +1,119 @@
 package org.alexcawl.sculptor.common.presenter
 
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import org.alexcawl.sculptor.common.contract.Component
 import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.ModifierContract
-import org.alexcawl.sculptor.common.contract.Section
 import org.alexcawl.sculptor.common.contract.StateContract
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
-import org.alexcawl.sculptor.common.core.Logger
-import org.alexcawl.sculptor.common.core.Tag
 import org.alexcawl.sculptor.common.layout.Layout
+import org.alexcawl.sculptor.common.layout.UiState
 import kotlin.reflect.KClass
 
-/**
- * TODO: docs
- */
-public typealias PresenterProvider = (inputClass: KClass<out Any>, outputClass: KClass<out Any>) -> Presenter<*, *>
+public sealed interface PresenterScope {
+    public suspend fun map(
+        inputClass: KClass<out Any>,
+        outputClass: KClass<out Any>,
+        value: Any
+    ): Any
 
-/**
- * TODO: docs
- */
-public typealias SectionProvider = (id: Identifier) -> Section
+    public suspend fun layout(input: List<Identifier>): List<Layout>
 
-/**
- * TODO: docs
- */
-@OptIn(InternalSculptorApi::class)
-public class PresenterScope private constructor(
-    private val presenterProvider: PresenterProvider,
-    private val sectionProvider: SectionProvider,
-) {
-    @InternalSculptorApi
-    public constructor(
-        presenters: List<Presenter<*, *>>,
-        sections: List<Section>,
-    ) : this(
-        presenterProvider = { inputClass: KClass<out Any>, outputClass: KClass<out Any> ->
-            presenters
-                .find { it.input == inputClass && it.output == outputClass }
-                ?: Logger.e(
-                    tag = Tag.PRESENTER_SCOPE,
-                    message = "Cannot resolve presenter for input $inputClass and output $outputClass",
-                )
-        },
-        sectionProvider = { identifier ->
-            sections
-                .find { it.id == identifier }
-                ?: Logger.e(
-                    tag = Tag.PRESENTER_SCOPE,
-                    message = "Cannot resolve section for id $identifier",
-                )
-        },
-    )
+    public companion object {
+        public operator fun invoke(
+            presenterProvider: PresenterProvider,
+            componentProvider: ComponentProvider,
+            stateCreateCallback: StateCreateCallback,
+        ): PresenterScope = PresenterScopeImpl(
+            presenterProvider = presenterProvider,
+            componentProvider = componentProvider,
+            stateCreateCallback = stateCreateCallback,
+        )
+    }
+}
 
-    /**
-     * TODO: docs
-     */
-    public inline fun <reified In : Any, reified Out : Any> map(
-        input: In,
-    ): Out = this.internalMap(
+public suspend inline fun <reified In : Any, reified Out : Any> PresenterScope.map(input: In): Out {
+    return this.map(
         inputClass = In::class,
         outputClass = Out::class,
-        value = input,
+        value = input
     ) as Out
+}
 
-    /**
-     * TODO: docs
-     */
-    public inline fun <reified In : Any, reified Out : Any> mapEach(
-        input: Iterable<In>,
-    ): List<Out> = input.map(transform = ::map)
+public suspend inline fun <reified In : Any, reified Out : Any> PresenterScope.mapEach(input: List<In>): List<Out> {
+    return coroutineScope {
+        input.map { inputItem: In ->
+            async(start = CoroutineStart.LAZY) {
+                this@mapEach.map(
+                    inputClass = inputItem::class,
+                    outputClass = Out::class,
+                    value = inputItem
+                ) as Out
+            }
+        }.awaitAll()
+    }
+}
 
-    /**
-     * TODO: docs
-     */
-    public fun buildModifier(
-        modifiers: List<ModifierContract>
-    ): Modifier = modifiers.map {
-        internalMap(it::class, Modifier::class, it) as Modifier
+public suspend fun PresenterScope.mapModifier(input: List<ModifierContract>): Modifier {
+    return coroutineScope {
+        input.map { inputModifier: ModifierContract ->
+            async(start = CoroutineStart.LAZY) {
+                this@mapModifier.map(
+                    inputClass = inputModifier::class,
+                    outputClass = Modifier::class,
+                    value = inputModifier
+                ) as Modifier
+            }
+        }.awaitAll()
     }.fold(
         initial = Modifier,
         operation = Modifier::then,
     )
+}
 
-    /**
-     * TODO: docs
-     */
-    public fun getLayout(
-        identifier: Identifier,
-    ): Layout {
-        val section: Section = sectionProvider(identifier)
-        val modifiers: List<ModifierContract> = section.modifiers
-        val state: StateContract = section.state
-        val statePresenter: Presenter<*, *> = presenterProvider(state::class, Layout::class)
-        if (statePresenter !is StatePresenter<*>) {
-            Logger.e(
-                tag = Tag.PRESENTER_SCOPE,
-                message = "Cannot resolve state presenter for state ${state::class}. Expected StatePresenter but it was ${statePresenter::class} instead"
-            )
-        }
-        return statePresenter.internalTransform(
-            scope = this,
-            input = StatePresenter.Bundle(
-                id = section.id + identifier,
-                modifiers = buildModifier(
-                    modifiers = modifiers,
-                ),
-                state = state,
-            ),
-        )
-    }
-
-    /**
-     * TODO: docs
-     */
-    public fun safeGetLayout(
-        identifier: Identifier,
-    ): Result<Layout> = runCatching { getLayout(identifier) }
-
-    @InternalSculptorApi
-    public fun internalMap(
+private class PresenterScopeImpl(
+    private val presenterProvider: PresenterProvider,
+    private val componentProvider: ComponentProvider,
+    private val stateCreateCallback: StateCreateCallback,
+) : PresenterScope {
+    @OptIn(InternalSculptorApi::class)
+    override suspend fun map(
         inputClass: KClass<out Any>,
         outputClass: KClass<out Any>,
         value: Any
-    ): Any = presenterProvider(inputClass, outputClass).internalTransform(
+    ): Any = presenterProvider(
+        inputClass = inputClass,
+        outputClass = outputClass
+    ).transform(
         scope = this,
-        input = value,
+        any = value,
     )
+
+    @OptIn(InternalSculptorApi::class)
+    override suspend fun layout(input: List<Identifier>): List<Layout> = coroutineScope {
+        input.map { identifier: Identifier ->
+            async(start = CoroutineStart.LAZY) {
+                val component: Component = componentProvider(id = identifier)
+                val modifiers: List<ModifierContract> = component.modifiers
+                val stateContract: StateContract = component.state
+                val uiState = presenterProvider(
+                    inputClass = stateContract::class,
+                    outputClass = UiState::class
+                ).transform(
+                    scope = this@PresenterScopeImpl,
+                    any = stateContract
+                ) as UiState
+                stateCreateCallback(uiState)
+                Layout(
+                    id = (component.id + stateContract.id).value,
+                    modifier = mapModifier(modifiers),
+                    uiState = uiState,
+                )
+            }
+        }.awaitAll()
+    }
 }

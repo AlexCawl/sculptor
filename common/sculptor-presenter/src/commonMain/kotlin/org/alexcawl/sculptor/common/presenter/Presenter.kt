@@ -3,20 +3,16 @@ package org.alexcawl.sculptor.common.presenter
 import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import kotlin.reflect.KClass
 
-/**
- * TODO: docs
- */
-public sealed class Presenter<Input : Any, Output : Any> {
-    /**
-     * TODO: docs
-     */
+public abstract class Presenter<Input : Any, Output : Any> {
     public abstract val input: KClass<Input>
 
-    /**
-     * TODO: docs
-     */
     public abstract val output: KClass<Output>
 
     @InternalSculptorApi
-    public abstract fun internalTransform(scope: PresenterScope, input: Any): Output
+    public suspend fun transform(scope: PresenterScope, any: Any): Output {
+        @Suppress("UNCHECKED_CAST")
+        return scope.transform(input = any as Input)
+    }
+
+    public abstract suspend fun PresenterScope.transform(input: Input): Output
 }

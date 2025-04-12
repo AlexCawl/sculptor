@@ -5,7 +5,6 @@ import kotlinx.serialization.modules.SerializersModuleBuilder
 import kotlinx.serialization.modules.subclass
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.engine.SculptorContractor
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
 import org.alexcawl.sculptor.foundation.contract.layout.BoxState
 import org.alexcawl.sculptor.foundation.contract.layout.ColumnState

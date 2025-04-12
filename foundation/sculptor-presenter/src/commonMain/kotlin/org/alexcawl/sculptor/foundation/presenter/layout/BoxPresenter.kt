@@ -1,24 +1,22 @@
 package org.alexcawl.sculptor.foundation.presenter.layout
 
-import androidx.compose.ui.Modifier
-import org.alexcawl.sculptor.common.layout.Layout
+import org.alexcawl.sculptor.common.layout.UiState
 import org.alexcawl.sculptor.common.presenter.PresenterScope
 import org.alexcawl.sculptor.common.presenter.StatePresenter
+import org.alexcawl.sculptor.common.presenter.map
 import org.alexcawl.sculptor.foundation.contract.layout.BoxState
-import org.alexcawl.sculptor.foundation.layout.BoxLayout
+import org.alexcawl.sculptor.foundation.layout.BoxUiState
 import kotlin.reflect.KClass
 
 public class BoxPresenter : StatePresenter<BoxState>() {
     override val input: KClass<BoxState> = BoxState::class
 
-    override fun PresenterScope.transform(id: String, modifier: Modifier, state: BoxState): Layout {
-        return with(state) {
-            BoxLayout(
-                id = id,
-                modifier = modifier,
+    public override suspend fun PresenterScope.transform(input: BoxState): UiState {
+        return with(input) {
+            BoxUiState(
                 contentAlignment = map(contentAlignment),
                 propagateMinConstraints = propagateMinConstraints,
-                content = content.map(::getLayout),
+                content = layout(content),
             )
         }
     }

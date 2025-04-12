@@ -3,29 +3,34 @@ package org.alexcawl.sculptor.foundation.renderer
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.renderer.Renderer
 import org.alexcawl.sculptor.common.renderer.RendererScope
-import org.alexcawl.sculptor.foundation.layout.BoxLayout
+import org.alexcawl.sculptor.foundation.layout.BoxUiState
 import kotlin.reflect.KClass
 
 @Stable
-public class BoxRenderer : Renderer<BoxLayout>() {
-    override val layout: KClass<BoxLayout> = BoxLayout::class
+public class BoxRenderer : Renderer<BoxUiState>() {
+    override val state: KClass<BoxUiState> = BoxUiState::class
 
     @Composable
-    override fun RendererScope.Draw(layout: BoxLayout) {
+    public override fun Draw(
+        scope: RendererScope,
+        id: String,
+        modifier: Modifier,
+        state: BoxUiState
+    ): Unit = with(scope) {
         Box(
-            modifier = layout.modifier,
-            contentAlignment = layout.contentAlignment,
-            propagateMinConstraints = layout.propagateMinConstraints,
+            modifier = modifier.testTag(tag = id),
+            contentAlignment = state.contentAlignment,
+            propagateMinConstraints = state.propagateMinConstraints,
             content = {
-                layout.content.forEach { layout: Layout ->
+                state.content.forEach { layout: Layout ->
                     draw(layout)
                 }
             }
         )
     }
-
-    override fun RendererScope.Measure(layout: BoxLayout): Boolean = layout.content.all(::measure)
 }

@@ -1,7 +1,5 @@
 package org.alexcawl.sculptor.foundation.client
 
-import org.alexcawl.sculptor.engine.SculptorState
-
 /**
  * TODO: docs
  */

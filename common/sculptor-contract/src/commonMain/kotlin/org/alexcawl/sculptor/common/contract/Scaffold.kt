@@ -5,11 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class Scaffold(
-    @SerialName("templates")
-    public val templates: List<Template>,
-
-    @SerialName("sections")
-    public val sections: List<Section>,
+    @SerialName("components")
+    public val components: List<Component>,
 
     @SerialName("root")
     public val root: Identifier,

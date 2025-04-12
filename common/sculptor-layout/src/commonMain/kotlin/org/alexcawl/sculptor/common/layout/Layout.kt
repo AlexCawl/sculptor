@@ -1,20 +1,11 @@
 package org.alexcawl.sculptor.common.layout
 
-import androidx.compose.runtime.Stable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 
-/**
- * TODO: docs
- */
-@Stable
-public interface Layout {
-    /**
-     * TODO: docs
-     */
-    public val id: String
-
-    /**
-     * TODO: docs
-     */
-    public val modifier: Modifier
-}
+@Immutable
+public data class Layout(
+    public val id: String,
+    public val modifier: Modifier,
+    public val uiState: UiState,
+)

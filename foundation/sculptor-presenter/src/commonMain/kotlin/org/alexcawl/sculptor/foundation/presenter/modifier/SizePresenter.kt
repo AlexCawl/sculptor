@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
+import org.alexcawl.sculptor.common.presenter.map
 import org.alexcawl.sculptor.foundation.contract.modifier.FillMaxSize
 import org.alexcawl.sculptor.foundation.contract.modifier.RequiredSize
 import org.alexcawl.sculptor.foundation.contract.modifier.RequiredSizeIn
@@ -20,7 +21,7 @@ import kotlin.reflect.KClass
 public class SizePresenter : ModifierPresenter<Size>() {
     override val input: KClass<Size> = Size::class
 
-    override fun PresenterScope.transform(input: Size): Modifier {
+    override suspend fun PresenterScope.transform(input: Size): Modifier {
         return with(input) {
             Modifier.size(
                 width = map(width),
@@ -33,7 +34,7 @@ public class SizePresenter : ModifierPresenter<Size>() {
 public class FillMaxSizePresenter : ModifierPresenter<FillMaxSize>() {
     override val input: KClass<FillMaxSize> = FillMaxSize::class
 
-    override fun PresenterScope.transform(input: FillMaxSize): Modifier {
+    override suspend fun PresenterScope.transform(input: FillMaxSize): Modifier {
         return with(input) {
             Modifier.fillMaxWidth(
                 fraction = fraction,
@@ -45,7 +46,7 @@ public class FillMaxSizePresenter : ModifierPresenter<FillMaxSize>() {
 public class RequiredSizePresenter : ModifierPresenter<RequiredSize>() {
     override val input: KClass<RequiredSize> = RequiredSize::class
 
-    override fun PresenterScope.transform(input: RequiredSize): Modifier {
+    override suspend fun PresenterScope.transform(input: RequiredSize): Modifier {
         return with(input) {
             Modifier.requiredSize(
                 width = map(width),
@@ -58,7 +59,7 @@ public class RequiredSizePresenter : ModifierPresenter<RequiredSize>() {
 public class RequiredSizeInPresenter : ModifierPresenter<RequiredSizeIn>() {
     override val input: KClass<RequiredSizeIn> = RequiredSizeIn::class
 
-    override fun PresenterScope.transform(input: RequiredSizeIn): Modifier {
+    override suspend fun PresenterScope.transform(input: RequiredSizeIn): Modifier {
         return with(input) {
             Modifier.requiredSizeIn(
                 minWidth = map(minWidth),
@@ -73,7 +74,7 @@ public class RequiredSizeInPresenter : ModifierPresenter<RequiredSizeIn>() {
 public class SizeInPresenter : ModifierPresenter<SizeIn>() {
     override val input: KClass<SizeIn> = SizeIn::class
 
-    override fun PresenterScope.transform(input: SizeIn): Modifier {
+    override suspend fun PresenterScope.transform(input: SizeIn): Modifier {
         return with(input) {
             Modifier.sizeIn(
                 minWidth = map(minWidth),
@@ -88,7 +89,7 @@ public class SizeInPresenter : ModifierPresenter<SizeIn>() {
 public class WrapContentSizePresenter : ModifierPresenter<WrapContentSize>() {
     override val input: KClass<WrapContentSize> = WrapContentSize::class
 
-    override fun PresenterScope.transform(input: WrapContentSize): Modifier {
+    override suspend fun PresenterScope.transform(input: WrapContentSize): Modifier {
         return with(input) {
             Modifier.wrapContentSize(
                 align = map(align),

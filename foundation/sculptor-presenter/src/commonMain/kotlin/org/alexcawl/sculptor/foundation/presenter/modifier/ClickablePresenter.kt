@@ -6,6 +6,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
 import org.alexcawl.sculptor.common.presenter.PresenterScope
+import org.alexcawl.sculptor.common.presenter.map
 import org.alexcawl.sculptor.foundation.contract.modifier.Clickable
 import org.alexcawl.sculptor.foundation.contract.modifier.CombinedClickable
 import kotlin.reflect.KClass
@@ -13,7 +14,7 @@ import kotlin.reflect.KClass
 public class ClickablePresenter : ModifierPresenter<Clickable>() {
     override val input: KClass<Clickable> = Clickable::class
 
-    override fun PresenterScope.transform(input: Clickable): Modifier {
+    public override suspend fun PresenterScope.transform(input: Clickable): Modifier {
         return with(input) {
             Modifier.clickable(
                 enabled = enabled,
@@ -29,7 +30,7 @@ public class CombinedClickablePresenter : ModifierPresenter<CombinedClickable>()
     override val input: KClass<CombinedClickable> = CombinedClickable::class
 
     @OptIn(ExperimentalFoundationApi::class)
-    override fun PresenterScope.transform(input: CombinedClickable): Modifier {
+    override suspend fun PresenterScope.transform(input: CombinedClickable): Modifier {
         return with(input) {
             Modifier.combinedClickable(
                 enabled = enabled,

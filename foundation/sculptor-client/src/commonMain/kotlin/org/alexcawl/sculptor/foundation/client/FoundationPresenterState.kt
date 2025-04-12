@@ -1,9 +1,7 @@
 package org.alexcawl.sculptor.foundation.client
 
-import org.alexcawl.sculptor.common.presenter.CommonPresenter
 import org.alexcawl.sculptor.common.presenter.StatePresenter
 import org.alexcawl.sculptor.common.presenter.ModifierPresenter
-import org.alexcawl.sculptor.engine.SculptorPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BasicTextPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BoxPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.ColumnPresenter
