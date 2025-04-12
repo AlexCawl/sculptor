@@ -2,22 +2,17 @@ package org.alexcawl.sculptor.common.contract
 
 import kotlinx.serialization.Serializable
 
-/**
- * TODO: docs
- */
 @JvmInline
 @Serializable
-public value class Identifier(
-    public val value: String,
-) {
-    /**
-     * TODO: docs
-     */
-    public operator fun plus(other: Identifier): String = "${value}@${other.value}"
+public value class Identifier(public val value: String) {
+    public operator fun plus(other: Identifier): Identifier =
+        Identifier(value = "${value}@${other.value}")
+
+    public operator fun plus(other: String): Identifier =
+        Identifier(value = "${value}@${other}")
+
+    override fun toString(): String = value
 }
 
-/**
- * TODO: docs
- */
 public val String.id: Identifier
     get() = Identifier(value = this)
