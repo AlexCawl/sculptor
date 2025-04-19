@@ -5,7 +5,7 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import org.alexcawl.sculptor.common.contract.Component
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
@@ -97,9 +97,9 @@ private class PresenterScopeImpl(
     override suspend fun layout(input: List<Identifier>): List<Layout> = coroutineScope {
         input.map { identifier: Identifier ->
             async(start = CoroutineStart.LAZY) {
-                val component: Component = componentProvider(id = identifier)
-                val modifiers: List<ModifierContract> = component.modifiers
-                val stateContract: StateContract = component.state
+                val block: Block = componentProvider(id = identifier)
+                val modifiers: List<ModifierContract> = block.modifiers
+                val stateContract: StateContract = block.state
                 val uiState = presenterProvider(
                     inputClass = stateContract::class,
                     outputClass = UiState::class
@@ -109,7 +109,7 @@ private class PresenterScopeImpl(
                 ) as UiState
                 stateCreateCallback(uiState)
                 Layout(
-                    id = (component.id + stateContract.id).value,
+                    id = (block.id + stateContract.id).value,
                     modifier = mapModifier(modifiers),
                     uiState = uiState,
                 )

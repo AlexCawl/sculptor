@@ -1,15 +1,15 @@
 package org.alexcawl.sculptor.common.presenter
 
-import org.alexcawl.sculptor.common.contract.Component
+import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.Identifier
 
 public fun interface ComponentProvider {
-    public suspend operator fun invoke(id: Identifier): Component
+    public suspend operator fun invoke(id: Identifier): Block
 
     public companion object {
-        public operator fun invoke(components: List<Component>): ComponentProvider =
+        public operator fun invoke(blocks: List<Block>): ComponentProvider =
             ComponentProvider { identifier: Identifier ->
-                components.find { it.id == identifier }
+                blocks.find { it.id == identifier }
                     ?: error(message = "Cannot resolve section for id $identifier")
             }
     }
