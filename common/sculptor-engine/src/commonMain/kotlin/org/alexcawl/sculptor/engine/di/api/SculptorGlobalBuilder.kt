@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.engine.di
+package org.alexcawl.sculptor.engine.di.api
 
 import kotlinx.serialization.KSerializer
 import org.alexcawl.sculptor.common.layout.UiState

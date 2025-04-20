@@ -17,7 +17,7 @@ internal class LocalMainContentResolverImpl(
 
     override fun resolve(key: String): Flow<Result<SculptorContent>> = flow {
         if (localContentSource != null) {
-            localContentSource.resolve(key = key)
+            localContentSource.select(key = key)
                 .onSuccess { sculptorContent: SculptorContent ->
                     emit(Result.success(sculptorContent))
                 }

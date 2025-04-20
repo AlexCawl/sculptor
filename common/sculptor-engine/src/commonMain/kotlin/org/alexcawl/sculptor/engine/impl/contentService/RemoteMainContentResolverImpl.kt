@@ -23,7 +23,7 @@ internal class RemoteMainContentResolverImpl(
             }
             .onFailure { remoteSourceException: Throwable ->
                 if (localContentSource != null) {
-                    localContentSource.resolve(key = key)
+                    localContentSource.select(key = key)
                         .onSuccess { sculptorContent: SculptorContent ->
                             emit(Result.success(sculptorContent))
                         }

@@ -12,11 +12,11 @@ import org.alexcawl.sculptor.engine.api.contentService.ContentResolutionStrategy
 import org.alexcawl.sculptor.engine.api.contentService.ContentResolver
 import org.alexcawl.sculptor.engine.api.contentService.LocalContentSource
 import org.alexcawl.sculptor.engine.api.contentService.RemoteContentSource
-import org.alexcawl.sculptor.engine.di.SculptorGlobalBuilder
-import org.alexcawl.sculptor.engine.di.module.contentServiceModule
-import org.alexcawl.sculptor.engine.di.module.presenterModule
-import org.alexcawl.sculptor.engine.di.module.rendererModule
-import org.alexcawl.sculptor.engine.di.module.serializerModule
+import org.alexcawl.sculptor.engine.di.api.SculptorGlobalBuilder
+import org.alexcawl.sculptor.engine.di.impl.module.contentServiceModule
+import org.alexcawl.sculptor.engine.di.impl.module.presenterModule
+import org.alexcawl.sculptor.engine.di.impl.module.rendererModule
+import org.alexcawl.sculptor.engine.di.impl.module.serializerModule
 
 public class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, OverridableBuilder {
     private val diComponent: DiComponent = DiComponent()
