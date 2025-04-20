@@ -9,7 +9,6 @@ import org.alexcawl.sculptor.common.contract.Block
 import org.alexcawl.sculptor.common.contract.Identifier
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.common.core.InternalSculptorApi
 import org.alexcawl.sculptor.common.layout.Layout
 import org.alexcawl.sculptor.common.layout.UiState
 import kotlin.reflect.KClass
@@ -80,7 +79,6 @@ private class PresenterScopeImpl(
     private val componentProvider: ComponentProvider,
     private val stateCreateCallback: StateCreateCallback,
 ) : PresenterScope {
-    @OptIn(InternalSculptorApi::class)
     override suspend fun map(
         inputClass: KClass<out Any>,
         outputClass: KClass<out Any>,
@@ -93,7 +91,6 @@ private class PresenterScopeImpl(
         any = value,
     )
 
-    @OptIn(InternalSculptorApi::class)
     override suspend fun layout(input: List<Identifier>): List<Layout> = coroutineScope {
         input.map { identifier: Identifier ->
             async(start = CoroutineStart.LAZY) {

@@ -4,18 +4,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.alexcawl.sculptor.common.contract.SculptorContent
 import org.alexcawl.sculptor.engine.api.contentService.ContentResolutionStrategy
-import org.alexcawl.sculptor.engine.api.contentService.ContentService
+import org.alexcawl.sculptor.engine.api.contentService.ContentResolver
 import org.alexcawl.sculptor.engine.api.contentService.LocalContentSource
 import org.alexcawl.sculptor.engine.api.contentService.RemoteContentSource
 
-internal class RemoteMainContentServiceImpl(
+internal class RemoteMainContentResolverImpl(
     private val remoteContentSource: RemoteContentSource,
     private val localContentSource: LocalContentSource?,
-) : ContentService {
+) : ContentResolver {
     override val contentResolutionStrategy: ContentResolutionStrategy =
         ContentResolutionStrategy.RemoteMain
 
-    override fun invoke(key: String): Flow<Result<SculptorContent>> = flow {
+    override fun resolve(key: String): Flow<Result<SculptorContent>> = flow {
         remoteContentSource.fetch(key)
             .onSuccess { sculptorContent: SculptorContent ->
                 emit(Result.success(sculptorContent))

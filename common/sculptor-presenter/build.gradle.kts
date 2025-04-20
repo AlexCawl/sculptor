@@ -9,9 +9,6 @@ android {
 }
 
 commonMainDependencies {
-    // Private dependencies
-    api(projects.common.sculptorCore) // TODO: make OptIn warning type
-
     // Public dependencies
     api(projects.common.sculptorContract)
     api(projects.common.sculptorLayout)

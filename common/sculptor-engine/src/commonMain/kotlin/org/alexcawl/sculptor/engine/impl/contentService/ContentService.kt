@@ -4,18 +4,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.alexcawl.sculptor.common.contract.SculptorContent
 import org.alexcawl.sculptor.engine.api.contentService.ContentResolutionStrategy
-import org.alexcawl.sculptor.engine.api.contentService.ContentService
+import org.alexcawl.sculptor.engine.api.contentService.ContentResolver
 
-internal class RouterContentService(
-    override val contentResolutionStrategy: ContentResolutionStrategy,
-    private val contentServices: List<ContentService>,
-) : ContentService {
-    override fun invoke(key: String): Flow<Result<SculptorContent>> = runCatching {
-        contentServices.first { contentService: ContentService ->
-            contentService.contentResolutionStrategy == contentResolutionStrategy
+internal class ContentService(
+    private val contentResolutionStrategy: ContentResolutionStrategy,
+    private val contentResolvers: List<ContentResolver>,
+) {
+    fun resolve(key: String): Flow<Result<SculptorContent>> = runCatching {
+        contentResolvers.first { contentResolver: ContentResolver ->
+            contentResolver.contentResolutionStrategy == contentResolutionStrategy
         }
-    }.map { contentService: ContentService ->
-        contentService.invoke(key = key)
+    }.map { contentResolver: ContentResolver ->
+        contentResolver.resolve(key = key)
     }.getOrElse { exception: Throwable ->
         flow {
             emit(
