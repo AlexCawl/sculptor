@@ -8,16 +8,16 @@ import kotlinx.serialization.StringFormat
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 
-public interface Constructor {
+public interface Assembler {
     public suspend fun construct(schema: SculptorScreen.Schema): SculptorScreen.Scaffold
 
     public companion object {
-        public operator fun invoke(stringFormat: StringFormat): Constructor =
-            ConstructorImpl(stringFormat = stringFormat)
+        public operator fun invoke(stringFormat: StringFormat): Assembler =
+            AssemblerImpl(stringFormat = stringFormat)
     }
 }
 
-private class ConstructorImpl(private val stringFormat: StringFormat) : Constructor {
+private class AssemblerImpl(private val stringFormat: StringFormat) : Assembler {
     override suspend fun construct(schema: SculptorScreen.Schema): SculptorScreen.Scaffold {
         val root: Identifier = schema.root
         val templates: List<Template> = schema.templates

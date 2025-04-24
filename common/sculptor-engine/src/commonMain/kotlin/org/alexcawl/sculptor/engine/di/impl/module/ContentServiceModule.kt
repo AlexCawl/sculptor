@@ -12,24 +12,24 @@ import org.alexcawl.sculptor.engine.impl.contentService.OnlyRemoteContentResolve
 import org.alexcawl.sculptor.engine.impl.contentService.RemoteMainContentResolverImpl
 
 internal fun contentServiceModule(): Module = module {
-    singleton<ContentService> {
+    singleton {
         ContentService(
             contentResolutionStrategy = get(),
             contentResolvers = getAll(),
         )
     }
-    singleton<ContentResolver> {
+    singleton<LocalMainContentResolverImpl, ContentResolver> {
         LocalMainContentResolverImpl(
             remoteContentSource = get(),
             localContentSource = get(),
         )
     }
-    singleton<ContentResolver> {
+    singleton<OnlyRemoteContentResolverImpl, ContentResolver> {
         OnlyRemoteContentResolverImpl(
             remoteContentSource = get(),
         )
     }
-    singleton<ContentResolver> {
+    singleton<RemoteMainContentResolverImpl, ContentResolver> {
         RemoteMainContentResolverImpl(
             remoteContentSource = get(),
             localContentSource = get(),

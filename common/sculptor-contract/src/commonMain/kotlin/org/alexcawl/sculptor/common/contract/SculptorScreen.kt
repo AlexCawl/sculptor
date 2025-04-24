@@ -9,6 +9,7 @@ public sealed interface SculptorScreen {
     public val root: Identifier
 
     @Serializable
+    @SerialName("schema")
     public data class Schema(
         @SerialName("sections")
         public val sections: List<Section>,
@@ -19,6 +20,7 @@ public sealed interface SculptorScreen {
     ) : SculptorScreen
 
     @Serializable
+    @SerialName("scaffold")
     public data class Scaffold(
         @SerialName("components")
         public val blocks: List<Block>,

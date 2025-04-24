@@ -5,11 +5,11 @@ import kotlin.reflect.KClass
 public interface DiTree : AutoCloseable {
     public val diComponent: DiComponent
 
-    public fun child(): DiTree
+    public fun clone(): DiTree
 
-    public fun <T : Any> get(key: KClass<T>): T
+    public fun <K : Any> get(key: KClass<K>): K
 
-    public fun <T : Any> getAll(key: KClass<T>): List<T>
+    public fun <T : Any> getAll(type: KClass<T>): List<T>
 
     public companion object {
         public operator fun invoke(diComponent: DiComponent): DiTree = DiTreeImpl(diComponent)
@@ -22,11 +22,11 @@ public inline fun <reified T : Any> DiTree.getAll(): List<T> = getAll(T::class)
 
 
 private class DiTreeImpl(override val diComponent: DiComponent) : DiTree {
-    override fun <T : Any> get(key: KClass<T>): T = diComponent.get(key)
+    override fun <K : Any> get(key: KClass<K>): K = diComponent.get(key)
 
-    override fun <T : Any> getAll(key: KClass<T>): List<T> = diComponent.getAll(key)
+    override fun <T : Any> getAll(type: KClass<T>): List<T> = diComponent.getAll(type)
 
-    override fun child(): DiTree = DiTreeImpl(diComponent.child())
+    override fun clone(): DiTree = DiTreeImpl(diComponent.clone())
 
     override fun close(): Unit = diComponent.close()
 }
