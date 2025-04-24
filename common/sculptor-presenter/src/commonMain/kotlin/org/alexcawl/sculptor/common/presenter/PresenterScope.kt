@@ -26,11 +26,11 @@ public sealed interface PresenterScope {
         public operator fun invoke(
             presenterProvider: PresenterProvider,
             componentProvider: ComponentProvider,
-            stateCreateCallback: StateCreateCallback,
+            onStateCreatedCallback: OnStateCreatedCallback,
         ): PresenterScope = PresenterScopeImpl(
             presenterProvider = presenterProvider,
             componentProvider = componentProvider,
-            stateCreateCallback = stateCreateCallback,
+            onStateCreatedCallback = onStateCreatedCallback,
         )
     }
 }
@@ -77,7 +77,7 @@ public suspend fun PresenterScope.mapModifier(input: List<ModifierContract>): Mo
 private class PresenterScopeImpl(
     private val presenterProvider: PresenterProvider,
     private val componentProvider: ComponentProvider,
-    private val stateCreateCallback: StateCreateCallback,
+    private val onStateCreatedCallback: OnStateCreatedCallback,
 ) : PresenterScope {
     override suspend fun map(
         inputClass: KClass<out Any>,
@@ -104,7 +104,7 @@ private class PresenterScopeImpl(
                     scope = this@PresenterScopeImpl,
                     any = stateContract
                 ) as UiState
-                stateCreateCallback(uiState)
+                onStateCreatedCallback(uiState)
                 Layout(
                     id = (block.id + stateContract.id).value,
                     modifier = mapModifier(modifiers),

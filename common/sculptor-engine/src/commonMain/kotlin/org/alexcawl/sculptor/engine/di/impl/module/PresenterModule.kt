@@ -5,24 +5,22 @@ import org.alexcawl.sculptor.common.di.factory
 import org.alexcawl.sculptor.common.di.get
 import org.alexcawl.sculptor.common.di.getAll
 import org.alexcawl.sculptor.common.di.module
-import org.alexcawl.sculptor.common.presenter.ComponentProvider
+import org.alexcawl.sculptor.common.presenter.OnStateCreatedCallback
 import org.alexcawl.sculptor.common.presenter.PresenterProvider
-import org.alexcawl.sculptor.common.presenter.PresenterScope
-import org.alexcawl.sculptor.common.presenter.StateCreateCallback
-import org.alexcawl.sculptor.engine.impl.LayoutValidationService
+import org.alexcawl.sculptor.engine.di.impl.providers.PresenterScopeProvider
+import org.alexcawl.sculptor.engine.impl.OnStateCreatedCallbackImpl
 
 internal fun presenterModule(): Module = module {
     factory {
         PresenterProvider(presenters = getAll())
     }
-    factory<StateCreateCallback, StateCreateCallback> {
-        LayoutValidationService(resolveRenderer = get())
+    factory<OnStateCreatedCallback, OnStateCreatedCallback> {
+        OnStateCreatedCallbackImpl(resolveRenderer = get())
     }
     factory {
-        PresenterScope(
+        PresenterScopeProvider(
             presenterProvider = get(),
-            componentProvider = get(),
-            stateCreateCallback = get(),
+            onStateCreatedCallback = get(),
         )
     }
 }
