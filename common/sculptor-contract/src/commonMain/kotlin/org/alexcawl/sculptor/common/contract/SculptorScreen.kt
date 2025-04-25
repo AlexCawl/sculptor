@@ -2,6 +2,8 @@ package org.alexcawl.sculptor.common.contract
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.alexcawl.sculptor.common.contract.Section.Block
+import org.alexcawl.sculptor.common.contract.Section.Template
 
 @Serializable
 public sealed interface SculptorScreen {

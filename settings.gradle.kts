@@ -36,21 +36,24 @@ dependencyResolutionManagement {
 include(":showroom:app")
 
 include(
-    ":common:sculptor-core",
+    ":common:sculptor-di",
     ":common:sculptor-contract",
     ":common:sculptor-layout",
-    ":common:sculptor-presenter",
-    ":common:sculptor-renderer",
-    ":common:sculptor-di",
-    ":common:sculptor-engine",
+    ":common:sculptor-presenter:api",
+    ":common:sculptor-presenter:impl",
+    ":common:sculptor-renderer:api",
+    ":common:sculptor-renderer:impl",
+    ":common:sculptor-engine:api",
+    ":common:sculptor-engine:impl",
+    ":common:sculptor-engine:core",
 )
 
-include(
-    ":foundation:sculptor-contract",
-    ":foundation:sculptor-layout",
-    ":foundation:sculptor-presenter",
-    ":foundation:sculptor-renderer",
-    ":foundation:sculptor-client",
-    ":foundation:sculptor-server",
-    ":foundation:showroom",
-)
+//include(
+//    ":foundation:sculptor-contract",
+//    ":foundation:sculptor-layout",
+//    ":foundation:sculptor-presenter",
+//    ":foundation:sculptor-renderer",
+//    ":foundation:sculptor-client",
+//    ":foundation:sculptor-server",
+//    ":foundation:showroom",
+//)

@@ -13,6 +13,3 @@ public value class Identifier(public val value: String) {
 
     override fun toString(): String = value
 }
-
-public val String.id: Identifier
-    get() = Identifier(value = this)
