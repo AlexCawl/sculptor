@@ -2,9 +2,9 @@ package org.alexcawl.sculptor.engine.impl
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import org.alexcawl.sculptor.common.contract.Contractor
-import org.alexcawl.sculptor.common.di.DiComponent
-import org.alexcawl.sculptor.common.di.DiTree
-import org.alexcawl.sculptor.common.di.DiTreeBuilder
+import org.alexcawl.sculptor.internal.di.DiComponent
+import org.alexcawl.sculptor.internal.di.DiTree
+import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 import org.alexcawl.sculptor.common.presenter.Presenter
 import org.alexcawl.sculptor.common.renderer.Renderer
 import org.alexcawl.sculptor.engine.SculptorGlobalBuilder

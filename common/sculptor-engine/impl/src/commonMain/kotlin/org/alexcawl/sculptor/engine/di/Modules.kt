@@ -7,11 +7,11 @@ import kotlinx.serialization.modules.polymorphic
 import org.alexcawl.sculptor.common.contract.Contractor
 import org.alexcawl.sculptor.common.contract.ModifierContract
 import org.alexcawl.sculptor.common.contract.StateContract
-import org.alexcawl.sculptor.common.di.Module
-import org.alexcawl.sculptor.common.di.factory
-import org.alexcawl.sculptor.common.di.get
-import org.alexcawl.sculptor.common.di.getAll
-import org.alexcawl.sculptor.common.di.module
+import org.alexcawl.sculptor.internal.di.Module
+import org.alexcawl.sculptor.internal.di.factory
+import org.alexcawl.sculptor.internal.di.get
+import org.alexcawl.sculptor.internal.di.getAll
+import org.alexcawl.sculptor.internal.di.module
 import org.alexcawl.sculptor.common.presenter.PresenterProvider
 import org.alexcawl.sculptor.common.presenter.PresenterScopeFactory
 import org.alexcawl.sculptor.common.presenter.StateValidator

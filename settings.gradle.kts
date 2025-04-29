@@ -36,7 +36,10 @@ dependencyResolutionManagement {
 include(":showroom:app")
 
 include(
-    ":common:sculptor-di",
+    ":internal:di"
+)
+
+include(
     ":common:sculptor-contract",
     ":common:sculptor-layout",
     ":common:sculptor-presenter:api",

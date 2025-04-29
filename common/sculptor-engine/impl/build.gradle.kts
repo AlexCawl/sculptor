@@ -12,5 +12,5 @@ commonMainDependencies {
     api(projects.common.sculptorEngine.api)
     implementation(projects.common.sculptorPresenter.impl)
     implementation(projects.common.sculptorRenderer.impl)
-    implementation(projects.common.sculptorDi)
+    implementation(projects.internal.di)
 }

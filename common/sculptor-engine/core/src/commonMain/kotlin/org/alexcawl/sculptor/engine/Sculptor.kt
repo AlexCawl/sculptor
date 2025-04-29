@@ -1,16 +1,42 @@
 package org.alexcawl.sculptor.engine
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
+import org.alexcawl.sculptor.engine.impl.SculptorDelegate
+import org.alexcawl.sculptor.engine.impl.SculptorGlobalBuilderImpl
+import org.alexcawl.sculptor.internal.di.DiTree
 import kotlin.properties.ReadOnlyProperty
 
+@Stable
 public interface Sculptor {
     @Composable
-    public fun open(deeplink: String)
+    public fun open(
+        deeplink: String,
+        loadingScreen: @Composable (modifier: Modifier) -> Unit,
+        errorScreen: @Composable (modifier: Modifier) -> Unit,
+        modifier: Modifier = Modifier,
+    )
 
     public companion object {
-        public fun initialize(builder: SculptorGlobalBuilder.() -> Unit): Nothing = TODO()
+        private var globalDiTreeInstance: DiTree? = null
 
-        public fun create(builder: SculptorBuilder.() -> Unit): ReadOnlyProperty<ViewModelStoreOwner, Sculptor> = TODO()
+        public fun isInitialized(): Boolean = globalDiTreeInstance != null
+
+        public fun initialize(builder: SculptorGlobalBuilder.() -> Unit) {
+            val diTree: DiTree = SculptorGlobalBuilderImpl().apply(builder).build()
+            return when (globalDiTreeInstance) {
+                null -> globalDiTreeInstance = diTree
+                else -> error("Sculptor is already initialized")
+            }
+        }
+
+        public fun create(builder: SculptorBuilder.() -> Unit): ReadOnlyProperty<ViewModelStoreOwner, Sculptor> {
+            return SculptorDelegate(
+                globalDiTree = globalDiTreeInstance ?: error("Sculptor is not initialized"),
+                builder = builder,
+            )
+        }
     }
 }
