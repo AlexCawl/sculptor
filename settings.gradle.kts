@@ -36,7 +36,8 @@ dependencyResolutionManagement {
 include(":showroom:app")
 
 include(
-    ":internal:di"
+    ":internal:di",
+    ":internal:mvi"
 )
 
 include(

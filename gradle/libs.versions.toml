@@ -38,6 +38,7 @@ common-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx
 common-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "version-common-kotlin-serialization" }
 common-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "version-common-lifecycle" }
 common-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "version-common-lifecycle" }
+common-lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime", version.ref = "version-common-lifecycle" }
 
 # [libraries.common.test]
 common-junit = { group = "junit", name = "junit", version.ref = "version-common-junit" }
@@ -77,8 +78,6 @@ common-source = [
     "common-kotlin-coroutines",
     "common-kotlin-serialization",
     "common-kotlin-serialization-json",
-    "common-lifecycle-compose",
-    "common-lifecycle-viewmodel",
 ]
 common-test = [
     "common-junit",
