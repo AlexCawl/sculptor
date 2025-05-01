@@ -32,13 +32,13 @@ public interface Store<out State : Any, in Event : Any> {
         public fun <State : Any, Event : Any, Command : Any> create(
             initialState: State,
             initialCommands: List<Command> = emptyList(),
-            commandHandlers: List<CommandHandler<Command, Event>> = emptyList(),
+            useCases: List<UseCase<Command, Event>> = emptyList(),
             reducers: List<Reducer<State, Event, Command>> = emptyList(),
         ): Store<State, Event> {
             return StoreImpl(
                 initialState = initialState,
                 initialCommands = initialCommands,
-                commandHandlers = commandHandlers,
+                useCases = useCases,
                 reducers = reducers,
             )
         }
@@ -48,7 +48,7 @@ public interface Store<out State : Any, in Event : Any> {
 private class StoreImpl<out State : Any, in Event : Any, Command : Any>(
     initialState: State,
     private val initialCommands: List<Command> = emptyList(),
-    private val commandHandlers: List<CommandHandler<Command, Event>> = emptyList(),
+    private val useCases: List<UseCase<Command, Event>> = emptyList(),
     private val reducers: List<Reducer<State, Event, Command>>,
 ) : Store<State, Event> {
     private val stateFlow: MutableStateFlow<State> = MutableStateFlow(value = initialState)
@@ -67,7 +67,7 @@ private class StoreImpl<out State : Any, in Event : Any, Command : Any>(
             sharedCommands
         }
 
-        for (flowHandler in commandHandlers) {
+        for (flowHandler in useCases) {
             coroutineScope.launch {
                 commandsFlow
                     .filterIsInstance(klass = flowHandler.key)

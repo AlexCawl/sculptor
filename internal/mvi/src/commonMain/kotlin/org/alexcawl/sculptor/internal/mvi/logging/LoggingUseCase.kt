@@ -1,12 +1,12 @@
 package org.alexcawl.sculptor.internal.mvi.logging
 
-import org.alexcawl.sculptor.internal.mvi.core.CommandHandler
+import org.alexcawl.sculptor.internal.mvi.core.UseCase
 import kotlin.reflect.KClass
 
-internal class LoggingCommandHandler<Command : Any, Event : Any>(
-    private val delegate: CommandHandler<Command, Event>,
+internal class LoggingUseCase<Command : Any, Event : Any>(
+    private val delegate: UseCase<Command, Event>,
     private val logger: UpdateLogger,
-): CommandHandler<Command, Event> {
+): UseCase<Command, Event> {
     override val key: KClass<Command> = delegate.key
 
     override fun handle(command: Command): List<Event> {

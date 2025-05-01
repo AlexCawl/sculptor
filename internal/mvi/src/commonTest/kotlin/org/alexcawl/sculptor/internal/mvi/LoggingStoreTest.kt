@@ -8,13 +8,13 @@ import kotlinx.coroutines.test.runTest
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.internal.mvi.logging.INITIAL_COMMAND_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.INITIAL_STATE_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingCommandHandler.Companion.COMMAND_RECEIVED_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingCommandHandler.Companion.EVENT_SENT_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.LoggingUseCase.Companion.COMMAND_RECEIVED_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.LoggingUseCase.Companion.EVENT_SENT_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.COMMAND_SENT_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.EVENT_RECEIVED_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.STATE_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.UpdateLogger
-import org.alexcawl.sculptor.internal.mvi.mocks.MockCommandHandler
+import org.alexcawl.sculptor.internal.mvi.mocks.MockUseCase
 import org.alexcawl.sculptor.internal.mvi.mocks.MockLogger
 import org.alexcawl.sculptor.internal.mvi.mocks.MockLoggingStore
 import org.alexcawl.sculptor.internal.mvi.mocks.MockReducer
@@ -91,7 +91,7 @@ class LoggingStoreTest {
         val scope = CoroutineScope(context = Dispatchers.Default)
         val store: Store<State, Event> = MockLoggingStore(
             initialState = State.Initial,
-            commandHandlers = listOf(MockCommandHandler()),
+            useCases = listOf(MockUseCase()),
             reducers = listOf(MockReducer()),
             logger = logger,
         )
@@ -131,7 +131,7 @@ class LoggingStoreTest {
         val scope = CoroutineScope(context = Dispatchers.Default)
         val store: Store<State, Event> = MockLoggingStore(
             initialState = State.Initial,
-            commandHandlers = listOf(MockCommandHandler()),
+            useCases = listOf(MockUseCase()),
             reducers = listOf(MockReducer()),
             logger = logger,
         )

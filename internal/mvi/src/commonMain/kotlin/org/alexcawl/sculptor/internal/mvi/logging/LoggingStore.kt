@@ -1,13 +1,13 @@
 package org.alexcawl.sculptor.internal.mvi.logging
 
-import org.alexcawl.sculptor.internal.mvi.core.CommandHandler
+import org.alexcawl.sculptor.internal.mvi.core.UseCase
 import org.alexcawl.sculptor.internal.mvi.core.Reducer
 import org.alexcawl.sculptor.internal.mvi.core.Store
 
 public fun <State : Any, Event : Any, Command : Any> Store.Companion.create(
     initialState: State,
     initialCommands: List<Command> = emptyList(),
-    commandHandlers: List<CommandHandler<Command, Event>> = emptyList(),
+    useCases: List<UseCase<Command, Event>> = emptyList(),
     reducers: List<Reducer<State, Event, Command>>,
     logger: UpdateLogger = UpdateLogger { _, _ -> },
 ): Store<State, Event> {
@@ -22,9 +22,9 @@ public fun <State : Any, Event : Any, Command : Any> Store.Companion.create(
     return create(
         initialState = initialState,
         initialCommands = initialCommands,
-        commandHandlers = commandHandlers.map { commandHandler: CommandHandler<Command, Event> ->
-            LoggingCommandHandler(
-                delegate = commandHandler,
+        useCases = useCases.map { useCase: UseCase<Command, Event> ->
+            LoggingUseCase(
+                delegate = useCase,
                 logger = logger,
             )
         },

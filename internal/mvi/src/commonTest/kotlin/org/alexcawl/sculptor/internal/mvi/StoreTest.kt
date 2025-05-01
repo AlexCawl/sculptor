@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import org.alexcawl.sculptor.internal.mvi.core.Store
-import org.alexcawl.sculptor.internal.mvi.mocks.MockCommandHandler
+import org.alexcawl.sculptor.internal.mvi.mocks.MockUseCase
 import org.alexcawl.sculptor.internal.mvi.mocks.MockReducer
 import org.alexcawl.sculptor.internal.mvi.mocks.MockStore
 import org.alexcawl.sculptor.internal.mvi.mocks.entity.Command
@@ -44,7 +44,7 @@ class StoreTest {
                 Command(name = "2"),
                 Command(name = "3"),
             ),
-            commandHandlers = listOf(MockCommandHandler()),
+            useCases = listOf(MockUseCase()),
             reducers = listOf(MockReducer()),
         )
         store.launchIn(coroutineScope = scope)
@@ -78,7 +78,7 @@ class StoreTest {
         val scope = CoroutineScope(context = Dispatchers.Default)
         val store: Store<State, Event> = MockStore(
             initialState = State.Initial,
-            commandHandlers = listOf(MockCommandHandler()),
+            useCases = listOf(MockUseCase()),
             reducers = listOf(MockReducer()),
         )
         store.launchIn(coroutineScope = scope)
