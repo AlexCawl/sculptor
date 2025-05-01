@@ -41,15 +41,16 @@ include(
 )
 
 include(
-    ":common:sculptor-contract",
-    ":common:sculptor-layout",
-    ":common:sculptor-presenter:api",
-    ":common:sculptor-presenter:impl",
-    ":common:sculptor-renderer:api",
-    ":common:sculptor-renderer:impl",
-    ":common:sculptor-engine:api",
-    ":common:sculptor-engine:impl",
-    ":common:sculptor-engine:core",
+    ":core:contract",
+    ":core:layout",
+    ":core:presenter",
+    ":core:renderer",
+)
+
+include(
+    ":runtime:engine",
+    ":runtime:presenter",
+    ":runtime:renderer",
 )
 
 //include(
