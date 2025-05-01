@@ -12,20 +12,20 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
-public fun <T : Store<*, *, *>> store(
+public fun <T : Store<*, *>> store(
+    viewModelKey: String,
     coroutineContext: CoroutineContext = Dispatchers.Default,
-    sharedViewModelKey: String? = null,
     factory: () -> T
 ): ReadOnlyProperty<ViewModelStoreOwner, T> {
     return StoreLazyDelegate(
-        viewModelKey = sharedViewModelKey,
+        viewModelKey = viewModelKey,
         coroutineContext = coroutineContext,
         factory = factory,
     )
 }
 
-internal class StoreLazyDelegate<T : Store<*, *, *>>(
-    private val viewModelKey: String? = null,
+internal class StoreLazyDelegate<T : Store<*, *>>(
+    private val viewModelKey: String,
     private val factory: () -> T,
     private val coroutineContext: CoroutineContext,
 ) : ReadOnlyProperty<ViewModelStoreOwner, T> {
@@ -33,10 +33,8 @@ internal class StoreLazyDelegate<T : Store<*, *, *>>(
 
     override fun getValue(thisRef: ViewModelStoreOwner, property: KProperty<*>): T {
         return value ?: run {
-            val key: String = viewModelKey
-                ?: keyFromProperty(thisRef = thisRef, property = property)
             val viewModelStore: ViewModelStore = thisRef.viewModelStore
-            val storeViewModel: StoreViewModel<T> = viewModelStore.get(key) {
+            val storeViewModel: StoreViewModel<T> = viewModelStore.get(viewModelKey) {
                 StoreViewModel(
                     store = factory(),
                     coroutineContext = coroutineContext,
@@ -44,10 +42,6 @@ internal class StoreLazyDelegate<T : Store<*, *, *>>(
             }
             storeViewModel.store.also { value = it }
         }
-    }
-
-    private fun keyFromProperty(thisRef: ViewModelStoreOwner, property: KProperty<*>): String {
-        return "${thisRef::class}#${property.name}"
     }
 }
 

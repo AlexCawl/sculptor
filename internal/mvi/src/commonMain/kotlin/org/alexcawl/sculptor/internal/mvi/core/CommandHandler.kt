@@ -1,7 +1,9 @@
 package org.alexcawl.sculptor.internal.mvi.core
 
-import kotlinx.coroutines.flow.Flow
+import kotlin.reflect.KClass
 
-public fun interface CommandHandler<in Command : Any, out Event : Any> {
-    public fun handle(commands: Flow<Command>): Flow<Event>
+public interface CommandHandler<Command : Any, Event : Any> {
+    public val key: KClass<Command>
+
+    public fun handle(command: Command): List<Event>
 }

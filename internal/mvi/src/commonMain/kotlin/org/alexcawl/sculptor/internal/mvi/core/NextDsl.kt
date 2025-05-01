@@ -1,64 +1,39 @@
 package org.alexcawl.sculptor.internal.mvi.core
 
-public interface NextDsl<State : Any, Command : Any, News : Any> {
+public interface NextDsl<State : Any, Command : Any> {
     public fun state(block: State.() -> State)
 
     public fun commands(vararg commands: Command?)
 
-    public fun news(vararg news: News?)
-
-    public fun build(): Next<State, Command, News>
+    public fun build(): Next<State, Command>
 
     public companion object {
-        public fun <State : Any, Command : Any, News : Any> create(
-            initialState: State,
-        ): NextDsl<State, Command, News> {
+        public fun <State : Any, Command : Any> create(initialState: State): NextDsl<State, Command> {
             return NextDslImpl(initialState = initialState)
         }
     }
 }
 
-private class NextDslImpl<State : Any, Command : Any, News : Any>(
-    initialState: State,
-) : NextDsl<State, Command, News> {
-    private val lock: Any = Any()
+private class NextDslImpl<State : Any, Command : Any>(initialState: State) : NextDsl<State, Command> {
     private var state: State = initialState
-    private val commands = mutableListOf<Command>()
-    private val news = mutableListOf<News>()
+    private val commands: MutableList<Command> = mutableListOf()
 
     override fun state(block: State.() -> State) {
-        synchronized(lock = lock) {
-            state = state.block()
-        }
+        state = state.block()
     }
 
     override fun commands(vararg commands: Command?) {
-        synchronized(lock = lock) {
-            for (item in commands) {
-                if (item != null) {
-                    this.commands.add(item)
-                }
+        for (item in commands) {
+            if (item != null) {
+                this.commands.add(item)
             }
         }
     }
 
-    override fun news(vararg news: News?) {
-        synchronized(lock = lock) {
-            for (item in news) {
-                if (item != null) {
-                    this.news.add(item)
-                }
-            }
-        }
-    }
-
-    override fun build(): Next<State, Command, News> {
-        return synchronized(lock = lock) {
-            Next(
-                state = state,
-                commands = commands,
-                news = news
-            )
-        }
+    override fun build(): Next<State, Command> {
+        return Next(
+            state = state,
+            commands = commands,
+        )
     }
 }

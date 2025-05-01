@@ -6,7 +6,7 @@ import kotlinx.coroutines.plus
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import kotlin.coroutines.CoroutineContext
 
-internal class StoreViewModel<T : Store<*, *, *>>(
+internal class StoreViewModel<T : Store<*, *>>(
     val store: T,
     coroutineContext: CoroutineContext,
 ) : ViewModel() {

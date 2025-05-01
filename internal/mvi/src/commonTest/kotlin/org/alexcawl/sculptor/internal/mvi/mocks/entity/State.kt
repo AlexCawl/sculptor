@@ -1,10 +1,11 @@
 package org.alexcawl.sculptor.internal.mvi.mocks.entity
 
-data class State(val name: String) {
-    companion object {
-        val initial = State("initial")
-        val changed = State("changed")
+sealed interface State {
+    val name: String
+
+    data object Initial : State {
+        override val name: String = "initial"
     }
 
-    override fun toString() = name
+    data class Content(override val name: String) : State
 }

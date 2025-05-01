@@ -8,24 +8,19 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import org.alexcawl.sculptor.internal.mvi.core.Store
 
-public fun <State : Any, News : Any> Store<State, *, News>.collectWithLifecycle(
+public fun <State : Any> Store<State, *>.collectWithLifecycle(
     lifecycleOwner: LifecycleOwner,
     stateCollector: (State) -> Unit,
-    newsCollector: (News) -> Unit,
 ): Unit = collectBuild(
     lifecycleOwner = lifecycleOwner,
     state = state,
     stateCollector = stateCollector,
-    news = news,
-    newsCollector = newsCollector,
 )
 
-private fun <State : Any, News : Any> collectBuild(
+private fun <State : Any> collectBuild(
     lifecycleOwner: LifecycleOwner,
     state: Flow<State>,
     stateCollector: (State) -> Unit,
-    news: Flow<News>,
-    newsCollector: (News) -> Unit,
 ) {
     val lifecycle: Lifecycle = lifecycleOwner.lifecycle
 
@@ -39,13 +34,6 @@ private fun <State : Any, News : Any> collectBuild(
                 lifecycle = lifecycle,
                 minActiveState = Lifecycle.State.STARTED,
             ).collect(collector = stateCollector::invoke)
-        }
-
-        launch {
-            news.flowWithLifecycle(
-                lifecycle = lifecycle,
-                minActiveState = Lifecycle.State.RESUMED,
-            ).collect(collector = newsCollector::invoke)
         }
     }
 }

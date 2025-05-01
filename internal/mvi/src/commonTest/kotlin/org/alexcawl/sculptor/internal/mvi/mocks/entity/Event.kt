@@ -1,10 +1,7 @@
 package org.alexcawl.sculptor.internal.mvi.mocks.entity
 
-open class Event(val name: String) {
-    companion object {
-        val smthLoaded = UiEvent("smthLoaded")
-    }
+sealed interface Event {
+    data class ChangeState(val name: String) : Event
 
-    override fun toString() = name
+    data class SendCommand(val name: String) : Event
 }
-
