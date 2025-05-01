@@ -33,7 +33,6 @@ dependencyResolutionManagement {
     }
 }
 
-include(":showroom:app")
 
 include(
     ":internal:di",
@@ -53,12 +52,14 @@ include(
     ":runtime:renderer",
 )
 
-//include(
-//    ":foundation:sculptor-contract",
-//    ":foundation:sculptor-layout",
-//    ":foundation:sculptor-presenter",
-//    ":foundation:sculptor-renderer",
-//    ":foundation:sculptor-client",
-//    ":foundation:sculptor-server",
-//    ":foundation:showroom",
-//)
+include(
+    ":foundation:contract",
+    ":foundation:layout",
+    ":foundation:presenter",
+    ":foundation:renderer",
+    ":foundation:bundle",
+)
+
+include(
+    ":showroom"
+)
