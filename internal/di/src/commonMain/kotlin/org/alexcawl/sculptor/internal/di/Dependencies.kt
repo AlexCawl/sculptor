@@ -5,6 +5,7 @@ import kotlin.reflect.KClass
 public interface Dependencies {
     public fun <K : T, T : Any> singleton(key: KClass<K>, type: KClass<T>, factory: DiComponent.() -> K)
     public fun <K : T, T : Any> factory(key: KClass<K>, type: KClass<T>, factory: DiComponent.() -> K)
+    public fun module(module: Module)
 }
 
 public inline fun <reified K : Any> Dependencies.singleton(noinline factory: DiComponent.() -> K) {

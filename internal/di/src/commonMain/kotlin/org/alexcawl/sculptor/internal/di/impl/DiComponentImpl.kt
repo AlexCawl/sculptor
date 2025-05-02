@@ -97,6 +97,10 @@ internal class DiComponentImpl : DiComponent {
         holder[key] = declaration
     }
 
+    override fun module(module: Module) {
+        addModule(module)
+    }
+
     override fun close(): Unit = synchronized(lock) {
         holder.forEach { (_, declaration) ->
             declaration.close()

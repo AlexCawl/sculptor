@@ -18,6 +18,7 @@ import org.alexcawl.sculptor.internal.mvi.compose.store
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.runtime.engine.Sculptor
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
+import org.alexcawl.sculptor.runtime.engine.domain.SculptorStore
 
 internal class SculptorImpl(
     viewModelStoreOwner: ViewModelStoreOwner,
@@ -29,7 +30,7 @@ internal class SculptorImpl(
     )
     private val store: Store<SculptorState, SculptorEvent> by store(
         viewModelKey = "SculptorStore",
-        factory = diTree::get,
+        factory = { diTree.get(SculptorStore::class) },
     )
     private val rendererScope: RendererScope by lazy(initializer = diTree::get)
 
@@ -79,7 +80,6 @@ internal class SculptorImpl(
             is SculptorState.Loading -> loadingScreen(modifier)
             is SculptorState.Idle -> draw(layout = state.layout)
             is SculptorState.Error -> errorScreen(modifier)
-            else -> error(message = "Unknown state: $state")
         }
     }
 }

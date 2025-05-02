@@ -22,7 +22,9 @@ public sealed interface Section {
         public val content: JsonObject,
     ) : Section {
         public operator fun plus(other: Template): Template {
-            check(value = (id == other.id)) { "Cannot add two templates with different ids" }
+            check(value = id == other.id) {
+                "Cannot add two templates with different ids"
+            }
             return Template(
                 id = id,
                 modifiers = modifiers + other.modifiers,

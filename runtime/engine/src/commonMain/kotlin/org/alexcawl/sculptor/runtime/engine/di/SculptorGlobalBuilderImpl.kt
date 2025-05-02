@@ -1,6 +1,5 @@
 package org.alexcawl.sculptor.runtime.engine.di
 
-import kotlinx.coroutines.CoroutineExceptionHandler
 import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.presenter.Presenter
 import org.alexcawl.sculptor.core.renderer.Renderer
@@ -11,21 +10,33 @@ import org.alexcawl.sculptor.runtime.engine.SculptorGlobalBuilder
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
 import kotlin.reflect.KClass
 
 internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder {
     private val diComponent: DiComponent = DiComponent()
 
+    init {
+        diComponent.addModules(
+            storeModule(),
+            reducersModule(),
+            useCasesModule(),
+            contractorModule(),
+            presenterModule(),
+            rendererModule(),
+            defaultDependenciesModule(),
+        )
+    }
+
     override fun override(override: DiComponent.() -> Unit): Unit = override(diComponent)
 
-    override fun <K : ContentResolutionStrategy> contentResolutionStrategy(
-        key: KClass<K>,
-        contentResolutionStrategy: () -> K
-    ): Unit = diComponent.singleton(
-        key = key,
-        type = ContentResolutionStrategy::class,
-        factory = { contentResolutionStrategy() },
-    )
+    override fun contentResolutionStrategy(contentResolutionStrategy: () -> ContentResolutionStrategy) =
+        diComponent.singleton(
+            key = ContentResolutionStrategy::class,
+            type = ContentResolutionStrategy::class,
+            factory = { contentResolutionStrategy() },
+        )
 
     override fun localContentSource(localContentSource: () -> LocalContentSource): Unit =
         diComponent.singleton(
@@ -41,12 +52,21 @@ internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder 
             factory = { remoteContentSource() },
         )
 
-    override fun exceptionHandler(exceptionHandler: () -> CoroutineExceptionHandler): Unit =
+    override fun sculptorLogger(sculptorLogger: () -> SculptorLogger) {
         diComponent.singleton(
-            key = CoroutineExceptionHandler::class,
-            type = CoroutineExceptionHandler::class,
-            factory = { exceptionHandler() },
+            key = SculptorLogger::class,
+            type = SculptorLogger::class,
+            factory = { sculptorLogger() },
         )
+    }
+
+    override fun intentResolver(intentResolver: () -> IntentResolver) {
+        diComponent.singleton(
+            key = IntentResolver::class,
+            type = IntentResolver::class,
+            factory = { intentResolver() },
+        )
+    }
 
     override fun <K : Renderer<*>> renderer(key: KClass<K>, renderer: () -> K): Unit =
         diComponent.singleton(

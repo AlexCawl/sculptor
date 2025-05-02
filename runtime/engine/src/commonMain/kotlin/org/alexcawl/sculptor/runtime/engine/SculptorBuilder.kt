@@ -1,13 +1,16 @@
 package org.alexcawl.sculptor.runtime.engine
 
-import androidx.lifecycle.LifecycleObserver
 import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.presenter.Presenter
 import org.alexcawl.sculptor.core.renderer.Renderer
+import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
 import kotlin.reflect.KClass
 
 public interface SculptorBuilder {
-    public fun lifecycleObserver(lifecycleObserver: () -> LifecycleObserver)
+    public fun sculptorLogger(sculptorLogger: () -> SculptorLogger)
+
+    public fun intentResolver(intentResolver: () -> IntentResolver)
 
     public fun <K : Renderer<*>> renderer(key: KClass<K>, renderer: () -> K)
 

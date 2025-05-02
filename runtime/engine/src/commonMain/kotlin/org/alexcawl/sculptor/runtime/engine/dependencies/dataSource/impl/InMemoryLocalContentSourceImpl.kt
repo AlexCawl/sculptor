@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.impl
 
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
 
-internal class DefaultLocalContentSource : LocalContentSource {
+internal class InMemoryLocalContentSourceImpl : LocalContentSource {
     private val lock: Any = Any()
     private val localContentMap: MutableMap<String, String> = mutableMapOf()
 

@@ -6,4 +6,4 @@ import androidx.compose.runtime.Immutable
 public abstract class SculptorIntent(public open val payload: Any)
 
 @Immutable
-public data class SculptorDeeplinkIntent(override val payload: String) : SculptorIntent(payload)
+public data class SculptorStringIntent(override val payload: String) : SculptorIntent(payload)

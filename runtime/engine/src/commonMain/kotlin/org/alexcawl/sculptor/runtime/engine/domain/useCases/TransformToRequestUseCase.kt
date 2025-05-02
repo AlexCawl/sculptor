@@ -5,23 +5,23 @@ import org.alexcawl.sculptor.runtime.engine.domain.IntentNotResolvedException
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToRequestCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorRequest
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorDeeplinkIntent
+import org.alexcawl.sculptor.runtime.engine.ui.SculptorStringIntent
 import kotlin.reflect.KClass
 
 internal class TransformToRequestUseCase(
-    private val intentResolver: IntentResolver,
+    private val intentResolver: IntentResolver?,
 ) : SculptorUseCase<TransformToRequestCommand>() {
     override val type: KClass<TransformToRequestCommand> = TransformToRequestCommand::class
 
     override suspend fun TaskBuilder.handle(command: TransformToRequestCommand) {
         val sculptorRequest: SculptorRequest? = when (val intent = command.intent) {
-            is SculptorDeeplinkIntent -> {
+            is SculptorStringIntent -> {
                 SculptorRequest(
                     key = intent.payload,
                     url = intent.payload,
                 )
             }
-            else -> intentResolver.resolve(intent)
+            else -> intentResolver?.resolve(intent)
         }
         when (sculptorRequest) {
             null -> {

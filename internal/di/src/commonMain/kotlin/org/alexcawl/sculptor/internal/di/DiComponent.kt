@@ -29,4 +29,6 @@ public interface DiComponent : Dependencies, AutoCloseable {
 
 public inline fun <reified T : Any> DiComponent.get(): T = get(T::class)
 
+public inline fun <reified T : Any> DiComponent.getOrNull(): T? = getOrNull(T::class)
+
 public inline fun <reified T : Any> DiComponent.getAll(): List<T> = getAll(T::class)
