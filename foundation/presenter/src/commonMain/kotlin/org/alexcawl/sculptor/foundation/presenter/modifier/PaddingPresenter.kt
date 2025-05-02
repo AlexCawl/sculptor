@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 public class PaddingPresenter : ModifierPresenter<Padding>() {
     override val input: KClass<Padding> = Padding::class
 
-    override suspend fun PresenterScope.transform(input: Padding): Modifier {
+    override suspend fun PresenterScope.dslTransform(input: Padding): Modifier {
         return with(input) {
             Modifier.padding(
                 start = map(start),

@@ -10,7 +10,7 @@ public class RolePresenter : Presenter<SculptorRole, ComposeRole>() {
     override val input: KClass<SculptorRole> = SculptorRole::class
     override val output: KClass<ComposeRole> = ComposeRole::class
 
-    public override suspend fun PresenterScope.transform(input: SculptorRole): ComposeRole {
+    public override suspend fun PresenterScope.dslTransform(input: SculptorRole): ComposeRole {
         return when (input) {
             SculptorRole.Button -> ComposeRole.Button
             SculptorRole.Checkbox -> ComposeRole.Checkbox

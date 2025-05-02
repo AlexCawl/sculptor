@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 public class BasicTextPresenter : StatePresenter<BasicTextState>() {
     override val input: KClass<BasicTextState> = BasicTextState::class
 
-    public override suspend fun PresenterScope.transform(input: BasicTextState): UiState {
+    public override suspend fun PresenterScope.dslTransform(input: BasicTextState): UiState {
         return with(input) {
             BasicTextUiState(
                 text = text,

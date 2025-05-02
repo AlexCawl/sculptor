@@ -10,7 +10,7 @@ public class DpPresenter : Presenter<SculptorDp, ComposeDp>() {
     override val input: KClass<SculptorDp> = SculptorDp::class
     override val output: KClass<ComposeDp> = ComposeDp::class
 
-    override suspend fun PresenterScope.transform(input: SculptorDp): ComposeDp {
+    override suspend fun PresenterScope.dslTransform(input: SculptorDp): ComposeDp {
         return when (input) {
             SculptorDp.Hairline -> ComposeDp.Hairline
             SculptorDp.Infinity -> ComposeDp.Infinity

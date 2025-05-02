@@ -24,7 +24,7 @@ internal class StoreLazyDelegate<out State : Any, in Event : Any>(
                 )
             }
             storeViewModel.also { eventStore: Store<State, Event> ->
-                value = eventStore
+                this@StoreLazyDelegate.value = eventStore
             }
         }
     }

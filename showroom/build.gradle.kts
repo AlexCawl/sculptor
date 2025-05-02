@@ -20,5 +20,4 @@ desktop(
 
 commonMainDependencies {
     implementation(projects.runtime.engine)
-    implementation(projects.foundation.bundle)
 }

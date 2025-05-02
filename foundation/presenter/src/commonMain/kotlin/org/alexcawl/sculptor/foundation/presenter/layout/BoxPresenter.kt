@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 public class BoxPresenter : StatePresenter<BoxState>() {
     override val input: KClass<BoxState> = BoxState::class
 
-    public override suspend fun PresenterScope.transform(input: BoxState): UiState {
+    public override suspend fun PresenterScope.dslTransform(input: BoxState): UiState {
         return with(input) {
             BoxUiState(
                 contentAlignment = map(contentAlignment),

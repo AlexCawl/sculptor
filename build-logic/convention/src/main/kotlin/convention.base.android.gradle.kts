@@ -22,7 +22,6 @@ androidBaseConfiguration {
     buildFeatures {
         viewBinding = false
         buildConfig = false
-        compose = true
     }
 
     defaultConfig {

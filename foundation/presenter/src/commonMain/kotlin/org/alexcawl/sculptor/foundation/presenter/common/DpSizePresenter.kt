@@ -11,7 +11,7 @@ public class DpSizePresenter : Presenter<SculptorDpSize, ComposeDpSize>() {
     override val input: KClass<SculptorDpSize> = SculptorDpSize::class
     override val output: KClass<ComposeDpSize> = ComposeDpSize::class
 
-    public override suspend fun PresenterScope.transform(input: SculptorDpSize): ComposeDpSize {
+    public override suspend fun PresenterScope.dslTransform(input: SculptorDpSize): ComposeDpSize {
         return when (input) {
             SculptorDpSize.Zero -> ComposeDpSize.Zero
             SculptorDpSize.Unspecified -> ComposeDpSize.Unspecified

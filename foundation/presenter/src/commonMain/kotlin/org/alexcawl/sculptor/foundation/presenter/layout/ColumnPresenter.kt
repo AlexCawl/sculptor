@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 public class ColumnPresenter : StatePresenter<ColumnState>() {
     override val input: KClass<ColumnState> = ColumnState::class
 
-    public override suspend fun PresenterScope.transform(input: ColumnState): UiState {
+    public override suspend fun PresenterScope.dslTransform(input: ColumnState): UiState {
         return with(input) {
             ColumnUiState(
                 verticalArrangement = map(verticalArrangement),

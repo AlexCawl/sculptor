@@ -61,6 +61,7 @@ include(
     ":foundation:presenter",
     ":foundation:renderer",
     ":foundation:bundle",
+    ":foundation:showroom",
 )
 
 include(

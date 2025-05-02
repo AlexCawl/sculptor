@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 public class BackgroundPresenter : ModifierPresenter<Background>() {
     override val input: KClass<Background> = Background::class
 
-    public override suspend fun PresenterScope.transform(input: Background): Modifier {
+    public override suspend fun PresenterScope.dslTransform(input: Background): Modifier {
         return Modifier.background(
             color = map(input.color),
             shape = map(input.shape),

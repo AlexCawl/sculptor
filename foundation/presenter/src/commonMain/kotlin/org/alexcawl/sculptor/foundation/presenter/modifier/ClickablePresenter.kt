@@ -14,7 +14,7 @@ import kotlin.reflect.KClass
 public class ClickablePresenter : ModifierPresenter<Clickable>() {
     override val input: KClass<Clickable> = Clickable::class
 
-    public override suspend fun PresenterScope.transform(input: Clickable): Modifier {
+    public override suspend fun PresenterScope.dslTransform(input: Clickable): Modifier {
         return with(input) {
             Modifier.clickable(
                 enabled = enabled,
@@ -30,7 +30,7 @@ public class CombinedClickablePresenter : ModifierPresenter<CombinedClickable>()
     override val input: KClass<CombinedClickable> = CombinedClickable::class
 
     @OptIn(ExperimentalFoundationApi::class)
-    override suspend fun PresenterScope.transform(input: CombinedClickable): Modifier {
+    override suspend fun PresenterScope.dslTransform(input: CombinedClickable): Modifier {
         return with(input) {
             Modifier.combinedClickable(
                 enabled = enabled,

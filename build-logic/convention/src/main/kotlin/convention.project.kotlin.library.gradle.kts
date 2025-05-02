@@ -13,6 +13,12 @@ plugins {
     id("convention.base.detekt")
 }
 
+android {
+    buildFeatures {
+        compose = false
+    }
+}
+
 kotlin {
     sourceSets {
         commonMain {

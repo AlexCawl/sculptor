@@ -11,7 +11,7 @@ public class ColorPresenter : Presenter<SculptorColor, ComposeColor>() {
     override val input: KClass<SculptorColor> = SculptorColor::class
     override val output: KClass<ComposeColor> = ComposeColor::class
 
-    public override suspend fun PresenterScope.transform(input: SculptorColor): ComposeColor {
+    public override suspend fun PresenterScope.dslTransform(input: SculptorColor): ComposeColor {
         return with(input) {
             when (input) {
                 is Color.RGB -> ComposeColor(r, g, b)

@@ -31,7 +31,7 @@ public abstract class Presenter<Input : Any, Output : Any> {
      */
     public suspend fun transform(scope: PresenterScope, any: Any): Output {
         @Suppress("UNCHECKED_CAST")
-        return scope.transform(input = any as Input)
+        return scope.dslTransform(input = any as Input)
     }
 
     /**
@@ -41,5 +41,5 @@ public abstract class Presenter<Input : Any, Output : Any> {
      * @param input the input data to be transformed.
      * @return the transformed output data.
      */
-    public abstract suspend fun PresenterScope.transform(input: Input): Output
+    public abstract suspend fun PresenterScope.dslTransform(input: Input): Output
 }

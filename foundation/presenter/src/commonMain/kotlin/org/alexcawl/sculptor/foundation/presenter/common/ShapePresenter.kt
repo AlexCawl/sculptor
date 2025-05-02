@@ -17,7 +17,7 @@ public class ShapePresenter : Presenter<SculptorShape, ComposeShape>() {
     override val input: KClass<SculptorShape> = SculptorShape::class
     override val output: KClass<ComposeShape> = ComposeShape::class
 
-    public override suspend fun PresenterScope.transform(input: SculptorShape): ComposeShape {
+    public override suspend fun PresenterScope.dslTransform(input: SculptorShape): ComposeShape {
         return when (input) {
             SculptorShape.Circle -> CircleShape
             SculptorShape.Rectangle -> RectangleShape

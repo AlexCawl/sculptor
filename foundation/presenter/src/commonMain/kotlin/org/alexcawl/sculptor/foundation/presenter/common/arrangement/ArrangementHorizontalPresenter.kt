@@ -13,7 +13,7 @@ public class ArrangementHorizontalPresenter : Presenter<SculptorArrangement.Hori
     override val input: KClass<SculptorArrangement.Horizontal> = SculptorArrangement.Horizontal::class
     override val output: KClass<ComposeArrangement.Horizontal> = ComposeArrangement.Horizontal::class
 
-    public override suspend fun PresenterScope.transform(input: SculptorArrangement.Horizontal): ComposeArrangement.Horizontal {
+    public override suspend fun PresenterScope.dslTransform(input: SculptorArrangement.Horizontal): ComposeArrangement.Horizontal {
         return when (input) {
             SculptorArrangement.Horizontal.Start -> ComposeArrangement.Start
             SculptorArrangement.Horizontal.Center -> ComposeArrangement.Center
