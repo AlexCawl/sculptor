@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.di
+package org.alexcawl.sculptor.runtime.engine.ui
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
@@ -7,20 +7,31 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModelStoreOwner
 import kotlinx.coroutines.CoroutineScope
 import org.alexcawl.sculptor.core.renderer.RendererScope
 import org.alexcawl.sculptor.internal.di.DiTree
+import org.alexcawl.sculptor.internal.di.DiTreeBuilder
+import org.alexcawl.sculptor.internal.di.compose.diTree
 import org.alexcawl.sculptor.internal.di.get
-import org.alexcawl.sculptor.internal.mvi.compose.rememberStore
+import org.alexcawl.sculptor.internal.mvi.compose.store
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.runtime.engine.Sculptor
-import org.alexcawl.sculptor.runtime.engine.mvi.SculptorEvent
-import org.alexcawl.sculptor.runtime.engine.mvi.SculptorState
-import org.alexcawl.sculptor.runtime.engine.mvi.SculptorStore
+import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 
-internal class SculptorImpl(diTree: DiTree) : Sculptor {
-    private val store: SculptorStore by lazy<SculptorStore>(diTree::get)
-    private val rendererScope: RendererScope by lazy<RendererScope>(diTree::get)
+internal class SculptorImpl(
+    viewModelStoreOwner: ViewModelStoreOwner,
+    diTreeBuilder: DiTreeBuilder,
+) : Sculptor, ViewModelStoreOwner by viewModelStoreOwner {
+    private val diTree: DiTree by diTree(
+        viewModelKey = "SculptorDiTree",
+        diTreeBuilder = diTreeBuilder,
+    )
+    private val store: Store<SculptorState, SculptorEvent> by store(
+        viewModelKey = "SculptorStore",
+        factory = diTree::get,
+    )
+    private val rendererScope: RendererScope by lazy(initializer = diTree::get)
 
     @Composable
     override fun open(
@@ -30,17 +41,13 @@ internal class SculptorImpl(diTree: DiTree) : Sculptor {
         modifier: Modifier,
     ) {
         val scope: CoroutineScope = rememberCoroutineScope()
-        val store: Store<SculptorState, SculptorEvent> = rememberStore(
-            viewModelKey = TAG,
-            factory = { store },
-        )
         store.launchIn(coroutineScope = scope)
 
         val sculptorState: SculptorState by store.state.collectAsState(initial = SculptorState.Loading)
         AnimatedContent(
             targetState = sculptorState,
         ) { targetState: SculptorState ->
-            render(
+            rendererScope.render(
                 state = targetState,
                 loadingScreen = loadingScreen,
                 errorScreen = errorScreen,
@@ -48,7 +55,7 @@ internal class SculptorImpl(diTree: DiTree) : Sculptor {
             )
         }
 
-        LaunchedEffect(deeplink) {
+        LaunchedEffect(key1 = deeplink) {
             store.dispatch(
                 event = SculptorEvent.LoadInitialContentEvent(deeplink = deeplink),
             )
@@ -56,21 +63,17 @@ internal class SculptorImpl(diTree: DiTree) : Sculptor {
     }
 
     @Composable
-    private fun render(
+    private fun RendererScope.render(
         state: SculptorState,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
         modifier: Modifier,
     ) {
         when (state) {
-            is SculptorState.Content -> rendererScope.draw(layout = state.layout)
+            is SculptorState.Content -> draw(layout = state.layout)
             is SculptorState.Error -> errorScreen(modifier)
             is SculptorState.Loading -> loadingScreen(modifier)
             else -> error(message = "Unknown state: $state")
         }
-    }
-
-    private companion object {
-        private const val TAG = "SculptorImpl"
     }
 }

@@ -70,8 +70,8 @@ private class StoreImpl<out State : Any, in Event : Any, Command : Any>(
         for (flowHandler in useCases) {
             coroutineScope.launch {
                 commandsFlow
-                    .filterIsInstance(klass = flowHandler.key)
-                    .mapNotNull(transform = flowHandler.key::safeCast)
+                    .filterIsInstance(klass = flowHandler.type)
+                    .mapNotNull(transform = flowHandler.type::safeCast)
                     .flatMapConcat(transform = { flowHandler.handle(it).asFlow() })
                     .catch { throwable: Throwable ->
                         when (throwable) {

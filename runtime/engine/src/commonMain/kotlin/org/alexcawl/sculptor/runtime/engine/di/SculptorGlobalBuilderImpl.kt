@@ -9,7 +9,6 @@ import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 import org.alexcawl.sculptor.runtime.engine.SculptorGlobalBuilder
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolver
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
 import kotlin.reflect.KClass
@@ -18,15 +17,6 @@ internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder 
     private val diComponent: DiComponent = DiComponent()
 
     override fun override(override: DiComponent.() -> Unit): Unit = override(diComponent)
-
-    override fun <K : ContentResolver> contentResolver(
-        key: KClass<K>,
-        contentResolverProvider: () -> K
-    ): Unit = diComponent.singleton(
-        key = key,
-        type = ContentResolver::class,
-        factory = { contentResolverProvider() },
-    )
 
     override fun <K : ContentResolutionStrategy> contentResolutionStrategy(
         key: KClass<K>,

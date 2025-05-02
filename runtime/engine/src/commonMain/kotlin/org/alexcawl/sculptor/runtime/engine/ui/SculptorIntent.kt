@@ -1,0 +1,9 @@
+package org.alexcawl.sculptor.runtime.engine.ui
+
+import androidx.compose.runtime.Immutable
+
+@Immutable
+public abstract class SculptorIntent(public open val payload: Any)
+
+@Immutable
+public data class SculptorDeeplinkIntent(override val payload: String) : SculptorIntent(payload)

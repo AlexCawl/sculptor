@@ -33,10 +33,11 @@ dependencyResolutionManagement {
     }
 }
 
-
 include(
     ":internal:di",
-    ":internal:mvi"
+    ":internal:di-compose",
+    ":internal:mvi",
+    ":internal:mvi-compose",
 )
 
 include(

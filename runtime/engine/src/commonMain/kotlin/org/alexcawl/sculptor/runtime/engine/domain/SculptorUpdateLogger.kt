@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.mvi
+package org.alexcawl.sculptor.runtime.engine.domain
 
 import org.alexcawl.sculptor.internal.mvi.logging.UpdateLogger
 import org.alexcawl.sculptor.runtime.engine.dependencies.logger.Logger

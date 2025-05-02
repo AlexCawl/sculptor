@@ -6,7 +6,7 @@ import org.alexcawl.sculptor.internal.mvi.mocks.entity.Event
 import kotlin.reflect.KClass
 
 class MockUseCase : UseCase<Command, Event> {
-    override val key: KClass<Command> = Command::class
+    override val type: KClass<Command> = Command::class
 
     override suspend fun handle(command: Command): List<Event> = buildList {
         println("Init command: $command")

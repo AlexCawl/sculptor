@@ -1,9 +1,7 @@
 package org.alexcawl.sculptor.runtime.engine.dependencies.dataSource
 
-public interface ContentResolutionStrategy {
-    public data object OnlyRemote : ContentResolutionStrategy
+public sealed interface ContentResolutionStrategy {
+    public data object RemoteFirst : ContentResolutionStrategy
 
-    public data object RemoteMain : ContentResolutionStrategy
-
-    public data object LocalMain : ContentResolutionStrategy
+    public data object LocalFirst : ContentResolutionStrategy
 }

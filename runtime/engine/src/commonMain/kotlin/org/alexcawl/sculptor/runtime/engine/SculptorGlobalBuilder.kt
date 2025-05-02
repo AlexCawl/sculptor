@@ -5,14 +5,11 @@ import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.presenter.Presenter
 import org.alexcawl.sculptor.core.renderer.Renderer
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolver
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
 import kotlin.reflect.KClass
 
 public interface SculptorGlobalBuilder {
-    public fun <K : ContentResolver> contentResolver(key: KClass<K>, contentResolverProvider: () -> K)
-
     public fun <K : ContentResolutionStrategy> contentResolutionStrategy(key: KClass<K>, contentResolutionStrategy: () -> K)
 
     public fun localContentSource(localContentSource: () -> LocalContentSource)
@@ -26,10 +23,6 @@ public interface SculptorGlobalBuilder {
     public fun <K : Presenter<*, *>> presenter(key: KClass<K>, presenter: () -> K)
 
     public fun <K : Contractor> contractor(key: KClass<K>, contractor: () -> K)
-}
-
-public inline fun <reified K : ContentResolver> SculptorGlobalBuilder.contentResolver(noinline contentResolverProvider: () -> K) {
-    contentResolver(K::class, contentResolverProvider)
 }
 
 public inline fun <reified K : ContentResolutionStrategy> SculptorGlobalBuilder.contentResolutionStrategy(noinline contentResolutionStrategy: () -> K) {

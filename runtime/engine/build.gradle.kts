@@ -15,6 +15,6 @@ commonMainDependencies {
     api(projects.core.renderer)
     implementation(projects.runtime.presenter)
     implementation(projects.runtime.renderer)
-    implementation(projects.internal.di)
+    implementation(projects.internal.diCompose)
     implementation(projects.internal.mviCompose)
 }

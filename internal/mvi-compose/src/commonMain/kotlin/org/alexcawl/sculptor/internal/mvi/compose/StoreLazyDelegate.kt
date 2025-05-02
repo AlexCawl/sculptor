@@ -17,7 +17,7 @@ internal class StoreLazyDelegate<out State : Any, in Event : Any>(
     override fun getValue(thisRef: ViewModelStoreOwner, property: KProperty<*>): Store<State, Event> {
         return value ?: run {
             val viewModelStore: ViewModelStore = thisRef.viewModelStore
-            val storeViewModel: Store<State, Event> = viewModelStore.get(key = viewModelKey) {
+            val storeViewModel: StoreViewModel<State, Event> = viewModelStore.get(key = viewModelKey) {
                 StoreViewModel(
                     store = factory(),
                     coroutineContext = coroutineContext,
