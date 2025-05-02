@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.internal.mvi.lifecycle
+package org.alexcawl.sculptor.internal.mvi.compose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,10 +6,11 @@ import kotlinx.coroutines.plus
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import kotlin.coroutines.CoroutineContext
 
-internal class StoreViewModel<T : Store<*, *>>(
-    val store: T,
+@PublishedApi
+internal class StoreViewModel<out State : Any, in Event : Any>(
+    private val store: Store<State, Event>,
     coroutineContext: CoroutineContext,
-) : ViewModel() {
+) : ViewModel(), Store<State, Event> by store {
     init {
         store.launchIn(coroutineScope = viewModelScope + coroutineContext)
     }

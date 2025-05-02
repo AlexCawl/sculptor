@@ -5,12 +5,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.toCollection
 import kotlinx.coroutines.test.runTest
 import org.alexcawl.sculptor.internal.mvi.core.Store
-import org.alexcawl.sculptor.internal.mvi.mocks.MockUseCase
 import org.alexcawl.sculptor.internal.mvi.mocks.MockReducer
 import org.alexcawl.sculptor.internal.mvi.mocks.MockStore
+import org.alexcawl.sculptor.internal.mvi.mocks.MockUseCase
 import org.alexcawl.sculptor.internal.mvi.mocks.entity.Command
 import org.alexcawl.sculptor.internal.mvi.mocks.entity.Event
 import org.alexcawl.sculptor.internal.mvi.mocks.entity.State
@@ -50,7 +50,9 @@ class StoreTest {
         store.launchIn(coroutineScope = scope)
 
         // Work
-        val resultStates: List<State> = store.state.take(count = 4).toList()
+        val resultStates: List<State> = store.state
+            .take(count = 4)
+            .toCollection(destination = mutableListOf())
         assertEquals(
             expected = resultStates[0],
             actual = State.Initial,

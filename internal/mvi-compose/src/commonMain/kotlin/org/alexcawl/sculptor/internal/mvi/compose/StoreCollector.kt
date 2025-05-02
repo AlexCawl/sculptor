@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.internal.mvi.lifecycle
+package org.alexcawl.sculptor.internal.mvi.compose
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -24,7 +24,7 @@ private fun <State : Any> collectBuild(
 ) {
     val lifecycle: Lifecycle = lifecycleOwner.lifecycle
 
-    check(value = (lifecycle.currentState == Lifecycle.State.INITIALIZED)) {
+    check(value = lifecycle.currentState == Lifecycle.State.INITIALIZED) {
         "Must be called when lifecycle in initialized state"
     }
 

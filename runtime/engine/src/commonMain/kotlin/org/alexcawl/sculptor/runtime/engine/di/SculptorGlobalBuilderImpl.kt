@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.impl
+package org.alexcawl.sculptor.runtime.engine.di
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import org.alexcawl.sculptor.core.contract.Contractor

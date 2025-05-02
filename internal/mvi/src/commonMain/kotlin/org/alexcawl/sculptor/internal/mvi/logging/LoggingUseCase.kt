@@ -9,7 +9,7 @@ internal class LoggingUseCase<Command : Any, Event : Any>(
 ): UseCase<Command, Event> {
     override val key: KClass<Command> = delegate.key
 
-    override fun handle(command: Command): List<Event> {
+    override suspend fun handle(command: Command): List<Event> {
         logger.log(COMMAND_RECEIVED_TAG, command.toString())
         val events: List<Event> = delegate.handle(command)
 

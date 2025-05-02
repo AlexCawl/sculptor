@@ -4,11 +4,11 @@ import org.jetbrains.compose.ExperimentalComposeLibrary
 plugins {
     id("com.android.library")
 
-    id("org.jetbrains.kotlin.multiplatform")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("org.jetbrains.compose")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("io.gitlab.arturbosch.detekt")
+    id("org.jetbrains.kotlin.multiplatform") // Kotlin multiplatform
+    id("org.jetbrains.kotlin.plugin.serialization") // Kotlin serialization
+    id("org.jetbrains.compose") // Compose multiplatform
+    id("org.jetbrains.kotlin.plugin.compose") // Compose compiler
+    id("io.gitlab.arturbosch.detekt") // Detekt
 
     id("convention.base.common")
     id("convention.base.android")
@@ -37,6 +37,16 @@ private val skikoNativeDistribution: String
         val target = "${targetOs}-${targetArch}"
         return "org.jetbrains.skiko:skiko-awt-runtime-$target:$version"
     }
+
+android {
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.version.common.kotlin.language.get()
+    }
+}
 
 kotlin {
     sourceSets {

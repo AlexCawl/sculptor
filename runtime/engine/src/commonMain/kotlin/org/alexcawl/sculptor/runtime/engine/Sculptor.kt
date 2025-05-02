@@ -5,8 +5,8 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
 import org.alexcawl.sculptor.internal.di.DiTree
-import org.alexcawl.sculptor.runtime.engine.impl.SculptorDelegate
-import org.alexcawl.sculptor.runtime.engine.impl.SculptorGlobalBuilderImpl
+import org.alexcawl.sculptor.runtime.engine.di.SculptorDelegate
+import org.alexcawl.sculptor.runtime.engine.di.SculptorGlobalBuilderImpl
 import kotlin.properties.ReadOnlyProperty
 
 @Stable

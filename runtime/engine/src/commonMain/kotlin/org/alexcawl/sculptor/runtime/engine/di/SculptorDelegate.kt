@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.impl
+package org.alexcawl.sculptor.runtime.engine.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelLazy

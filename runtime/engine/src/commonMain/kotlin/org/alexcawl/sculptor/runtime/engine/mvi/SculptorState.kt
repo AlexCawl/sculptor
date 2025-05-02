@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine
+package org.alexcawl.sculptor.runtime.engine.mvi
 
 import androidx.compose.runtime.Immutable
 import org.alexcawl.sculptor.core.layout.Layout

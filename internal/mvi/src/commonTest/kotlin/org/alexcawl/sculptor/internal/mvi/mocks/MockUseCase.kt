@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 class MockUseCase : UseCase<Command, Event> {
     override val key: KClass<Command> = Command::class
 
-    override fun handle(command: Command): List<Event> = buildList {
+    override suspend fun handle(command: Command): List<Event> = buildList {
         println("Init command: $command")
         add(element = Event.ChangeState(command.name))
         println("Finish command: $command")

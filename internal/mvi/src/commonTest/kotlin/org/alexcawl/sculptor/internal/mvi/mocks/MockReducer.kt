@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 class MockReducer : ReducerDsl<State, Event, Command>() {
     override val key: KClass<Event> = Event::class
 
-    override suspend fun NextBuilder.update(event: Event) {
+    override suspend fun NextBuilder.reduce(event: Event) {
         println("Init event: $event")
         when (event) {
             is Event.ChangeState ->{
