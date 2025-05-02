@@ -35,7 +35,8 @@ internal class SculptorImpl(
 
     @Composable
     override fun open(
-        deeplink: String,
+        intent: SculptorIntent?,
+        placeholderScreen: @Composable (modifier: Modifier) -> Unit,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
         modifier: Modifier,
@@ -43,36 +44,41 @@ internal class SculptorImpl(
         val scope: CoroutineScope = rememberCoroutineScope()
         store.launchIn(coroutineScope = scope)
 
-        val sculptorState: SculptorState by store.state.collectAsState(initial = SculptorState.Loading)
+        val sculptorState: SculptorState by store.state.collectAsState(initial = SculptorState.Initial)
         AnimatedContent(
             targetState = sculptorState,
         ) { targetState: SculptorState ->
             rendererScope.render(
                 state = targetState,
+                placeholderScreen = placeholderScreen,
                 loadingScreen = loadingScreen,
                 errorScreen = errorScreen,
                 modifier = modifier,
             )
         }
 
-        LaunchedEffect(key1 = deeplink) {
-            store.dispatch(
-                event = SculptorEvent.LoadInitialContentEvent(deeplink = deeplink),
-            )
+        LaunchedEffect(key1 = intent) {
+            if (intent != null) {
+                store.dispatch(
+                    event = SculptorEvent.HandleIntentEvent(intent = intent),
+                )
+            }
         }
     }
 
     @Composable
     private fun RendererScope.render(
         state: SculptorState,
+        placeholderScreen: @Composable (modifier: Modifier) -> Unit,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
         modifier: Modifier,
     ) {
         when (state) {
-            is SculptorState.Content -> draw(layout = state.layout)
-            is SculptorState.Error -> errorScreen(modifier)
+            is SculptorState.Initial -> placeholderScreen(modifier)
             is SculptorState.Loading -> loadingScreen(modifier)
+            is SculptorState.Idle -> draw(layout = state.layout)
+            is SculptorState.Error -> errorScreen(modifier)
             else -> error(message = "Unknown state: $state")
         }
     }

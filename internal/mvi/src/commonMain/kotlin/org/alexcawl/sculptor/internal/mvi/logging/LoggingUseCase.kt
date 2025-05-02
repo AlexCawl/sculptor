@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 internal class LoggingUseCase<Command : Any, Event : Any>(
     private val delegate: UseCase<Command, Event>,
-    private val logger: UpdateLogger,
+    private val logger: StoreLogger,
 ): UseCase<Command, Event> {
     override val type: KClass<Command> = delegate.type
 

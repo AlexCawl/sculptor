@@ -1,6 +1,5 @@
 package org.alexcawl.sculptor.runtime.presenter.impl
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -36,7 +35,32 @@ public class PresenterScopeImpl(
         any = value,
     )
 
-    override suspend fun layout(input: List<Identifier>): List<Layout> = coroutineScope {
+    override suspend fun layout(identifier: Identifier): Layout {
+        val block: Block = componentProvider.findBlock(identifier)
+        val modifiers: List<ModifierContract> = block.modifiers
+        val stateContract: StateContract = block.state
+        val uiState = presenterProvider.findPresenter(
+            inputClass = stateContract::class,
+            outputClass = UiState::class
+        ).transform(
+            scope = this@PresenterScopeImpl,
+            any = stateContract
+        ) as UiState
+
+        coroutineScope {
+            launch {
+                validateState(uiState = uiState)
+            }
+        }
+
+        return Layout(
+            id = (block.id + stateContract.id).value,
+            modifier = mapModifier(modifiers),
+            uiState = uiState,
+        )
+    }
+
+    override suspend fun layouts(input: List<Identifier>): List<Layout> = coroutineScope {
         input.map { identifier: Identifier ->
             async(start = CoroutineStart.LAZY) {
                 val block: Block = componentProvider.findBlock(identifier)
@@ -49,7 +73,11 @@ public class PresenterScopeImpl(
                     scope = this@PresenterScopeImpl,
                     any = stateContract
                 ) as UiState
-                validateState(uiState = uiState)
+
+                launch {
+                    validateState(uiState = uiState)
+                }
+
                 Layout(
                     id = (block.id + stateContract.id).value,
                     modifier = mapModifier(modifiers),
@@ -59,11 +87,9 @@ public class PresenterScopeImpl(
         }.awaitAll()
     }
 
-    private fun CoroutineScope.validateState(uiState: UiState) {
-        launch {
-            if (!stateValidator.canBeDrawn(uiState)) {
-                error("No presenter found for $uiState. State cannot be drawn.")
-            }
+    private suspend fun validateState(uiState: UiState) {
+        if (!stateValidator.canBeDrawn(uiState)) {
+            error("No presenter found for $uiState. State cannot be drawn.")
         }
     }
 }

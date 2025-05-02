@@ -26,7 +26,7 @@ internal class TransformToRequestUseCase(
         when (sculptorRequest) {
             null -> {
                 dispatch {
-                    SculptorEvent.FailureEvent(cause = IntentNotResolvedException)
+                    SculptorEvent.HandleFailureEvent(cause = IntentNotResolvedException)
                 }
             }
             else -> {

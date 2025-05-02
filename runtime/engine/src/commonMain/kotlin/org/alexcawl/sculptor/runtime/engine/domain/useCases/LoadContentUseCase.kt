@@ -1,9 +1,8 @@
 package org.alexcawl.sculptor.runtime.engine.domain.useCases
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
-import org.alexcawl.sculptor.runtime.engine.dependencies.coroutine.SculptorDispatchers
+import kotlinx.coroutines.coroutineScope
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy.LocalFirst
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy.RemoteFirst
@@ -17,7 +16,6 @@ internal class LoadContentUseCase(
     private val localContentSource: LocalContentSource,
     private val remoteContentSource: RemoteContentSource,
     private val contentResolutionStrategy: ContentResolutionStrategy,
-    dispatchers: SculptorDispatchers,
 ) : SculptorUseCase<LoadContentCommand>() {
     override val type: KClass<LoadContentCommand> = LoadContentCommand::class
 
@@ -28,16 +26,14 @@ internal class LoadContentUseCase(
             LocalFirst -> localFirst(key = key, url = url)
         }.onSuccess { content: String ->
             dispatch {
-                SculptorEvent.HandleRawContentEvent(rawContent = content)
+                SculptorEvent.HandleRawContentEvent(key = key, rawContent = content)
             }
         }.onFailure { exception: Throwable ->
             dispatch {
-                SculptorEvent.FailureEvent(cause = exception)
+                SculptorEvent.HandleFailureEvent(cause = exception)
             }
         }
     }
-
-    private val scope: CoroutineScope = CoroutineScope(dispatchers.io)
 
     private suspend fun remoteFirst(url: String): Result<String> {
         return remoteContentSource.fetch(url = url)
@@ -45,8 +41,10 @@ internal class LoadContentUseCase(
 
     private suspend fun localFirst(key: String, url: String): Result<String> {
         val localContent: String? = localContentSource.find(key = key)
-        val remoteContent: Deferred<Result<String>> = scope.async {
-            remoteContentSource.fetch(url = url)
+        val remoteContent: Deferred<Result<String>> = coroutineScope {
+            async {
+                remoteContentSource.fetch(url = url)
+            }
         }
         return when (localContent) {
             null -> remoteContent.await()

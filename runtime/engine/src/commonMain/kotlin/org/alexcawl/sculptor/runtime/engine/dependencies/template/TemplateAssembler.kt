@@ -1,8 +1,8 @@
 package org.alexcawl.sculptor.runtime.engine.dependencies.template
 
-import org.alexcawl.sculptor.core.contract.ScreenScaffold
-import org.alexcawl.sculptor.core.contract.ScreenSchema
+import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
+import org.alexcawl.sculptor.core.contract.SculptorScreenSchema
 
 public interface TemplateAssembler {
-    public suspend fun assemble(screenSchema: ScreenSchema): ScreenScaffold
+    public suspend fun assemble(schema: SculptorScreenSchema): SculptorScreenScaffold
 }

@@ -13,7 +13,7 @@ import org.alexcawl.sculptor.internal.mvi.logging.LoggingUseCase.Companion.EVENT
 import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.COMMAND_SENT_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.EVENT_RECEIVED_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.STATE_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.UpdateLogger
+import org.alexcawl.sculptor.internal.mvi.logging.StoreLogger
 import org.alexcawl.sculptor.internal.mvi.mocks.MockUseCase
 import org.alexcawl.sculptor.internal.mvi.mocks.MockLogger
 import org.alexcawl.sculptor.internal.mvi.mocks.MockLoggingStore
@@ -29,7 +29,7 @@ class LoggingStoreTest {
     fun `Check WHEN store is empty THEN logging only initial state`() = runTest {
         // Init
         val messages: MutableList<Pair<String, String>> = mutableListOf()
-        val logger: UpdateLogger = MockLogger { tag: String, message: String ->
+        val logger: StoreLogger = MockLogger { tag: String, message: String ->
             messages.add(tag to message)
         }
 
@@ -51,7 +51,7 @@ class LoggingStoreTest {
     fun `Check WHEN store has initial commands THEN state is reduced`() = runTest {
         // Init
         val messages: MutableList<Pair<String, String>> = mutableListOf()
-        val logger: UpdateLogger = MockLogger { tag: String, message: String ->
+        val logger: StoreLogger = MockLogger { tag: String, message: String ->
             messages.add(tag to message)
         }
 
@@ -83,7 +83,7 @@ class LoggingStoreTest {
     fun `Check WHEN store handles events THEN state is reduced`() = runTest {
         // Init
         val messages: MutableList<Pair<String, String>> = mutableListOf()
-        val logger: UpdateLogger = MockLogger { tag: String, message: String ->
+        val logger: StoreLogger = MockLogger { tag: String, message: String ->
             messages.add(tag to message)
         }
 
@@ -123,7 +123,7 @@ class LoggingStoreTest {
     fun `Check WHEN store handles commands and events THEN state is reduced`() = runTest {
         // Init
         val messages: MutableList<Pair<String, String>> = mutableListOf()
-        val logger: UpdateLogger = MockLogger { tag: String, message: String ->
+        val logger: StoreLogger = MockLogger { tag: String, message: String ->
             messages.add(tag to message)
         }
 

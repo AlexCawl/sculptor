@@ -1,6 +1,5 @@
 package org.alexcawl.sculptor.runtime.engine.domain.reducers
 
-import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToRequestCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent.HandleIntentEvent
 import kotlin.reflect.KClass

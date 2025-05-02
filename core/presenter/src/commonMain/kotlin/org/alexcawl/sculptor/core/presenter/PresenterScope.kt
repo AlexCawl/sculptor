@@ -24,10 +24,18 @@ public interface PresenterScope {
     ): Any
 
     /**
-     * Generates a list of layouts based on a list of identifiers.
+     * Transforms a layout based on the identifier.
+     *
+     * @param identifier layout identifier
+     * @return a layout corresponding to the identifier
+     */
+    public suspend fun layout(identifier: Identifier): Layout
+
+    /**
+     * Transforms a list of layouts based on a list of identifiers.
      *
      * @param input a list of identifiers
      * @return a list of layouts corresponding to the identifiers
      */
-    public suspend fun layout(input: List<Identifier>): List<Layout>
+    public suspend fun layouts(input: List<Identifier>): List<Layout>
 }

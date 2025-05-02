@@ -16,7 +16,7 @@ public class ColumnPresenter : StatePresenter<ColumnState>() {
             ColumnUiState(
                 verticalArrangement = map(verticalArrangement),
                 horizontalAlignment = map(horizontalAlignment),
-                content = layout(content),
+                content = layouts(content),
             )
         }
     }

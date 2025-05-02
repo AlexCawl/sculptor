@@ -16,7 +16,7 @@ public class BoxPresenter : StatePresenter<BoxState>() {
             BoxUiState(
                 contentAlignment = map(contentAlignment),
                 propagateMinConstraints = propagateMinConstraints,
-                content = layout(content),
+                content = layouts(content),
             )
         }
     }

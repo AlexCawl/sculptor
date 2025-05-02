@@ -8,8 +8,9 @@ internal class HandleRawContentReducer : SculptorReducer<HandleRawContentEvent>(
     override val key: KClass<HandleRawContentEvent> = HandleRawContentEvent::class
 
     override suspend fun NextBuilder.reduce(event: HandleRawContentEvent) {
+        val (key: String, rawContent: String) = event
         commands(
-            SculptorCommand.DemarshallContentCommand(rawContent = event.rawContent)
+            SculptorCommand.DemarshallContentCommand(key = key, rawContent = rawContent)
         )
     }
 }

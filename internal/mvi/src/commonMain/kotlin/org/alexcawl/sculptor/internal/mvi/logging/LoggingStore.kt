@@ -9,7 +9,7 @@ public fun <State : Any, Event : Any, Command : Any> Store.Companion.create(
     initialCommands: List<Command> = emptyList(),
     useCases: List<UseCase<Command, Event>> = emptyList(),
     reducers: List<Reducer<State, Event, Command>>,
-    logger: UpdateLogger = UpdateLogger.NoOp,
+    logger: StoreLogger = StoreLogger.NoOp,
 ): Store<State, Event> {
     logger.log(tag = INITIAL_STATE_TAG, message = initialState.toString())
 

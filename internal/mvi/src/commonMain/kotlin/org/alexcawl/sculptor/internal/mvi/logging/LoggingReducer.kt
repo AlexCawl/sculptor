@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 
 internal class LoggingReducer<State : Any, Event : Any, Command : Any>(
     private val delegate: Reducer<State, Event, Command>,
-    private val logger: UpdateLogger,
+    private val logger: StoreLogger,
 ) : Reducer<State, Event, Command> {
     override val key: KClass<Event> = delegate.key
 

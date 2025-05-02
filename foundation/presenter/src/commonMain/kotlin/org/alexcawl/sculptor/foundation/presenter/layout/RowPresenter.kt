@@ -16,7 +16,7 @@ public class RowPresenter : StatePresenter<RowState>() {
             RowUiState(
                 horizontalArrangement = map(horizontalArrangement),
                 verticalAlignment = map(verticalAlignment),
-                content = layout(content),
+                content = layouts(content),
             )
         }
     }
