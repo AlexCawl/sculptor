@@ -64,9 +64,11 @@ internal class DiComponentImpl : DiComponent {
     }
 
     override fun clone(): DiComponent = synchronized(lock = lock) {
-        DiComponent().apply {
-            this@DiComponentImpl.holder.entries.forEach { (key, declaration) ->
-                holder[key] = declaration.clone()
+        val ref: DiComponentImpl = this
+        DiComponentImpl().apply {
+            val new: DiComponentImpl = this
+            ref.holder.entries.forEach { (key, declaration) ->
+                new.holder[key] = declaration.clone()
             }
         }
     }

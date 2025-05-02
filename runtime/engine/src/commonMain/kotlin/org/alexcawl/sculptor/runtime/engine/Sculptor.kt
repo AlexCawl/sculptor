@@ -14,11 +14,11 @@ import kotlin.properties.ReadOnlyProperty
 public interface Sculptor {
     @Composable
     public fun open(
-        intent: SculptorIntent? = null,
+        intent: SculptorIntent?,
         placeholderScreen: @Composable (modifier: Modifier) -> Unit,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
-        modifier: Modifier = Modifier,
+        modifier: Modifier,
     )
 
     public companion object {

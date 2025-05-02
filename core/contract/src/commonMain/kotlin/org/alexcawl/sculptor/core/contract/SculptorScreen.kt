@@ -25,7 +25,7 @@ public data class SculptorScreenSchema(
 @Serializable
 @SerialName("scaffold")
 public data class SculptorScreenScaffold(
-    @SerialName("components")
+    @SerialName("blocks")
     public val blocks: List<Block>,
     @SerialName("root")
     public override val root: Identifier,

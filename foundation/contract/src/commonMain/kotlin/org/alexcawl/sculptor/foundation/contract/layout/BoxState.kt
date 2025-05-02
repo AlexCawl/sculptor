@@ -9,8 +9,6 @@ import org.alexcawl.sculptor.foundation.contract.common.Alignment
 @Serializable
 @SerialName("box@state")
 public data class BoxState(
-    @SerialName("id")
-    override val id: Identifier,
     @SerialName("content_alignment")
     val contentAlignment: Alignment,
     @SerialName("propagate_min_constraints")

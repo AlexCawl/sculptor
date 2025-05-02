@@ -17,6 +17,7 @@ import org.alexcawl.sculptor.internal.di.module
 import org.alexcawl.sculptor.internal.di.singleton
 import org.alexcawl.sculptor.internal.mvi.core.Reducer
 import org.alexcawl.sculptor.internal.mvi.core.UseCase
+import org.alexcawl.sculptor.internal.mvi.logging.StoreLogger
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.impl.InMemoryLocalContentSourceImpl
 import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
@@ -46,7 +47,7 @@ import org.alexcawl.sculptor.runtime.renderer.impl.RendererScopeImpl
 
 internal fun storeModule(): Module = module {
     // Store
-    singleton(SculptorStore::class) {
+    singleton<SculptorStore> {
         SculptorStore(
             initialState = SculptorState.Initial,
             initialCommands = emptyList(),
@@ -54,6 +55,10 @@ internal fun storeModule(): Module = module {
             reducers = getAll(),
             logger = get(),
         )
+    }
+    singleton<StoreLogger> {
+        val sculptorLogger: SculptorLogger = get()
+        StoreLogger(function = sculptorLogger::debug)
     }
 }
 
@@ -111,7 +116,7 @@ internal fun useCasesModule(): Module = module {
 
 internal fun contractorModule(): Module = module {
     // Json
-    singleton(StringFormat::class) {
+    singleton<StringFormat> {
         Json {
             encodeDefaults = true
             ignoreUnknownKeys = true
@@ -121,7 +126,7 @@ internal fun contractorModule(): Module = module {
     }
 
     // Serializers
-    singleton(SerializersModule::class) {
+    singleton<SerializersModule> {
         SerializersModule {
             getAll<Contractor>().forEach { contractor: Contractor ->
                 polymorphic(StateContract::class) {
@@ -135,34 +140,34 @@ internal fun contractorModule(): Module = module {
     }
 
     // Template Assembler
-    factory(TemplateAssembler::class) {
+    factory<TemplateAssembler> {
         TemplateAssemblerImpl(stringFormat = get())
     }
 }
 
 internal fun presenterModule(): Module = module {
-    factory(PresenterProvider::class) {
+    factory<PresenterProvider> {
         PresenterProviderImpl(presenters = getAll())
     }
-    factory(StateValidator::class) {
+    factory<StateValidator> {
         StateValidatorImpl(rendererProvider = get())
     }
 }
 
 internal fun rendererModule(): Module = module {
-    factory(RendererProvider::class) {
+    factory<RendererProvider> {
         RendererProviderImpl(renderers = getAll())
     }
-    factory(RendererScope::class) {
+    factory<RendererScope> {
         RendererScopeImpl(rendererProvider = get())
     }
 }
 
 internal fun defaultDependenciesModule(): Module = module {
-    singleton(SculptorLogger::class) {
+    singleton<SculptorLogger> {
         NoOpSculptorLoggerImpl
     }
-    singleton(LocalContentSource::class) {
+    singleton<LocalContentSource> {
         InMemoryLocalContentSourceImpl()
     }
 }

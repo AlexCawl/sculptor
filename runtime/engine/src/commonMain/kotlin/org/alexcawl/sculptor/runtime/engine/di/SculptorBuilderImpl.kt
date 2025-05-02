@@ -12,7 +12,7 @@ import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
 import kotlin.reflect.KClass
 
 internal class SculptorBuilderImpl(globalDiTree: DiTree) : SculptorBuilder, DiTreeBuilder {
-    private val diComponent: DiComponent = globalDiTree.diComponent.clone()
+    private val diComponent: DiComponent = globalDiTree.clone().diComponent
 
     override fun sculptorLogger(sculptorLogger: () -> SculptorLogger) {
         diComponent.singleton(

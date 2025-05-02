@@ -10,8 +10,6 @@ import org.alexcawl.sculptor.foundation.contract.common.Arrangement
 @Serializable
 @SerialName("column@state")
 public data class ColumnState(
-    @SerialName("id")
-    override val id: Identifier,
     @SerialName("vertical_arrangement")
     val verticalArrangement: Arrangement.Vertical,
     @SerialName("horizontal_alignment")

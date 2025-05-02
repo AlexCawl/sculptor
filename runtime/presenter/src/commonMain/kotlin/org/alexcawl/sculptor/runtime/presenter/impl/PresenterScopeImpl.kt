@@ -54,7 +54,7 @@ public class PresenterScopeImpl(
         }
 
         return Layout(
-            id = (block.id + stateContract.id).value,
+            id = block.id.value,
             modifier = mapModifier(modifiers),
             uiState = uiState,
         )
@@ -79,7 +79,7 @@ public class PresenterScopeImpl(
                 }
 
                 Layout(
-                    id = (block.id + stateContract.id).value,
+                    id = block.id.value,
                     modifier = mapModifier(modifiers),
                     uiState = uiState,
                 )

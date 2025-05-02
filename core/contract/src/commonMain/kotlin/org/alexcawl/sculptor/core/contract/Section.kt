@@ -43,5 +43,4 @@ public sealed interface Section {
         @SerialName("state")
         public val state: StateContract
     ) : Section
-
 }
