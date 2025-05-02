@@ -1,5 +1,6 @@
 package org.alexcawl.sculptor.internal.di
 
+import org.alexcawl.sculptor.internal.di.impl.DiTreeImpl
 import kotlin.reflect.KClass
 
 public interface DiTree : AutoCloseable {
@@ -19,14 +20,3 @@ public interface DiTree : AutoCloseable {
 public inline fun <reified T : Any> DiTree.get(): T = get(T::class)
 
 public inline fun <reified T : Any> DiTree.getAll(): List<T> = getAll(T::class)
-
-
-private class DiTreeImpl(override val diComponent: DiComponent) : DiTree {
-    override fun <K : Any> get(key: KClass<K>): K = diComponent.get(key)
-
-    override fun <T : Any> getAll(type: KClass<T>): List<T> = diComponent.getAll(type)
-
-    override fun clone(): DiTree = DiTreeImpl(diComponent.clone())
-
-    override fun close(): Unit = diComponent.close()
-}
