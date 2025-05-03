@@ -11,7 +11,7 @@ public class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Application()
+            App()
         }
     }
 }
@@ -19,5 +19,5 @@ public class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 private fun AppAndroidPreview() {
-    Application()
+    App()
 }

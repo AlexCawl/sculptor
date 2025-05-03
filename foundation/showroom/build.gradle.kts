@@ -5,22 +5,20 @@ plugins {
     id("convention.project.showroom.application")
 }
 
-val packageNamespace = "org.alexcawl.sculptor.foundation.showroom"
-
 android {
-    namespace = packageNamespace
+    namespace = "org.alexcawl.sculptor.foundation.showroom"
 
     defaultConfig {
-        applicationId = "org.alexcawl.showroom.app"
+        applicationId = "org.alexcawl.sculptor.foundation.showroom"
     }
 }
 
 desktop(
-    applicationClass = "$packageNamespace.MainKt",
-    applicationPackage = packageNamespace
+    applicationClass = "org.alexcawl.sculptor.foundation.showroom.MainKt",
+    applicationPackage = "org.alexcawl.sculptor.foundation.showroom"
 )
 
 commonMainDependencies {
-    implementation(projects.foundation.sculptorClient)
-    implementation(projects.foundation.sculptorServer)
+    implementation(projects.runtime.engine)
+    implementation(projects.foundation.bundle)
 }

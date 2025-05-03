@@ -4,6 +4,6 @@ import androidx.compose.ui.window.application
 
 public fun main() {
     application {
-        Application()
+        App()
     }
 }

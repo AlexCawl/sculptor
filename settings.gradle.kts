@@ -1,5 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
+rootProject.name = "sculptor"
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -33,24 +35,35 @@ dependencyResolutionManagement {
     }
 }
 
-include(":showroom:app")
-
 include(
-    ":common:sculptor-core",
-    ":common:sculptor-contract",
-    ":common:sculptor-layout",
-    ":common:sculptor-presenter",
-    ":common:sculptor-renderer",
-    ":common:sculptor-builder",
-    ":common:sculptor-engine",
+    ":internal:di",
+    ":internal:di-compose",
+    ":internal:mvi",
+    ":internal:mvi-compose",
 )
 
 include(
-    ":foundation:sculptor-contract",
-    ":foundation:sculptor-layout",
-    ":foundation:sculptor-presenter",
-    ":foundation:sculptor-renderer",
-    ":foundation:sculptor-client",
-    ":foundation:sculptor-server",
+    ":core:contract",
+    ":core:layout",
+    ":core:presenter",
+    ":core:renderer",
+)
+
+include(
+    ":runtime:engine",
+    ":runtime:presenter",
+    ":runtime:renderer",
+)
+
+include(
+    ":foundation:contract",
+    ":foundation:layout",
+    ":foundation:presenter",
+    ":foundation:renderer",
+    ":foundation:bundle",
     ":foundation:showroom",
+)
+
+include(
+    ":showroom"
 )

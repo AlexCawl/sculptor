@@ -6,6 +6,7 @@ version-common-kotlin-coroutines = "1.10.1"
 version-common-kotlin-serialization = "1.8.0"
 version-common-compose = "1.7.3"
 version-common-skiko = "0.8.19"
+version-common-lifecycle = "2.8.4"
 
 # [versions.common.test]
 version-common-junit = "4.13.2"
@@ -35,7 +36,9 @@ version-utility-detekt = "1.23.7"
 common-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "version-common-kotlin-coroutines" }
 common-kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "version-common-kotlin-serialization" }
 common-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "version-common-kotlin-serialization" }
-common-collections = { module = "androidx.collection:collection", version = "1.4.5" }
+common-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "version-common-lifecycle" }
+common-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "version-common-lifecycle" }
+common-lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime", version.ref = "version-common-lifecycle" }
 
 # [libraries.common.test]
 common-junit = { group = "junit", name = "junit", version.ref = "version-common-junit" }
@@ -51,8 +54,8 @@ android-activityCompose = { module = "androidx.activity:activity-compose", versi
 android-splash = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
 
 # [libraries.android.test]
-android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "version-common-compose"}
-android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "version-common-compose" }
+android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version = "1.7.8"}
+android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version = "1.7.8" }
 
 # ======================================= [libraries.jvm] ==========================================
 # [libraries.jvm.source]
@@ -75,7 +78,6 @@ common-source = [
     "common-kotlin-coroutines",
     "common-kotlin-serialization",
     "common-kotlin-serialization-json",
-    "common-collections",
 ]
 common-test = [
     "common-junit",
