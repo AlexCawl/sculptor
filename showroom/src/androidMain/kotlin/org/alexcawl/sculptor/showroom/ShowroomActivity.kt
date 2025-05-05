@@ -4,21 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import org.alexcawl.sculptor.runtime.engine.Sculptor
+import org.alexcawl.sculptor.runtime.engine.SculptorScreen
 import org.alexcawl.sculptor.runtime.engine.SculptorStringIntent
+import org.alexcawl.sculptor.runtime.engine.presentation.sculptorScreen
 
 public class ShowroomActivity : ComponentActivity() {
-    private val sculptor: Sculptor by Sculptor.create { }
+    private val sculptorScreen: SculptorScreen by sculptorScreen()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            sculptor.open(
-                intent = SculptorStringIntent(payload = "showroom://gallery"),
+            sculptorScreen.open(
+                intent = SculptorStringIntent(payload = "files/screen_hello_world.json"),
                 loadingScreen = {
                     BasicText(text = "Loading")
                 },
@@ -31,8 +30,3 @@ public class ShowroomActivity : ComponentActivity() {
     }
 }
 
-@Preview
-@Composable
-private fun AppAndroidPreview() {
-    App()
-}

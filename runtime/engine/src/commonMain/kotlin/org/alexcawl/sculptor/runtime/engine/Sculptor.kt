@@ -1,32 +1,18 @@
 package org.alexcawl.sculptor.runtime.engine
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModelStoreOwner
 import org.alexcawl.sculptor.internal.di.DiTree
-import org.alexcawl.sculptor.runtime.engine.presentation.SculptorDelegateImpl
-import org.alexcawl.sculptor.runtime.engine.presentation.SculptorGlobalBuilderImpl
-import kotlin.properties.ReadOnlyProperty
+import org.alexcawl.sculptor.runtime.engine.di.SculptorBuilderImpl
+import org.alexcawl.sculptor.runtime.engine.di.SculptorConnector
+import org.alexcawl.sculptor.runtime.engine.di.SculptorGlobalBuilderImpl
 
 @Stable
-public interface Sculptor {
-    @Composable
-    public fun open(
-        intent: SculptorIntent,
-        loadingScreen: @Composable (modifier: Modifier) -> Unit,
-        errorScreen: @Composable (modifier: Modifier) -> Unit,
-        modifier: Modifier,
-    )
-
-    @Composable
-    public fun provides(content: @Composable () -> Unit)
+public interface Sculptor : AutoCloseable {
+    public val connector: SculptorConnector
 
     public companion object {
+        @Volatile
         private var globalDiTreeInstance: DiTree? = null
-
-        internal val globalDiTree: DiTree
-           get() = globalDiTreeInstance?: error("Sculptor is not initialized")
 
         @JvmStatic
         public val isInitialized: Boolean
@@ -34,19 +20,27 @@ public interface Sculptor {
 
         @JvmStatic
         public fun initialize(builder: SculptorGlobalBuilder.() -> Unit) {
-            val diTree: DiTree = SculptorGlobalBuilderImpl().apply(builder).build()
-            return when (globalDiTreeInstance) {
-                null -> globalDiTreeInstance = diTree
-                else -> error("Sculptor is already initialized")
+            val globalDiTree: DiTree = SculptorGlobalBuilderImpl().apply(builder).build()
+            return when (isInitialized) {
+                true -> error("Sculptor is already initialized")
+                false -> globalDiTreeInstance = globalDiTree
             }
         }
 
         @JvmStatic
-        public fun create(builder: SculptorBuilder.() -> Unit): ReadOnlyProperty<ViewModelStoreOwner, Sculptor> {
-            return SculptorDelegateImpl(
-                globalDiTree = globalDiTreeInstance ?: error("Sculptor is not initialized"),
-                builder = builder,
-            )
+        public fun create(builder: SculptorBuilder.() -> Unit): Sculptor {
+            val globalDiTree: DiTree = globalDiTreeInstance ?: error("Sculptor is not initialized")
+            return object : Sculptor {
+                override fun close() = connector.localDiTree.close()
+
+                override val connector: SculptorConnector by lazy {
+                    SculptorConnector(
+                        localDiTree = SculptorBuilderImpl(globalDiTree = globalDiTree)
+                            .apply(builder)
+                            .build()
+                    )
+                }
+            }
         }
     }
 }

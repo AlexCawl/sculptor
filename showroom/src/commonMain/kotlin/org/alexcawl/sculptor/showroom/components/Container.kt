@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.showroom.dependencies
+package org.alexcawl.sculptor.showroom.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

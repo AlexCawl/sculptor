@@ -6,13 +6,13 @@ import org.alexcawl.sculptor.runtime.engine.contractor
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
 import org.alexcawl.sculptor.runtime.engine.presenter
 import org.alexcawl.sculptor.runtime.engine.renderer
-import org.alexcawl.sculptor.showroom.dependencies.ContainerPresenter
-import org.alexcawl.sculptor.showroom.dependencies.ContainerRenderer
+import org.alexcawl.sculptor.showroom.components.ContainerPresenter
+import org.alexcawl.sculptor.showroom.components.ContainerRenderer
 import org.alexcawl.sculptor.showroom.dependencies.ShowroomContractor
 import org.alexcawl.sculptor.showroom.dependencies.ShowroomLogger
 import org.alexcawl.sculptor.showroom.dependencies.ShowroomRemoteContentSource
-import org.alexcawl.sculptor.showroom.dependencies.TextPresenter
-import org.alexcawl.sculptor.showroom.dependencies.TextRenderer
+import org.alexcawl.sculptor.showroom.components.TextPresenter
+import org.alexcawl.sculptor.showroom.components.TextRenderer
 
 public class ShowroomApplication : Application() {
     override fun onCreate() {
@@ -22,10 +22,10 @@ public class ShowroomApplication : Application() {
                 ContentResolutionStrategy.RemoteFirst
             }
             remoteContentSource {
-                ShowroomRemoteContentSource(context = this@ShowroomApplication)
+                ShowroomRemoteContentSource()
             }
             sculptorLogger {
-                ShowroomLogger
+                ShowroomLogger()
             }
             contractor {
                 ShowroomContractor

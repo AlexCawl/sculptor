@@ -2,9 +2,9 @@ package org.alexcawl.sculptor.runtime.engine.presentation
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -19,7 +19,7 @@ import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import org.alexcawl.sculptor.runtime.renderer.RootRenderer
 
 @Composable
-internal fun SculptorScreenImpl(
+internal fun Content(
     intent: SculptorIntent,
     diTree: () -> DiTree,
     store: () -> Store<SculptorState, SculptorEvent>,
@@ -55,16 +55,17 @@ internal fun SculptorScreenImpl(
     }
 }
 
-internal object SculptorScreenScope {
-    internal val diTree: DiTree
-        @ReadOnlyComposable
-        @Composable
-        get() = CompositionLocalDiTree.current
-
-    internal val store: Store<SculptorState, SculptorEvent>
-        @ReadOnlyComposable
-        @Composable
-        get() = CompositionLocalStore.current
+@Composable
+internal inline fun Scope(
+    diTree: () -> DiTree,
+    store: () -> Store<SculptorState, SculptorEvent>,
+    noinline content: @Composable () -> Unit,
+) {
+    CompositionLocalProvider(
+        CompositionLocalDiTree provides diTree(),
+        CompositionLocalStore provides store(),
+        content = content,
+    )
 }
 
 internal val CompositionLocalDiTree: ProvidableCompositionLocal<DiTree> =

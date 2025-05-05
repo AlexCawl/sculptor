@@ -1,0 +1,42 @@
+{
+  "type": "scaffold",
+  "blocks": [
+    {
+      "id": "root",
+      "modifiers": [],
+      "state": {
+        "type": "container",
+        "content": [
+          "text1",
+          "text2",
+          "text3"
+        ]
+      }
+    },
+    {
+      "id": "text1",
+      "modifiers": [],
+      "state": {
+        "type": "text",
+        "text": "Hello, world!"
+      }
+    },
+    {
+      "id": "text2",
+      "modifiers": [],
+      "state": {
+        "type": "text",
+        "text": "I'm a text block!"
+      }
+    },
+    {
+      "id": "text3",
+      "modifiers": [],
+      "state": {
+        "type": "text",
+        "text": "Welcome to Sculptor!"
+      }
+    }
+  ],
+  "root": "root"
+}

@@ -7,19 +7,18 @@ import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import org.alexcawl.sculptor.internal.di.DiTree
-import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 
 @Stable
 @Composable
 public inline fun rememberDiTree(
     viewModelKey: String,
-    crossinline diTreeBuilder: @DisallowComposableCalls () -> DiTreeBuilder,
+    crossinline factory: @DisallowComposableCalls () -> DiTree,
 ): DiTree {
     val viewModelStoreOwner: ViewModelStoreOwner = LocalViewModelStoreOwner.current
         ?: error("No ViewModelStoreOwner in compose hierarchy")
     return remember(key1 = viewModelKey) {
         viewModelStoreOwner.viewModelStore.get(key = viewModelKey) {
-            DiTreeViewModel(diTree = diTreeBuilder().build())
+            DiTreeViewModel(diTree = factory())
         }
     }
 }
