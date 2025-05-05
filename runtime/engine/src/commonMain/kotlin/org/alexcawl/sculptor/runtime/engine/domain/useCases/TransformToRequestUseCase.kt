@@ -5,7 +5,7 @@ import org.alexcawl.sculptor.runtime.engine.domain.IntentNotResolvedException
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToRequestCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorRequest
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorStringIntent
+import org.alexcawl.sculptor.runtime.engine.SculptorStringIntent
 import kotlin.reflect.KClass
 
 internal class TransformToRequestUseCase(

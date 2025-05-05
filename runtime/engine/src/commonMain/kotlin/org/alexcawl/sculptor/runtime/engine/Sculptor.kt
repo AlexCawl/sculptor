@@ -5,27 +5,34 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelStoreOwner
 import org.alexcawl.sculptor.internal.di.DiTree
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorDelegate
-import org.alexcawl.sculptor.runtime.engine.di.SculptorGlobalBuilderImpl
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorIntent
+import org.alexcawl.sculptor.runtime.engine.presentation.SculptorDelegateImpl
+import org.alexcawl.sculptor.runtime.engine.presentation.SculptorGlobalBuilderImpl
 import kotlin.properties.ReadOnlyProperty
 
 @Stable
 public interface Sculptor {
     @Composable
     public fun open(
-        intent: SculptorIntent?,
-        placeholderScreen: @Composable (modifier: Modifier) -> Unit,
+        intent: SculptorIntent,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
         modifier: Modifier,
     )
 
+    @Composable
+    public fun provides(content: @Composable () -> Unit)
+
     public companion object {
         private var globalDiTreeInstance: DiTree? = null
 
-        public fun isInitialized(): Boolean = globalDiTreeInstance != null
+        internal val globalDiTree: DiTree
+           get() = globalDiTreeInstance?: error("Sculptor is not initialized")
 
+        @JvmStatic
+        public val isInitialized: Boolean
+            get() = globalDiTreeInstance != null
+
+        @JvmStatic
         public fun initialize(builder: SculptorGlobalBuilder.() -> Unit) {
             val diTree: DiTree = SculptorGlobalBuilderImpl().apply(builder).build()
             return when (globalDiTreeInstance) {
@@ -34,8 +41,9 @@ public interface Sculptor {
             }
         }
 
+        @JvmStatic
         public fun create(builder: SculptorBuilder.() -> Unit): ReadOnlyProperty<ViewModelStoreOwner, Sculptor> {
-            return SculptorDelegate(
+            return SculptorDelegateImpl(
                 globalDiTree = globalDiTreeInstance ?: error("Sculptor is not initialized"),
                 builder = builder,
             )

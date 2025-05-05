@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.di
+package org.alexcawl.sculptor.runtime.engine.presentation
 
 import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.presenter.Presenter
@@ -6,51 +6,13 @@ import org.alexcawl.sculptor.core.renderer.Renderer
 import org.alexcawl.sculptor.internal.di.DiComponent
 import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.DiTreeBuilder
-import org.alexcawl.sculptor.runtime.engine.SculptorGlobalBuilder
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.SculptorBuilder
 import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
 import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
 import kotlin.reflect.KClass
 
-internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder {
-    private val diComponent: DiComponent = DiComponent()
-
-    init {
-        diComponent.addModules(
-            storeModule(),
-            reducersModule(),
-            useCasesModule(),
-            contractorModule(),
-            presenterModule(),
-            rendererModule(),
-            defaultDependenciesModule(),
-        )
-    }
-
-    override fun override(override: DiComponent.() -> Unit): Unit = override(diComponent)
-
-    override fun contentResolutionStrategy(contentResolutionStrategy: () -> ContentResolutionStrategy) =
-        diComponent.singleton(
-            key = ContentResolutionStrategy::class,
-            type = ContentResolutionStrategy::class,
-            factory = { contentResolutionStrategy() },
-        )
-
-    override fun localContentSource(localContentSource: () -> LocalContentSource): Unit =
-        diComponent.singleton(
-            key = LocalContentSource::class,
-            type = LocalContentSource::class,
-            factory = { localContentSource() },
-        )
-
-    override fun remoteContentSource(remoteContentSource: () -> RemoteContentSource): Unit =
-        diComponent.singleton(
-            key = RemoteContentSource::class,
-            type = RemoteContentSource::class,
-            factory = { remoteContentSource() },
-        )
+internal class SculptorBuilderImpl(globalDiTree: DiTree) : SculptorBuilder, DiTreeBuilder {
+    private val diComponent: DiComponent = globalDiTree.clone().diComponent
 
     override fun sculptorLogger(sculptorLogger: () -> SculptorLogger) {
         diComponent.singleton(
@@ -88,6 +50,10 @@ internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder 
             type = Contractor::class,
             factory = { contractor() },
         )
+
+    override fun override(override: DiComponent.() -> Unit) {
+        override(diComponent)
+    }
 
     override fun build(): DiTree = DiTree(diComponent = diComponent)
 }

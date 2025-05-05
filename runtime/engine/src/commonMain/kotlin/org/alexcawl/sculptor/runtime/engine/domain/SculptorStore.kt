@@ -5,7 +5,6 @@ import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.internal.mvi.core.UseCase
 import org.alexcawl.sculptor.internal.mvi.logging.StoreLogger
 import org.alexcawl.sculptor.internal.mvi.logging.create
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorState
 
 internal class SculptorStore(
     initialState: SculptorState = SculptorState.Loading,

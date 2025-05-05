@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.runtime.engine.domain.reducers
 
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToRequestCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent.HandleIntentEvent
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorState
+import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import kotlin.reflect.KClass
 
 internal class HandleIntentReducer : SculptorReducer<HandleIntentEvent>() {

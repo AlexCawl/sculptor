@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.di
+package org.alexcawl.sculptor.runtime.engine.presentation
 
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.json.Json
@@ -24,6 +24,7 @@ import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
 import org.alexcawl.sculptor.runtime.engine.dependencies.logger.impl.NoOpSculptorLoggerImpl
 import org.alexcawl.sculptor.runtime.engine.dependencies.template.TemplateAssembler
 import org.alexcawl.sculptor.runtime.engine.dependencies.template.impl.TemplateAssemblerImpl
+import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorStore
 import org.alexcawl.sculptor.runtime.engine.domain.StateValidatorImpl
 import org.alexcawl.sculptor.runtime.engine.domain.reducers.HandleFailureReducer
@@ -37,19 +38,20 @@ import org.alexcawl.sculptor.runtime.engine.domain.useCases.LoadContentUseCase
 import org.alexcawl.sculptor.runtime.engine.domain.useCases.SaveToCacheUseCase
 import org.alexcawl.sculptor.runtime.engine.domain.useCases.TransformToLayoutUseCase
 import org.alexcawl.sculptor.runtime.engine.domain.useCases.TransformToRequestUseCase
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorState
 import org.alexcawl.sculptor.runtime.presenter.PresenterProvider
 import org.alexcawl.sculptor.runtime.presenter.StateValidator
 import org.alexcawl.sculptor.runtime.presenter.impl.PresenterProviderImpl
 import org.alexcawl.sculptor.runtime.renderer.RendererProvider
+import org.alexcawl.sculptor.runtime.renderer.RootRenderer
 import org.alexcawl.sculptor.runtime.renderer.impl.RendererProviderImpl
 import org.alexcawl.sculptor.runtime.renderer.impl.RendererScopeImpl
+import org.alexcawl.sculptor.runtime.renderer.impl.RootRendererImpl
 
 internal fun storeModule(): Module = module {
     // Store
     singleton<SculptorStore> {
         SculptorStore(
-            initialState = SculptorState.Initial,
+            initialState = SculptorState.Loading,
             initialCommands = emptyList(),
             useCases = getAll(),
             reducers = getAll(),
@@ -160,6 +162,12 @@ internal fun rendererModule(): Module = module {
     }
     factory<RendererScope> {
         RendererScopeImpl(rendererProvider = get())
+    }
+    factory<RootRenderer> {
+        RootRendererImpl(
+            rendererProvider = get(),
+            rendererScope = get(),
+        )
     }
 }
 

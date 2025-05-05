@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.runtime.engine.domain
 
 import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorIntent
+import org.alexcawl.sculptor.runtime.engine.SculptorIntent
 
 internal interface SculptorCommand {
     data class TransformToRequestCommand(val intent: SculptorIntent) : SculptorCommand

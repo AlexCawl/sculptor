@@ -2,7 +2,7 @@ package org.alexcawl.sculptor.runtime.engine.domain
 
 import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
 import org.alexcawl.sculptor.core.layout.Layout
-import org.alexcawl.sculptor.runtime.engine.ui.SculptorIntent
+import org.alexcawl.sculptor.runtime.engine.SculptorIntent
 
 internal interface SculptorEvent {
     data class HandleIntentEvent(val intent: SculptorIntent) : SculptorEvent

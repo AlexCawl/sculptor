@@ -13,13 +13,13 @@ import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 @Composable
 public inline fun rememberDiTree(
     viewModelKey: String,
-    crossinline builder: @DisallowComposableCalls () -> DiTreeBuilder,
+    crossinline diTreeBuilder: @DisallowComposableCalls () -> DiTreeBuilder,
 ): DiTree {
     val viewModelStoreOwner: ViewModelStoreOwner = LocalViewModelStoreOwner.current
         ?: error("No ViewModelStoreOwner in compose hierarchy")
     return remember(key1 = viewModelKey) {
         viewModelStoreOwner.viewModelStore.get(key = viewModelKey) {
-            DiTreeViewModel(diTree = builder().build())
+            DiTreeViewModel(diTree = diTreeBuilder().build())
         }
     }
 }

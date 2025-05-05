@@ -6,15 +6,15 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
-import kotlinx.coroutines.Dispatchers
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 @Stable
 @Composable
 public inline fun <State : Any, Event : Any> rememberStore(
     viewModelKey: String,
-    coroutineContext: CoroutineContext = Dispatchers.Default,
+    coroutineContext: CoroutineContext = EmptyCoroutineContext,
     crossinline factory: @DisallowComposableCalls () -> Store<State, Event>,
 ): Store<State, Event> {
     val viewModelStoreOwner: ViewModelStoreOwner = LocalViewModelStoreOwner.current

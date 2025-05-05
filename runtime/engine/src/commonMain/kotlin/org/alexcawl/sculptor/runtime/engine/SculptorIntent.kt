@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.ui
+package org.alexcawl.sculptor.runtime.engine
 
 import androidx.compose.runtime.Immutable
 
