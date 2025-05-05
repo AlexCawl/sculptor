@@ -13,6 +13,7 @@ plugins {
     id("convention.base.common")
     id("convention.base.android")
     id("convention.base.desktop")
+    id("convention.base.wasmJs")
     id("convention.base.kmp")
     id("convention.base.detekt")
 }

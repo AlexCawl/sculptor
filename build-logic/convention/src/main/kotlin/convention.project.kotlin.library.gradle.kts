@@ -9,6 +9,7 @@ plugins {
 
     id("convention.base.common")
     id("convention.base.android")
+    id("convention.base.wasmJs")
     id("convention.base.kmp")
     id("convention.base.detekt")
 }
@@ -55,6 +56,14 @@ kotlin {
             dependencies {
                 implementation(libs.bundles.jvm.test)
             }
+        }
+
+        wasmJsMain {
+            // No dependencies
+        }
+
+        wasmJsTest {
+            // No dependencies
         }
     }
 }

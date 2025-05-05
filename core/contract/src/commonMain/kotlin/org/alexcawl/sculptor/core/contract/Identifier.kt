@@ -1,6 +1,7 @@
 package org.alexcawl.sculptor.core.contract
 
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmInline
 
 @JvmInline
 @Serializable

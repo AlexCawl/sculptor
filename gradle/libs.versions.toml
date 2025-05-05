@@ -41,9 +41,7 @@ common-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name 
 common-lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime", version.ref = "version-common-lifecycle" }
 
 # [libraries.common.test]
-common-junit = { group = "junit", name = "junit", version.ref = "version-common-junit" }
 common-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "version-common-kotlin-language" }
-common-kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "version-common-kotlin-language" }
 common-kotlin-test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "version-common-kotlin-coroutines" }
 
 # ======================================= [libraries.android] ======================================
@@ -80,9 +78,7 @@ common-source = [
     "common-kotlin-serialization-json",
 ]
 common-test = [
-    "common-junit",
     "common-kotlin-test",
-    "common-kotlin-test-junit",
     "common-kotlin-test-coroutines",
 ]
 android-source = [

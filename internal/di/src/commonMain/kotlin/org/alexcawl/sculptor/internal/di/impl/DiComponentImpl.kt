@@ -6,6 +6,7 @@ import org.alexcawl.sculptor.internal.di.Module
 import org.alexcawl.sculptor.internal.di.delegateDeclaration
 import org.alexcawl.sculptor.internal.di.factoryDeclaration
 import org.alexcawl.sculptor.internal.di.singletonDeclaration
+import org.alexcawl.sculptor.internal.di.synchronized
 import kotlin.reflect.KClass
 
 internal class DiComponentImpl : DiComponent {

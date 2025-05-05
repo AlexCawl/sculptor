@@ -156,7 +156,7 @@ class DiComponentTest {
         val diComponent = DiComponent()
         diComponent.addDeclaration(
             declaration = singletonDeclaration(
-                key = ServiceImplV1::class,
+                key = Service::class,
                 type = Service::class,
                 factory = { ServiceImplV1() },
             ),
@@ -168,7 +168,7 @@ class DiComponentTest {
         val clonedDiComponent = diComponent.clone()
         clonedDiComponent.addDeclaration(
             declaration = singletonDeclaration(
-                key = ServiceImplV2::class,
+                key = Service::class,
                 type = Service::class,
                 factory = { ServiceImplV2() },
             ),
