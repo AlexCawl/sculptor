@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.dependencies.template.impl
+package org.alexcawl.sculptor.runtime.engine.dependencies.impl
 
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.async
@@ -13,7 +13,7 @@ import org.alexcawl.sculptor.core.contract.ScreenSchema
 import org.alexcawl.sculptor.core.contract.Section
 import org.alexcawl.sculptor.core.contract.Section.Block
 import org.alexcawl.sculptor.core.contract.Section.Template
-import org.alexcawl.sculptor.runtime.engine.dependencies.template.TemplateAssembler
+import org.alexcawl.sculptor.runtime.engine.dependencies.TemplateAssembler
 
 internal class TemplateAssemblerImpl(private val stringFormat: StringFormat) : TemplateAssembler {
     override suspend fun assemble(schema: ScreenSchema): ScreenScaffold {

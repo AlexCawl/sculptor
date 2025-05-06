@@ -1,6 +1,6 @@
-package org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.impl
+package org.alexcawl.sculptor.runtime.engine.dependencies.impl
 
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.LocalContentSource
 
 internal class InMemoryLocalContentSourceImpl : LocalContentSource {
     private val localContentMap: MutableMap<String, String> = mutableMapOf()

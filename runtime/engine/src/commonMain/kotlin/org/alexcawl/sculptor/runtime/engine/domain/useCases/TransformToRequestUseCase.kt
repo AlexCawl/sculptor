@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.runtime.engine.domain.useCases
 
-import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
 import org.alexcawl.sculptor.runtime.engine.domain.IntentNotResolvedException
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToRequestCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent

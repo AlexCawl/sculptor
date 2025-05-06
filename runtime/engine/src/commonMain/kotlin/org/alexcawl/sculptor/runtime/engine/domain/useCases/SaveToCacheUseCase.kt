@@ -3,7 +3,7 @@ package org.alexcawl.sculptor.runtime.engine.domain.useCases
 import kotlinx.serialization.StringFormat
 import org.alexcawl.sculptor.core.contract.Screen
 import org.alexcawl.sculptor.core.contract.ScreenScaffold
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.SaveToCacheCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import kotlin.reflect.KClass

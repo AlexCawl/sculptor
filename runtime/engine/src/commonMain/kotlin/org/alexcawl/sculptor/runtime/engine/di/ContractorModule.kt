@@ -13,8 +13,8 @@ import org.alexcawl.sculptor.internal.di.get
 import org.alexcawl.sculptor.internal.di.getAll
 import org.alexcawl.sculptor.internal.di.module
 import org.alexcawl.sculptor.internal.di.singleton
-import org.alexcawl.sculptor.runtime.engine.dependencies.template.TemplateAssembler
-import org.alexcawl.sculptor.runtime.engine.dependencies.template.impl.TemplateAssemblerImpl
+import org.alexcawl.sculptor.runtime.engine.dependencies.TemplateAssembler
+import org.alexcawl.sculptor.runtime.engine.dependencies.impl.TemplateAssemblerImpl
 
 internal fun contractorModule(): Module = module {
     // Json

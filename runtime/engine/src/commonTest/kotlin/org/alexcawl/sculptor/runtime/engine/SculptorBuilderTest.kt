@@ -1,8 +1,8 @@
 package org.alexcawl.sculptor.runtime.engine
 
 import org.alexcawl.sculptor.internal.di.DiTree
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.RemoteContentSource
 import org.alexcawl.sculptor.runtime.engine.di.SculptorBuilderImpl
 import org.alexcawl.sculptor.runtime.engine.di.SculptorGlobalBuilderImpl
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorStore

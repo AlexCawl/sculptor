@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.runtime.engine.domain.reducers
 
-import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
+import org.alexcawl.sculptor.runtime.engine.dependencies.SculptorLogger
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent.HandleFailureEvent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import kotlin.reflect.KClass

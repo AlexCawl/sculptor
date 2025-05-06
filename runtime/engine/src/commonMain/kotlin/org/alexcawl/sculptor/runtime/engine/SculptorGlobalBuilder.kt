@@ -3,11 +3,11 @@ package org.alexcawl.sculptor.runtime.engine
 import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.presenter.Presenter
 import org.alexcawl.sculptor.core.renderer.Renderer
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
-import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.LocalContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.SculptorLogger
 import kotlin.reflect.KClass
 
 public interface SculptorGlobalBuilder {

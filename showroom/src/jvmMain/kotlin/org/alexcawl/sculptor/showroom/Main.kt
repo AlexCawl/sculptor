@@ -7,7 +7,7 @@ import androidx.compose.ui.window.application
 import org.alexcawl.sculptor.runtime.engine.Sculptor
 import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.contractor
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
 import org.alexcawl.sculptor.runtime.engine.presentation.rememberSculptorUi
 import org.alexcawl.sculptor.runtime.engine.presenter
 import org.alexcawl.sculptor.runtime.engine.renderer

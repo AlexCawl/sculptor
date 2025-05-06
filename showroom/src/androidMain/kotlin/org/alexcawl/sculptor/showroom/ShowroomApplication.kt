@@ -3,7 +3,7 @@ package org.alexcawl.sculptor.showroom
 import android.app.Application
 import org.alexcawl.sculptor.runtime.engine.Sculptor
 import org.alexcawl.sculptor.runtime.engine.contractor
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
 import org.alexcawl.sculptor.runtime.engine.presenter
 import org.alexcawl.sculptor.runtime.engine.renderer
 import org.alexcawl.sculptor.showroom.components.ContainerPresenter

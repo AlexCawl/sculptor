@@ -7,11 +7,11 @@ import org.alexcawl.sculptor.internal.di.DiComponent
 import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 import org.alexcawl.sculptor.runtime.engine.SculptorGlobalBuilder
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
-import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.LocalContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.SculptorLogger
 import kotlin.reflect.KClass
 
 internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder {

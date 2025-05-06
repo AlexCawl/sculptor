@@ -3,11 +3,11 @@ package org.alexcawl.sculptor.runtime.engine.domain.useCases
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy.LocalFirst
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy.RemoteFirst
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy.LocalFirst
+import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy.RemoteFirst
+import org.alexcawl.sculptor.runtime.engine.dependencies.LocalContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.RemoteContentSource
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.LoadContentCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import kotlin.reflect.KClass

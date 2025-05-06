@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.dependencies.dataSource
+package org.alexcawl.sculptor.runtime.engine.dependencies
 
 public interface LocalContentSource {
     public suspend fun find(key: String): String?

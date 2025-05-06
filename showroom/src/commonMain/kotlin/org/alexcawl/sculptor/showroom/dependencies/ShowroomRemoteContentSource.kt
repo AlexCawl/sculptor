@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.showroom.dependencies
 
-import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.RemoteContentSource
+import org.alexcawl.sculptor.runtime.engine.dependencies.RemoteContentSource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import sculptor.showroom.generated.resources.Res
 

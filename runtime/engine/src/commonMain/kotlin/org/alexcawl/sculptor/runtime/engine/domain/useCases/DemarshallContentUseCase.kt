@@ -4,7 +4,7 @@ import kotlinx.serialization.StringFormat
 import org.alexcawl.sculptor.core.contract.Screen
 import org.alexcawl.sculptor.core.contract.ScreenScaffold
 import org.alexcawl.sculptor.core.contract.ScreenSchema
-import org.alexcawl.sculptor.runtime.engine.dependencies.template.TemplateAssembler
+import org.alexcawl.sculptor.runtime.engine.dependencies.TemplateAssembler
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.DemarshallContentCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import kotlin.reflect.KClass

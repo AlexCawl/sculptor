@@ -7,8 +7,8 @@ import org.alexcawl.sculptor.internal.di.DiComponent
 import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 import org.alexcawl.sculptor.runtime.engine.SculptorBuilder
-import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
-import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
+import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.SculptorLogger
 import kotlin.reflect.KClass
 
 internal class SculptorBuilderImpl(globalDiTree: DiTree) : SculptorBuilder, DiTreeBuilder {

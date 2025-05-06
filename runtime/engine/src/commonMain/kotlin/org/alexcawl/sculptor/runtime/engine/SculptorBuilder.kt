@@ -3,8 +3,8 @@ package org.alexcawl.sculptor.runtime.engine
 import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.presenter.Presenter
 import org.alexcawl.sculptor.core.renderer.Renderer
-import org.alexcawl.sculptor.runtime.engine.dependencies.intent.IntentResolver
-import org.alexcawl.sculptor.runtime.engine.dependencies.logger.SculptorLogger
+import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
+import org.alexcawl.sculptor.runtime.engine.dependencies.SculptorLogger
 import kotlin.reflect.KClass
 
 public interface SculptorBuilder {

@@ -1,4 +1,4 @@
-package org.alexcawl.sculptor.runtime.engine.dependencies.logger
+package org.alexcawl.sculptor.runtime.engine.dependencies
 
 public interface SculptorLogger {
     public fun debug(tag: String, message: String)
