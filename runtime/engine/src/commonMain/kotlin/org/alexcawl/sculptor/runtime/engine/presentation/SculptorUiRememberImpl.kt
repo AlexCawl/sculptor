@@ -7,17 +7,17 @@ import org.alexcawl.sculptor.internal.di.compose.rememberDiTree
 import org.alexcawl.sculptor.internal.mvi.compose.rememberStore
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.runtime.engine.SculptorIntent
-import org.alexcawl.sculptor.runtime.engine.SculptorScreen
+import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.di.SculptorConnector
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorStore
 
-internal class SculptorScreenRememberImpl(
+internal class SculptorUiRememberImpl(
     private val sculptorConnector: SculptorConnector,
-) : SculptorScreen {
+) : SculptorUi {
     @Composable
-    override fun open(
+    override fun Screen(
         intent: SculptorIntent,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
@@ -31,30 +31,13 @@ internal class SculptorScreenRememberImpl(
             viewModelKey = REMEMBER_STORE_KEY,
             factory = { diTree.get(SculptorStore::class) },
         )
-        Content(
+        SculptorUiImpl(
             intent = intent,
             diTree = { diTree },
             store = { store },
             loadingScreen = loadingScreen,
             errorScreen = errorScreen,
             modifier = modifier,
-        )
-    }
-
-    @Composable
-    override fun provides(content: @Composable () -> Unit) {
-        val diTree: DiTree = rememberDiTree(
-            viewModelKey = REMEMBER_DI_TREE_KEY,
-            factory = sculptorConnector::localDiTree,
-        )
-        val store: Store<SculptorState, SculptorEvent> = rememberStore(
-            viewModelKey = REMEMBER_STORE_KEY,
-            factory = { diTree.get(SculptorStore::class) },
-        )
-        Scope(
-            diTree = { diTree },
-            store = { store },
-            content = content,
         )
     }
 }

@@ -1,16 +1,15 @@
 package org.alexcawl.sculptor.showroom
 
-import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
 import org.alexcawl.sculptor.runtime.engine.Sculptor
-import org.alexcawl.sculptor.runtime.engine.SculptorScreen
-import org.alexcawl.sculptor.runtime.engine.SculptorStringIntent
+import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.contractor
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.ContentResolutionStrategy
-import org.alexcawl.sculptor.runtime.engine.presentation.rememberSculptorScreen
+import org.alexcawl.sculptor.runtime.engine.presentation.rememberSculptorUi
 import org.alexcawl.sculptor.runtime.engine.presenter
 import org.alexcawl.sculptor.runtime.engine.renderer
 import org.alexcawl.sculptor.showroom.components.ContainerPresenter
@@ -55,18 +54,10 @@ public fun main() {
     val sculptor: Sculptor = Sculptor.create {  }
 
     ComposeViewport(document.body!!) {
-        val sculptorScreen: SculptorScreen = rememberSculptorScreen(sculptor)
-        sculptorScreen.provides {
-            SculptorScreen(
-                intent = SculptorStringIntent("files/screen_hello_world.json"),
-                loadingScreen = {
-                    BasicText(text = "Loading")
-                },
-                errorScreen = {
-                    BasicText(text = "Error")
-                },
-                modifier = Modifier,
-            )
-        }
+        val sculptorUi: SculptorUi = rememberSculptorUi(sculptor)
+        ShowroomApp(
+            sculptorUiProvider = { sculptorUi },
+            modifier = Modifier.fillMaxSize(),
+        )
     }
 }

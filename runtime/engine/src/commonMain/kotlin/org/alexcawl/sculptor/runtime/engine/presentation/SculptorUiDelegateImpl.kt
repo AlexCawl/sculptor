@@ -8,16 +8,16 @@ import org.alexcawl.sculptor.internal.di.compose.diTree
 import org.alexcawl.sculptor.internal.mvi.compose.store
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.runtime.engine.SculptorIntent
-import org.alexcawl.sculptor.runtime.engine.SculptorScreen
+import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.di.SculptorConnector
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorStore
 
-internal class SculptorScreenDelegateImpl(
+internal class SculptorUiDelegateImpl(
     sculptorConnector: SculptorConnector,
     viewModelStoreOwner: ViewModelStoreOwner,
-) : SculptorScreen, ViewModelStoreOwner by viewModelStoreOwner {
+) : SculptorUi, ViewModelStoreOwner by viewModelStoreOwner {
     private val diTree: DiTree by diTree(
         viewModelKey = DELEGATE_DI_TREE_KEY,
         factory = { sculptorConnector.localDiTree },
@@ -28,28 +28,19 @@ internal class SculptorScreenDelegateImpl(
     )
 
     @Composable
-    override fun open(
+    override fun Screen(
         intent: SculptorIntent,
         loadingScreen: @Composable (modifier: Modifier) -> Unit,
         errorScreen: @Composable (modifier: Modifier) -> Unit,
         modifier: Modifier,
     ) {
-        Content(
+        SculptorUiImpl(
             intent = intent,
             diTree = { diTree },
             store = { store },
             loadingScreen = loadingScreen,
             errorScreen = errorScreen,
             modifier = modifier,
-        )
-    }
-
-    @Composable
-    override fun provides(content: @Composable () -> Unit) {
-        Scope(
-            diTree = { diTree },
-            store = { store },
-            content = content,
         )
     }
 }

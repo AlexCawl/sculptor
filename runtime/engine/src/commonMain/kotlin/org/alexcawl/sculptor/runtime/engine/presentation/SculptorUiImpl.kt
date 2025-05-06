@@ -2,13 +2,10 @@ package org.alexcawl.sculptor.runtime.engine.presentation
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.get
@@ -19,7 +16,7 @@ import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
 import org.alexcawl.sculptor.runtime.renderer.RootRenderer
 
 @Composable
-internal fun Content(
+internal fun SculptorUiImpl(
     intent: SculptorIntent,
     diTree: () -> DiTree,
     store: () -> Store<SculptorState, SculptorEvent>,
@@ -54,24 +51,5 @@ internal fun Content(
         )
     }
 }
-
-@Composable
-internal inline fun Scope(
-    diTree: () -> DiTree,
-    store: () -> Store<SculptorState, SculptorEvent>,
-    noinline content: @Composable () -> Unit,
-) {
-    CompositionLocalProvider(
-        CompositionLocalDiTree provides diTree(),
-        CompositionLocalStore provides store(),
-        content = content,
-    )
-}
-
-internal val CompositionLocalDiTree: ProvidableCompositionLocal<DiTree> =
-    staticCompositionLocalOf { error("No DiTree provided") }
-
-internal val CompositionLocalStore: ProvidableCompositionLocal<Store<SculptorState, SculptorEvent>> =
-    staticCompositionLocalOf { error("No Store provided") }
 
 private const val SCULPTOR_ANIMATION: String = "SCULPTOR_ANIMATION"
