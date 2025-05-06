@@ -5,6 +5,8 @@ import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.runtime.engine.di.SculptorBuilderImpl
 import org.alexcawl.sculptor.runtime.engine.di.SculptorConnector
 import org.alexcawl.sculptor.runtime.engine.di.SculptorGlobalBuilderImpl
+import kotlin.concurrent.Volatile
+import kotlin.jvm.JvmStatic
 
 @Stable
 public interface Sculptor : AutoCloseable {
