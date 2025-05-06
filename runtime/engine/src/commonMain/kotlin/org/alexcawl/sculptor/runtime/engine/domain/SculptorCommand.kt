@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.runtime.engine.domain
 
-import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
+import org.alexcawl.sculptor.core.contract.ScreenScaffold
 import org.alexcawl.sculptor.runtime.engine.SculptorIntent
 
 internal interface SculptorCommand {
@@ -10,7 +10,7 @@ internal interface SculptorCommand {
 
     data class DemarshallContentCommand(val key: String, val rawContent: String) : SculptorCommand
 
-    data class SaveToCacheCommand(val key: String, val scaffold: SculptorScreenScaffold) : SculptorCommand
+    data class SaveToCacheCommand(val key: String, val scaffold: ScreenScaffold) : SculptorCommand
 
-    data class TransformToLayoutCommand(val scaffold: SculptorScreenScaffold) : SculptorCommand
+    data class TransformToLayoutCommand(val scaffold: ScreenScaffold) : SculptorCommand
 }

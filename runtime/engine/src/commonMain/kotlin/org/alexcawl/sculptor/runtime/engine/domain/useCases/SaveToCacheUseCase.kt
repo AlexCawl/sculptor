@@ -1,8 +1,8 @@
 package org.alexcawl.sculptor.runtime.engine.domain.useCases
 
 import kotlinx.serialization.StringFormat
-import org.alexcawl.sculptor.core.contract.SculptorScreen
-import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
+import org.alexcawl.sculptor.core.contract.Screen
+import org.alexcawl.sculptor.core.contract.ScreenScaffold
 import org.alexcawl.sculptor.runtime.engine.dependencies.dataSource.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.SaveToCacheCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
@@ -15,10 +15,10 @@ internal class SaveToCacheUseCase(
     override val type: KClass<SaveToCacheCommand> = SaveToCacheCommand::class
 
     override suspend fun TaskBuilder.handle(command: SaveToCacheCommand) {
-        val (key: String, scaffold: SculptorScreenScaffold) = command
+        val (key: String, scaffold: ScreenScaffold) = command
         runCatching {
             stringFormat.encodeToString(
-                serializer = SculptorScreen.serializer(),
+                serializer = Screen.serializer(),
                 value = scaffold,
             )
         }.onSuccess { content: String ->

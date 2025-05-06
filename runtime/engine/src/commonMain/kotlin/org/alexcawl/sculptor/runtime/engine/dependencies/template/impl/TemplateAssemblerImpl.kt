@@ -8,15 +8,15 @@ import kotlinx.serialization.StringFormat
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import org.alexcawl.sculptor.core.contract.Identifier
-import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
-import org.alexcawl.sculptor.core.contract.SculptorScreenSchema
+import org.alexcawl.sculptor.core.contract.ScreenScaffold
+import org.alexcawl.sculptor.core.contract.ScreenSchema
 import org.alexcawl.sculptor.core.contract.Section
 import org.alexcawl.sculptor.core.contract.Section.Block
 import org.alexcawl.sculptor.core.contract.Section.Template
 import org.alexcawl.sculptor.runtime.engine.dependencies.template.TemplateAssembler
 
 internal class TemplateAssemblerImpl(private val stringFormat: StringFormat) : TemplateAssembler {
-    override suspend fun assemble(schema: SculptorScreenSchema): SculptorScreenScaffold {
+    override suspend fun assemble(schema: ScreenSchema): ScreenScaffold {
         val root: Identifier = schema.root
         val templates: List<Template> = schema.templates
         val blocks: List<Block> = coroutineScope {
@@ -37,7 +37,7 @@ internal class TemplateAssemblerImpl(private val stringFormat: StringFormat) : T
                 }
             }.awaitAll()
         }
-        return SculptorScreenScaffold(
+        return ScreenScaffold(
             blocks = blocks,
             root = root,
         )

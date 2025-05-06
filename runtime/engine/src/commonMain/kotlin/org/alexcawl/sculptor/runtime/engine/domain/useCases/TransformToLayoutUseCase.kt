@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.runtime.engine.domain.useCases
 
 import org.alexcawl.sculptor.core.contract.Identifier
-import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
+import org.alexcawl.sculptor.core.contract.ScreenScaffold
 import org.alexcawl.sculptor.core.layout.Layout
 import org.alexcawl.sculptor.core.presenter.PresenterScope
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToLayoutCommand
@@ -19,7 +19,7 @@ internal class TransformToLayoutUseCase(
     override val type: KClass<TransformToLayoutCommand> = TransformToLayoutCommand::class
 
     override suspend fun TaskBuilder.handle(command: TransformToLayoutCommand) {
-        val scaffold: SculptorScreenScaffold = command.scaffold
+        val scaffold: ScreenScaffold = command.scaffold
         val componentProvider = ComponentProvider { identifier: Identifier ->
             scaffold.blocks
                 .find { it.id == identifier }

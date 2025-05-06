@@ -1,9 +1,9 @@
 package org.alexcawl.sculptor.runtime.engine.domain.useCases
 
 import kotlinx.serialization.StringFormat
-import org.alexcawl.sculptor.core.contract.SculptorScreen
-import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
-import org.alexcawl.sculptor.core.contract.SculptorScreenSchema
+import org.alexcawl.sculptor.core.contract.Screen
+import org.alexcawl.sculptor.core.contract.ScreenScaffold
+import org.alexcawl.sculptor.core.contract.ScreenSchema
 import org.alexcawl.sculptor.runtime.engine.dependencies.template.TemplateAssembler
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.DemarshallContentCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
@@ -19,20 +19,20 @@ internal class DemarshallContentUseCase(
         val (key: String, rawContent: String) = command
         runCatching {
             stringFormat.decodeFromString(
-                deserializer = SculptorScreen.serializer(),
+                deserializer = Screen.serializer(),
                 string = rawContent,
             )
-        }.onSuccess { sculptorScreen: SculptorScreen ->
-            when (sculptorScreen) {
-                is SculptorScreenScaffold -> {
+        }.onSuccess { screen: Screen ->
+            when (screen) {
+                is ScreenScaffold -> {
                     dispatch {
-                        SculptorEvent.HandleScaffoldEvent(key = key, scaffold = sculptorScreen)
+                        SculptorEvent.HandleScaffoldEvent(key = key, scaffold = screen)
                     }
                 }
 
-                is SculptorScreenSchema -> {
-                    val scaffold: SculptorScreenScaffold = templateAssembler.assemble(
-                        schema = sculptorScreen,
+                is ScreenSchema -> {
+                    val scaffold: ScreenScaffold = templateAssembler.assemble(
+                        schema = screen,
                     )
                     dispatch {
                         SculptorEvent.HandleScaffoldEvent(key = key, scaffold = scaffold)

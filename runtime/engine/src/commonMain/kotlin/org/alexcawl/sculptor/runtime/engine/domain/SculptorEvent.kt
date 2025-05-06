@@ -1,6 +1,6 @@
 package org.alexcawl.sculptor.runtime.engine.domain
 
-import org.alexcawl.sculptor.core.contract.SculptorScreenScaffold
+import org.alexcawl.sculptor.core.contract.ScreenScaffold
 import org.alexcawl.sculptor.core.layout.Layout
 import org.alexcawl.sculptor.runtime.engine.SculptorIntent
 
@@ -11,7 +11,7 @@ internal interface SculptorEvent {
 
     data class HandleRawContentEvent(val key: String, val rawContent: String) : SculptorEvent
 
-    data class HandleScaffoldEvent(val key: String, val scaffold: SculptorScreenScaffold) : SculptorEvent
+    data class HandleScaffoldEvent(val key: String, val scaffold: ScreenScaffold) : SculptorEvent
 
     data class HandleUiContentEvent(val uiContent: Layout) : SculptorEvent
 
