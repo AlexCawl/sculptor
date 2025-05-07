@@ -5,8 +5,12 @@ import org.gradle.api.Project
 import java.io.File
 
 inline fun Project.detektConfiguration(
-    block: DetektExtension.(DetektConfiguration) -> Unit
-) = block(detektExtension, DetektConfigurationImpl)
+    block: DetektExtension.(DetektConfiguration) -> Unit,
+): Unit = try {
+    block(detektExtension, DetektConfigurationImpl)
+} catch (ignored: IllegalStateException) {
+    project.logger.warn("Detekt is not applied for ${project.name}")
+}
 
 interface DetektConfiguration {
     val Project.detektConfigPathValue: String

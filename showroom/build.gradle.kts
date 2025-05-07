@@ -1,5 +1,5 @@
 import org.alexcawl.plugins.commonMainDependencies
-import org.alexcawl.plugins.jvm.desktop
+import org.alexcawl.plugins.desktop.desktop
 
 plugins {
     id("convention.project.showroom.application")

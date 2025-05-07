@@ -1,4 +1,4 @@
-package org.alexcawl.plugins.kotlin
+package org.alexcawl.plugins.kmp
 
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.findByType

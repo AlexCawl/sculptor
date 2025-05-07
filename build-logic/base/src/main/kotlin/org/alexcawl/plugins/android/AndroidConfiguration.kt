@@ -7,24 +7,34 @@ import org.gradle.kotlin.dsl.findByType
 
 inline fun Project.androidBaseConfiguration(
     androidConfigurationBlock: AndroidExtensions.() -> Unit
-) = androidConfigurationBlock(androidExtension)
+): Unit = try {
+    androidConfigurationBlock(androidExtension)
+} catch (ignored: IllegalStateException) {
+    project.logger.warn("Android plugin is not applied for ${project.name}")
+}
 
 inline fun Project.androidLibraryConfiguration(
     androidConfigurationBlock: LibraryExtension.() -> Unit
 ) {
-    val libraryExtension: LibraryExtension? = extensions.findByType(LibraryExtension::class)
-    when (libraryExtension) {
-        null -> Unit
-        else -> androidConfigurationBlock(libraryExtension)
+    try {
+        when (val libraryExtension: LibraryExtension? = androidExtension as? LibraryExtension) {
+            null -> Unit
+            else -> androidConfigurationBlock(libraryExtension)
+        }
+    } catch (ignored: IllegalStateException) {
+        project.logger.warn("Android library plugin is not applied for ${project.name}")
     }
 }
 
 inline fun Project.androidApplicationConfiguration(
     androidConfigurationBlock: ApplicationExtension.() -> Unit
 ) {
-    val applicationExtension: ApplicationExtension? = extensions.findByType(ApplicationExtension::class)
-    when (applicationExtension) {
-        null -> Unit
-        else -> androidConfigurationBlock(applicationExtension)
+    try {
+        when (val applicationExtension: ApplicationExtension? = androidExtension as? ApplicationExtension) {
+            null -> Unit
+            else -> androidConfigurationBlock(applicationExtension)
+        }
+    } catch (ignored: IllegalStateException) {
+        project.logger.warn("Android application plugin is not applied for ${project.name}")
     }
 }

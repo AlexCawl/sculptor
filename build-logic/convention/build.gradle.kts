@@ -24,3 +24,20 @@ dependencies {
     // Issue - https://github.com/gradle/gradle/issues/15383
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
+
+//gradlePlugin {
+//    plugins {
+//        register("convention.project.kotlin.library") {
+//            id = "convention.project.kotlin.library"
+//            implementationClass = "org.alexcawl.plugins.project.KmpModulePlugin"
+//        }
+//        register("convention.project.compose.library") {
+//            id = "convention.project.compose.library"
+//            implementationClass = "org.alexcawl.plugins.project.CmpModulePlugin"
+//        }
+//        register("convention.project.showroom.application") {
+//            id = "convention.project.showroom.application"
+//            implementationClass = "org.alexcawl.plugins.project.ShowroomModulePlugin"
+//        }
+//    }
+//}
