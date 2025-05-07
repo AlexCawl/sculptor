@@ -1,8 +1,10 @@
 package org.alexcawl.sculptor.foundation.client
 
 import kotlinx.serialization.modules.PolymorphicModuleBuilder
-import kotlinx.serialization.modules.SerializersModuleBuilder
 import kotlinx.serialization.modules.subclass
+import org.alexcawl.sculptor.core.contract.Contractor
+import org.alexcawl.sculptor.core.contract.ModifierContract
+import org.alexcawl.sculptor.core.contract.StateContract
 import org.alexcawl.sculptor.foundation.contract.layout.BasicTextState
 import org.alexcawl.sculptor.foundation.contract.layout.BoxState
 import org.alexcawl.sculptor.foundation.contract.layout.ColumnState
@@ -30,46 +32,41 @@ import org.alexcawl.sculptor.foundation.contract.modifier.WrapContentHeight
 import org.alexcawl.sculptor.foundation.contract.modifier.WrapContentSize
 import org.alexcawl.sculptor.foundation.contract.modifier.WrapContentWidth
 
-/**
- * TODO: docs
- */
-//public object FoundationContractorState : SculptorContractor.State {
-//    override val modifiers: PolymorphicModuleBuilder<ModifierContract>.() -> Unit = {
-//        subclass(Background::class)
-//
-//        subclass(Clickable::class)
-//        subclass(CombinedClickable::class)
-//
-//        subclass(Padding::class)
-//
-//        subclass(FillMaxHeight::class)
-//        subclass(Height::class)
-//        subclass(HeightIn::class)
-//        subclass(RequiredHeight::class)
-//        subclass(RequiredHeightIn::class)
-//        subclass(WrapContentHeight::class)
-//
-//        subclass(FillMaxSize::class)
-//        subclass(RequiredSize::class)
-//        subclass(RequiredSizeIn::class)
-//        subclass(Size::class)
-//        subclass(SizeIn::class)
-//        subclass(WrapContentSize::class)
-//
-//        subclass(FillMaxWidth::class)
-//        subclass(RequiredWidth::class)
-//        subclass(RequiredWidthIn::class)
-//        subclass(Width::class)
-//        subclass(WidthIn::class)
-//        subclass(WrapContentWidth::class)
-//    }
-//
-//    override val states: PolymorphicModuleBuilder<StateContract>.() -> Unit = {
-//        subclass(BasicTextState::class)
-//        subclass(BoxState::class)
-//        subclass(ColumnState::class)
-//        subclass(RowState::class)
-//    }
-//
-//    override val contractBuilder: SerializersModuleBuilder.() -> Unit = {}
-//}
+internal object FoundationContract : Contractor {
+    override val stateContracts: PolymorphicModuleBuilder<StateContract>.() -> Unit = {
+        subclass(BasicTextState::class)
+        subclass(BoxState::class)
+        subclass(ColumnState::class)
+        subclass(RowState::class)
+    }
+
+    override val modifierContracts: PolymorphicModuleBuilder<ModifierContract>.() -> Unit = {
+        subclass(Background::class)
+
+        subclass(Clickable::class)
+        subclass(CombinedClickable::class)
+
+        subclass(Padding::class)
+
+        subclass(FillMaxHeight::class)
+        subclass(Height::class)
+        subclass(HeightIn::class)
+        subclass(RequiredHeight::class)
+        subclass(RequiredHeightIn::class)
+        subclass(WrapContentHeight::class)
+
+        subclass(FillMaxSize::class)
+        subclass(RequiredSize::class)
+        subclass(RequiredSizeIn::class)
+        subclass(Size::class)
+        subclass(SizeIn::class)
+        subclass(WrapContentSize::class)
+
+        subclass(FillMaxWidth::class)
+        subclass(RequiredWidth::class)
+        subclass(RequiredWidthIn::class)
+        subclass(Width::class)
+        subclass(WidthIn::class)
+        subclass(WrapContentWidth::class)
+    }
+}

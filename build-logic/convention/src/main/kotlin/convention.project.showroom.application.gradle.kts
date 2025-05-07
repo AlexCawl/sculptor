@@ -53,18 +53,27 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                // Bundle
                 implementation(libs.bundles.common.source)
+
+                // Compose
                 implementation(compose.foundation)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
+
+                // Lifecycle
                 implementation(libs.common.lifecycle.compose)
                 implementation(libs.common.lifecycle.viewmodel)
+                implementation(libs.common.lifecycle.runtime)
             }
         }
 
         commonTest {
             dependencies {
+                // Bundle
                 implementation(libs.bundles.common.test)
+
+                // Compose
                 @OptIn(ExperimentalComposeLibrary::class)
                 implementation(compose.uiTest)
             }
@@ -72,22 +81,30 @@ kotlin {
 
         androidMain {
             dependencies {
+                // Bundle
                 implementation(libs.bundles.android.source)
+
+                // Compose
                 implementation(compose.uiTooling)
+
+                // Android
                 implementation(libs.android.activityCompose)
-                implementation(libs.android.splash)
             }
         }
 
         androidInstrumentedTest {
             dependencies {
+                // Bundle
                 implementation(libs.bundles.android.test)
             }
         }
 
         jvmMain {
             dependencies {
+                // Bundle
                 implementation(libs.bundles.jvm.source)
+
+                // Compose
                 implementation(compose.desktop.currentOs)
                 implementation(skikoNativeDistribution)
             }
@@ -95,6 +112,7 @@ kotlin {
 
         jvmTest {
             dependencies {
+                // Bundle
                 implementation(libs.bundles.jvm.test)
             }
         }

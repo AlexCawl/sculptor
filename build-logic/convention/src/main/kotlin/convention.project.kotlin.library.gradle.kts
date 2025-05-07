@@ -3,9 +3,9 @@ import org.alexcawl.plugins.libs
 plugins {
     id("com.android.library")
 
-    id("org.jetbrains.kotlin.multiplatform")
-    id("org.jetbrains.kotlin.plugin.serialization")
-    id("io.gitlab.arturbosch.detekt")
+    id("org.jetbrains.kotlin.multiplatform") // Kotlin multiplatform
+    id("org.jetbrains.kotlin.plugin.serialization") // Kotlin serialization
+    id("io.gitlab.arturbosch.detekt") // Detekt
 
     id("convention.base.common")
     id("convention.base.android")

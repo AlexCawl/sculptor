@@ -1,7 +1,7 @@
 [versions]
 # ======================================= [versions.common] ========================================
 # [versions.common.source]
-version-common-kotlin-language = "2.1.0"
+version-common-kotlin-language = "2.1.10"
 version-common-kotlin-coroutines = "1.10.1"
 version-common-kotlin-serialization = "1.8.0"
 version-common-compose = "1.7.3"
@@ -9,16 +9,16 @@ version-common-skiko = "0.8.19"
 version-common-lifecycle = "2.8.4"
 
 # [versions.common.test]
-version-common-junit = "4.13.2"
+version-common-mokkery = "2.7.2"
 
 # ======================================= [versions.android] =======================================
 # [versions.android.source]
-version-android-agp = "8.5.2"
-version-android-activityCompose = "1.10.0"
-version-android-coreKtx = "1.15.0"
+version-android-agp = "8.8.2"
+version-android-activityCompose = "1.10.1"
+version-android-coreKtx = "1.16.0"
 
 # [versions.android.test]
-version-android-espresso = "3.6.1"
+version-android-compose-test = "1.8.0"
 
 # ======================================= [versions.jvm] ===========================================
 # [versions.jvm.source]
@@ -49,11 +49,10 @@ common-kotlin-test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-corout
 android-kotlin = { group = "androidx.core", name = "core-ktx", version.ref = "version-android-coreKtx" }
 android-kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "version-common-kotlin-coroutines" }
 android-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "version-android-activityCompose" }
-android-splash = { group = "androidx.core", name = "core-splashscreen", version = "1.0.1" }
 
 # [libraries.android.test]
-android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version = "1.7.8"}
-android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version = "1.7.8" }
+android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "version-android-compose-test" }
+android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "version-android-compose-test" }
 
 # ======================================= [libraries.jvm] ==========================================
 # [libraries.jvm.source]
@@ -70,6 +69,7 @@ gradleplugin-composeCompiler = { module = "org.jetbrains.kotlin:compose-compiler
 gradleplugin-kotlinSerialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "version-common-kotlin-language" }
 gradleplugin-kotlinJvm = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "version-common-kotlin-language" }
 gradleplugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "version-utility-detekt" }
+gradleplugin-mokkery = { module = "dev.mokkery:mokkery-gradle", version.ref = "version-common-mokkery" }
 
 [bundles]
 common-source = [
@@ -110,4 +110,5 @@ androidLibrary = { id = "com.android.library", version.ref = "version-android-ag
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "version-common-kotlin-language" }
 
 # [plugins.util]
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "version-utility-detekt"}
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "version-utility-detekt" }
+mokkery = { id = "dev.mokkery", version.ref = "version-common-mokkery" }

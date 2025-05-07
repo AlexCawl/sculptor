@@ -1,5 +1,8 @@
 package org.alexcawl.sculptor.foundation.client
 
+import org.alexcawl.sculptor.core.presenter.ModifierPresenter
+import org.alexcawl.sculptor.core.presenter.Presenter
+import org.alexcawl.sculptor.core.presenter.StatePresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BasicTextPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BoxPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.ColumnPresenter
@@ -34,58 +37,69 @@ import org.alexcawl.sculptor.foundation.presenter.modifier.WidthPresenter
 import org.alexcawl.sculptor.foundation.presenter.modifier.WrapContentHeightPresenter
 import org.alexcawl.sculptor.foundation.presenter.modifier.WrapContentSizePresenter
 import org.alexcawl.sculptor.foundation.presenter.modifier.WrapContentWidthPresenter
+import org.alexcawl.sculptor.runtime.engine.SculptorGlobalBuilder
+import org.alexcawl.sculptor.runtime.engine.presenter
 
-/**
- * TODO: docs
- */
-//public object FoundationPresenterState : SculptorPresenter.State {
-//    override val statePresenters: List<StatePresenter<*>> = buildList {
-//        add(BasicTextPresenter())
-//        add(BoxPresenter())
-//        add(ColumnPresenter())
-//        add(RowPresenter())
-//    }
-//
-//    override val modifierPresenters: List<ModifierPresenter<*>> = buildList {
-//        add(BackgroundPresenter())
-//
-//        add(ClickablePresenter())
-//        add(CombinedClickablePresenter())
-//
-//        add(HeightPresenter())
-//        add(FillMaxHeightPresenter())
-//        add(HeightInPresenter())
-//        add(RequiredHeightPresenter())
-//        add(WrapContentHeightPresenter())
-//
-//        add(WidthPresenter())
-//        add(FillMaxWidthPresenter())
-//        add(WidthInPresenter())
-//        add(RequiredWidthPresenter())
-//        add(WrapContentWidthPresenter())
-//
-//        add(SizePresenter())
-//        add(FillMaxSizePresenter())
-//        add(SizeInPresenter())
-//        add(RequiredSizePresenter())
-//        add(WrapContentSizePresenter())
-//
-//        add(PaddingPresenter())
-//    }
-//
-//    override val commonPresenters: List<CommonPresenter<*, *>> = buildList {
-//        add(AlignmentHorizontalPresenter())
-//        add(AlignmentPresenter())
-//        add(AlignmentVerticalPresenter())
-//
-//        add(ArrangementHorizontalPresenter())
-//        add(ArrangementPresenter())
-//        add(ArrangementVerticalPresenter())
-//
-//        add(ColorPresenter())
-//        add(DpPresenter())
-//        add(DpSizePresenter())
-//        add(RolePresenter())
-//        add(ShapePresenter())
-//    }
-//}
+internal object FoundationPresenter {
+    internal fun SculptorGlobalBuilder.install() {
+        foundationCommonPresenters.forEach { foundationCommonPresenter: Presenter<*, *> ->
+            presenter { foundationCommonPresenter }
+        }
+        foundationStatePresenters.forEach { foundationStatePresenter: StatePresenter<*> ->
+            presenter { foundationStatePresenter }
+        }
+        foundationModifierPresenters.forEach { foundationModifierPresenter: ModifierPresenter<*> ->
+            presenter { foundationModifierPresenter }
+        }
+    }
+
+    private val foundationStatePresenters: List<StatePresenter<*>> = buildList {
+        add(BasicTextPresenter())
+        add(BoxPresenter())
+        add(ColumnPresenter())
+        add(RowPresenter())
+    }
+
+    private val foundationModifierPresenters: List<ModifierPresenter<*>> = buildList {
+        add(BackgroundPresenter())
+
+        add(ClickablePresenter())
+        add(CombinedClickablePresenter())
+
+        add(HeightPresenter())
+        add(FillMaxHeightPresenter())
+        add(HeightInPresenter())
+        add(RequiredHeightPresenter())
+        add(WrapContentHeightPresenter())
+
+        add(WidthPresenter())
+        add(FillMaxWidthPresenter())
+        add(WidthInPresenter())
+        add(RequiredWidthPresenter())
+        add(WrapContentWidthPresenter())
+
+        add(SizePresenter())
+        add(FillMaxSizePresenter())
+        add(SizeInPresenter())
+        add(RequiredSizePresenter())
+        add(WrapContentSizePresenter())
+
+        add(PaddingPresenter())
+    }
+
+    private val foundationCommonPresenters: List<Presenter<*, *>> = buildList {
+        add(AlignmentHorizontalPresenter())
+        add(AlignmentPresenter())
+        add(AlignmentVerticalPresenter())
+
+        add(ArrangementHorizontalPresenter())
+        add(ArrangementPresenter())
+        add(ArrangementVerticalPresenter())
+
+        add(ColorPresenter())
+        add(DpPresenter())
+        add(DpSizePresenter())
+        add(RolePresenter())
+        add(ShapePresenter())
+    }
+}
