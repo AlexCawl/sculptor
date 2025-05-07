@@ -8,11 +8,11 @@ import kotlinx.coroutines.test.runTest
 import org.alexcawl.sculptor.internal.mvi.core.Store
 import org.alexcawl.sculptor.internal.mvi.logging.INITIAL_COMMAND_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.INITIAL_STATE_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingUseCase.Companion.COMMAND_RECEIVED_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingUseCase.Companion.EVENT_SENT_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.COMMAND_SENT_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.EVENT_RECEIVED_TAG
-import org.alexcawl.sculptor.internal.mvi.logging.LoggingReducer.Companion.STATE_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.impl.LoggingUseCaseImpl.Companion.COMMAND_RECEIVED_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.impl.LoggingUseCaseImpl.Companion.EVENT_SENT_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.impl.LoggingReducerImpl.Companion.COMMAND_SENT_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.impl.LoggingReducerImpl.Companion.EVENT_RECEIVED_TAG
+import org.alexcawl.sculptor.internal.mvi.logging.impl.LoggingReducerImpl.Companion.STATE_TAG
 import org.alexcawl.sculptor.internal.mvi.logging.StoreLogger
 import org.alexcawl.sculptor.internal.mvi.mocks.MockUseCase
 import org.alexcawl.sculptor.internal.mvi.mocks.MockLogger

@@ -1,10 +1,11 @@
-package org.alexcawl.sculptor.internal.mvi.logging
+package org.alexcawl.sculptor.internal.mvi.logging.impl
 
 import org.alexcawl.sculptor.internal.mvi.core.Next
 import org.alexcawl.sculptor.internal.mvi.core.Reducer
+import org.alexcawl.sculptor.internal.mvi.logging.StoreLogger
 import kotlin.reflect.KClass
 
-internal class LoggingReducer<State : Any, Event : Any, Command : Any>(
+internal class LoggingReducerImpl<State : Any, Event : Any, Command : Any>(
     private val delegate: Reducer<State, Event, Command>,
     private val logger: StoreLogger,
 ) : Reducer<State, Event, Command> {
@@ -30,7 +31,7 @@ internal class LoggingReducer<State : Any, Event : Any, Command : Any>(
 
     internal companion object {
         const val STATE_TAG = "STATE"
-        const val EVENT_RECEIVED_TAG = "EVENT_RECEIVED"
-        const val COMMAND_SENT_TAG = "COMMAND_SENT"
+        const val EVENT_RECEIVED_TAG = "STORE_EVENT_RECEIVED"
+        const val COMMAND_SENT_TAG = "STORE_COMMAND_SENT"
     }
 }

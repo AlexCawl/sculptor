@@ -1,9 +1,10 @@
-package org.alexcawl.sculptor.internal.mvi.logging
+package org.alexcawl.sculptor.internal.mvi.logging.impl
 
 import org.alexcawl.sculptor.internal.mvi.core.UseCase
+import org.alexcawl.sculptor.internal.mvi.logging.StoreLogger
 import kotlin.reflect.KClass
 
-internal class LoggingUseCase<Command : Any, Event : Any>(
+internal class LoggingUseCaseImpl<Command : Any, Event : Any>(
     private val delegate: UseCase<Command, Event>,
     private val logger: StoreLogger,
 ): UseCase<Command, Event> {
@@ -23,7 +24,7 @@ internal class LoggingUseCase<Command : Any, Event : Any>(
     }
 
     internal companion object {
-        const val COMMAND_RECEIVED_TAG = "COMMAND_RECEIVED"
-        const val EVENT_SENT_TAG = "EVENT_SENT"
+        const val COMMAND_RECEIVED_TAG = "STORE_COMMAND_RECEIVED"
+        const val EVENT_SENT_TAG = "STORE_EVENT_SENT"
     }
 }
