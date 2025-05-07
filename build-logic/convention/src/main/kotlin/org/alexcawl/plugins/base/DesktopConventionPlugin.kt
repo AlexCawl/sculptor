@@ -10,14 +10,19 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
-internal class DesktopConventionPlugin : BaseConventionPlugin() {
+sealed class DesktopConventionPlugin : BaseConventionPlugin() {
+    abstract val isApplicationModule: Boolean
+
     override fun Project.configure() {
         plugins.apply(type = JvmConventionPlugin::class)
-        desktopConfiguration {
-            application {
-                nativeDistributions {
-                    targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-                    packageVersion = projectVersionNameValue
+
+        if (isApplicationModule) {
+            desktopConfiguration {
+                application {
+                    nativeDistributions {
+                        targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+                        packageVersion = projectVersionNameValue
+                    }
                 }
             }
         }
@@ -25,4 +30,12 @@ internal class DesktopConventionPlugin : BaseConventionPlugin() {
             jvm()
         }
     }
+}
+
+internal class DesktopLibraryPlugin : DesktopConventionPlugin() {
+    override val isApplicationModule: Boolean = false
+}
+
+internal class DesktopApplicationPlugin : DesktopConventionPlugin() {
+    override val isApplicationModule: Boolean = true
 }

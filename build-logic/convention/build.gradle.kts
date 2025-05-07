@@ -25,19 +25,19 @@ dependencies {
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
-//gradlePlugin {
-//    plugins {
-//        register("convention.project.kotlin.library") {
-//            id = "convention.project.kotlin.library"
-//            implementationClass = "org.alexcawl.plugins.project.KmpModulePlugin"
-//        }
-//        register("convention.project.compose.library") {
-//            id = "convention.project.compose.library"
-//            implementationClass = "org.alexcawl.plugins.project.CmpModulePlugin"
-//        }
-//        register("convention.project.showroom.application") {
-//            id = "convention.project.showroom.application"
-//            implementationClass = "org.alexcawl.plugins.project.ShowroomModulePlugin"
-//        }
-//    }
-//}
+gradlePlugin {
+    plugins {
+        register("convention.project.kotlin.library") {
+            id = "convention.project.kotlin.library"
+            implementationClass = "org.alexcawl.plugins.project.KmpModuleLibraryPlugin"
+        }
+        register("convention.project.compose.library") {
+            id = "convention.project.compose.library"
+            implementationClass = "org.alexcawl.plugins.project.CmpModuleLibraryPlugin"
+        }
+        register("convention.project.showroom.application") {
+            id = "convention.project.showroom.application"
+            implementationClass = "org.alexcawl.plugins.project.ShowroomModulePlugin"
+        }
+    }
+}

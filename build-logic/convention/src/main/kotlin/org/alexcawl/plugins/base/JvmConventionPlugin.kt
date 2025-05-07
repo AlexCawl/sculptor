@@ -14,14 +14,6 @@ import org.gradle.api.Project
 
 internal class JvmConventionPlugin : BaseConventionPlugin() {
     override fun Project.configure() {
-        jvmConfiguration {
-            compilerOptions {
-                jvmTarget.set(javaCompileTargetVersionValue.toJvmTarget())
-            }
-            jvmToolchain {
-                languageVersion.set(kotlinJvmToolchainVersionValue.toJavaLanguageVersion())
-            }
-        }
         kotlinCompilerConfiguration {
             jvmTarget.set(javaCompileTargetVersionValue.toJvmTarget())
             languageVersion.set(kotlinLanguageVersionValue.toKotlinVersion())

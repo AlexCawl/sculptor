@@ -16,6 +16,7 @@ import org.alexcawl.plugins.projectVersionNameValue
 import org.alexcawl.plugins.targetSdkValue
 import org.alexcawl.plugins.toJavaVersion
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.maybeCreate
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
@@ -24,6 +25,10 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 internal class AndroidConventionPlugin : BaseConventionPlugin() {
     @Suppress("UnstableApiUsage")
     override fun Project.configure() {
+        with(plugins) {
+            apply(type = JvmConventionPlugin::class)
+        }
+
         androidBaseConfiguration {
             compileSdk = compileSdkValue
             ndkVersion = ndkVersionValue

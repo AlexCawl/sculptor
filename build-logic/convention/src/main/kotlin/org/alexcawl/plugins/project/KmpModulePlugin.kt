@@ -2,15 +2,17 @@ package org.alexcawl.plugins.project
 
 import org.alexcawl.plugins.BaseConventionPlugin
 import org.alexcawl.plugins.base.AndroidConventionPlugin
+import org.alexcawl.plugins.base.DesktopApplicationPlugin
 import org.alexcawl.plugins.base.DesktopConventionPlugin
+import org.alexcawl.plugins.base.DesktopLibraryPlugin
 import org.alexcawl.plugins.base.WasmJsConventionPlugin
 import org.alexcawl.plugins.kmp.kotlinMultiplatformConfiguration
 import org.alexcawl.plugins.libs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 
-open class KmpModulePlugin : BaseConventionPlugin() {
-    protected open val isApplicationModule: Boolean = false
+sealed class KmpModulePlugin : BaseConventionPlugin() {
+    abstract val isApplicationModule: Boolean
 
     override fun Project.configure() {
         with(plugins) {
@@ -28,11 +30,18 @@ open class KmpModulePlugin : BaseConventionPlugin() {
 
             // Convention plugins
             apply(type = AndroidConventionPlugin::class)
-            apply(type = DesktopConventionPlugin::class)
             apply(type = WasmJsConventionPlugin::class)
+
+            if (isApplicationModule) {
+                apply(type = DesktopApplicationPlugin::class)
+            } else {
+                apply(type = DesktopLibraryPlugin::class)
+            }
         }
 
         kotlinMultiplatformConfiguration {
+            explicitApi()
+
             sourceSets.commonMain {
                 dependencies {
                     implementation(libs.bundles.common.source)
@@ -78,4 +87,12 @@ open class KmpModulePlugin : BaseConventionPlugin() {
             }
         }
     }
+}
+
+class KmpModuleLibraryPlugin : KmpModulePlugin() {
+    override val isApplicationModule: Boolean = false
+}
+
+internal class KmpModuleApplicationPlugin : KmpModulePlugin() {
+    override val isApplicationModule: Boolean = true
 }

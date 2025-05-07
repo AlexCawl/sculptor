@@ -1,22 +1,28 @@
 package org.alexcawl.plugins.project
 
+import org.alexcawl.plugins.BaseConventionPlugin
 import org.alexcawl.plugins.android.androidBaseConfiguration
 import org.alexcawl.plugins.compose
 import org.alexcawl.plugins.kmp.kotlinMultiplatformConfiguration
 import org.alexcawl.plugins.libs
 import org.alexcawl.plugins.skikoNativeDistribution
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.apply
 import org.jetbrains.compose.ExperimentalComposeLibrary
 
-open class CmpModulePlugin : KmpModulePlugin() {
-    override val isApplicationModule: Boolean = false
+sealed class CmpModulePlugin : BaseConventionPlugin() {
+    abstract val isApplicationModule: Boolean
 
     override fun Project.configure() {
-        super.apply(target = this)
-
         with(plugins) {
             apply("org.jetbrains.compose") // Compose multiplatform
             apply("org.jetbrains.kotlin.plugin.compose") // Compose compiler
+
+            if (isApplicationModule) {
+                apply(KmpModuleApplicationPlugin::class)
+            } else {
+                apply(KmpModuleLibraryPlugin::class)
+            }
         }
 
         androidBaseConfiguration {
@@ -71,4 +77,12 @@ open class CmpModulePlugin : KmpModulePlugin() {
             }
         }
     }
+}
+
+class CmpModuleLibraryPlugin : CmpModulePlugin() {
+    override val isApplicationModule: Boolean = false
+}
+
+internal class CmpModuleApplicationPlugin : CmpModulePlugin() {
+    override val isApplicationModule: Boolean = true
 }
