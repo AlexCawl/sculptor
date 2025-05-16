@@ -3,7 +3,6 @@ package org.alexcawl.plugins.project
 import org.alexcawl.plugins.BaseConventionPlugin
 import org.alexcawl.plugins.base.AndroidConventionPlugin
 import org.alexcawl.plugins.base.DesktopApplicationPlugin
-import org.alexcawl.plugins.base.DesktopConventionPlugin
 import org.alexcawl.plugins.base.DesktopLibraryPlugin
 import org.alexcawl.plugins.base.WasmJsConventionPlugin
 import org.alexcawl.plugins.kmp.kotlinMultiplatformConfiguration

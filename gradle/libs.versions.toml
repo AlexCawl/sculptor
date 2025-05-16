@@ -39,6 +39,7 @@ common-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-ser
 common-lifecycle-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "version-common-lifecycle" }
 common-lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "version-common-lifecycle" }
 common-lifecycle-runtime = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime", version.ref = "version-common-lifecycle" }
+common-ktor-client = { group = "io.ktor", name = "ktor-client-core", version = "3.1.1" }
 
 # [libraries.common.test]
 common-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "version-common-kotlin-language" }
@@ -49,6 +50,7 @@ common-kotlin-test-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-corout
 android-kotlin = { group = "androidx.core", name = "core-ktx", version.ref = "version-android-coreKtx" }
 android-kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "version-common-kotlin-coroutines" }
 android-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "version-android-activityCompose" }
+android-datastore = { group = "androidx.datastore", name = "datastore-preferences-core", version = "1.1.0" }
 
 # [libraries.android.test]
 android-junit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "version-android-compose-test" }
@@ -57,8 +59,16 @@ android-testManifest = { group = "androidx.compose.ui", name = "ui-test-manifest
 # ======================================= [libraries.jvm] ==========================================
 # [libraries.jvm.source]
 jvm-kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "version-common-kotlin-coroutines" }
+jvm-datastore = { group = "androidx.datastore", name = "datastore-preferences-core", version = "1.1.0" }
 
 # [libraries.jvm.test]
+# ...
+
+# ======================================= [libraries.wasmJs] ==========================================
+# [libraries.wasmJs.source]
+wasmJs-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser-wasm-js", version = "0.3" }
+
+# [libraries.wasmJs.test]
 # ...
 
 # ======================================= [libraries.precompiled] ==================================

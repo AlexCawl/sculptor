@@ -20,4 +20,5 @@ desktop(
 
 commonMainDependencies {
     implementation(projects.runtime.engine)
+    implementation(projects.runtime.datasource)
 }

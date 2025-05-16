@@ -53,6 +53,7 @@ include(
     ":runtime:engine",
     ":runtime:presenter",
     ":runtime:renderer",
+    ":runtime:datasource",
 )
 
 include(

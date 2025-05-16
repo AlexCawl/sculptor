@@ -28,21 +28,9 @@ fun DependencyHandlerScope.testImplementation(
     add("testImplementation", dependency)
 }
 
-fun DependencyHandlerScope.androidTestImplementation(
-    dependency: Any
-) {
-    add("androidTestImplementation", dependency)
-}
-
 fun Project.commonMainDependencies(block: KotlinDependencyHandler.() -> Unit) {
     kotlinMultiplatformConfiguration {
         sourceSets.commonMain.dependencies(block)
-    }
-}
-
-fun Project.commonTestDependencies(block: KotlinDependencyHandler.() -> Unit) {
-    kotlinMultiplatformConfiguration {
-        sourceSets.commonTest.dependencies(block)
     }
 }
 
@@ -55,5 +43,11 @@ fun Project.androidMainDependencies(block: KotlinDependencyHandler.() -> Unit) {
 fun Project.jvmMainDependencies(block: KotlinDependencyHandler.() -> Unit) {
     kotlinMultiplatformConfiguration {
         sourceSets.jvmMain.dependencies(block)
+    }
+}
+
+fun Project.wasmJsMainDependencies(block: KotlinDependencyHandler.() -> Unit) {
+    kotlinMultiplatformConfiguration {
+        sourceSets.wasmJsMain.dependencies(block)
     }
 }
