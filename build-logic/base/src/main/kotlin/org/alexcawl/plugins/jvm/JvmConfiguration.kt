@@ -10,30 +10,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 inline fun Project.jvmConfiguration(
     block: KotlinJvmExtension.() -> Unit
-) = block(jvmExtension)
-
-inline fun Project.desktopConfiguration(
-    block: DesktopExtension.() -> Unit
-) = try {
-    block(desktopExtension)
-} catch (ignored: IllegalStateException) {
-    // no-op
-}
-
-fun Project.desktop(
-    applicationClass: String,
-    applicationPackage: String,
-    block: DesktopExtension.() -> Unit = {}
-) {
-    desktopConfiguration {
-        application {
-            mainClass = applicationClass
-            nativeDistributions {
-                packageName = applicationPackage
-            }
-        }
-        block()
-    }
+): Unit = try {
+    block(jvmExtension)
+} catch (e: IllegalStateException) {
+    project.logger.warn("Jvm is not applied for ${project.name}")
 }
 
 inline fun Project.kotlinCompilerConfiguration(

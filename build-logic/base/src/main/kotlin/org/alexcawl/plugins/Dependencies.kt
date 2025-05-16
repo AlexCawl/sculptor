@@ -1,6 +1,6 @@
 package org.alexcawl.plugins
 
-import org.alexcawl.plugins.kotlin.kotlinMultiplatformConfiguration
+import org.alexcawl.plugins.kmp.kotlinMultiplatformConfiguration
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.DependencyHandlerScope

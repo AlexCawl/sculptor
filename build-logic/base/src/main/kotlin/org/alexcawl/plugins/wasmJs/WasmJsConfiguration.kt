@@ -1,6 +1,6 @@
 package org.alexcawl.plugins.wasmJs
 
-import org.alexcawl.plugins.kotlin.kotlinMultiplatformExtension
+import org.alexcawl.plugins.kmp.kotlinMultiplatformExtension
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinWasmJsTargetDsl

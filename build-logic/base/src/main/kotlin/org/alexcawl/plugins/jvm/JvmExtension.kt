@@ -16,15 +16,3 @@ internal val Project.jvmExtension: KotlinJvmExtension
                 Check if id("org.jetbrains.kotlin.jvm") was applied!
             """.trimIndent()
         )
-
-@PublishedApi
-internal val Project.desktopExtension: DesktopExtension
-    get() = extensions.findByType<ComposeExtension>()
-        ?.extensions?.findByType<DesktopExtension>()
-        ?: error(
-            """
-                "Project.desktopExtension" value may be called only from KMP application 
-                or KMP library gradle script!
-                Check if id("org.jetbrains.kotlin.multiplatform") was applied!
-            """.trimIndent()
-        )
