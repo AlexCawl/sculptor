@@ -9,7 +9,8 @@
         "content": [
           "text1",
           "text2",
-          "text3"
+          "text3",
+          "text4"
         ]
       }
     },
@@ -35,6 +36,14 @@
       "state": {
         "type": "text",
         "text": "Welcome to Sculptor!"
+      }
+    },
+    {
+      "id": "text4",
+      "modifiers": [],
+      "state": {
+        "type": "basic_text@state",
+        "text": "Hello, Foundation!"
       }
     }
   ],

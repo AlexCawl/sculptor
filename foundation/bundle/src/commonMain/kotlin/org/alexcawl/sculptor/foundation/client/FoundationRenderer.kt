@@ -10,15 +10,9 @@ import org.alexcawl.sculptor.runtime.engine.renderer
 
 internal object FoundationRenderer {
     internal fun SculptorGlobalBuilder.install() {
-        foundationRenderers.forEach { foundationRenderer: Renderer<*> ->
-            renderer { foundationRenderer }
-        }
-    }
-    
-    private val foundationRenderers: List<Renderer<*>> = buildList {
-        add(BasicTextRenderer())
-        add(BoxRenderer())
-        add(ColumnRenderer())
-        add(RowRenderer())
+        renderer { BasicTextRenderer() }
+        renderer { BoxRenderer() }
+        renderer { ColumnRenderer() }
+        renderer { RowRenderer() }
     }
 }
