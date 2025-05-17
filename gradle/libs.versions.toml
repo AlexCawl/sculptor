@@ -3,7 +3,7 @@
 # [versions.common.source]
 version-common-kotlin-language = "2.1.10"
 version-common-kotlin-coroutines = "1.10.1"
-version-common-kotlin-serialization = "1.8.0"
+version-common-kotlin-serialization = "1.8.1"
 version-common-compose = "1.7.3"
 version-common-skiko = "0.8.19"
 version-common-lifecycle = "2.8.4"
@@ -18,13 +18,27 @@ version-android-activityCompose = "1.10.1"
 version-android-coreKtx = "1.16.0"
 
 # [versions.android.test]
-version-android-compose-test = "1.8.0"
+version-android-compose-test = "1.8.1"
 
 # ======================================= [versions.jvm] ===========================================
 # [versions.jvm.source]
 # ...
 
 # [versions.jvm.test]
+# ...
+
+# ======================================= [versions.wasmJs] ========================================
+# [versions.wasmJs.source]
+# ...
+
+# [versions.wasmJs.test]
+# ...
+
+# ======================================= [versions.server] ========================================
+# [versions.server.source]
+# ...
+
+# [versions.server.test]
 # ...
 
 # ======================================= [versions.utility] =======================================
@@ -71,6 +85,13 @@ wasmJs-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser-wasm-js", ver
 # [libraries.wasmJs.test]
 # ...
 
+# ======================================= [libraries.server] ==========================================
+# [libraries.server.source]
+# ...
+
+# [libraries.server.test]
+# ...
+
 # ======================================= [libraries.precompiled] ==================================
 gradleplugin-android = { module = "com.android.tools.build:gradle", version.ref = "version-android-agp" }
 gradleplugin-kotlinMultiplatform = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "version-common-kotlin-language" }
@@ -82,27 +103,71 @@ gradleplugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plug
 gradleplugin-mokkery = { module = "dev.mokkery:mokkery-gradle", version.ref = "version-common-mokkery" }
 
 [bundles]
-common-source = [
+# ======================================= [bundles.kmp] ============================================
+common-kmp-source = [
     "common-kotlin-coroutines",
     "common-kotlin-serialization",
     "common-kotlin-serialization-json",
 ]
-common-test = [
+common-kmp-test = [
     "common-kotlin-test",
     "common-kotlin-test-coroutines",
 ]
-android-source = [
+android-kmp-source = [
     "android-kotlin",
     "android-kotlin-coroutines",
 ]
-android-test = [
+android-kmp-test = [
+    # ...
+]
+jvm-kmp-source = [
+    "jvm-kotlin-coroutines",
+]
+jvm-kmp-test = [
+    # ...
+]
+wasmJs-kmp-source = [
+    # ...
+]
+wasmJs-kmp-test = [
+    # ...
+]
+
+# ======================================= [bundles.cmp] ============================================
+common-cmp-source = [
+    "common-lifecycle-compose",
+    "common-lifecycle-viewmodel",
+    "common-lifecycle-runtime",
+]
+common-cmp-test = [
+    # ...
+]
+android-cmp-source = [
+    "android-activityCompose",
+]
+android-cmp-test = [
     "android-junit",
     "android-testManifest",
 ]
-jvm-source = [
-    "jvm-kotlin-coroutines",
+jvm-cmp-source = [
+    # ...
 ]
-jvm-test = [
+jvm-cmp-test = [
+    #...
+]
+wasmJs-cmp-source = [
+    # ...
+]
+wasmJs-cmp-test = [
+    #...
+]
+
+# ======================================= [bundles.server] =========================================
+server-source = [
+
+]
+server-test = [
+
 ]
 
 [plugins]

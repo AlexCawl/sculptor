@@ -1,10 +1,10 @@
-import org.alexcawl.plugins.androidMainDependencies
-import org.alexcawl.plugins.commonMainDependencies
-import org.alexcawl.plugins.jvmMainDependencies
-import org.alexcawl.plugins.wasmJsMainDependencies
+import org.alexcawl.plugins.base.androidMainDependencies
+import org.alexcawl.plugins.base.commonMainDependencies
+import org.alexcawl.plugins.base.jvmMainDependencies
+import org.alexcawl.plugins.base.wasmJsMainDependencies
 
 plugins {
-    id("convention.project.kotlin.library")
+    id("convention.client.library")
 }
 
 android {

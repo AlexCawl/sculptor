@@ -66,6 +66,6 @@ include(
 )
 
 include(
-    ":showroom:shared",
-    ":showroom:client"
+    ":showroom:server",
+    ":showroom:client",
 )

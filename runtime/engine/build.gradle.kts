@@ -1,7 +1,7 @@
-import org.alexcawl.plugins.commonMainDependencies
+import org.alexcawl.plugins.base.commonMainDependencies
 
 plugins {
-    id("convention.project.compose.library")
+    id("convention.client.library")
 }
 
 android {

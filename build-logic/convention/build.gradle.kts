@@ -2,6 +2,10 @@ plugins {
     `kotlin-dsl`
 }
 
+kotlin {
+    explicitApi()
+}
+
 dependencies {
     implementation(projects.base)
 
@@ -27,17 +31,37 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("convention.project.kotlin.library") {
-            id = "convention.project.kotlin.library"
-            implementationClass = "org.alexcawl.plugins.project.KmpModuleLibraryPlugin"
+        // Server plugins
+        register("convention.server.library") {
+            id = "convention.server.library"
+            implementationClass = "org.alexcawl.plugins.convention.plugins.ServerLibraryConvention"
         }
-        register("convention.project.compose.library") {
-            id = "convention.project.compose.library"
-            implementationClass = "org.alexcawl.plugins.project.CmpModuleLibraryPlugin"
+
+        register("convention.server.application") {
+            id = "convention.server.application"
+            implementationClass = "org.alexcawl.plugins.convention.plugins.ServerApplicationConvention"
         }
-        register("convention.project.showroom.application") {
-            id = "convention.project.showroom.application"
-            implementationClass = "org.alexcawl.plugins.project.ShowroomModulePlugin"
+
+        // Client plugins
+        register("convention.client.library") {
+            id = "convention.client.library"
+            implementationClass = "org.alexcawl.plugins.convention.plugins.CmpLibraryConvention"
+        }
+
+        register("convention.client.application") {
+            id = "convention.client.application"
+            implementationClass = "org.alexcawl.plugins.convention.plugins.CmpApplicationConvention"
+        }
+
+        // Shared plugins
+        register("convention.shared.library") {
+            id = "convention.shared.library"
+            implementationClass = "org.alexcawl.plugins.convention.plugins.KmpLibraryConvention"
+        }
+
+        register("convention.shared.application") {
+            id = "convention.shared.application"
+            implementationClass = "org.alexcawl.plugins.convention.plugins.KmpApplicationConvention"
         }
     }
 }

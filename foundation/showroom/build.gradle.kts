@@ -1,8 +1,8 @@
-import org.alexcawl.plugins.commonMainDependencies
-import org.alexcawl.plugins.desktop.desktop
+import org.alexcawl.plugins.base.commonMainDependencies
+import org.alexcawl.plugins.base.configurations.desktop
 
 plugins {
-    id("convention.project.showroom.application")
+    id("convention.client.application")
 }
 
 android {

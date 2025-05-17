@@ -2,6 +2,10 @@ plugins {
     `kotlin-dsl`
 }
 
+kotlin {
+    explicitApi()
+}
+
 dependencies {
     // Kotlin plugins
     implementation(libs.gradleplugin.kotlinMultiplatform)
