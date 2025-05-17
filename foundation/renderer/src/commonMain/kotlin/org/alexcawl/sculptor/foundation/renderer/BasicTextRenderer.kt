@@ -24,9 +24,9 @@ public class BasicTextRenderer : Renderer<BasicTextUiState>() {
         BasicText(
             modifier = modifier.testTag(tag = id),
             text = state.text,
-            softWrap = state.softWrap,
-            maxLines = state.maxLines,
-            minLines = state.minLines,
+            softWrap = state.softWrap ?: true,
+            maxLines = state.maxLines ?: Int.MAX_VALUE,
+            minLines = state.minLines ?: 1,
         )
     }
 }

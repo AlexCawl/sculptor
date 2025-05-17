@@ -10,9 +10,9 @@ public data class BasicTextState(
     @SerialName("text")
     val text: String,
     @SerialName("soft_wrap")
-    public val softWrap: Boolean,
+    public val softWrap: Boolean? = null,
     @SerialName("max_lines")
-    public val maxLines: Int,
+    public val maxLines: Int? = null,
     @SerialName("min_lines")
-    public val minLines: Int,
+    public val minLines: Int? = null,
 ) : StateContract

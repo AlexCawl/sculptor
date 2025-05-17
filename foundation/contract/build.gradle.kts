@@ -1,7 +1,7 @@
-import org.alexcawl.plugins.commonMainDependencies
+import org.alexcawl.plugins.base.commonMainDependencies
 
 plugins {
-    id("convention.project.kotlin.library")
+    id("convention.shared.library")
 }
 
 android {

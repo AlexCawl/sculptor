@@ -1,8 +1,5 @@
 package org.alexcawl.sculptor.foundation.client
 
-import org.alexcawl.sculptor.core.presenter.ModifierPresenter
-import org.alexcawl.sculptor.core.presenter.Presenter
-import org.alexcawl.sculptor.core.presenter.StatePresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BasicTextPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.BoxPresenter
 import org.alexcawl.sculptor.foundation.presenter.layout.ColumnPresenter
@@ -42,64 +39,44 @@ import org.alexcawl.sculptor.runtime.engine.presenter
 
 internal object FoundationPresenter {
     internal fun SculptorGlobalBuilder.install() {
-        foundationCommonPresenters.forEach { foundationCommonPresenter: Presenter<*, *> ->
-            presenter { foundationCommonPresenter }
-        }
-        foundationStatePresenters.forEach { foundationStatePresenter: StatePresenter<*> ->
-            presenter { foundationStatePresenter }
-        }
-        foundationModifierPresenters.forEach { foundationModifierPresenter: ModifierPresenter<*> ->
-            presenter { foundationModifierPresenter }
-        }
-    }
+        // Foundation Common
+        presenter(::AlignmentHorizontalPresenter)
+        presenter(::AlignmentPresenter)
+        presenter(::AlignmentVerticalPresenter)
+        presenter(::ArrangementHorizontalPresenter)
+        presenter(::ArrangementPresenter)
+        presenter(::ArrangementVerticalPresenter)
+        presenter(::ColorPresenter)
+        presenter(::DpPresenter)
+        presenter(::DpSizePresenter)
+        presenter(::RolePresenter)
+        presenter(::ShapePresenter)
 
-    private val foundationStatePresenters: List<StatePresenter<*>> = buildList {
-        add(BasicTextPresenter())
-        add(BoxPresenter())
-        add(ColumnPresenter())
-        add(RowPresenter())
-    }
+        // Foundation States
+        presenter(::BasicTextPresenter)
+        presenter(::BoxPresenter)
+        presenter(::ColumnPresenter)
+        presenter(::RowPresenter)
 
-    private val foundationModifierPresenters: List<ModifierPresenter<*>> = buildList {
-        add(BackgroundPresenter())
-
-        add(ClickablePresenter())
-        add(CombinedClickablePresenter())
-
-        add(HeightPresenter())
-        add(FillMaxHeightPresenter())
-        add(HeightInPresenter())
-        add(RequiredHeightPresenter())
-        add(WrapContentHeightPresenter())
-
-        add(WidthPresenter())
-        add(FillMaxWidthPresenter())
-        add(WidthInPresenter())
-        add(RequiredWidthPresenter())
-        add(WrapContentWidthPresenter())
-
-        add(SizePresenter())
-        add(FillMaxSizePresenter())
-        add(SizeInPresenter())
-        add(RequiredSizePresenter())
-        add(WrapContentSizePresenter())
-
-        add(PaddingPresenter())
-    }
-
-    private val foundationCommonPresenters: List<Presenter<*, *>> = buildList {
-        add(AlignmentHorizontalPresenter())
-        add(AlignmentPresenter())
-        add(AlignmentVerticalPresenter())
-
-        add(ArrangementHorizontalPresenter())
-        add(ArrangementPresenter())
-        add(ArrangementVerticalPresenter())
-
-        add(ColorPresenter())
-        add(DpPresenter())
-        add(DpSizePresenter())
-        add(RolePresenter())
-        add(ShapePresenter())
+        // Foundation Modifiers
+        presenter(::BackgroundPresenter)
+        presenter(::ClickablePresenter)
+        presenter(::CombinedClickablePresenter)
+        presenter(::HeightPresenter)
+        presenter(::FillMaxHeightPresenter)
+        presenter(::HeightInPresenter)
+        presenter(::RequiredHeightPresenter)
+        presenter(::WrapContentHeightPresenter)
+        presenter(::WidthPresenter)
+        presenter(::FillMaxWidthPresenter)
+        presenter(::WidthInPresenter)
+        presenter(::RequiredWidthPresenter)
+        presenter(::WrapContentWidthPresenter)
+        presenter(::SizePresenter)
+        presenter(::FillMaxSizePresenter)
+        presenter(::SizeInPresenter)
+        presenter(::RequiredSizePresenter)
+        presenter(::WrapContentSizePresenter)
+        presenter(::PaddingPresenter)
     }
 }

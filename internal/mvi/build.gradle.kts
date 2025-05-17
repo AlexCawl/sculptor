@@ -1,5 +1,5 @@
 plugins {
-    id("convention.project.kotlin.library")
+    id("convention.shared.library")
 }
 
 android {

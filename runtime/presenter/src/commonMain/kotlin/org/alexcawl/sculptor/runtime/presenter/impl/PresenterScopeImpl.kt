@@ -89,7 +89,7 @@ public class PresenterScopeImpl(
 
     private suspend fun validateState(uiState: UiState) {
         if (!stateValidator.canBeDrawn(uiState)) {
-            error("No presenter found for $uiState. State cannot be drawn.")
+            error("No renderer found for $uiState. State cannot be drawn.")
         }
     }
 }

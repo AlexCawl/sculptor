@@ -1,5 +1,5 @@
 plugins {
-    id("convention.project.compose.library")
+    id("convention.client.library")
 }
 
 android {

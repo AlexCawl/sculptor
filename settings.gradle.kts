@@ -53,6 +53,7 @@ include(
     ":runtime:engine",
     ":runtime:presenter",
     ":runtime:renderer",
+    ":runtime:datasource",
 )
 
 include(
@@ -65,5 +66,6 @@ include(
 )
 
 include(
-    ":showroom"
+    ":showroom:server",
+    ":showroom:client",
 )
