@@ -43,6 +43,7 @@ version-android-compose-test = "1.8.1"
 
 # ======================================= [versions.utility] =======================================
 version-utility-detekt = "1.23.7"
+version-utility-publish = "0.28.0"
 
 [libraries]
 # ======================================= [libraries.common] =======================================
@@ -101,6 +102,7 @@ gradleplugin-kotlinSerialization = { module = "org.jetbrains.kotlin:kotlin-seria
 gradleplugin-kotlinJvm = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "version-common-kotlin-language" }
 gradleplugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "version-utility-detekt" }
 gradleplugin-mokkery = { module = "dev.mokkery:mokkery-gradle", version.ref = "version-common-mokkery" }
+gradleplugin-publish = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version.ref = "version-utility-publish" }
 
 [bundles]
 # ======================================= [bundles.kmp] ============================================
@@ -187,3 +189,4 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "version-common-kot
 # [plugins.util]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "version-utility-detekt" }
 mokkery = { id = "dev.mokkery", version.ref = "version-common-mokkery" }
+publish = { id = "com.vanniktech.maven.publish", version.ref = "version-utility-publish" }

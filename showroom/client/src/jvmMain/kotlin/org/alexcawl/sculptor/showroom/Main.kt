@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import org.alexcawl.sculptor.foundation.client.FoundationBundle
 import org.alexcawl.sculptor.runtime.engine.Sculptor
 import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.contractor
@@ -46,6 +47,7 @@ public fun main() {
         renderer {
             ContainerRenderer
         }
+        with(FoundationBundle) { install() }
     }
 
     // Create
