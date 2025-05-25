@@ -19,7 +19,7 @@ public sealed class KmpModulePlugin : ModulePlugin() {
                 false -> apply(ANDROID_LIBRARY_PLUGIN_ID)
             }
             apply(type = AndroidPlatformPlugin::class)
-            apply(type = WasmJsPlatformPlugin::class)
+//            apply(type = WasmJsPlatformPlugin::class)
             apply(type = DesktopPlatformPlugin::class)
             apply(type = DetektUtilityPlugin::class)
         }
