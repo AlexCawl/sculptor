@@ -21,6 +21,7 @@ dependencies {
 
     // Utility plugins
     implementation(libs.gradleplugin.detekt)
+    implementation(libs.gradleplugin.publish)
 
     // Workaround for version catalog working inside precompiled scripts
     // Issue - https://github.com/gradle/gradle/issues/15383

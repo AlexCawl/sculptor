@@ -18,14 +18,14 @@ public sealed interface Color {
     @Serializable
     public data class RGB(override val content: String) : Color {
         init {
-            assert(content.matches(Regex(pattern = RGB_REGEX)))
+            check(content.matches(Regex(pattern = RGB_REGEX)))
         }
     }
 
     @Serializable
     public data class RGBA(override val content: String) : Color {
         init {
-            assert(content.matches(Regex(pattern = RGBA_REGEX)))
+            check(content.matches(Regex(pattern = RGBA_REGEX)))
         }
     }
 
