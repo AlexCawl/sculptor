@@ -30,7 +30,7 @@ public data class Size(
 @SerialName("size@fill_max_size")
 public data class FillMaxSize(
     @SerialName("fraction")
-    val fraction: Float,
+    val fraction: Float = 1f,
 ) : ModifierContract
 
 @Serializable

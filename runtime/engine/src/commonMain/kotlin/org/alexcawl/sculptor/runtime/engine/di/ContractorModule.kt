@@ -20,7 +20,6 @@ internal fun contractorModule(): Module = module {
     // Json
     singleton<StringFormat> {
         Json {
-            encodeDefaults = true
             ignoreUnknownKeys = true
             prettyPrint = true
             serializersModule = get()

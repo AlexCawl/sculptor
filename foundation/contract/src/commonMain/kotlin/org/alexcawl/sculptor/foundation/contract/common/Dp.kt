@@ -1,6 +1,7 @@
 package org.alexcawl.sculptor.foundation.contract.common
 
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -10,7 +11,10 @@ import kotlinx.serialization.encoding.Encoder
 
 @Serializable(with = DpSerializer::class)
 public sealed interface Dp {
-    public data class Number(val value: Float) : Dp
+    public data class Number(
+        @SerialName("value")
+        val value: Float,
+    ) : Dp
 
     public data object Hairline : Dp
 

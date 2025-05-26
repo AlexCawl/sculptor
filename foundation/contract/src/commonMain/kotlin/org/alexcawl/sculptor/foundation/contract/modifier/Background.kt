@@ -12,5 +12,5 @@ public data class Background(
     @SerialName("color")
     val color: Color,
     @SerialName("shape")
-    val shape: Shape,
+    val shape: Shape = Shape.Rectangle,
 ) : ModifierContract

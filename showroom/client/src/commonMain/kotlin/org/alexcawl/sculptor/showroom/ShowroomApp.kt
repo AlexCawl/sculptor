@@ -14,7 +14,7 @@ public fun ShowroomApp(
 ) {
     val sculptorUi: SculptorUi = remember(key1 = Unit, calculation = sculptorUiProvider)
     sculptorUi.Screen(
-        intent = SculptorStringIntent("files/screen_hello_world.json"),
+        intent = SculptorStringIntent("files/screen_with_texts.json"),
         loadingScreen = {
             BasicText(text = "Loading")
         },

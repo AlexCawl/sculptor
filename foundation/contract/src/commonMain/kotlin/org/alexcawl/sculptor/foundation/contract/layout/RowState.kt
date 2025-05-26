@@ -11,9 +11,9 @@ import org.alexcawl.sculptor.foundation.contract.common.Arrangement
 @SerialName("row@state")
 public data class RowState(
     @SerialName("horizontal_arrangement")
-    val horizontalArrangement: Arrangement.Horizontal,
+    val horizontalArrangement: Arrangement.Horizontal = Arrangement.Horizontal.Start,
     @SerialName("vertical_alignment")
-    val verticalAlignment: Alignment.Vertical,
+    val verticalAlignment: Alignment.Vertical = Alignment.Vertical.Top,
     @SerialName("content")
-    val content: List<Identifier>,
+    val content: List<Identifier> = emptyList(),
 ) : StateContract

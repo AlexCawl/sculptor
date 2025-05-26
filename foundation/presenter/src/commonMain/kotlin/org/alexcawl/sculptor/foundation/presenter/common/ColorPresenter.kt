@@ -16,6 +16,7 @@ public class ColorPresenter : Presenter<SculptorColor, ComposeColor>() {
             when (input) {
                 is Color.RGB -> ComposeColor(r, g, b)
                 is Color.RGBA -> ComposeColor(r, g, b, a)
+                Color.Unspecified -> ComposeColor.Unspecified
             }
         }
     }

@@ -14,7 +14,7 @@ public class RootRendererImpl(
 ) : RootRenderer {
     @Stable
     @Composable
-    override fun Draw(modifier: Modifier, layout: Layout) {
+    override fun Draw(layout: Layout) {
         rendererProvider
             .findRenderer(uiStateClass = layout.uiState::class)
             .Draw(scope = rendererScope, id = layout.id, modifier = layout.modifier, state = layout.uiState)

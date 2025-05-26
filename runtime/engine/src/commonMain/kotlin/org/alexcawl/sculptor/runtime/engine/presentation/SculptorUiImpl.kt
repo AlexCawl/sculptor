@@ -1,6 +1,7 @@
 package org.alexcawl.sculptor.runtime.engine.presentation
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -20,29 +21,27 @@ internal fun SculptorUiImpl(
     intent: SculptorIntent,
     diTree: () -> DiTree,
     store: () -> Store<SculptorState, SculptorEvent>,
-    loadingScreen: @Composable (modifier: Modifier) -> Unit,
-    errorScreen: @Composable (modifier: Modifier) -> Unit,
-    modifier: Modifier,
+    loadingScreen: @Composable () -> Unit,
+    errorScreen: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val state: SculptorState by store().state.collectAsState(initial = SculptorState.Loading)
     AnimatedContent(
         targetState = state,
         label = SCULPTOR_ANIMATION,
+        modifier = modifier,
     ) { targetState: SculptorState ->
         when (targetState) {
-            is SculptorState.Loading -> loadingScreen(modifier)
+            is SculptorState.Loading -> loadingScreen()
             is SculptorState.Idle -> {
                 val rootRenderer: RootRenderer = remember(
                     key1 = targetState,
                     calculation = diTree()::get,
                 )
-                rootRenderer.Draw(
-                    modifier = modifier,
-                    layout = targetState.layout,
-                )
+                rootRenderer.Draw(layout = targetState.layout)
             }
 
-            is SculptorState.Error -> errorScreen(modifier)
+            is SculptorState.Error -> errorScreen()
         }
     }
     LaunchedEffect(key1 = intent) {

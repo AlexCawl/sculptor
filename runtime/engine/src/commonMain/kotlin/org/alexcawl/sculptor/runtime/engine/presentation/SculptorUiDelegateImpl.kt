@@ -30,9 +30,9 @@ internal class SculptorUiDelegateImpl(
     @Composable
     override fun Screen(
         intent: SculptorIntent,
-        loadingScreen: @Composable (modifier: Modifier) -> Unit,
-        errorScreen: @Composable (modifier: Modifier) -> Unit,
-        modifier: Modifier,
+        loadingScreen: @Composable () -> Unit,
+        errorScreen: @Composable () -> Unit,
+        modifier: Modifier
     ) {
         SculptorUiImpl(
             intent = intent,

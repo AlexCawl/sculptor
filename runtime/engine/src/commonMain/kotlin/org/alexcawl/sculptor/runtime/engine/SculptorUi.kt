@@ -9,8 +9,8 @@ public interface SculptorUi {
     @Composable
     public fun Screen(
         intent: SculptorIntent,
-        loadingScreen: @Composable (modifier: Modifier) -> Unit,
-        errorScreen: @Composable (modifier: Modifier) -> Unit,
+        loadingScreen: @Composable () -> Unit,
+        errorScreen: @Composable () -> Unit,
         modifier: Modifier,
     )
 }

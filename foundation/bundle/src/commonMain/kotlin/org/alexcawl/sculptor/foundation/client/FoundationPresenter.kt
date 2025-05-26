@@ -8,8 +8,12 @@ import org.alexcawl.sculptor.foundation.presenter.modifier.BackgroundPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.ColorPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.DpSizePresenter
+import org.alexcawl.sculptor.foundation.presenter.common.FontStylePresenter
 import org.alexcawl.sculptor.foundation.presenter.common.RolePresenter
 import org.alexcawl.sculptor.foundation.presenter.common.ShapePresenter
+import org.alexcawl.sculptor.foundation.presenter.common.TextDecorationPresenter
+import org.alexcawl.sculptor.foundation.presenter.common.TextStylePresenter
+import org.alexcawl.sculptor.foundation.presenter.common.TextUnitPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.alignment.AlignmentHorizontalPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.alignment.AlignmentPresenter
 import org.alexcawl.sculptor.foundation.presenter.common.alignment.AlignmentVerticalPresenter
@@ -51,6 +55,10 @@ internal object FoundationPresenter {
         presenter(::DpSizePresenter)
         presenter(::RolePresenter)
         presenter(::ShapePresenter)
+        presenter(::FontStylePresenter)
+        presenter(::TextStylePresenter)
+        presenter(::TextUnitPresenter)
+        presenter(::TextDecorationPresenter)
 
         // Foundation States
         presenter(::BasicTextPresenter)

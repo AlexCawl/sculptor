@@ -19,13 +19,13 @@ public sealed interface Shape {
         @SerialName("rounded_corner@dp")
         public data class DPixel(
             @SerialName("top_start")
-            val topStart: Dp,
+            val topStart: Dp = 0.dp,
             @SerialName("top_end")
-            val topEnd: Dp,
+            val topEnd: Dp = 0.dp,
             @SerialName("bottom_end")
-            val bottomEnd: Dp,
+            val bottomEnd: Dp = 0.dp,
             @SerialName("bottom_start")
-            val bottomStart: Dp
+            val bottomStart: Dp = 0.dp,
         ) : RoundedCorner
 
         @Serializable

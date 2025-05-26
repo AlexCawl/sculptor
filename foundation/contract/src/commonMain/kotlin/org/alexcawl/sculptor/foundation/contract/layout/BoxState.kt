@@ -10,9 +10,9 @@ import org.alexcawl.sculptor.foundation.contract.common.Alignment
 @SerialName("box@state")
 public data class BoxState(
     @SerialName("content_alignment")
-    val contentAlignment: Alignment,
+    val contentAlignment: Alignment = Alignment.TopStart,
     @SerialName("propagate_min_constraints")
-    val propagateMinConstraints: Boolean,
+    val propagateMinConstraints: Boolean = false,
     @SerialName("content")
-    val content: List<Identifier>,
+    val content: List<Identifier> = emptyList(),
 ) : StateContract

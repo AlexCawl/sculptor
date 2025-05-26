@@ -3,8 +3,10 @@ package org.alexcawl.sculptor.showroom
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.presentation.sculptorUi
 
@@ -17,7 +19,7 @@ public class ShowroomActivity : ComponentActivity() {
         setContent {
             ShowroomApp(
                 sculptorUiProvider = { sculptorUi },
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().background(Color.Red),
             )
         }
     }

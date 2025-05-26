@@ -28,21 +28,6 @@ public class ShowroomApplication : Application() {
             sculptorLogger {
                 ShowroomLogger()
             }
-            contractor {
-                ShowroomContractor
-            }
-            presenter {
-                TextPresenter
-            }
-            presenter {
-                ContainerPresenter
-            }
-            renderer {
-                TextRenderer
-            }
-            renderer {
-                ContainerRenderer
-            }
             with(FoundationBundle) { install() }
         }
     }

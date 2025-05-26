@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.TextStyle
 import org.alexcawl.sculptor.core.renderer.Renderer
 import org.alexcawl.sculptor.core.renderer.RendererScope
 import org.alexcawl.sculptor.foundation.layout.BasicTextUiState
@@ -24,9 +25,10 @@ public class BasicTextRenderer : Renderer<BasicTextUiState>() {
         BasicText(
             modifier = modifier.testTag(tag = id),
             text = state.text,
-            softWrap = state.softWrap ?: true,
-            maxLines = state.maxLines ?: Int.MAX_VALUE,
-            minLines = state.minLines ?: 1,
+            softWrap = state.softWrap,
+            maxLines = state.maxLines,
+            minLines = state.minLines,
+            style = state.textStyle
         )
     }
 }

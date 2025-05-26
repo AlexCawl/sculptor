@@ -10,6 +10,7 @@ import kotlinx.serialization.encoding.Encoder
 
 private const val RGB_REGEX = "^[0-9a-fA-F]{6}$"
 private const val RGBA_REGEX = "^[0-9a-fA-F]{8}$"
+private const val UNSPECIFIED_COLOR = "unspecified"
 
 @Serializable(with = ColorSerializer::class)
 public sealed interface Color {
@@ -18,15 +19,20 @@ public sealed interface Color {
     @Serializable
     public data class RGB(override val content: String) : Color {
         init {
-            assert(content.matches(Regex(pattern = RGB_REGEX)))
+            check(value = content.matches(Regex(pattern = RGB_REGEX)))
         }
     }
 
     @Serializable
     public data class RGBA(override val content: String) : Color {
         init {
-            assert(content.matches(Regex(pattern = RGBA_REGEX)))
+            check(value = content.matches(Regex(pattern = RGBA_REGEX)))
         }
+    }
+
+    @Serializable
+    public data object Unspecified : Color {
+        override val content: String = "unspecified"
     }
 
     public val r: Int
@@ -39,13 +45,15 @@ public sealed interface Color {
         get() = when (this) {
             is RGB -> 0xFF
             is RGBA -> content.substring(6, 8).toInt(radix = 16)
+            else -> error("Invalid color: $content")
         }
 
     public companion object {
         public operator fun invoke(content: String): Color = when {
             content.matches(Regex(pattern = RGB_REGEX)) -> RGB(content)
             content.matches(Regex(pattern = RGBA_REGEX)) -> RGBA(content)
-            else -> throw IllegalArgumentException("Invalid color: $content")
+            content.matches(Regex(pattern = UNSPECIFIED_COLOR)) -> Unspecified
+            else -> error("Invalid color: $content")
         }
     }
 }
@@ -61,6 +69,7 @@ internal class ColorSerializer : KSerializer<Color> {
         return when {
             string.matches(Regex(pattern = RGB_REGEX)) -> Color.RGB(content = string)
             string.matches(Regex(pattern = RGBA_REGEX)) -> Color.RGBA(content = string)
+            string.matches(Regex(pattern = UNSPECIFIED_COLOR)) -> Color.Unspecified
             else -> error("Invalid color: $string")
         }
     }

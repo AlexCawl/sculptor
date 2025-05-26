@@ -19,9 +19,9 @@ internal class SculptorUiRememberImpl(
     @Composable
     override fun Screen(
         intent: SculptorIntent,
-        loadingScreen: @Composable (modifier: Modifier) -> Unit,
-        errorScreen: @Composable (modifier: Modifier) -> Unit,
-        modifier: Modifier,
+        loadingScreen: @Composable () -> Unit,
+        errorScreen: @Composable () -> Unit,
+        modifier: Modifier
     ) {
         val diTree: DiTree = rememberDiTree(
             viewModelKey = REMEMBER_DI_TREE_KEY,
