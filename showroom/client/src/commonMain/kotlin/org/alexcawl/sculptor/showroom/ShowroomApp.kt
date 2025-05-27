@@ -42,8 +42,17 @@ public fun ShowroomApp(
                     modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
                 )
             }
-            Screen.FEED -> {
-
+            Screen.MODIFIER -> {
+                sculptorUi.Screen(
+                    intent = SculptorStringIntent("files/nested_modifier.json"),
+                    loadingScreen = {
+                        BasicText(text = "Loading")
+                    },
+                    errorScreen = {
+                        BasicText(text = "Error")
+                    },
+                    modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
+                )
             }
         }
 

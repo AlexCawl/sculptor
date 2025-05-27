@@ -1,0 +1,44 @@
+{
+  "type": "scaffold",
+  "blocks": [
+    {
+      "id": "root",
+      "modifiers": [
+        {
+          "type": "modifier@padding",
+          "start": "16",
+          "top": "16",
+          "end": "16",
+          "bottom": "16"
+        },
+        {
+          "type": "background@color",
+          "color": "CCCCCC",
+          "shape": {
+            "type": "rounded_corner@dp",
+            "top_start": "16",
+            "top_end": "16",
+            "bottom_end": "16",
+            "bottom_start": "16"
+          }
+        },
+        {
+          "type": "modifier@padding",
+          "start": "8",
+          "top": "8",
+          "end": "8",
+          "bottom": "8"
+        }
+      ],
+      "state": {
+        "type": "basic_text@state",
+        "text": "This is Sculptor (Server Compose)",
+        "text_style": {
+          "color": "000000",
+          "font_size": "36"
+        }
+      }
+    }
+  ],
+  "root": "root"
+}
