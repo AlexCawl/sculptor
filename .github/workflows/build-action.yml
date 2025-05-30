@@ -1,8 +1,9 @@
-name: Build project
+name: Pre-commit checks
 on:
   pull_request:
     branches:
       - master
+      - release-*
 env:
   JAVA_VERSION: 17
   JAVA_DISTRIBUTION: temurin
