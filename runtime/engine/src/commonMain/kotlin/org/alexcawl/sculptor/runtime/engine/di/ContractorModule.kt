@@ -4,9 +4,9 @@ import kotlinx.serialization.StringFormat
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
-import org.alexcawl.sculptor.core.contract.Contractor
 import org.alexcawl.sculptor.core.contract.ModifierContract
 import org.alexcawl.sculptor.core.contract.StateContract
+import org.alexcawl.sculptor.core.contractor.ContractBundle
 import org.alexcawl.sculptor.internal.di.Module
 import org.alexcawl.sculptor.internal.di.factory
 import org.alexcawl.sculptor.internal.di.get
@@ -29,12 +29,12 @@ internal fun contractorModule(): Module = module {
     // Serializers
     singleton<SerializersModule> {
         SerializersModule {
-            getAll<Contractor>().forEach { contractor: Contractor ->
+            getAll<ContractBundle>().forEach { contractBundle: ContractBundle ->
                 polymorphic(StateContract::class) {
-                    contractor.stateContracts.invoke(this)
+                    contractBundle.stateContracts.invoke(this)
                 }
                 polymorphic(ModifierContract::class) {
-                    contractor.modifierContracts.invoke(this)
+                    contractBundle.modifierContracts.invoke(this)
                 }
             }
         }

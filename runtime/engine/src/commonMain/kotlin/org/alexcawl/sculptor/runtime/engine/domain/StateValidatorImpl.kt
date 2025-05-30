@@ -1,9 +1,9 @@
 package org.alexcawl.sculptor.runtime.engine.domain
 
-import org.alexcawl.sculptor.core.layout.UiState
-import org.alexcawl.sculptor.core.renderer.Renderer
-import org.alexcawl.sculptor.runtime.presenter.StateValidator
-import org.alexcawl.sculptor.runtime.renderer.RendererProvider
+import org.alexcawl.sculptor.core.contractor.layout.UiState
+import org.alexcawl.sculptor.core.contractor.renderer.Renderer
+import org.alexcawl.sculptor.runtime.contractor.presenter.StateValidator
+import org.alexcawl.sculptor.runtime.contractor.renderer.RendererProvider
 
 internal class StateValidatorImpl(
     private val rendererProvider: RendererProvider,

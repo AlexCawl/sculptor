@@ -2,14 +2,14 @@ package org.alexcawl.sculptor.runtime.engine.domain.useCases
 
 import org.alexcawl.sculptor.core.contract.Identifier
 import org.alexcawl.sculptor.core.contract.ScreenScaffold
-import org.alexcawl.sculptor.core.layout.Layout
-import org.alexcawl.sculptor.core.presenter.PresenterScope
+import org.alexcawl.sculptor.core.contractor.layout.Layout
+import org.alexcawl.sculptor.core.contractor.presenter.PresenterScope
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorCommand.TransformToLayoutCommand
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
-import org.alexcawl.sculptor.runtime.presenter.ComponentProvider
-import org.alexcawl.sculptor.runtime.presenter.PresenterProvider
-import org.alexcawl.sculptor.runtime.presenter.StateValidator
-import org.alexcawl.sculptor.runtime.presenter.impl.PresenterScopeImpl
+import org.alexcawl.sculptor.runtime.contractor.presenter.ComponentProvider
+import org.alexcawl.sculptor.runtime.contractor.presenter.PresenterProvider
+import org.alexcawl.sculptor.runtime.contractor.presenter.StateValidator
+import org.alexcawl.sculptor.runtime.contractor.presenter.impl.PresenterScopeImpl
 import kotlin.reflect.KClass
 
 internal class TransformToLayoutUseCase(

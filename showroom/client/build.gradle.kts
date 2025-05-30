@@ -21,5 +21,5 @@ desktop(
 commonMainDependencies {
     implementation(projects.runtime.engine)
     implementation(projects.runtime.datasource)
-    implementation(projects.foundation.bundle)
+    implementation(projects.foundation.contractor)
 }

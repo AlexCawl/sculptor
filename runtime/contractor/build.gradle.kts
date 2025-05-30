@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "org.alexcawl.sculptor.runtime"
+    namespace = "org.alexcawl.sculptor.runtime.contractor"
 }
 
 commonMainDependencies {

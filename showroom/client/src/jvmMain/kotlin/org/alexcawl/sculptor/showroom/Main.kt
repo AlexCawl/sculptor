@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.alexcawl.sculptor.foundation.client.FoundationBundle
+import org.alexcawl.sculptor.foundation.contractor.FoundationBundle
 import org.alexcawl.sculptor.runtime.engine.Sculptor
 import org.alexcawl.sculptor.runtime.engine.SculptorUi
 import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
@@ -27,7 +27,7 @@ public fun main() {
         sculptorLogger {
             ShowroomLogger()
         }
-        with(FoundationBundle) { install() }
+        bundle(FoundationBundle)
     }
 
     // Create

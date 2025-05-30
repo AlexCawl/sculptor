@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.runtime.engine.domain
 
 import org.alexcawl.sculptor.core.contract.ScreenScaffold
-import org.alexcawl.sculptor.core.layout.Layout
+import org.alexcawl.sculptor.core.contractor.layout.Layout
 import org.alexcawl.sculptor.runtime.engine.SculptorIntent
 
 internal interface SculptorEvent {

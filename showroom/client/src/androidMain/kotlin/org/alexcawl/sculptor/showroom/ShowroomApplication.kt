@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.showroom
 
 import android.app.Application
-import org.alexcawl.sculptor.foundation.client.FoundationBundle
+import org.alexcawl.sculptor.foundation.contractor.FoundationBundle
 import org.alexcawl.sculptor.runtime.engine.Sculptor
 import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
 import org.alexcawl.sculptor.showroom.dependencies.ShowroomLogger
@@ -20,7 +20,7 @@ public class ShowroomApplication : Application() {
             sculptorLogger {
                 ShowroomLogger()
             }
-            with(FoundationBundle) { install() }
+            bundle(FoundationBundle)
         }
     }
 }

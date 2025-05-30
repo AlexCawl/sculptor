@@ -1,16 +1,18 @@
 package org.alexcawl.sculptor.runtime.engine.di
 
-import org.alexcawl.sculptor.core.contract.Contractor
-import org.alexcawl.sculptor.core.presenter.Presenter
-import org.alexcawl.sculptor.core.renderer.Renderer
+import org.alexcawl.sculptor.core.contractor.Bundle
+import org.alexcawl.sculptor.core.contractor.ContractBundle
+import org.alexcawl.sculptor.core.contractor.contract
+import org.alexcawl.sculptor.core.contractor.presenter.Presenter
+import org.alexcawl.sculptor.core.contractor.renderer.Renderer
 import org.alexcawl.sculptor.internal.di.DiComponent
 import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.DiTreeBuilder
 import org.alexcawl.sculptor.runtime.engine.SculptorGlobalBuilder
 import org.alexcawl.sculptor.runtime.engine.dependencies.ContentResolutionStrategy
+import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
 import org.alexcawl.sculptor.runtime.engine.dependencies.LocalContentSource
 import org.alexcawl.sculptor.runtime.engine.dependencies.RemoteContentSource
-import org.alexcawl.sculptor.runtime.engine.dependencies.IntentResolver
 import org.alexcawl.sculptor.runtime.engine.dependencies.SculptorLogger
 import kotlin.reflect.KClass
 
@@ -75,6 +77,12 @@ internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder 
             factory = { renderer() },
         )
 
+    override fun bundle(bundle: Bundle) {
+        contract(bundle::contractBundle)
+        bundle.presenterBundle.presenters.invoke(this)
+        bundle.rendererBundle.renderers.invoke(this)
+    }
+
     override fun <K : Presenter<*, *>> presenter(key: KClass<K>, presenter: () -> K): Unit =
         diComponent.singleton(
             key = key,
@@ -82,10 +90,10 @@ internal class SculptorGlobalBuilderImpl : SculptorGlobalBuilder, DiTreeBuilder 
             factory = { presenter() },
         )
 
-    override fun <K : Contractor> contractor(key: KClass<K>, contractor: () -> K): Unit =
+    override fun <K : ContractBundle> contract(key: KClass<K>, contractor: () -> K) =
         diComponent.singleton(
             key = key,
-            type = Contractor::class,
+            type = ContractBundle::class,
             factory = { contractor() },
         )
 

@@ -1,7 +1,7 @@
 package org.alexcawl.sculptor.runtime.engine.domain
 
 import androidx.compose.runtime.Immutable
-import org.alexcawl.sculptor.core.layout.Layout
+import org.alexcawl.sculptor.core.contractor.layout.Layout
 
 @Immutable
 internal sealed interface SculptorState {

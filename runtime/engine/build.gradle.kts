@@ -9,6 +9,7 @@ android {
 }
 
 commonMainDependencies {
+    api(projects.core.contractor)
     implementation(projects.runtime.contractor)
     implementation(projects.internal.diCompose)
     implementation(projects.internal.mviCompose)

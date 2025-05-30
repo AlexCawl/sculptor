@@ -1,7 +1,6 @@
 package org.alexcawl.sculptor.runtime.engine.presentation
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -11,10 +10,10 @@ import androidx.compose.ui.Modifier
 import org.alexcawl.sculptor.internal.di.DiTree
 import org.alexcawl.sculptor.internal.di.get
 import org.alexcawl.sculptor.internal.mvi.core.Store
+import org.alexcawl.sculptor.runtime.contractor.renderer.RootRenderer
 import org.alexcawl.sculptor.runtime.engine.SculptorIntent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorEvent
 import org.alexcawl.sculptor.runtime.engine.domain.SculptorState
-import org.alexcawl.sculptor.runtime.renderer.RootRenderer
 
 @Composable
 internal fun SculptorUiImpl(
