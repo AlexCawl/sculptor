@@ -9,12 +9,7 @@ android {
 }
 
 commonMainDependencies {
-    implementation(projects.core.contract)
-    implementation(projects.core.layout)
-    implementation(projects.core.presenter)
-    implementation(projects.core.renderer)
-    implementation(projects.runtime.presenter)
-    implementation(projects.runtime.renderer)
+    implementation(projects.runtime.contractor)
     implementation(projects.internal.diCompose)
     implementation(projects.internal.mviCompose)
 }

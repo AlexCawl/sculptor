@@ -44,23 +44,18 @@ include(
 
 include(
     ":core:contract",
-    ":core:layout",
-    ":core:presenter",
-    ":core:renderer",
+    ":core:contractor",
 )
 
 include(
     ":runtime:engine",
-    ":runtime:presenter",
-    ":runtime:renderer",
+    ":runtime:contractor",
     ":runtime:datasource",
 )
 
 include(
     ":foundation:contract",
-    ":foundation:layout",
-    ":foundation:presenter",
-    ":foundation:renderer",
+    ":foundation:contractor",
     ":foundation:bundle",
     ":foundation:showroom",
 )

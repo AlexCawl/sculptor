@@ -9,9 +9,6 @@ android {
 }
 
 commonMainDependencies {
-    implementation(projects.foundation.contract)
-    implementation(projects.foundation.layout)
-    implementation(projects.foundation.presenter)
-    implementation(projects.foundation.renderer)
+    implementation(projects.foundation.contractor)
     implementation(projects.runtime.engine)
 }
